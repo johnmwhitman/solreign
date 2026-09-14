@@ -93,7 +93,7 @@ Engine licenses appear after `git submodule update --init`.
 
 ## Status of this publication
 
-Repo starts **private**. Public visibility is a John-gated step (see `JOHN-HANDOFF.md`). MiniMax key rotation is the other John-gated step. Operations on the live box stay as they are for about a month unless arrivals say otherwise.
+Archived-live portfolio piece: the Hetzner demo box stays up for about a month unless arrivals say otherwise. Repo starts **private**. Public visibility is a John-gated step (see `docs/OPEN-SOURCE-LAUNCH.md`). MiniMax key rotation is the other John-gated step.
 
 Upstream SS14: https://github.com/space-wizards/space-station-14
 Engine: https://github.com/space-wizards/RobustToolbox
