@@ -1,0 +1,15 @@
+//Recolors an existing texture with a flat multiply tint — lets a Solreign parallax layer reuse stock
+//art (e.g. the Wizard nebula/starfield textures) dressed in the acid-green corporate palette instead of
+//needing new source images.
+//
+//Applied the same way as any other parallax layer shader: ParallaxLayerConfig.Shader
+//(Content.Client/Parallax/Data/ParallaxLayerConfig.cs) names a shader prototype id, and
+//ParallaxOverlay.Draw (Content.Client/Parallax/ParallaxOverlay.cs) calls UseShader with it before
+//drawing that layer's texture.
+
+uniform highp vec4 tint; // = vec4(0.35, 1.0, 0.25, 1.0); acid green
+
+void fragment() {
+	highp vec4 color = zTexture(UV);
+	COLOR = vec4(color.rgb * tint.rgb, color.a * tint.a);
+}

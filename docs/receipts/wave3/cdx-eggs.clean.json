@@ -1,0 +1,717 @@
+{
+ "sprites": [
+  {
+   "rsi": "egg01_aperture",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "The portal core breathes, surges white-green, then snaps into a tiny charged glint.",
+   "frames": 4,
+   "delays": [
+    0.55,
+    0.38,
+    0.14,
+    0.2
+   ],
+   "masks": {
+    "core": {
+     "letters": [
+      "m",
+      "x",
+      "C"
+     ],
+     "region": [
+      7,
+      10,
+      12,
+      14
+     ]
+    },
+    "glint": {
+     "pixels": [
+      [
+       9,
+       11
+      ]
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "core",
+       "op": "brightness",
+       "factor": 1.18
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "core",
+       "op": "brightness",
+       "factor": 1.38
+      },
+      {
+       "mask": "core",
+       "op": "lerp",
+       "to": [
+        210,
+        255,
+        218
+       ],
+       "t": 0.18
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "core",
+       "op": "brightness",
+       "factor": 1.15
+      },
+      {
+       "mask": "glint",
+       "op": "brightness",
+       "factor": 1.55
+      },
+      {
+       "mask": "glint",
+       "op": "lerp",
+       "to": [
+        245,
+        255,
+        247
+       ],
+       "t": 0.35
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  },
+  {
+   "rsi": "egg06_rainbow_sword",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "The entire rainbow blade smoothly phase-cycles through two extra spectral alignments.",
+   "frames": 3,
+   "delays": [
+    0.5,
+    0.18,
+    0.18
+   ],
+   "masks": {
+    "blade_upper": {
+     "letters": [
+      "a",
+      "h",
+      "c",
+      "f",
+      "b"
+     ],
+     "region": [
+      21,
+      2,
+      29,
+      10
+     ]
+    },
+    "blade_lower": {
+     "letters": [
+      "a",
+      "h",
+      "c",
+      "f",
+      "b",
+      "m",
+      "l",
+      "i",
+      "n"
+     ],
+     "region": [
+      13,
+      11,
+      22,
+      20
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "blade_upper",
+       "op": "hue_shift",
+       "degrees": 120
+      },
+      {
+       "mask": "blade_lower",
+       "op": "hue_shift",
+       "degrees": 120
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "blade_upper",
+       "op": "hue_shift",
+       "degrees": -120
+      },
+      {
+       "mask": "blade_lower",
+       "op": "hue_shift",
+       "degrees": -120
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  },
+  {
+   "rsi": "egg20_omni_gauntlet",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "Orb breathe: the floating orb swells, surges toward white while the gauntlet green glints catch the light, then settles (Claude redesign; cdx stone-mask was 1px)",
+   "frames": 4,
+   "delays": [
+    0.6,
+    0.14,
+    0.14,
+    0.18
+   ],
+   "masks": {
+    "orb_core": {
+     "letters": [
+      "r",
+      "n",
+      "w"
+     ],
+     "region": [
+      10,
+      3,
+      21,
+      14
+     ]
+    },
+    "orb_halo": {
+     "letters": [
+      "f",
+      "g",
+      "j",
+      "k",
+      "m",
+      "q",
+      "D"
+     ],
+     "region": [
+      10,
+      3,
+      21,
+      14
+     ]
+    },
+    "green_glints": {
+     "letters": [
+      "A"
+     ],
+     "region": [
+      0,
+      14,
+      31,
+      31
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "orb_core",
+       "op": "brightness",
+       "factor": 1.1
+      },
+      {
+       "mask": "orb_halo",
+       "op": "brightness",
+       "factor": 1.06
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "orb_core",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.5
+      },
+      {
+       "mask": "orb_halo",
+       "op": "brightness",
+       "factor": 1.16
+      },
+      {
+       "mask": "green_glints",
+       "op": "brightness",
+       "factor": 1.55
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "orb_core",
+       "op": "brightness",
+       "factor": 0.93
+      },
+      {
+       "mask": "orb_halo",
+       "op": "brightness",
+       "factor": 0.95
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  },
+  {
+   "rsi": "egg17_plasmid_injector",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "A concentrated cyan charge races upward through the plasmid reservoir before settling.",
+   "frames": 4,
+   "delays": [
+    0.55,
+    0.14,
+    0.14,
+    0.32
+   ],
+   "masks": {
+    "liquid": {
+     "letters": [
+      "e",
+      "g",
+      "o",
+      "q",
+      "k",
+      "p"
+     ],
+     "region": [
+      10,
+      11,
+      20,
+      20
+     ]
+    },
+    "charge_lower": {
+     "letters": [
+      "e",
+      "g",
+      "o",
+      "q",
+      "k",
+      "p"
+     ],
+     "region": [
+      10,
+      17,
+      18,
+      20
+     ]
+    },
+    "charge_middle": {
+     "letters": [
+      "e",
+      "g",
+      "o",
+      "q",
+      "k",
+      "p"
+     ],
+     "region": [
+      11,
+      14,
+      19,
+      18
+     ]
+    },
+    "charge_upper": {
+     "letters": [
+      "e",
+      "g",
+      "o",
+      "q",
+      "k",
+      "p"
+     ],
+     "region": [
+      13,
+      11,
+      21,
+      15
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "liquid",
+       "op": "brightness",
+       "factor": 0.92
+      },
+      {
+       "mask": "charge_lower",
+       "op": "brightness",
+       "factor": 1.48
+      },
+      {
+       "mask": "charge_lower",
+       "op": "lerp",
+       "to": [
+        180,
+        255,
+        255
+       ],
+       "t": 0.25
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "liquid",
+       "op": "brightness",
+       "factor": 0.92
+      },
+      {
+       "mask": "charge_middle",
+       "op": "brightness",
+       "factor": 1.48
+      },
+      {
+       "mask": "charge_middle",
+       "op": "lerp",
+       "to": [
+        180,
+        255,
+        255
+       ],
+       "t": 0.25
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "liquid",
+       "op": "brightness",
+       "factor": 0.92
+      },
+      {
+       "mask": "charge_upper",
+       "op": "brightness",
+       "factor": 1.48
+      },
+      {
+       "mask": "charge_upper",
+       "op": "lerp",
+       "to": [
+        180,
+        255,
+        255
+       ],
+       "t": 0.25
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  },
+  {
+   "rsi": "nanoware_trenchcoat",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "The coat's circuitry wakes from the hem upward like a stealth-system boot sequence.",
+   "frames": 4,
+   "delays": [
+    0.58,
+    0.16,
+    0.16,
+    0.4
+   ],
+   "masks": {
+    "trace_lower": {
+     "letters": [
+      "a",
+      "j",
+      "v"
+     ],
+     "region": [
+      10,
+      21,
+      22,
+      28
+     ]
+    },
+    "trace_middle": {
+     "letters": [
+      "a",
+      "j",
+      "v",
+      "t"
+     ],
+     "region": [
+      9,
+      13,
+      22,
+      20
+     ]
+    },
+    "trace_upper": {
+     "letters": [
+      "a",
+      "j",
+      "v",
+      "t"
+     ],
+     "region": [
+      10,
+      4,
+      23,
+      12
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "trace_lower",
+       "op": "brightness",
+       "factor": 1.6
+      },
+      {
+       "mask": "trace_lower",
+       "op": "lerp",
+       "to": [
+        102,
+        255,
+        126
+       ],
+       "t": 0.22
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "trace_middle",
+       "op": "brightness",
+       "factor": 1.6
+      },
+      {
+       "mask": "trace_middle",
+       "op": "lerp",
+       "to": [
+        102,
+        255,
+        126
+       ],
+       "t": 0.22
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "trace_upper",
+       "op": "brightness",
+       "factor": 1.6
+      },
+      {
+       "mask": "trace_upper",
+       "op": "lerp",
+       "to": [
+        102,
+        255,
+        126
+       ],
+       "t": 0.22
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  },
+  {
+   "rsi": "egg15_wrist_organizer",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "The green display dims around a bright CRT scanline that rolls cleanly down the screen.",
+   "frames": 4,
+   "delays": [
+    0.55,
+    0.12,
+    0.12,
+    0.2
+   ],
+   "masks": {
+    "screen": {
+     "letters": [
+      "c",
+      "n",
+      "o",
+      "B"
+     ],
+     "region": [
+      13,
+      11,
+      20,
+      17
+     ]
+    },
+    "scan_top": {
+     "letters": [
+      "c",
+      "n",
+      "B"
+     ],
+     "region": [
+      13,
+      11,
+      20,
+      12
+     ]
+    },
+    "scan_middle": {
+     "letters": [
+      "c",
+      "n",
+      "o",
+      "B"
+     ],
+     "region": [
+      13,
+      13,
+      20,
+      14
+     ]
+    },
+    "scan_lower": {
+     "letters": [
+      "c",
+      "n",
+      "o",
+      "B"
+     ],
+     "region": [
+      13,
+      15,
+      20,
+      17
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "screen",
+       "op": "brightness",
+       "factor": 0.92
+      },
+      {
+       "mask": "scan_top",
+       "op": "brightness",
+       "factor": 1.42
+      },
+      {
+       "mask": "scan_top",
+       "op": "lerp",
+       "to": [
+        210,
+        255,
+        190
+       ],
+       "t": 0.2
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "screen",
+       "op": "brightness",
+       "factor": 0.92
+      },
+      {
+       "mask": "scan_middle",
+       "op": "brightness",
+       "factor": 1.42
+      },
+      {
+       "mask": "scan_middle",
+       "op": "lerp",
+       "to": [
+        210,
+        255,
+        190
+       ],
+       "t": 0.2
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "screen",
+       "op": "brightness",
+       "factor": 0.92
+      },
+      {
+       "mask": "scan_lower",
+       "op": "brightness",
+       "factor": 1.42
+      },
+      {
+       "mask": "scan_lower",
+       "op": "lerp",
+       "to": [
+        210,
+        255,
+        190
+       ],
+       "t": 0.2
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  }
+ ]
+}

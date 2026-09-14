@@ -1,0 +1,7 @@
+INSTALLED_HOOKS_VERSION
+DISABLE_SUBMODULE_AUTOUPDATE
+*.nuget*
+project.assets.json
+project.packagespec.json
+# Local engine-symlink clone dir (accidental gitlink 2026-07-15; never track)
+RobustToolbox

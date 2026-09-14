@@ -1,0 +1,40 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'solreign-contracts-window-title'}"
+                      SetSize="620 460"
+                      MinSize="450 350">
+    <!-- Layout copies the upstream cargo bounty console menu (Content.Client/Cargo/UI/CargoBountyMenu.xaml)
+         minus its history tab: one scrolling list of work-order cards over a flavor footer. Styling is
+         existing stylesheet classes + the upstream panel idiom only; acid-green accents live in loc markup. -->
+    <BoxContainer Orientation="Vertical"
+                  VerticalExpand="True"
+                  HorizontalExpand="True">
+        <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="10">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+            </PanelContainer.PanelOverride>
+            <ScrollContainer HScrollEnabled="False"
+                             HorizontalExpand="True"
+                             VerticalExpand="True">
+                <Label Name="NoContractsLabel"
+                       Text="{Loc 'solreign-contracts-window-empty'}"
+                       Visible="False"
+                       Align="Center" />
+                <BoxContainer Name="ContractEntriesContainer"
+                              Orientation="Vertical"
+                              VerticalExpand="True"
+                              HorizontalExpand="True" />
+            </ScrollContainer>
+        </PanelContainer>
+        <!-- Footer -->
+        <BoxContainer Orientation="Vertical">
+            <PanelContainer StyleClasses="LowDivider" />
+            <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
+                <Label Text="{Loc 'solreign-contracts-window-flavor-left'}" StyleClasses="WindowFooterText" />
+                <Label Text="{Loc 'solreign-contracts-window-flavor-right'}" StyleClasses="WindowFooterText"
+                       HorizontalAlignment="Right" HorizontalExpand="True" Margin="0 0 5 0" />
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

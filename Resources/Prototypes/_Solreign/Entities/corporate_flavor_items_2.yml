@@ -1,0 +1,73 @@
+# Solreign corporate-flavor cosmetic items — SECOND wave, same additive idiom as
+# corporate_flavor_items.yml (this pack's predecessor): each item parents a verified
+# existing base prototype and only overrides name/description/suffix (and, for the
+# memo, a Paper `content:` locale key) — no new sprites, no placeholder-mismatch risk.
+#
+# Distribution (reachability): these items do NOT define a new vending machine. They
+# are added to the EXISTING SolreignBreakRoomKiosk's SolreignBreakRoomKioskInventory
+# (defined in corporate_flavor_items.yml, which is now placed on the Oasis map at uid
+# 90270 in the Science Break Room — see Resources/Maps/_Solreign/solreign_oasis.yml).
+# The only edit made to corporate_flavor_items.yml is extending that inventory list;
+# none of its existing items/kiosk definition are touched. This keeps every item here
+# reachable in a live round from the moment this file loads, satisfying the Wave-22
+# orphan-reachability test.
+
+# ---------------------------------------------------------------- flavor items (cosmetic)
+
+- type: entity
+  parent: FoodSnackChips
+  id: SolreignSynergyChips
+  suffix: solreign, flavor
+  name: Solreign Synergy Chips
+  description: A bag of potato chips branded with the word "Synergy" in a font that suggests an optimism it does not feel.
+  # No sprite override: FoodSnackChips's existing chips.rsi art already reads as generic
+  # snack-bag packaging — no placeholder mismatch to flag (same idiom as the first pack's
+  # SolreignBreakRoomMug/SolreignComplianceDuck).
+
+- type: entity
+  parent: DrinkColaCan
+  id: SolreignHouseCola
+  suffix: solreign, flavor
+  name: Solreign house cola
+  description: A can of house-brand cola. The label promises "refreshment aligned with quarterly objectives."
+  # No sprite override: reuses DrinkColaCan's existing cola.rsi art, which already reads as
+  # a generic soda can — no new texture needed.
+
+- type: entity
+  parent: TennisBall
+  id: SolreignStressOrb
+  suffix: solreign, flavor
+  name: Solreign stress orb
+  description: A fuzzy acid-green orb stamped "SQUEEZE RESPONSIBLY." Compresses your stress into a smaller, more portable, more heavily branded shape.
+  # No sprite override: TennisBall's existing tennisball.rsi art and ToySqueak use-sound
+  # already read as "stress toy" — no new texture or sound needed.
+
+- type: entity
+  parent: Pen
+  id: SolreignCompliancePen
+  suffix: solreign, flavor
+  name: Solreign compliance pen
+  description: A dark ink pen embossed with the Solreign wordmark. Signing anything with it feels vaguely more binding than it should.
+  # No sprite override: reuses Pen's existing pens.rsi art — a plain dark pen needs no reskin.
+
+- type: entity
+  parent: ClothingNeckLawyerbadge
+  id: SolreignEmployeeLanyard
+  suffix: solreign, flavor
+  name: Solreign employee lanyard
+  description: A laminated badge on an acid-green lanyard. The photo is flattering; the fine print on the back is not.
+  # No sprite override: reuses ClothingNeckLawyerbadge's existing lawyerbadge.rsi art, which
+  # already reads as "generic laminated badge on a neck strap" — a perfect fit.
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignEmployeeSatisfactionMemo
+  suffix: solreign, flavor
+  name: employee satisfaction memo
+  description: A crisp Solreign document. The letterhead is printed in an unsettlingly cheerful acid green.
+  components:
+  - type: Paper
+    content: solreign-flavor-memo-1
+  # No sprite override: reuses PaperOffice's existing plain-paper art, same idiom as
+  # SolreignPaperLoreBase in lore_papers.yml. Content text lives in
+  # Locale/en-US/_solreign/corporate-flavor-items-2.ftl.

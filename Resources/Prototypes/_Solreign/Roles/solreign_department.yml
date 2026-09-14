@@ -1,0 +1,21 @@
+# Solreign corporate department — a non-primary branded view for _Solreign roles.
+# Each role must also belong to exactly one primary department for progression,
+# coloring, and department-aware systems.
+
+- type: department
+  id: Solreign
+  name: department-Solreign
+  description: department-Solreign-description
+  color: "#9fed32"
+  weight: 15
+  primary: false
+  roles:
+  - GreenshieldOfficer
+  - NTRepresentative
+  - SolreignMedicalIntern
+  - SolreignResearchAssistant
+  - SolreignEngineeringApprentice
+  - SolreignCargoTrainee
+  - SolreignKitchenHand
+  - SolreignSectorFreightMaster
+  - SolreignExpeditionSpecialist

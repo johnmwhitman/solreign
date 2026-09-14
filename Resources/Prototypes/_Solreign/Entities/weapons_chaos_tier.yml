@@ -1,0 +1,139 @@
+# Solreign chaos-tier weapons: kid-safe toy reskins for general-population vendors.
+# Roadmap: martial arts + weapons variety lane (drip-feed doctrine — small, frequent,
+# discoverable additions rather than one big dump).
+#
+# Pattern followed throughout this file: these are DATA-ONLY reskins. Reuse an existing
+# upstream (or Solreign) entity's mechanics/sprite wholesale, override only id/name/
+# description/suffix (+ occasional acid-green Sprite tint, the established Solreign
+# reskin idiom — see _Solreign/Entities/delighters/pool_noodle.yml). No new components,
+# no new C# — none needed for a toy reskin.
+#
+# Upstream examples read before writing this file:
+#   - Entities/Objects/Fun/weapons.yml            (BaseToyGun / BaseToySword / ToyHammer
+#     idiom: PacifismAllowedGun, near-zero MeleeWeapon damage = "kid-safe")
+#   - Entities/Objects/Weapons/Guns/Basic/watergun.yml (WeaponWaterPistol / WeaponWaterBlaster
+#     / WeaponWaterBlasterSuper — the latter is a dormant base: not in any vendor, loot
+#     table, or map at audit time)
+#   - Entities/Objects/Weapons/Melee/baseball_bat.yml  (WeaponMeleeKnockbackStick — dormant,
+#     `categories: [ DoNotMap ]`, not in any vendor/loot/map at audit time)
+#   - Entities/Objects/Weapons/Guns/pneumatic_cannon.yml (LauncherCreamPie — placed on some
+#     maps but never vendored)
+#   - Entities/Objects/Consumable/Food/Baked/pie.yml (FoodPieBananaCream already carries
+#     CreamPie + ThrowingAngle + LandAtCursor and zero damage components — genuinely
+#     kid-safe out of the box, no stripping needed)
+#   - _Solreign/Entities/delighters/pool_noodle.yml (house style for the reskin idiom:
+#     acid-green tint, suffix convention, corporate-deadpan description voice)
+#
+# Dormant-base audit (Resources/Prototypes/Entities/Objects/Weapons, cross-checked against
+# Catalog/VendingMachines, Entities/Markers/Spawners, and Resources/Maps): WeaponWaterBlasterSuper
+# and WeaponMeleeKnockbackStick were NOT referenced anywhere outside their own defining file.
+# Both are reactivated here as the chassis for two of the eight reskins below.
+#
+# All eight items are vendor-ready (see games.yml / happyhonk.yml edits in the same PR).
+# Contraband status is inherited from the base prototype, not invented here — see the
+# per-item notes.
+
+## Water blaster variants (no Contraband on the upstream base — general population safe)
+
+- type: entity
+  parent: WeaponWaterPistol
+  id: SolreignFizzSoaker
+  name: fizz soaker
+  suffix: solreign, chaos-tier
+  description: Solreign Recreation Division water pistol, twelve shots of pre-approved joy. Aim responsibly — morale metrics do not cover eye injuries.
+
+- type: entity
+  parent: WeaponWaterBlasterSuper # reactivated dormant base, see audit note above
+  id: SolreignHydroBlasterMax
+  name: Hydro-Blaster Max
+  suffix: solreign, chaos-tier
+  description: The flagship of the Solreign Recreation Division catalog. Ninety-six shots of hydration warfare. Previously shelved pending a liability review that never actually happened.
+
+## Cream-pie-launcher-alikes (upstream bases carry no Contraband either)
+
+- type: entity
+  parent: LauncherCreamPie
+  id: SolreignPastryPersuader
+  name: pastry persuader
+  suffix: solreign, chaos-tier
+  description: A Solreign-branded pie cannon. Load with company-approved dessert product for a fully compliant pieing. Structural integrity of the pie itself is not guaranteed.
+
+- type: entity
+  parent: FoodPieBananaCream
+  id: SolreignSplatPie
+  name: Solreign splat pie
+  suffix: solreign, chaos-tier
+  description: A banana cream pie stamped with the Solreign wordmark. Throws clean, lands funny, does zero recorded damage. HR has cleared this pie for interoffice use.
+
+## Foam dart rifle (and crossbow) — upstream bases carry no Contraband
+
+- type: entity
+  parent: WeaponRifleFoam
+  id: SolreignFoamStormRifle
+  name: Foam Storm Rifle
+  suffix: solreign, chaos-tier
+  description: Solreign Recreation Division's answer to "can we get sued for this." Full-size foam dart rifle, corporate-approved for hallway skirmishes during sanctioned recreation windows.
+
+- type: entity
+  parent: FoamCrossbow
+  id: SolreignFoamCrossbow
+  name: foam crossbow, Solreign edition
+  suffix: solreign, chaos-tier
+  description: A single-shot foam crossbow bearing the Solreign crest. Aiming this at Security may still get you filled with lead; the crest offers no legal protection.
+  components:
+  # CLOSED (production batch 10, sprite-factory wave, 2026-07-16): superseding the
+  # player-feedback batch's runtime color-tint hack (item 9, 2026-07-16) with real,
+  # dedicated art -- a procedural acid-green hue-lock recolor of this file's own already-
+  # shipped (non-NC, CC0-1.0) foam_crossbow.rsi, 0 generation calls, matching the same
+  # #9dfd39 house idiom exactly. No runtime color override needed now; the tint is baked
+  # into the RSI itself.
+  - type: Sprite
+    sprite: _Solreign/foam_crossbow_solreign.rsi
+    state: icon
+  - type: Item
+    sprite: _Solreign/foam_crossbow_solreign.rsi
+
+## Knockback bat (and a second blunt-chaos toy) — upstream bases DO carry Contraband
+## (BaseBallBat -> BaseMinorContraband). Kept as minor contraband on purpose — a bat-shaped
+## object still reads as a bat-shaped object — so these two are vendored via
+## contrabandInventory, matching the existing games.yml convention (Basketball, snacks, etc.)
+
+- type: entity
+  parent: WeaponMeleeKnockbackStick # reactivated dormant base, see audit note above
+  id: SolreignKnockoutBat
+  name: compliance knockout bat
+  suffix: solreign, chaos-tier
+  description: A padded acid-green bat that turns confrontations into gentle physics demonstrations. Solreign Wellness calls this "kinetic conflict resolution."
+  categories: [ ] # clears the inherited DoNotMap — this reskin is a real, vendor-ready item
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/baseball_bat.rsi
+    state: icon
+    color: "#9dfd39" # Solreign acid-green, matches pool_noodle.yml convention
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 0 # completely harmless; the knockback is the point
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: MeleeThrowOnHit # upstream default is speed 10 / distance 20; tuned down for "gentle chaos"
+    speed: 6
+    distance: 5
+  - type: IncreaseDamageOnWield # BaseBallBat's wield bonus (Blunt 5 / Structural 10) would
+    damage:                     # otherwise still apply on top of the Blunt: 0 above — zero it
+      types:                    # so this stays harmless in every grip state, not just unwielded.
+        Blunt: 0
+        Structural: 0
+
+- type: entity
+  parent: ToyHammer
+  id: SolreignLuckyMallet
+  name: Solreign lucky mallet
+  suffix: solreign, chaos-tier
+  description: A rubber mallet in corporate acid-green. One in one-hundred-thousand swings ends the argument outright. Solreign Legal insists the odds are "basically zero."
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/rubber_hammer.rsi
+    state: icon
+    color: "#9dfd39"

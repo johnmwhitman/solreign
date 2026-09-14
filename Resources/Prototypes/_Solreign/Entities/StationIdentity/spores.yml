@@ -1,0 +1,79 @@
+# Harmless drifting spore particle — spawned by SolreignSporeDriftRule
+# (Content.Server/_Solreign/StationIdentity/SolreignSporeDriftRule.cs).
+#
+# Sprite reuse: upstream ships no dedicated "spore"/"pollen" asset (checked
+# Resources/Textures for spore/pollen/dust — nothing fits). Effects/chempuff.rsi (tgstation,
+# CC-BY-SA-3.0 per its meta.json — NOT AGPL) is a soft, animated, tintable puff already used
+# cosmetically upstream (Objects/Specific/Janitorial/spray.yml's Vapor), so it's reused here at a
+# small scale with a green tint rather than adding new art for a mechanics-only wave.
+#
+# Deliberately NO Physics/Fixtures component (unlike upstream's Vapor, which the sprite is borrowed
+# from) — this is a purely cosmetic, non-colliding mote. Its drift is driven entirely by
+# SolreignSporeParticleComponent/SolreignSporeParticleSystem (a straight position nudge each tick),
+# not physics simulation — "harmless" means it can never push, block, or collide with anything.
+
+- type: entity
+  id: SolreignAmbientSpore
+  name: drifting spore
+  description: A harmless mote of bioluminescent spore, drifting on the station's air currents.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolreignSporeParticle
+    minSpeed: 0.1
+    maxSpeed: 0.35
+  - type: TimedDespawn
+    lifetime: 8
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
+    sprite: Effects/chempuff.rsi
+    scale: 0.35, 0.35
+    color: "#7CFFB2AA"
+    layers:
+    - state: chempuff
+  - type: PointLight
+    radius: 1.2
+    energy: 0.6
+    color: "#7CFFB2"
+    softness: 2
+  - type: AnimationPlayer
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# Acid Storm's ambient mote (wow-wiring wave, SolreignAcidStormRule) — REUSES SolreignSporeParticle
+# verbatim (same drift component/system as SolreignAmbientSpore above; no new mechanic), just a
+# differently-tinted (acid-green/toxic, not bioluminescent-teal), longer-lived entity. One scatter
+# happens at Started() only (no continuous respawn, no ActiveTick) -- 30s lifetime deliberately does
+# NOT try to span the full 60-120s storm duration; the motes visibly settle partway through, before the
+# announced all-clear, the same way real weather often visually calms before an official all-clear is
+# declared. Longer than SolreignAmbientSpore's 8s (tuned for a 1-second one-shot event) so the motes
+# still read as a sustained opening beat, not a one-tick flash.
+- type: entity
+  id: SolreignAcidMote
+  name: acid condensation
+  description: A bead of acid-green condensation, drifting on the station's contaminated air currents.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolreignSporeParticle
+    minSpeed: 0.05
+    maxSpeed: 0.2
+  - type: TimedDespawn
+    lifetime: 30
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
+    sprite: Effects/chempuff.rsi
+    scale: 0.3, 0.3
+    color: "#39FF14AA"
+    layers:
+    - state: chempuff
+  - type: PointLight
+    radius: 1.0
+    energy: 0.5
+    color: "#39FF14"
+    softness: 2
+  - type: AnimationPlayer
+  - type: Tag
+    tags:
+    - HideContextMenu

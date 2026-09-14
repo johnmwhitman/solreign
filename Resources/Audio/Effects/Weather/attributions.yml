@@ -1,0 +1,23 @@
+- files:
+    - rain.ogg
+    - snowstorm.ogg
+    - snowstorm_weak.ogg
+    - wind_2_1.ogg
+    - wind_2_2.ogg
+    - wind_3_1.ogg
+    - wind_4_1.ogg
+    - wind_4_2.ogg
+    - wind_5_1.ogg
+  license: CC-BY-SA-3.0
+  copyright: '"rain.ogg", "snowstorm.ogg", "snowstorm_weak.ogg", "wind_2_1.ogg", "wind_2_2.ogg", "wind_3_1.ogg", "wind_4_1.ogg", "wind_4_2.ogg", "wind_5_1.ogg" by Citadel Station 13. Modified for looping.'
+  source: https://github.com/Citadel-Station-13/Citadel-Station-13-RP/tree/28e11dee540e61b6c42fa293c1e1da087c1c2b0a
+
+- files: [rain2.ogg]
+  copyright: '"Natural Environments" by Varazuvi of SONNISS.com. License: Sonniss GDC Bundle License (commercial use permitted, no attribution required; prohibits standalone resale of raw SFX and AI-training use — neither applies here). Verified 2026-07-16 via https://sonniss.com/gdc-bundle-license/. Filename corrected from stale rain2.wav to the actual on-disk rain2.ogg (Vorbis, referenced in SoundCollections/weather.yml).'
+  license: "Custom"
+  source: https://gdc.sonniss.com
+
+- files: [rain_heavy.ogg]
+  copyright: '"RATH - Rain Hard Loop 08s" of SONNISS.com. License: Sonniss GDC Bundle License (commercial use permitted, no attribution required; prohibits standalone resale of raw SFX and AI-training use — neither applies here). Verified 2026-07-16 via https://sonniss.com/gdc-bundle-license/.'
+  license: "Custom"
+  source: https://gdc.sonniss.com

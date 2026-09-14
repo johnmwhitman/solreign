@@ -1,0 +1,61 @@
+# PROVIDENCE power contractor unit (SPEC-ai-npc-phase1-v2.md §3-§7).
+#
+# save: false is REQUIRED (§7.3) -- this entity is dispatch-spawned at runtime (§10 Open Question 2,
+# resolved: no map-authored anchor/attach-point), never placed by a mapper, and must never round-trip
+# into a saved map.
+#
+# Parented to MobRobotic (Resources/Prototypes/Entities/Mobs/NPCs/silicon.yml:1-53) rather than the
+# heavier MobSiliconBase: this gets real Damageable/Destructible/MobState "for free" (so the §5/§9
+# "destroyed mid-lease" implicit-recall path is a real in-game possibility, not just a test artifact)
+# without pulling in NPC-faction/radio/emote machinery Phase 1 doesn't use -- §6's decorative HTN
+# layer is explicitly optional and NOT built in this cut, so there is no behavior tree here at all.
+# Sprite reuses the existing cleanbot rig (§10 Open Question 3: reuse an existing robotic base to ship
+# faster; a distinct asset is a later polish pass) -- openly robotic, never disguised as human (§7.8).
+- type: entity
+  save: false
+  parent: MobRobotic
+  id: ProvidencePowerContractor
+  name: PROVIDENCE contractor unit
+  description: >-
+    A stopgap power unit, dispatched by PROVIDENCE to keep a failing grid alive until a qualified
+    engineer takes over. Openly robotic -- unmistakably not a person.
+  components:
+  - type: Sprite
+    sprite: Mobs/Silicon/Bots/cleanbot.rsi
+    state: cleanbot
+  - type: Transform
+    anchored: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        density: 80
+        hard: true
+        mask:
+        - MobMask
+        layer:
+        - MobMask
+  # §3.2's attach point: a High-voltage CableDeviceNode. Joining/leaving the network is standard
+  # engine node-group connectivity (BaseNetConnectorNodeGroup) -- no bespoke "activate" call.
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      output:
+        !type:CableDeviceNode
+        nodeGroupID: HVPower
+  # §3.1/§3.4: the leased supplier itself. supplyRate here is a placeholder -- the real capped
+  # wattage (solreign.power_contractor.lease_watts) is set programmatically at dispatch time by
+  # ProvidencePowerContractorSystem.Lifecycle.cs's DispatchZone. Ramp is intentionally near-instant
+  # ("materializes already there" providing immediate coverage, §1) rather than a slow generator-style
+  # spin-up. enabled: true is required explicitly -- nothing else in this codebase flips Enabled on
+  # for a non-FuelGenerator supplier (GeneratorSystem only touches entities that ALSO carry
+  # FuelGeneratorComponent, which this entity deliberately does not -- §1's "no feed-the-generator"
+  # grounding).
+  - type: PowerSupplier
+    node: output
+    supplyRate: 0
+    supplyRampRate: 1000000
+    supplyRampTolerance: 1000000
+    enabled: true

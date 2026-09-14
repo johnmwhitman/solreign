@@ -1,0 +1,78 @@
+# Solreign Corporate Projects — SR-W-030
+# Player-run corporate projects with bounded contributions, round-to-round persistence,
+# anti-monopoly account caps, and corporate unlock milestones.
+
+- type: solreignCorporateProject
+  id: ProjectNaniteRefinery
+  name: solreign-corporate-project-nanite-refinery-name
+  description: solreign-corporate-project-nanite-refinery-desc
+  sponsor: solreign-corporate-sponsor-logistics
+  targetContribution: 1000
+  maxContributionPerAction: 50
+  maxAccountShareFraction: 0.35
+  milestones:
+  - milestoneId: nanite_phase_1
+    thresholdFraction: 0.25
+    name: solreign-corporate-milestone-nanite-1-name
+    standingReward: 5
+    unlockId: NaniteFilterTech
+  - milestoneId: nanite_phase_2
+    thresholdFraction: 0.50
+    name: solreign-corporate-milestone-nanite-2-name
+    standingReward: 10
+    unlockId: AdvancedNaniteSynthesis
+  - milestoneId: nanite_phase_3
+    thresholdFraction: 0.75
+    name: solreign-corporate-milestone-nanite-3-name
+    standingReward: 15
+    unlockId: StationNaniteBuff
+  - milestoneId: nanite_phase_4
+    thresholdFraction: 1.00
+    name: solreign-corporate-milestone-nanite-4-name
+    standingReward: 25
+    unlockId: AutonomousRefineryDrone
+
+- type: solreignCorporateProject
+  id: ProjectOrbitalRelay
+  name: solreign-corporate-project-orbital-relay-name
+  description: solreign-corporate-project-orbital-relay-desc
+  sponsor: solreign-corporate-sponsor-aethertech
+  targetContribution: 1500
+  maxContributionPerAction: 75
+  maxAccountShareFraction: 0.30
+  milestones:
+  - milestoneId: relay_phase_1
+    thresholdFraction: 0.33
+    name: solreign-corporate-milestone-relay-1-name
+    standingReward: 8
+    unlockId: LongRangeSensors
+  - milestoneId: relay_phase_2
+    thresholdFraction: 0.66
+    name: solreign-corporate-milestone-relay-2-name
+    standingReward: 16
+    unlockId: AutomatedBeaconMesh
+  - milestoneId: relay_phase_3
+    thresholdFraction: 1.00
+    name: solreign-corporate-milestone-relay-3-name
+    standingReward: 30
+    unlockId: DirectOrbitalCargoDrop
+
+- type: solreignCorporateProject
+  id: ProjectBiomedSynth
+  name: solreign-corporate-project-biomed-synth-name
+  description: solreign-corporate-project-biomed-synth-desc
+  sponsor: solreign-corporate-sponsor-vanguard
+  targetContribution: 800
+  maxContributionPerAction: 40
+  maxAccountShareFraction: 0.40
+  milestones:
+  - milestoneId: biomed_phase_1
+    thresholdFraction: 0.50
+    name: solreign-corporate-milestone-biomed-1-name
+    standingReward: 10
+    unlockId: RegenerativeTopicals
+  - milestoneId: biomed_phase_2
+    thresholdFraction: 1.00
+    name: solreign-corporate-milestone-biomed-2-name
+    standingReward: 20
+    unlockId: UniversalAntidoteDispenser

@@ -1,0 +1,34 @@
+- type: vendingMachineInventory
+  id: NutriMaxInventory
+  startingInventory:
+    HydroponicsToolSpade: 4
+    HydroponicsToolMiniHoe: 4
+    HydroponicsToolClippers: 4
+    HydroponicsToolScythe: 4
+    HydroponicsToolHatchet: 4
+    Dropper: 4
+    PlantBag: 3
+    PlantBGoneSpray: 20
+    WeedSpray: 20
+    PestSpray: 20
+    Syringe: 5
+    ChemistryBottleRobustHarvest: 3
+    ChemistryBottleEZNutrient: 3
+    Bucket: 3
+    BoxMouthSwab: 1
+    BoxAgrichem: 1
+    MortarAndPestle: 1
+    HandheldJuicer: 1
+    #TO DO:
+    #plant analyzer
+    # MAPSEED-AUDIT-2026-07-16 Gap 7 fix (feat/lore-trail): these 3 easter eggs were only reachable
+    # via GetmoreChocolateCorpInventory (VendingMachineSnack, absent on Perihelion/Verdant/Meridian/
+    # Terminus). NutriMax is universal on all 7 rotation maps and already botanical-themed, so this
+    # is a cleaner long-term home for berry/fungal-flavored items than Snack anyway.
+    SolreignEgg09: 1 # Solreign easter egg (astral berry)
+    SolreignEgg11: 1 # Solreign easter egg (winged berry)
+    SolreignEgg13: 1 # Solreign easter egg (fungal growth)
+  contrabandInventory:
+    ChemistryBottleUnstableMutagen: 1
+    Joint: 1
+    ChemistryBottleLeft4Zed: 1

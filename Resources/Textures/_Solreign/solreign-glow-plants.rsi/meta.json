@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Solreign + AI-authored code + human-review-pending",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "plant-02",
+      "delays": [
+        [
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "plant-05",
+      "delays": [
+        [
+          1.0
+        ]
+      ]
+    }
+  ]
+}

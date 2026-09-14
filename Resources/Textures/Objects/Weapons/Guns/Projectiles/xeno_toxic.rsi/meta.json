@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Original Solreign art (AI-generated with MiniMax image-01, hand-curated from 1-4 variants per state, post-processed: chroma-keyed, despeckled, cropped, quantized, resized, key-remnant swept) replacing the CC-BY-NC-SA-3.0 original -- SR-W-084 production batch 1. Full RSI: all original states reproduced.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "xeno_toxic"
+    }
+  ]
+}

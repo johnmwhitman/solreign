@@ -1,0 +1,629 @@
+{
+  "sprites": [
+    {
+      "rsi": "lantern_on",
+      "state": "lantern-on",
+      "verdict": "animate",
+      "concept": "Warm holy flame breathe \u2014 amber glass core pulses brighter then settles with a soft mid-pane glint; iron cage almost still.",
+      "frames": 4,
+      "delays": [
+        0.5,
+        0.18,
+        0.4,
+        0.22
+      ],
+      "masks": {
+        "glass": {
+          "letters": [
+            "a"
+          ]
+        },
+        "core": {
+          "letters": [
+            "k",
+            "m",
+            "n",
+            "t",
+            "N",
+            "4",
+            "X"
+          ]
+        },
+        "mid": {
+          "letters": [
+            "g",
+            "p",
+            "q",
+            "w",
+            "x",
+            "O",
+            "5",
+            "3"
+          ]
+        },
+        "frame": {
+          "letters": [
+            "b",
+            "c",
+            "d",
+            "e",
+            "f"
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "glass",
+              "op": "brightness",
+              "factor": 1.1
+            },
+            {
+              "mask": "core",
+              "op": "brightness",
+              "factor": 1.2
+            },
+            {
+              "mask": "core",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.08
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "glass",
+              "op": "brightness",
+              "factor": 1.16
+            },
+            {
+              "mask": "core",
+              "op": "brightness",
+              "factor": 1.3
+            },
+            {
+              "mask": "core",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.14
+            },
+            {
+              "mask": "mid",
+              "op": "brightness",
+              "factor": 1.1
+            },
+            {
+              "mask": "frame",
+              "op": "brightness",
+              "factor": 1.05
+            }
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {
+              "mask": "glass",
+              "op": "brightness",
+              "factor": 1.06
+            },
+            {
+              "mask": "mid",
+              "op": "brightness",
+              "factor": 1.14
+            },
+            {
+              "mask": "core",
+              "op": "brightness",
+              "factor": 1.08
+            },
+            {
+              "mask": "mid",
+              "op": "lerp",
+              "to": [
+                255,
+                240,
+                180
+              ],
+              "t": 0.06
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "light_post_glow",
+      "state": "glow",
+      "verdict": "animate",
+      "concept": "Unshaded lamp-lens pulse \u2014 bright core flashes, then whole glass lifts, then a soft rim afterglow.",
+      "frames": 4,
+      "delays": [
+        0.45,
+        0.12,
+        0.35,
+        0.18
+      ],
+      "masks": {
+        "core": {
+          "letters": [
+            "c"
+          ]
+        },
+        "mid": {
+          "letters": [
+            "a",
+            "b"
+          ]
+        },
+        "rim": {
+          "letters": [
+            "d",
+            "e",
+            "f"
+          ]
+        },
+        "lens": {
+          "letters": [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f"
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "core",
+              "op": "brightness",
+              "factor": 1.22
+            },
+            {
+              "mask": "core",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.12
+            },
+            {
+              "mask": "mid",
+              "op": "brightness",
+              "factor": 1.08
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "lens",
+              "op": "brightness",
+              "factor": 1.14
+            },
+            {
+              "mask": "core",
+              "op": "brightness",
+              "factor": 1.18
+            },
+            {
+              "mask": "core",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.18
+            }
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {
+              "mask": "rim",
+              "op": "brightness",
+              "factor": 1.12
+            },
+            {
+              "mask": "mid",
+              "op": "brightness",
+              "factor": 1.06
+            },
+            {
+              "mask": "core",
+              "op": "brightness",
+              "factor": 1.05
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "warding_tower",
+      "state": "wardingtower-unshaded",
+      "verdict": "animate",
+      "concept": "Xeno ward thrum \u2014 main glyphs breathe hot lime, secondary runes lag a beat, three marker motes spark in sequence.",
+      "frames": 4,
+      "delays": [
+        0.4,
+        0.2,
+        0.48,
+        0.15
+      ],
+      "masks": {
+        "core": {
+          "letters": [
+            "d"
+          ]
+        },
+        "glow": {
+          "letters": [
+            "a"
+          ]
+        },
+        "rim": {
+          "letters": [
+            "b",
+            "c"
+          ]
+        },
+        "mote1": {
+          "pixels": [
+            [
+              9,
+              20
+            ]
+          ]
+        },
+        "mote2": {
+          "pixels": [
+            [
+              17,
+              21
+            ]
+          ]
+        },
+        "mote3": {
+          "pixels": [
+            [
+              14,
+              27
+            ]
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "glow",
+              "op": "brightness",
+              "factor": 1.12
+            },
+            {
+              "mask": "core",
+              "op": "brightness",
+              "factor": 1.25
+            },
+            {
+              "mask": "core",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.1
+            },
+            {
+              "mask": "rim",
+              "op": "brightness",
+              "factor": 1.06
+            },
+            {
+              "mask": "mote1",
+              "op": "brightness",
+              "factor": 1.45
+            },
+            {
+              "mask": "mote1",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.25
+            },
+            {
+              "mask": "mote2",
+              "op": "alpha",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "glow",
+              "op": "brightness",
+              "factor": 1.18
+            },
+            {
+              "mask": "glow",
+              "op": "hue_shift",
+              "degrees": 8
+            },
+            {
+              "mask": "core",
+              "op": "brightness",
+              "factor": 1.35
+            },
+            {
+              "mask": "core",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.16
+            },
+            {
+              "mask": "rim",
+              "op": "brightness",
+              "factor": 1.1
+            },
+            {
+              "mask": "mote2",
+              "op": "brightness",
+              "factor": 1.5
+            },
+            {
+              "mask": "mote2",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.28
+            },
+            {
+              "mask": "mote3",
+              "op": "alpha",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {
+              "mask": "glow",
+              "op": "brightness",
+              "factor": 1.06
+            },
+            {
+              "mask": "core",
+              "op": "brightness",
+              "factor": 1.1
+            },
+            {
+              "mask": "rim",
+              "op": "brightness",
+              "factor": 1.04
+            },
+            {
+              "mask": "mote3",
+              "op": "brightness",
+              "factor": 1.4
+            },
+            {
+              "mask": "mote3",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.22
+            },
+            {
+              "mask": "mote1",
+              "op": "alpha",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "borg_charger",
+      "state": "borgcharger-u1",
+      "verdict": "animate",
+      "concept": "Tint-safe charge breathe \u2014 mid vent/status grille and center slot pulse brightness like a power indicator; body plate stays steady.",
+      "frames": 4,
+      "delays": [
+        0.55,
+        0.28,
+        0.48,
+        0.22
+      ],
+      "masks": {
+        "strip": {
+          "letters": [
+            "e",
+            "h",
+            "i",
+            "n"
+          ],
+          "region": [
+            6,
+            18,
+            25,
+            25
+          ]
+        },
+        "hot": {
+          "letters": [
+            "h",
+            "n"
+          ],
+          "region": [
+            6,
+            18,
+            25,
+            25
+          ]
+        },
+        "slot": {
+          "letters": [
+            "e",
+            "i",
+            "h"
+          ],
+          "region": [
+            12,
+            12,
+            19,
+            14
+          ]
+        },
+        "vent_mid": {
+          "letters": [
+            "k",
+            "j",
+            "g"
+          ],
+          "region": [
+            8,
+            17,
+            23,
+            20
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "strip",
+              "op": "brightness",
+              "factor": 1.14
+            },
+            {
+              "mask": "hot",
+              "op": "brightness",
+              "factor": 1.2
+            },
+            {
+              "mask": "slot",
+              "op": "brightness",
+              "factor": 1.12
+            },
+            {
+              "mask": "vent_mid",
+              "op": "brightness",
+              "factor": 1.08
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "strip",
+              "op": "brightness",
+              "factor": 1.24
+            },
+            {
+              "mask": "hot",
+              "op": "brightness",
+              "factor": 1.35
+            },
+            {
+              "mask": "hot",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.12
+            },
+            {
+              "mask": "slot",
+              "op": "brightness",
+              "factor": 1.22
+            },
+            {
+              "mask": "slot",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.08
+            },
+            {
+              "mask": "vent_mid",
+              "op": "brightness",
+              "factor": 1.12
+            }
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {
+              "mask": "strip",
+              "op": "brightness",
+              "factor": 1.08
+            },
+            {
+              "mask": "hot",
+              "op": "brightness",
+              "factor": 1.1
+            },
+            {
+              "mask": "slot",
+              "op": "brightness",
+              "factor": 1.06
+            },
+            {
+              "mask": "vent_mid",
+              "op": "brightness",
+              "factor": 1.04
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

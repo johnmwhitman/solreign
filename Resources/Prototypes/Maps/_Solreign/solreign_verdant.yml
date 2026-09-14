@@ -1,0 +1,215 @@
+# Solreign Verdant — Station 4, the overgrown bio-station. Third distinct small chassis in the
+# maps program (task #21): Solreign Oasis (Station 2-ish, task #8) copied upstream Saltern; this one
+# copies upstream Packed — a different building entirely (different footprint, different room
+# layout, same "compact/small" population class: Packed ships 7-35 players / 47 jobs, the same
+# general size bracket as Saltern's own 0-35 / ~47 jobs). Packed was in fact the *other* candidate
+# the Oasis chassis-pick doc named and passed over
+# (Resources/Prototypes/Maps/_Solreign/solreign_oasis.yml's own header comment: "Saltern
+# minPlayers 0/maxPlayers 35, Packed minPlayers 7/maxPlayers 35 were the two candidates") — picking
+# it now means Solreign's small-station roster covers two genuinely different upstream buildings
+# instead of two copies of the same one.
+#
+# Grid file: Resources/Maps/_Solreign/solreign_verdant.yml — a byte-for-byte copy of upstream
+# packed.yml (Resources/Maps/packed.yml, authors: packed.yml's original authors — unattributed in
+# Resources/map_attributions.txt for packed.yml itself as of this fork, same posture as
+# solreign_perihelion.yml's own identical chassis; see Resources/map_attributions.txt's
+# "_Solreign/solreign_verdant.yml" entry for the full Solreign-pass attribution) with its
+# `BecomesStation` id updated to SolreignVerdant to match the `stations:` key below, plus the actual
+# Verdant content layered on top (see next section). Reach (upstream's other true "small" map, 0-7 players) was
+# considered and rejected: at 18.7k lines / ~7 max pop it reads as a tiny transport shuttle, too
+# cramped for a central atrium + 3 spread-out secrets + a hydro-heavy roster without a full
+# room-by-room rebuild this session doesn't have budget for.
+#
+# Parallax: the map's own Map entity (uid 126 in the grid file) got a `type: Parallax` component
+# pointing at the `SolreignVerdant` parallax prototype — which turned out to already exist
+# (Resources/Prototypes/_Solreign/parallax_stations.yml, a green-aurora backdrop set built ahead of
+# time for "the maps program," whose own header comment explicitly deferred "assigning a parallax:
+# to an actual station/map" to whichever session did this grid work). Same `type: Parallax` /
+# `parallax:` field shape as upstream's own per-map overrides (e.g. Resources/Maps/plasma.yml,
+# Resources/Maps/bagel.yml) — no new component, just wiring an existing one.
+#
+# Identity: "reclaimed by nature" — corporate kudzu (SolreignKudzuCorporate) and glow flora
+# (SolreignGlowPlantAcid/Cyan, SolreignGlowTreeAcid — all Resources/Prototypes/_Solreign/Entities/
+# delighters/glow_plants.yml) creeping through the station, dormant awakening-tree Ents
+# (SolreignDormantEnt, Resources/Prototypes/_Solreign/Entities/ents.yml — first-ever map placement
+# for that entity; every other file that touches it says "wired to no maps") standing in as
+# ordinary decorative trees until they aren't, and station lighting shifted to read as
+# substantially plant-sourced rather than fixture-sourced in the rooms this pass touched.
+#
+# ── Room census used for placement (verified against Resources/Maps/packed.yml before the copy,
+#    via its DefaultStationBeacon* nav-map markers — same anchor-and-grep discipline as
+#    docs/specs/2026-07-11-map-graft-plan.md's APC-anchor technique for Saltern/Oasis. NOT walked in
+#    the mapping editor — no dotnet build this session — so treat every coordinate below as
+#    "walk here and confirm the exact tile," not "paint blind at this pixel," same caveat that doc
+#    already carries.) ──
+#
+# 1. THE ATRIUM (central atrium garden) = the existing Botany/Hydroponics room (beacon anchor
+#    44.5,-3.5; hydro-tray cluster roughly x:41-51, y:-11..-1; Biogenerator at 44.5,-5.5; 3 tables at
+#    48.5,-7.5 / 49.5,-6.5 / 51.5,-7.5). Sited here for the same reason Oasis's zoo wing reused
+#    Xenoarch: the room already has the closest in-fiction excuse (it's already hydroponics) instead
+#    of a bolted-on room with no plumbing/atmos reason to exist. All 11 light fixtures in this room
+#    (7 Poweredlight + 4 PoweredSmallLight, every one grep-verified present in the source grid) got a
+#    per-instance PointLight dim (energy cut to ~30% of the AlwaysPoweredWallLight default, tinted
+#    toward green) so the room reads as lit mostly by the new glow flora, not the ceiling fixtures —
+#    this is a per-map-instance override (added only on these specific placed entities in this one
+#    file), it does not touch the Poweredlight/PoweredSmallLight prototypes globally. One dormant Ent
+#    stands over the Biogenerator; loose synergy fruit (the "healing-fruit trees'" literal harvest —
+#    see note below) sits on/near the hydro trays; kudzu creeps at both hydro-glass doors.
+#
+#    Note on "healing-fruit trees": no upstream or Solreign prototype for a fruit-bearing decorative
+#    *tree* exists (grep-verified — Entities/Objects/Decoration/flora.yml ships bark-only trees, no
+#    Produce component anywhere in that file). The healing fruit itself is real and fully built
+#    (SolreignFoodSynergyFruit, Resources/Prototypes/_Solreign/Botany/produce.yml — "Restores a
+#    small, pre-approved amount of well-being," grown from seedId solreignSynergyFruit). Rather than
+#    invent an unbuilt tree entity, the atrium reads as fruit-bearing via the real hydro trays
+#    growing that seed (a starter box + loose seed packet placed on the tables) plus loose harvested
+#    fruit scattered near them — same "trust only what's grep-verified to exist" discipline this
+#    codebase already holds itself to (map-graft-plan.md §0's own stated limitation).
+#
+# 2. Secret #1 — "first expedition" camp with lore: a SW maintenance pocket (anchor
+#    ClosetMaintenanceFilledRandom 11.5W,23.5S / Rack 13.5W,24.5S, off the AirlockMaintLocked at
+#    -5.5,-20.5 / trash-disposal catwalk loop — verified real props, far from any core engineering
+#    system so nothing here risks fouling the singularity/PA/TEG rooms in the same quadrant). 3 new
+#    lore papers (SolreignPaperVerdantExpeditionLog1-3, Resources/Prototypes/_Solreign/Entities/
+#    verdant_lore.yml + Locale/en-US/_solreign/verdant-lore.ftl) tell the botanical survey team's
+#    last week in found-document order, plus kudzu/glow-plant creep dressing the abandoned camp.
+#
+# 3. Secret #2 — hidden grove w/ unicorn spawn marker: the Dorms/Library maintenance loop (anchor
+#    AirlockMaintLocked 13.5,15.5 / 12.5,14.5; RandomSpawner 12.5,15.5 — a guaranteed-walkable marker
+#    tile reused as the anchor for the new marker). SpawnMobSolreignUnicorn (new
+#    ConditionalSpawner marker, Resources/Prototypes/_Solreign/Entities/Markers/verdant_markers.yml)
+#    wraps SolreignMobUnicorn (Resources/Prototypes/_Solreign/Entities/delighters/unicorn.yml) — that
+#    mob has never been placed on any map before this one. A second dormant Ent and glow flora share
+#    the grove; a third Ent stands in the Dorms common room proper (beacon 15.5,14.5) as the more
+#    "everyday" tree a crew member trips over on day one.
+#
+# 4. Secret #3 — showpiece: SpearSharkMinnow (Resources/Prototypes/Entities/Objects/Weapons/Melee/
+#    spear.yml), a fully dormant upstream weapon — grep-audited repo-wide (Resources/Maps,
+#    Prototypes/Catalog, Entities/Markers/Spawners) same methodology as
+#    docs/specs/2026-07-11-showpiece-placement.md's original 6-weapon audit; all 6 of THOSE are
+#    already placed on Oasis (grep-confirmed against solreign_oasis.yml before picking a new one, so
+#    this doesn't double up), and SpearSharkMinnow independently comes back zero hits anywhere in the
+#    whole repo. Placed near the Cargo/Salvage maintenance loop (CrateEmptySpawner tile 12.5,24.5) —
+#    "a salvage crew dragged this in and it got reclassified as botanical debris," in keeping with
+#    the never-announce rule (no AnnounceOnUse, no comms ping; it is just an item entity sitting on
+#    a tile, discoverable by foot traffic and rumor only, per that doc's §1).
+#
+# 5. Representative "kudzu + glow flora EVERYWHERE" pass: beyond the atrium/secrets above, one
+#    glow-plant or kudzu instance was added at 10 more named-room beacon anchors spread across the
+#    map (Bar, Chapel, Kitchen, Library, CargoBay, Salvage, Chemistry, Medical, Arrivals, QMRoom —
+#    beacon coordinates are guaranteed-real open floor by construction, so these carry zero
+#    placement risk even unverified in-editor). This is a representative first pass, not a literal
+#    light-by-light/tile-by-tile retexture of all ~1300+ entity blocks on this chassis — flagged
+#    the same way Oasis's own map-graft-plan.md flagged its one known cosmetic leftover, for
+#    whichever session next opens this map in the RT mapping editor.
+#
+# Weather: SolreignWeatherSporeDrift (Resources/Prototypes/_Solreign/Entities/verdant_weather.yml)
+# is built and ready, but — verified repo-wide, zero hits — this engine never bakes weather
+# declaratively into a map file; it is always applied at runtime via the `weather add`/`weather set`
+# admin commands or a GameRule calling SharedWeatherSystem.TryAddWeather. "Configured" here means
+# built via the exact same mechanism every other weather effect in the game uses, ready for
+# `weather add <SolreignVerdant map id> SolreignWeatherSporeDrift` — wiring an automatic
+# station-event trigger for it is a GameRule-authoring task, out of this session's map-content scope.
+#
+# Jobs: hydro-heavy by design — Botanist bumped from Packed's stock 1-2 to 2-3 below (a spawn point
+# for that job already exists on the base grid; the GameMapsLoadableTest job-spawnpoint check only
+# requires at least one spawn point per job key present in availableJobs, not one per slot, so this
+# needed no new spawn-point entity). Rest of the roster is Packed's stock list, untouched.
+#
+# DoNotMap check: grep-verified Resources/Maps/packed.yml carries zero DoNotMap-category entities
+# (the repo's only two DoNotMapWhitelistSpecific entries are for bagel.yml and reach.yml — Packed
+# has none, and it isn't in Content.IntegrationTests/Tests/PostMapInitTest.cs's whitelist because it
+# has never needed one). None of this session's new prototypes (glow plants, kudzu, Ent, lore
+# papers, unicorn marker, spore-drift weather, the showpiece) carry the DoNotMap category either
+# (checked each one's parent chain / categories field) — so, unlike the ground-rule's own reach.yml
+# example, no PostMapInitTest.cs edit was needed for this chassis.
+
+- type: gameMap
+  id: SolreignVerdant
+  mapName: 'Solreign Verdant'
+  mapPath: /Maps/_Solreign/solreign_verdant.yml
+  minPlayers: 0
+  maxPlayers: 35
+  stations:
+    SolreignVerdant:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Solreign Verdant {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'VD'
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/Shuttles/emergency_crimson.yml
+        # Mood rollout pass (2026-07-16): Verdant had no StationIdentity mood component at all until
+        # this pass (the maps-program's "reclaimed by nature" station -- kudzu, glow flora, dormant
+        # Ents). Warm gold-green "sun through leaves" palette, deliberately NOT the same register as
+        # Meridian's clinical blue-white or Leviathan's champagne-ivory -- see
+        # SolreignStationMoodComponent's doc comment for the mechanic breakdown. Long 3600s cycle
+        # matches the station's slow-overgrowth pacing. Prefers spore-drift only (kudzu/grove
+        # fiction; solar flare is Perihelion's identity, not this station's).
+        - type: SolreignStationMood
+          dayNightCycle: true
+          cyclePeriodSeconds: 3600
+          colorA: "#2A3420"
+          colorB: "#E8F0B8"
+          weatherEventPrototypes:
+          - SolreignSporeDrift
+          moodPopupLines:
+          - solreign-verdant-mood-popup-1
+          - solreign-verdant-mood-popup-2
+          - solreign-verdant-mood-popup-3
+          - solreign-verdant-mood-popup-4
+        - type: StationJobs
+          availableJobs: # carried over from Packed verbatim except Botanist (bumped, hydro-heavy note above)
+            #command (7)
+            Captain: [ 1, 1 ]
+            HeadOfPersonnel: [ 1, 1 ]
+            HeadOfSecurity: [ 1, 1 ]
+            ChiefMedicalOfficer: [ 1, 1 ]
+            ChiefEngineer: [ 1, 1 ]
+            ResearchDirector: [ 1, 1 ]
+            Quartermaster: [ 1, 1 ]
+            #service (9 - 11) — Botanist bumped 1-2 -> 2-3, this is the hydro-heavy station
+            Bartender: [ 1, 1 ]
+            Botanist: [ 2, 3 ]
+            Chef: [ 1, 1 ]
+            Janitor: [ 1, 2 ]
+            Chaplain: [ 1, 1 ]
+            Librarian: [ 1, 1 ]
+            ServiceWorker: [ 2, 2 ]
+            #engineering (6)
+            AtmosphericTechnician: [ 2, 2 ]
+            StationEngineer: [ 4, 4 ]
+            TechnicalAssistant: [ 3, 3 ] #intern, not counted
+            #medical (6)
+            Chemist: [ 2, 2 ]
+            MedicalDoctor: [ 3, 3 ]
+            MedicalIntern: [ 2, 2 ] #intern, not counted
+            Paramedic: [ 1, 1 ]
+            #science (4)
+            Scientist: [ 4, 4 ]
+            ResearchAssistant: [ 2, 2 ] #intern, not counted
+            #security (6)
+            Warden: [ 1, 1 ]
+            SecurityOfficer: [ 3, 3 ]
+            Detective: [ 1, 1 ]
+            SecurityCadet: [ 2, 2 ] #intern, not counted
+            Lawyer: [ 1, 1 ]
+            #supply (6)
+            SalvageSpecialist: [ 2, 2 ]
+            CargoTechnician: [ 2, 2 ]
+            SolreignSectorFreightMaster: [ 1, 1 ]
+            SolreignExpeditionSpecialist: [ 1, 1 ]
+            #civilian (3+)
+            Passenger: [ -1, -1 ] #infinite, not counted
+            # Pair-up onboarding roles; both present as Passenger in-game and share a
+            # private radio channel. Unlimited like Passenger so onboarding is never capped.
+            Wingmate: [ -1, -1 ]
+            WingmateMentor: [ -1, -1 ]
+            Clown: [ 1, 1 ]
+            Mime: [ 1, 1 ]
+            Musician: [ 1, 1 ]
+            #silicon (3)
+            StationAi: [ 1, 1 ]
+            Borg: [ 2, 2 ]

@@ -1,0 +1,41 @@
+# Personnel Records Terminal — wave-2 item einstein-016 (mine rank #8). Clean-room build: the idea
+# came from Einstein Engines' public description of a records computer with HUD status icons; no
+# source was read (docs/receipts/RECORDS-HUD-2026-07-17.md carries the note). This wave ships the
+# console half only — the "HUD icons" half of the idea is explicitly deferred, not built.
+#
+# A player-reachable wall console: click it, read YOUR OWN Season Ledger record (title, tours,
+# standing, social firsts, first-death status, Mark). No admin/moderator browse-other-players variant
+# exists — see Content.Server._Solreign.Records.SolreignRecordsTerminalSystem's doc comment for why
+# that's structural, not a checked gate.
+#
+# Sprite reuses the upstream wallmount Structures/Wallmounts/screen.rsi (state "screen"), the same
+# fixture SolreignDirectiveTerminal (oracle_terminal.yml) uses — deliberately NOT
+# SolreignContractsBoard's noticeboard.rsi, so this reads as a "screen you read" rather than a
+# "board you browse". Placed on all 7 Solreign rotation maps (R1 2026-08-10). CVar solreign.records_terminal.enabled defaults TRUE.
+
+- type: entity
+  parent: BaseWallmountMetallic
+  id: SolreignRecordsTerminal
+  name: personnel records terminal
+  suffix: solreign
+  description: A dull acid-green monitor. A small brass plate reads "PROVIDENCE PERSONNEL RECORDS — AUTHORIZED USER ONLY." It already knows who you are.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/screen.rsi
+    state: screen
+  - type: SolreignRecordsTerminal
+  - type: ActivatableUI
+    key: enum.RecordsTerminalUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RecordsTerminalUiKey.Key:
+        type: RecordsTerminalBoundUserInterface
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

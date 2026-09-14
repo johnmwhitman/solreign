@@ -1,0 +1,11 @@
+# Solreign custom tags. Same rules as upstream Resources/Prototypes/tags.yml:
+# alphabetical order, document what they do.
+
+- type: Tag
+  id: SolreignHolographicCake # the only item the employee reward cake display (SolreignCakeShowcase) will accept
+
+- type: Tag
+  id: SolreignSabotageTarget # rival props spawned BY a PG-sabotage contract — the only things such contracts may target (anti-grief rule 2)
+
+- type: Tag
+  id: SolreignZooExhibit # carried by zoo_fauna.yml's exhibit critters; used by RulesPrototype NearZooExhibit inside AmbientMusicPrototype to play SolreignZooWing near a live exhibit animal — same idiom as stock SpookyFog in Tags.yml

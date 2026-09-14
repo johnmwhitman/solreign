@@ -1,0 +1,29 @@
+# Solreign Verdant — map-placement marker(s) for Station 4 (the overgrown bio-station).
+#
+# SpawnMobSolreignUnicorn: a ConditionalSpawner marker wrapping the existing SolreignMobUnicorn
+# delighter (Resources/Prototypes/_Solreign/Entities/delighters/unicorn.yml) — that mob has never
+# been placed on any map before this one (its own file's comment: it's spawn-menu/admin-spawn only
+# to date). Pattern copied verbatim from upstream's single-option animal spawners, e.g. SpawnMobCarp
+# (Resources/Prototypes/Entities/Markers/Spawners/Mobs/carp.yml) and SpawnMobBee/SpawnMobButterfly
+# (Resources/Prototypes/Entities/Markers/Spawners/Mobs/animals.yml): parent MarkerBase, a
+# ConditionalSpawner with exactly one guaranteed prototype. Icon reuses the sheep sprite the unicorn
+# itself parents (MobSheep), same idiom as upstream SpawnMobSheep's own marker icon.
+#
+# Placement: Resources/Maps/_Solreign/solreign_verdant.yml, Secret #2 ("hidden grove") — the
+# Dorms/Library maintenance loop, anchored on the existing RandomSpawner tile at (12.5,15.5)
+# (verified real floor against Resources/Maps/packed.yml before the copy).
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobSolreignUnicorn
+  name: Corporate Unicorn Spawner
+  suffix: solreign, delighter
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: sheep_wool
+      sprite: Mobs/Animals/sheep.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - SolreignMobUnicorn

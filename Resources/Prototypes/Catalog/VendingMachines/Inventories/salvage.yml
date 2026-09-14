@@ -1,0 +1,26 @@
+- type: vendingMachineInventory
+  id: SalvageEquipmentInventory
+  startingInventory:
+    Crowbar: 2
+    Pickaxe: 4
+    OreBag: 4
+    Flare: 4
+    FlashlightLantern: 2
+    HandheldGPSBasic: 2
+    RadioHandheld: 2
+    WeaponGrapplingGun: 4
+    WeaponProtoKineticAccelerator: 4
+  # SOLREIGN 2026-07-22 (player report): the Minecraft/Terraria toy swords were listed beside
+  # the Pickaxe and the PKA, so a vendor of working salvage tools implied they were working
+  # salvage tools -- the player tested whether they mined ore and read them as broken, not as
+  # a wink. Moved to contraband, where PlushieCarp already establishes "novelty, not utility":
+  # now they are a discovery for someone who hacked the vendor rather than a listed product.
+  # The joke needs to be found, not sold. Entities unchanged; revert = move these two lines up.
+  contrabandInventory:
+    PlushieCarp: 1
+    SolreignEgg05: 1 # Solreign easter egg
+    # ── Delighter (2026-08-01): salvagers buy charts. This is also the entry that makes
+    # SolreignStarChart pass SolreignOrphanReachabilityTest — startingInventory is a source
+    # the gate follows; the MaintFluffTable entry is a second hop and is not.
+    SolreignStarChart: 2
+    SolreignEgg06: 1 # Solreign easter egg

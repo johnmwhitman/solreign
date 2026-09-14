@@ -1,0 +1,39 @@
+# SR-W-049: Zoo Breach Systemic Playground Prototypes
+- type: entity
+  id: SolreignZooContainmentConsole
+  name: zoo containment control console
+  description: Central monitoring console for xenobiological containment fields, power grids, and bio-feeder systems.
+  parent: BaseStructure
+  components:
+  - type: SolreignZooContainment
+    cellId: "ZooCell-Main"
+    integrity: 100
+    isPowered: true
+    stressLevel: 0
+    activeBreachPath: None
+    popTier: MidPop
+    maxSpecimenCapacity: 4
+    isRecovered: true
+
+- type: entity
+  id: SolreignZooContainmentEmitter
+  name: forcefield containment emitter
+  description: High-output containment emitter projecting dense particle forcefields around specimen enclosures.
+  parent: BaseStructure
+  components:
+  - type: SolreignZooContainment
+    cellId: "ZooCell-Sub"
+    integrity: 100
+    isPowered: true
+
+- type: entity
+  id: SolreignZooBioFeeder
+  name: automated bio-feeder unit
+  description: Automated nutrient dispenser engineered to calm and nourish contained specimens.
+  parent: BaseStructure
+
+- type: entity
+  id: SolreignZooRecoveryPad
+  name: specimen recovery lure pad
+  description: Designated non-lethal specimen lure pad utilizing whitelisted pheromone attractants.
+  parent: BaseStructure

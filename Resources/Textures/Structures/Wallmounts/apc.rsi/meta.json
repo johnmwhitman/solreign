@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Solreign original (procedural, sprite-factory scripts/machine_swath_builders.py build_apc). Contract-exact replacement: every frame occupies the vanilla apc.rsi bounding box. Solreign original (procedural, in-house). Approved by the project owner 2026-08-06. Provenance: see docs/receipts/SOLREIGN-ART-2026-08-06.md. SOLREIGN re-theme 'ledger-green-border-pass' (value-preserving hue remap, 21 colors preserved, Sprite Factory 2026-08-08).",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base",
+      "directions": 4
+    },
+    {
+      "name": "static"
+    },
+    {
+      "name": "broken",
+      "directions": 4
+    },
+    {
+      "name": "frame",
+      "directions": 4
+    },
+    {
+      "name": "panel",
+      "directions": 4,
+      "sparse": true
+    },
+    {
+      "name": "lock0-locked",
+      "directions": 4,
+      "sparse": true
+    },
+    {
+      "name": "lock1-locked",
+      "directions": 4,
+      "sparse": true
+    },
+    {
+      "name": "display-lack",
+      "directions": 4,
+      "delays": [
+        [
+          0.25,
+          0.25,
+          1,
+          3
+        ],
+        [
+          0.25,
+          0.25,
+          1,
+          3
+        ],
+        [
+          0.25,
+          0.25,
+          1,
+          3
+        ],
+        [
+          0.25,
+          0.25,
+          1,
+          3
+        ]
+      ]
+    },
+    {
+      "name": "display-charging",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "display-full",
+      "directions": 4,
+      "delays": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "display-remote",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "emag-unlit",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "sparks-unlit",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ],
+      "sparse": true
+    }
+  ]
+}

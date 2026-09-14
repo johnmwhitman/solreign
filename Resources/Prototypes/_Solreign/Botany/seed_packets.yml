@@ -1,0 +1,123 @@
+# Solreign weird botany: SEED PACKETS + starter box
+# Packet pattern verified against upstream WheatSeeds / WatermelonSeeds
+# (Resources/Prototypes/Entities/Objects/Specific/Hydroponics/seeds.yml);
+# box pattern verified against upstream BoxAgrichem
+# (Resources/Prototypes/Catalog/Fills/Boxes/service.yml).
+
+- type: entity
+  parent: SeedBase
+  name: packet of lumen melon seeds
+  description: "Grow your own lighting. Facilities loves this one weird crop."
+  id: SolreignLumenMelonSeeds
+  components:
+    - type: Seed
+      plantId: SolreignLumenMelonPlants
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/watermelon.rsi
+
+- type: entity
+  parent: SeedBase
+  name: packet of nightshift glowcap spores
+  description: "For dim corners and dimmer schedules. The mushroom that never calls in sick."
+  id: SolreignNightshiftGlowcapSeeds
+  components:
+    - type: Seed
+      plantId: SolreignNightshiftGlowcapPlants
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/chanterelle.rsi
+
+- type: entity
+  parent: SeedBase
+  name: packet of ambition bean seeds
+  description: "Plant one. Believe in it. Watch it exceed expectations."
+  id: SolreignAmbitionBeanSeeds
+  components:
+    - type: Seed
+      plantId: SolreignAmbitionBeanPlants
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/soybeans.rsi
+
+- type: entity
+  parent: SeedBase
+  name: packet of compliance pea seeds
+  description: "Pre-briefed, pre-aligned, pre-approved. The politest legume in the sector."
+  id: SolreignCompliancePeaSeeds
+  components:
+    - type: Seed
+      plantId: SolreignCompliancePeaPlants
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/pea.rsi
+
+- type: entity
+  parent: SeedBase
+  name: packet of synergy fruit seeds
+  description: "When departments cooperate, fruit happens. Small heals, big morale."
+  id: SolreignSynergyFruitSeeds
+  components:
+    - type: Seed
+      plantId: SolreignSynergyFruitPlants
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/golden_apple.rsi
+
+# Wave 21 (S8): the warding-garlic packet — the round-start botany path to
+# SolreignVampireGarlicWard (see Botany/seeds.yml #7 and Entities/Antags/vampire.yml).
+# Stocked in the upstream MegaSeedServitorInventory beside plain GarlicSeeds.
+- type: entity
+  parent: SeedBase
+  name: packet of warding garlic seeds
+  description: "Solreign Wellness heirloom garlic. Identical to the regular crop in every culinary respect; unusually persuasive toward Nocturnal Acquisitions staff."
+  id: SolreignWardGarlicSeeds
+  components:
+    - type: Seed
+      plantId: SolreignWardGarlicPlants
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/garlic.rsi
+
+- type: entity
+  parent: SeedBase
+  name: packet of corporate kudzu seeds
+  description: "Office Beautification Initiative, form 7-G (Groundcover). Plant responsibly. It will not slow you down. It will not stop, either."
+  id: SolreignCorporateKudzuSeeds
+  components:
+    - type: Seed
+      plantId: SolreignCorporateKudzuPlants
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
+
+# Feedback #5/#4 (FEEDBACK-SMALL-2026-07-16): the round-start botany path to SolreignEgg18 (the
+# "antiviral botanist's greenery" easter egg, Entities/easter_eggs.yml), grown from a MegaSeed
+# Servitor line instead of only being obtainable from the easter-egg pack. Same clone-the-upstream-
+# RSI idiom as SolreignWardGarlicSeeds above.
+- type: entity
+  parent: SeedBase
+  name: packet of antiviral herb seeds
+  description: "Hydroponics-grade biohazard countermeasure, pre-approved for on-site cultivation. Identical care instructions to standard ambrosia vulgaris."
+  id: SolreignAntiviralHerbSeeds
+  components:
+    - type: Seed
+      plantId: SolreignAntiviralHerbPlants
+    - type: Sprite
+      sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
+
+# Starter box so mappers/admins can hand the whole pack out in one item.
+- type: entity
+  parent: BoxCardboard
+  id: SolreignBoxWeirdSeeds
+  name: Solreign experimental agriculture kit
+  suffix: solreign
+  description: One box of everything the Solreign Botanical Excellence Program is legally allowed to distribute. Grow different.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SolreignLumenMelonSeeds
+        - id: SolreignNightshiftGlowcapSeeds
+        - id: SolreignAmbitionBeanSeeds
+        - id: SolreignCompliancePeaSeeds
+        - id: SolreignSynergyFruitSeeds
+        - id: SolreignCorporateKudzuSeeds
+        - id: SolreignWardGarlicSeeds
+  - type: Sprite
+    layers:
+      - state: box

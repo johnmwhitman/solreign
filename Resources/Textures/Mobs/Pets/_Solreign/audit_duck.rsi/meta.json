@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC0-1.0",
+    "copyright": "Replumage by Sprite Factory (Solreign, 2026) of duck.rsi created by https://github.com/Mith-randalf (CC0-1.0)",
+    "states": [
+        {
+            "name": "duck-0",
+            "directions": 4
+        },
+        {
+            "name": "dead-0",
+            "delays": [
+                [
+                    1
+                ]
+            ]
+        }
+    ]
+}

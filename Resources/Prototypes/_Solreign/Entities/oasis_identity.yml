@@ -1,0 +1,83 @@
+# Solreign Oasis — the station identity props Oasis never got. Per
+# docs/specs/2026-07-11-showpiece-placement.md (line 56), Oasis was "the one Solreign-identity map
+# on disk at the time of writing" — the identity-prop treatment (see leviathan_identity.yml,
+# meridian_identity.yml, perihelion_identity.yml) was added to every station built AFTER Oasis, and
+# Oasis itself was never retrofitted. Player feedback #14 (FEEDBACK-SMALL-2026-07-16): closing that
+# known, self-documented gap — one quiet showpiece reskin, no announcements per the showpiece
+# doctrine's "never-announce rule" (docs/specs/2026-07-11-showpiece-placement.md §1).
+#
+# SolreignOasisFoundersIdol — pure fashion/lore trinket, same doctrine as
+# SolreignLeviathanFoundersSeal/SolreignMeridianShowpiece: reuses one static state from the existing
+# upstream artifact-fragment art (Objects/Specific/Xenoarchaeology/artifact_fragments.rsi, state
+# "ancientball3" — a different state than Meridian's own "ancientball1" pick, so the two showpieces
+# don't look identical), tinted, no mechanical behavior. No XenoArtifact/artifact-analyzer component
+# of any kind.
+#
+# RANDOMIZED SPAWN LOCATIONS (feedback #14's own ask, "RandomSpawner patterns"): rather than a
+# single hardcoded placement, this idol and the Crimson Keycard (Markers/hellzone_gates.yml) are
+# both merged at low weight into SolreignOasisIdentityRareRoll below, referenced from several
+# different ClosetMaintenanceFilledRandom instances on solreign_oasis.yml — same probabilistic
+# per-locker-independent-roll mechanism this wave also applies to the energy katana (item #2,
+# SolreignEnergyKatanaRareRoll), generalizing the doctrine's existing "check every closet" idiom
+# instead of inventing a new one. Each roll is independent, so which locker (if any) holds either
+# item varies round to round.
+#
+# The Sublevel H gate itself (SolreignSublevelHGate, a physical Gateway-idiom structure) is NOT
+# container-spawnable — it needs a fixed Transform on the grid, the same way every other Gateway-
+# idiom structure in this fork is authored. Its own file (Markers/hellzone_gates.yml) already states
+# hand-placing one instance in deep maintenance is "the follow-up mapping step"; this wave does
+# exactly that at a single anchor. What IS randomized is whether/where you find the Crimson Keycard
+# needed to get through it — the functional "will you find your way in this round" experience is
+# still randomized, without inventing a new position-randomization system for a placed structure.
+
+- type: entity
+  parent: BaseItem
+  id: SolreignOasisFoundersIdol
+  name: "the Founder's Idol"
+  suffix: solreign, oasis, showpiece
+  description: A palm-sized carved figure, worn smooth at the base from handling. Nobody currently on the manifest can say who it depicts, or why Oasis has one and no other station does.
+  components:
+  # CLOSED (production batch 10, sprite-factory wave, 2026-07-16): real, ORIGINAL art
+  # landed (the "Oasis Founder's Seal") -- a fist-sized disc of cast metal embossed with a
+  # crest, per the game's own flavor text. Not a reused/tinted artifact-fragment state
+  # (like the Leviathan/Meridian showpieces) -- own dedicated RSI, no color override needed.
+  - type: Sprite
+    sprite: _Solreign/founders_seal.rsi
+    state: icon
+  - type: Item
+    size: Small
+
+# ── Rare-roll pools (probabilistic, per-locker-independent) ──────────────────────────────────────
+
+# Energy katana (item #2): was a guaranteed single-locker placement
+# (docs/specs/2026-07-11-showpiece-placement.md §3.2, solreign_oasis.yml uid 550) — that reads as
+# "this maintenance closet always has a ninja sword," functionally identical to guaranteed loot, not
+# a showpiece. Kept on Oasis (doesn't gut the deliberate showpiece design) but no longer
+# deterministic: ~5% per locker, spread across several ClosetMaintenanceFilledRandom instances on
+# solreign_oasis.yml instead of one fixed closet.
+- type: entityTable
+  id: SolreignEnergyKatanaRareRoll
+  table: !type:GroupSelector
+    children:
+    - id: EnergyKatana
+      weight: 1
+    - !type:NoneSelector
+      weight: 19
+
+# Founder's Idol + Crimson Keycard + Navy Officer's Sabre (item #14, item #18): each ~3.3% per
+# locker, independently. The sabre (navy_officer_sabre.yml) has no dedicated role/job to issue it
+# from (triage note: no "Navy Officer" role exists in this fork) and no other placement was asked
+# for, so it rides this same rare-roll idiom to stay reachable (SolreignOrphanReachabilityTest)
+# rather than sitting allowlisted as a fake "by-design admin-only" entry it isn't.
+- type: entityTable
+  id: SolreignOasisIdentityRareRoll
+  table: !type:GroupSelector
+    children:
+    - id: SolreignOasisFoundersIdol
+      weight: 1
+    - id: SolreignCrimsonKeycard
+      weight: 1
+    - id: SolreignNavyOfficerSabre
+      weight: 1
+    - !type:NoneSelector
+      weight: 27

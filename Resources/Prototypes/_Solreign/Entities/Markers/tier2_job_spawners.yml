@@ -1,0 +1,25 @@
+# Nonblocking job markers colocated with existing Cargo/Salvage markers on each
+# Solreign rotation map. Job selection requires an exact job_id marker.
+- type: entity
+  id: SpawnPointSolreignSectorFreightMaster
+  parent: SpawnPointJobBase
+  name: sector freight master
+  components:
+  - type: SpawnPoint
+    job_id: SolreignSectorFreightMaster
+  - type: Sprite
+    layers:
+    - state: green
+    - state: cargo_tech
+
+- type: entity
+  id: SpawnPointSolreignExpeditionSpecialist
+  parent: SpawnPointJobBase
+  name: expedition specialist
+  components:
+  - type: SpawnPoint
+    job_id: SolreignExpeditionSpecialist
+  - type: Sprite
+    layers:
+    - state: green
+    - state: salvagespecialist

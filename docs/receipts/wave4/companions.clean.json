@@ -1,0 +1,42 @@
+{
+  "sprites": [
+    {
+      "rsi": "glowstick_glow",
+      "state": "glowstick_glow",
+      "verdict": "animate",
+      "concept": "Claude-synced companion layer: this mask is already pure white at low alpha (a translucent glow bloom), so brightness/lerp are no-ops here (RGB already saturated). The executor's alpha op is a cap (min(a,value)), never a boost, so the base alpha (38) is the ceiling — re-expressed glowstick_lit's 'body' breathe as an alpha pulse that dips below and returns toward that ceiling, same rhythm, so the bloom breathes in lockstep with the visible chemlight body.",
+      "frames": 4,
+      "delays": [0.55, 0.32, 0.48, 0.28],
+      "masks": {
+        "glow": {"letters": ["a"]}
+      },
+      "frame_ops": [
+        {"frame": 1, "ops": [{"mask": "glow", "op": "alpha", "value": 25}]},
+        {"frame": 2, "ops": [{"mask": "glow", "op": "alpha", "value": 12}]},
+        {"frame": 3, "ops": [{"mask": "glow", "op": "alpha", "value": 32}]}
+      ]
+    },
+    {
+      "rsi": "carp_statue_teeth",
+      "state": "teeth_unshaded",
+      "verdict": "animate",
+      "concept": "Claude-synced companion layer: mirrors carp_statue_eyes's 'eyes' dim/shut/flare beat, applied to the teeth's own single-color mask, so the whole guardian face flickers together.",
+      "frames": 4,
+      "delays": [0.75, 0.12, 0.1, 0.35],
+      "masks": {
+        "teeth": {"letters": ["a"]}
+      },
+      "frame_ops": [
+        {"frame": 1, "ops": [{"mask": "teeth", "op": "brightness", "factor": 0.85}]},
+        {"frame": 2, "ops": [
+          {"mask": "teeth", "op": "brightness", "factor": 0.22},
+          {"mask": "teeth", "op": "alpha", "value": 70}
+        ]},
+        {"frame": 3, "ops": [
+          {"mask": "teeth", "op": "brightness", "factor": 1.22},
+          {"mask": "teeth", "op": "lerp", "to": [255, 255, 255], "t": 0.3}
+        ]}
+      ]
+    }
+  ]
+}

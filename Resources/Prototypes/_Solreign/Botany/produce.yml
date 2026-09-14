@@ -1,0 +1,232 @@
+# Solreign weird botany: PRODUCE + the corporate kudzu vine
+# Produce pattern verified against upstream FoodApple / FoodPumpkin
+# (Resources/Prototypes/Entities/Objects/Consumable/Food/produce.yml);
+# kudzu pattern verified against upstream Kudzu / WeakKudzu
+# (Resources/Prototypes/Entities/Objects/Misc/kudzu.yml).
+# Sprites reuse upstream produce RSIs with color tints; glow = PointLight,
+# same trick as upstream PottedPlantBioluminscent. TODO(sprite factory): bespoke art.
+
+# 1. Lumen melon — glowing harvest, glow crop A.
+- type: entity
+  parent: FoodProduceBase
+  id: SolreignFoodLumenMelon
+  name: lumen melon
+  suffix: solreign
+  description: A melon that photosynthesizes overtime and stores the surplus as pure acid-green glow. Legally, it is a lighting fixture that happens to be delicious.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - watermelon
+    - light
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/watermelon.rsi
+    color: "#b6ff7a"
+  - type: PointLight
+    radius: 2.0
+    energy: 1.2
+    color: "#7cf64b"
+  - type: Item
+    size: Normal
+    heldPrefix: produce
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: Water
+        Quantity: 5
+      - ReagentId: SolreignLumenSap
+        Quantity: 5
+  - type: Produce
+    plantId: SolreignLumenMelonPlants
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: SolreignRainbowJuice
+        Quantity: 10
+
+# 2. Nightshift glowcap — soft cyan mushroom, glow crop B.
+- type: entity
+  parent: FoodProduceBase
+  id: SolreignFoodNightshiftGlowcap
+  name: nightshift glowcap
+  suffix: solreign
+  description: A mushroom that clocked in for the night shift and never clocked out. Emits a calm cyan glow and a quiet sense of duty.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - mushroom
+    - light
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/chanterelle.rsi
+    color: "#a8f0ff"
+  - type: PointLight
+    radius: 1.8
+    energy: 1.0
+    color: "#4bf6d8"
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: SolreignLumenSap
+        Quantity: 5
+  - type: Produce
+    plantId: SolreignNightshiftGlowcapPlants
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: SolreignOvertimeOil
+        Quantity: 10
+
+# 3. Ambition bean — the raw material of hustle.
+- type: entity
+  parent: FoodProduceBase
+  id: SolreignFoodAmbitionBean
+  name: ambition bean
+  suffix: solreign
+  description: Each bean contains one (1) five-year plan. Grind for liquid ambition. Results not guaranteed; enthusiasm is.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - nutty
+    - motivating
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/soybeans.rsi
+    color: "#ffd75e"
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 4
+      - ReagentId: SolreignLiquidAmbition
+        Quantity: 5
+  - type: Produce
+    plantId: SolreignAmbitionBeanPlants
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: SolreignLiquidAmbition
+        Quantity: 8
+
+# 4. Compliance pod — peas in perfect alignment.
+- type: entity
+  parent: FoodProduceBase
+  id: SolreignFoodCompliancePod
+  name: compliance pod
+  suffix: solreign
+  description: Every pea in this pod has read the handbook. Every pea has signed. Eating one is considered an acknowledgment.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - peas
+    - mindful
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/pea.rsi
+    color: "#b6ff7a"
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 4
+      - ReagentId: SolreignComplianceSerum
+        Quantity: 4
+  - type: Produce
+    plantId: SolreignCompliancePeaPlants
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: SolreignComplianceSerum
+        Quantity: 8
+
+# 5. Synergy fruit — the power-up fruit. Heals a small, budgeted amount.
+- type: entity
+  parent: FoodProduceBase
+  id: SolreignFoodSynergyFruit
+  name: synergy fruit
+  suffix: solreign
+  description: A golden fruit grown at the intersection of two departments that finally talked to each other. Restores a small, pre-approved amount of well-being.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - apple
+    - profits
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/golden_apple.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: Vitamin
+        Quantity: 3
+      - ReagentId: SolreignSynergy
+        Quantity: 6
+  - type: Produce
+    plantId: SolreignSynergyFruitPlants
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: SolreignSynergy
+        Quantity: 8
+
+# 6. Kudzu clipping — harvest of the corporate kudzu.
+- type: entity
+  parent: FoodProduceBase
+  id: SolreignFoodKudzuClipping
+  name: corporate kudzu clipping
+  suffix: solreign
+  description: A vigorous cutting of decorative corporate groundcover. It has already begun onboarding the nearest wall.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - leafy
+    - fiber
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/cabbage.rsi
+    color: "#9dff6b"
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 2
+      - ReagentId: Fiber
+        Quantity: 4
+  - type: Produce
+    plantId: SolreignCorporateKudzuPlants
+
+# THE CORPORATE KUDZU ITSELF — fast-spreading, strictly decorative.
+# Parents upstream Kudzu (keeps EdgeSpreader/GrowingKudzu/destructible wiring),
+# then de-fangs it: no movement slow, easier to clear, faster spread, acid-green.
+- type: entity
+  parent: Kudzu
+  id: SolreignKudzuCorporate
+  name: corporate kudzu
+  suffix: solreign
+  description: Decorative groundcover from the Solreign Office Beautification Initiative. It grows at the speed of quarterly targets and harms nothing but sightlines. Prune with anything sharp.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/kudzu.rsi
+    state: kudzu_11
+    drawdepth: Overdoors
+    color: "#b6ff7a"
+  - type: Kudzu
+    # Decorative-static: never spreads to neighbor tiles, so it cannot overrun a
+    # round (Prob(0) is always false in KudzuSystem.OnKudzuSpread). Same pattern
+    # as ShadowKudzuWeak. growthTickChance only matures its own sprite (visual
+    # flavor) and spawns nothing on its own.
+    growthTickChance: 0.1
+    spreadChance: 0
+  - type: SpeedModifierContacts # decorative: does NOT slow anyone down
+    walkSpeedModifier: 1.0
+    sprintSpeedModifier: 1.0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5 # easy pruning; beautification is reversible
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

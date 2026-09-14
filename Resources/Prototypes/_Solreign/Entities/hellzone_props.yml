@@ -1,0 +1,279 @@
+# Solreign Doom pack: HELL/HEAVEN ZONE PROPS (props only — NOTHING is mapped yet;
+# mapping is a later wave, see docs/specs/2026-07-11-hell-heaven-zones.md).
+#
+# Fiction: Sublevel H — "Thermal Motivation Annex" (hell wing) and the
+# "Serenity & Compliance Atrium" (heaven wing). Two corporate-branded afterlife
+# attractions the Company insists are ordinary facilities. PG throughout.
+#
+# Patterns studied before writing (verified in-repo):
+# - Braziers/fire decor: Entities/Structures/Decoration/bonfire.yml
+#   (BaseBonfire abstract = fixtures + PointLight + IgnitionSource; children
+#   override Sprite layers + PointLight color, e.g. LegionnaireBonfire).
+# - Stone pillars/statues: Entities/Structures/Decoration/statues.yml
+#   (BaseIronsandStatue = noRot Mobs-depth sprite + Rock damage + Destructible
+#   spawning SteelOre1; tall pillars use ironsand_statue_tall.rsi + offset 0,0.5).
+# - Pedestals: Entities/Structures/Furniture/altar.yml (AltarBase abstract =
+#   Prayable + PlaceableSurface + Climbable; AltarNanotrasen/AltarSpaceChristian
+#   children add Sprite/Icon/Destructible; space-christian uses an unshaded
+#   _lightning layer).
+# - Vending machine: Entities/Structures/Machines/vending_machines.yml
+#   (VendingMachine abstract; VendingMachineChapel "PietyVend" = chapdrobe.rsi
+#   off/broken/normal-unshaded/deny-unshaded states + PointLight) and
+#   Catalog/VendingMachines/Inventories/chapel.yml (vendingMachineInventory).
+# - Wall sign: Entities/Structures/Wallmounts/Signs/base_structuresigns.yml
+#   (BaseSign) + signs.yml (SignFire uses state: fire).
+# - House reskin style: _Solreign/Entities/portal_props.yml (tint existing RSIs,
+#   TODO(sprite factory) markers for dedicated art later).
+#
+# DELIBERATELY NOT DONE HERE (wiring wave, to avoid concurrent-agent conflicts):
+# - No new tags (the SolreignHellZone ambience tag lands in _Solreign/tags.yml
+#   together with the ambientMusic/rules/soundCollection prototypes).
+# - No ambientMusic prototypes; plan is in the spec doc.
+#
+# TODO(sprite factory): dedicated RSIs — obsidian pedestal, marble seraph,
+# Indulgences vendor face, "SUBLEVEL H" sign plate.
+
+# ══ HELL WING — THE THERMAL MOTIVATION ANNEX ══════════════════════════════════
+
+# ── EXECUTIVE MOTIVATION BRAZIER ──────────────────────────────────────────────
+# Bonfire reskin. Real fire, real ignition source (upstream BaseBonfire behavior
+# retained on purpose — the Annex is a workplace-hazards theme park).
+- type: entity
+  parent: BaseBonfire
+  id: SolreignHellBrazier
+  name: executive motivation brazier
+  suffix: solreign, hellzone
+  description: An open flame in a corporate-approved basin. The plaque reads, "Ambient warmth is provided at no cost to the employee. Standing in the warmth is a personal growth decision."
+  components:
+  - type: Sprite
+    layers:
+    - state: burning
+    color: "#ff9a66" # ember-orange cast; TODO(sprite factory): dedicated brazier RSI
+  - type: PointLight
+    radius: 5
+    energy: 3
+    color: "#ff3b1e"
+
+# ── OBSIDIAN COMPLIANCE PILLAR ────────────────────────────────────────────────
+# Tall ironsand statue reskin, scorched-red tint. Pure decor, breakable.
+- type: entity
+  parent: BaseIronsandStatue
+  id: SolreignHellPillar
+  name: obsidian compliance pillar
+  suffix: solreign, hellzone
+  description: A cracked basalt column, warm to the touch. Facilities has classified the carvings on it as "decorative" and asks that you stop filing reports about them.
+  components:
+  - type: Sprite
+    sprite: Structures/Decoration/solreign_obsidian_compliance_pillar.rsi
+    state: inverse_pillar
+    offset: "0.0,0.5"
+    color: "#a03c30" # scorched basalt; TODO(sprite factory): dedicated RSI
+  - type: PointLight
+    radius: 1.4
+    energy: 0.5
+    color: "#ff5a2e"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.1,0.45,0.1"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+# ── DEMONIC PEDESTAL ("PERFORMANCE REVIEW LECTERN") ───────────────────────────
+# AltarBase child, chaos-altar sprite with an infernal tint. Inherits Prayable +
+# PlaceableSurface from AltarBase — you can pray at it and display loot on it.
+# NOTE: Prayable trips the upstream "Holy" ambient-music rule (NearPrayable,
+# priority 4). Intentional irony; the hell track outranks it at priority 6 once
+# the ambience wave lands (see spec §6).
+- type: entity
+  parent: AltarBase
+  id: SolreignDemonicPedestal
+  name: performance review lectern
+  suffix: solreign, hellzone
+  description: A pedestal of fused obsidian that hums at the exact frequency of an unanswered email. Offerings placed here are considered submitted. Prayers are logged.
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/Altars/Gods/solreign_demonic_pedestal.rsi
+    state: chaos
+    color: "#e06a55" # infernal cast; TODO(sprite factory): dedicated obsidian RSI
+  - type: Icon
+    sprite: Structures/Furniture/Altars/Gods/solreign_demonic_pedestal.rsi
+    state: chaos
+  - type: PointLight
+    radius: 2
+    energy: 1.2
+    color: "#ff2e14"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# ── SUBLEVEL H SIGNAGE ────────────────────────────────────────────────────────
+- type: entity
+  parent: BaseSign
+  id: SolreignSignSublevelH
+  name: sublevel H notice
+  suffix: solreign, hellzone
+  description: A fire-hazard sign amended with corporate letterhead. It reads, "SUBLEVEL H — THERMAL MOTIVATION ANNEX. Temperature is a state of mind. Your state of mind has been scheduled."
+  components:
+  - type: Sprite
+    sprite: Structures/Wallmounts/solreign_sign_sublevel_h.rsi
+    state: fire
+
+# ══ HEAVEN WING — THE SERENITY & COMPLIANCE ATRIUM ════════════════════════════
+
+# ── MARBLE SERENITY COLUMN ────────────────────────────────────────────────────
+# Small ironsand pillar reskin, polished-marble tint, soft glow.
+- type: entity
+  parent: BaseIronsandStatue
+  id: SolreignHeavenColumn
+  name: marble serenity column
+  suffix: solreign, hellzone, heaven
+  description: A flawless marble column, softly lit from within. An engraved plate certifies it as "load-bearing for morale purposes only."
+  components:
+  - type: Sprite
+    sprite: Structures/Decoration/solreign_marble_serenity_column.rsi
+    state: small_pillar
+    color: "#f2ede3" # polished marble; TODO(sprite factory): dedicated RSI
+  - type: PointLight
+    radius: 1.6
+    energy: 0.6
+    color: "#fff3d6"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+# ── SERAPHIC EXHIBIT PEDESTAL ─────────────────────────────────────────────────
+# AltarBase child using the space-christian sprite (with its unshaded lightning
+# layer). Prayable + PlaceableSurface inherited — the heaven wing's reward
+# pedestal, and the anchor for the upstream "Holy" ambience (free, no new audio).
+- type: entity
+  parent: AltarBase
+  id: SolreignHeavenPedestal
+  name: seraphic exhibit pedestal
+  suffix: solreign, hellzone, heaven
+  description: A luminous marble pedestal. Items displayed here are insured against theft, fire, and acts of the Company. Claims have never been honored, because nothing displayed here has ever been lost. Officially.
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/Altars/Gods/solreign_seraphic_exhibit_pedestal.rsi
+    layers:
+    - state: space-christian
+    - state: space-christian_lightning
+      shader: unshaded
+  - type: Icon
+    sprite: Structures/Furniture/Altars/Gods/solreign_seraphic_exhibit_pedestal.rsi
+    state: space-christian
+  - type: PointLight
+    radius: 2
+    energy: 1
+    color: "#ffe9a8"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# ── STATUE OF THE FINAL AUDITOR ───────────────────────────────────────────────
+# Venus statue reskin in marble white with a halo glow. Yes, she is holding a
+# toolbox. The lore leans in.
+- type: entity
+  parent: BaseIronsandStatue
+  id: SolreignAngelicStatue
+  name: statue of the final auditor
+  suffix: solreign, hellzone, heaven
+  description: A marble seraph with a floor-length braid, depicted wielding the Toolbox of Final Review. When the last shift ends, she opens it. Nobody knows what is inside. HR says it is forms.
+  components:
+  - type: Sprite
+    sprite: Structures/Decoration/statues.rsi
+    state: venus_blue
+    offset: "0.0,0.5"
+    color: "#fdf8ec" # marble white; TODO(sprite factory): dedicated seraph RSI
+  - type: PointLight
+    radius: 1.8
+    energy: 0.7
+    color: "#fff3c2"
+
+# ── INDULGENCES (ANGELIC VENDING MACHINE) ─────────────────────────────────────
+# PietyVend reskin, no access lock — absolution is for everyone, that's the
+# business model. Stock is strictly PG chapel-adjacent goods.
+- type: entity
+  parent: VendingMachine
+  id: SolreignVendingMachineIndulgences
+  name: Indulgences
+  suffix: solreign, hellzone, heaven
+  description: A gleaming white vending machine with a gilded halo antenna. The Company's afterlife-services subsidiary guarantees every purchase is morally offsetting. Refunds are processed in the next life.
+  components:
+  - type: VendingMachine
+    pack: SolreignIndulgencesInventory
+  - type: VendingMachineVisuals
+    denyState: deny-unshaded
+  - type: SpeakOnUIClosed
+    pack: GenericVendGoodbyes
+  - type: Sprite
+    sprite: _Solreign/PlayerDelight/solreign_indulgences_vendor.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    color: "#fdf6e0" # gilded-white cast
+  - type: PointLight
+    radius: 1.8
+    energy: 2.5
+    color: "#ffe9a8"
+
+# Stock for the Indulgences machine. Every id verified upstream:
+# BoxCandle/BoxCandleSmall (Catalog/Fills/Boxes), Urn + Bible (chapel gear),
+# PlushieGhost/PlushieCarp (Objects/Fun/Plushies/plushies.yml),
+# FoodDonutPlain (Consumable/Food/Baked/donut.yml — it's halo-shaped, look at it),
+# DrinkWaterBottleFull (sold as-is; the label does all the work).
+- type: vendingMachineInventory
+  id: SolreignIndulgencesInventory
+  startingInventory:
+    BoxCandle: 3
+    BoxCandleSmall: 3
+    Urn: 2
+    Bible: 1
+    PlushieGhost: 2
+    PlushieCarp: 2
+    FoodDonutPlain: 6
+    DrinkWaterBottleFull: 6

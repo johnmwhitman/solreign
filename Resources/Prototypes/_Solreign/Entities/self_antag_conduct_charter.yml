@@ -1,0 +1,38 @@
+# Solreign "Asset Conduct Charter" — self-antag conduct boundaries, one-page in-game
+# readable. Same additive Paper idiom as lore_papers.yml's SolreignPaperLoreBase /
+# corporate_flavor_items_2.yml's SolreignEmployeeSatisfactionMemo: parents PaperOffice,
+# overrides name/description/suffix, and points a Paper `content:` field at a locale key —
+# no new sprite, no placeholder-mismatch risk.
+#
+# Purpose: churn-risk mitigation for a Reddit-driven server (top griefing complaint —
+# random mass murder / new-player targeting / ERP / ledger-farming griefing breaking the
+# chill-RP core). This is flavor + norm-setting text, NOT an enforcement mechanism — actual
+# moderation still lives with admins/CoreRules (see Resources/ServerInfo/_Solreign/
+# FirstShift.xml's "the server rules are not [flavor text]" line). This charter exists so
+# a player can find the stated boundary in-character before an admin has to state it
+# out-of-character.
+#
+# Distribution (reachability): stocked in the existing SolreignBreakRoomKiosk's
+# SolreignBreakRoomKioskInventory (corporate_flavor_items.yml) — the only edit made to that
+# file for this wave is extending that inventory list, same idiom as the second flavor-item
+# wave. The kiosk is already placed on the Oasis map (uid 90270, Science Break Room), so
+# this item is reachable in a live round from the moment this file loads, satisfying the
+# Wave-22 orphan-reachability test. A PlayerSpawnCompleteEvent-driven per-player hand-out
+# (studied via Content.Server/_Solreign/Providence/ProvidenceWelcomeSystem.cs) was the other
+# option on the table; the kiosk route was chosen as the lower-risk, already-proven-twice
+# reachability path for a single cosmetic prototype — no new ECS system, no new CVar, no new
+# test surface to regress.
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignSelfAntagConductCharter
+  suffix: solreign, charter
+  name: Solreign Asset Conduct Charter
+  description: A laminated one-pager from Solreign HR. The acid-green header reads "SELF-DIRECTED ENTERPRISE INITIATIVES — READ BEFORE IMPROVISING."
+  components:
+  - type: Paper
+    content: solreign-conduct-charter-1
+  # No sprite override: reuses PaperOffice's existing plain-paper art, same idiom as
+  # SolreignPaperLoreBase (lore_papers.yml) and SolreignEmployeeSatisfactionMemo
+  # (corporate_flavor_items_2.yml). Content text lives in Locale/en-US/_solreign/
+  # self-antag-conduct-charter.ftl.

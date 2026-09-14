@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 64
+  },
+  "license": "CC0-1.0",
+  "copyright": "Original Solreign art (AI-generated with MiniMax image-01, hand post-processed: chroma-keyed, cropped, quantized, resized) for the CC-BY-NC-3.0 swap pilot. Full RSI: this asset has only one state (memorial) in the original, and it is fully covered here.",
+  "states": [
+    {
+      "name": "memorial"
+    }
+  ]
+}

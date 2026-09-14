@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Solreign + Sprite Factory portal-props delivery (icon+inhands CC0; human-reviewed 2026-07-25/29). Prior placeholder icon replaced as whole family.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon",
+      "delays": [
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

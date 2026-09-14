@@ -1,0 +1,75 @@
+# Solreign — "Hostile Onboarding" (Antags On Spawn chaos preset).
+# YAML-only: every component/param below already exists upstream (see Resources/Prototypes/GameRules/roundstart.yml).
+#
+# Design intent (council: 8-15 pop, shorter/chaotic rounds):
+# - Antags are chosen BEFORE player spawn (BaseRoundstartAntagRule -> AntagSelection selectionTime: PrePlayerSpawn),
+#   so each antag receives their private briefing the moment they spawn. That IS the upstream
+#   "announced to themselves" path (AntagSelectionSystem.SendBriefing) — no new C# and no global announcement.
+# - Higher antag ratio than upstream Traitor (playerRatio 4 vs 10, range.min 2 vs 1) so even an 8-pop
+#   round seats at least two agents.
+# - No selection delay: upstream Traitor delays 240-420s; this rule omits GameRule.delay entirely.
+# - minPlayers: 3, NOT 2. LinearAntagCount floors to range.min=2 for any pop below playerRatio*range.min
+#   (8), so at exactly the old minPlayers=2 floor this rule always selected 2 antags out of 2 total
+#   players -- 100% antag, zero regular crew. AllGamePresetsStartTest's assignment loop asserts
+#   antag-count strictly < player-count (there must be at least one non-antag seat) at whatever
+#   floor pop GetMinimumPlayerCount reports, and 2 !< 2 tripped it ("more antags than players").
+#   Bumping the floor to 3 keeps the 2-antag floor (unchanged: Clamp(3/4, 2, 5) = 2) but guarantees
+#   1 non-antag crew member exists whenever the preset is legal to start. The playerRatio/range
+#   formula itself is untouched, so normal-pop behavior is identical to before this fix:
+#     5 players:  Clamp(5/4=1,  2, 5) = 2 agents (unchanged from minPlayers=2 case)
+#     10 players: Clamp(10/4=2, 2, 5) = 2 agents
+#     30 players: Clamp(30/4=7, 2, 5) = 5 agents (clamped to range.max)
+#   matching this file's own "8 pop -> 2 agents, 15 pop -> 3" comment below at every pop level;
+#   only the unplayable 2-pop all-antag edge case is removed.
+
+- type: entity
+  parent: [ BaseTraitorRule, BaseRoundstartAntagRule ]
+  id: SolreignTraitorOnSpawn
+  components:
+  - type: GameRule
+    minPlayers: 3
+    # NOTE: no `delay` — antag selection resolves at roundstart, briefing lands at spawn.
+  - type: AntagSelection
+    lateJoinAdditional: true # late arrivals can also be "onboarded"
+    antags:
+    - !type:LinearAntagCount
+      proto: Traitor
+      playerRatio: 4 # upstream: 10. 8 pop -> 2 agents, 15 pop -> 3 (clamped by range).
+      range:
+        min: 2
+        max: 5
+
+# Spicier sub-gamemode roll than upstream SubGamemodesRuleNoWizardNoXenoborg (Thief prob 0.5).
+- type: entity
+  parent: BaseGameRule
+  id: SolreignSubGamemodesChaos
+  components:
+  - type: SubGamemodes
+    rules:
+    - id: Thief
+      prob: 0.8
+
+- type: gamePreset
+  id: SolreignAntagsOnSpawn
+  alias:
+  - antagsonspawn
+  - hostileonboarding
+  - chaos
+  name: solreign-antags-on-spawn-title
+  description: solreign-antags-on-spawn-description
+  showInVote: true
+  rules:
+  - SolreignTraitorOnSpawn
+  - SolreignSubGamemodesChaos
+  - SolreignCorporate # Solreign flavor layer (game_rules_corporate.yml); cosmetic-only, never cancels.
+  - RampingStationEventScheduler # ramps event pressure -> naturally shorter rounds (council ask)
+  - SpaceTrafficControlEventScheduler
+  - BasicRoundstartVariation
+  # V13.5 wire-up (UNWIRED-CONTENT-CENSUS-2026-07-17 #6): anti-spectate for the low-pop path.
+  # RespawnDeadRule (Resources/Prototypes/GameRules/roundstart.yml) carries alwaysRespawnDead:
+  # true + a RespawnTracker (respawnDelay: 10s, deleteBody: false) — RespawnRuleSystem
+  # auto-queues anyone who dies while this rule is active and respawns them via
+  # GameTicker.MakeJoinGame 10s later (original body left in place, not deleted). This preset
+  # is reachable today via the player preset-vote (showInVote: true above) independent of
+  # whether SolreignSecret itself is deployed live.
+  - RespawnDeadRule

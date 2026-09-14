@@ -1,0 +1,41 @@
+# Solreign Verdant — spore-drift weather.
+#
+# This engine's weather (Content.Shared/Weather/SharedWeatherSystem.cs) is never baked declaratively
+# into a map file — verified by grepping every WeatherRain/WeatherAshfall*/WeatherSnowfall*/
+# WeatherStorm/WeatherSandstorm*/WeatherHail id across every file under Resources/Maps: zero hits,
+# repo-wide, including upstream. It is always applied at runtime, either by an admin
+# (`weather add <mapId> <protoId>` / `weather set`, Content.Server/Weather/Commands/) or by code
+# calling SharedWeatherSystem.TryAddWeather/TrySetWeather. "Spore-drift weather configured" for this
+# station is therefore delivered the same way every other weather effect in this engine is: the
+# WeatherStatusEffect prototype below, ready to be added to Solreign Verdant's map via
+# `weather add <SolreignVerdant's MapId> SolreignWeatherSporeDrift` (admin command, or a future
+# station-event/GameRule hook — out of this task's scope, which is map content only, zero new C#).
+#
+# No "spore" texture state exists in Textures/Effects/weather.rsi (states are rain/ashfall*/
+# fallout/hail/sandstorm*/snowfall*/storm only — grep-verified against
+# Resources/Entities/StatusEffects/weather.yml, the full state list). Reuses "ashfall_light" — a
+# slow-drifting particle overlay — tinted acid-green via the Color field, which
+# WeatherStatusEffectComponent supports natively (see its own doc comment: "Tint that will be
+# applied to the weather texture"). Same reuse-the-closest-existing-asset idiom as
+# SolreignGlowTreeAcid (parent LightTree, override only the PointLight color).
+#
+# Sound reuses upstream's own soft-wind bed (/Audio/Effects/Weather/wind_2_1.ogg, grep-verified to
+# exist alongside rain/snowstorm ambience in the same directory) — a slow drift of spores on air
+# currents reads a lot closer to "wind" than to rain or a snowstorm.
+
+- type: entity
+  parent: WeatherBase
+  id: SolreignWeatherSporeDrift
+  name: spore drift
+  suffix: solreign, verdant
+  components:
+  - type: WeatherStatusEffect
+    sprite:
+      sprite: /Textures/Effects/weather.rsi
+      state: ashfall_light
+    color: "#8fd15a"
+    sound:
+      path: /Audio/Effects/Weather/wind_2_1.ogg
+      params:
+        loop: true
+        volume: -10

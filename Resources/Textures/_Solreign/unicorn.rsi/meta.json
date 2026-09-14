@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Solreign (AI-generated, human-reviewed). Corporate Unicorn \u2014 Imagen 4 (Vertex) chibi concepts, LANCZOS downscale + curated palette-snap, mane split to wool layer for RgbLightController. No third-party art conditioned on. Relicensed CC0-1.0.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sheep_bare",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "sheep_wool",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "sheep_dead",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "name": "sheep_wool_dead",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "name": "icon",
+      "delays": [
+        [
+          1
+        ]
+      ]
+    }
+  ]
+}

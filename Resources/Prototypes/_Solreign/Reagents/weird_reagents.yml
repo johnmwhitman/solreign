@@ -1,0 +1,174 @@
+# Solreign weird chemistry: SIX PG REAGENTS
+# Every effect below is an existing upstream effect type — no new C#.
+# Patterns verified against upstream Reagents/narcotics.yml (Ephedrine:
+# MovementSpeedModifier / PopupMessage / OD-conditioned HealthChange),
+# Reagents/medicine.yml (Tricordrazine: EvenHealthChange healing),
+# Reagents/fun.yml (Carpetium: PopupMessage; Fiber: SatiateHunger),
+# Reagents/cleaning.yml + elements.yml (Emote effect).
+# Loc strings live in Resources/Locale/en-US/_Solreign/weird-reagents.ftl.
+
+# 1. LIQUID AMBITION — brief, well-documented speed. Burnout at high doses.
+- type: reagent
+  id: SolreignLiquidAmbition
+  name: reagent-name-solreign-liquid-ambition
+  group: Special
+  desc: reagent-desc-solreign-liquid-ambition
+  physicalDesc: reagent-physical-desc-energizing
+  flavor: motivating
+  color: "#7cf64b"
+  metabolisms:
+    Bloodstream:
+      effects:
+      # Main effect: a modest spring in your step, upstream-Ephedrine style.
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 1.15
+        sprintSpeedModifier: 1.15
+      - !type:PopupMessage
+        type: Local
+        visualType: Medium
+        messages:
+        - "solreign-ambition-effect-deadlines"
+        - "solreign-ambition-effect-spreadsheet"
+        probability: 0.08
+      # Burnout: too much ambition is mildly unsustainable.
+      - !type:Jitter
+        conditions:
+        - !type:ReagentCondition
+          reagent: SolreignLiquidAmbition
+          min: 15
+      - !type:PopupMessage
+        conditions:
+        - !type:ReagentCondition
+          reagent: SolreignLiquidAmbition
+          min: 15
+        type: Local
+        messages: [ "solreign-ambition-effect-burnout" ]
+        probability: 0.1
+
+# 2. COMPLIANCE SERUM — forced politeness. Popups and the occasional salute.
+- type: reagent
+  id: SolreignComplianceSerum
+  name: reagent-name-solreign-compliance-serum
+  group: Special
+  desc: reagent-desc-solreign-compliance-serum
+  physicalDesc: reagent-physical-desc-soothing
+  flavor: mindful
+  color: "#4bf6d8"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:PopupMessage
+        type: Local
+        visualType: Medium
+        messages:
+        - "solreign-compliance-effect-please"
+        - "solreign-compliance-effect-thankyou"
+        - "solreign-compliance-effect-handbook"
+        - "solreign-compliance-effect-queue"
+        probability: 0.15
+      - !type:Emote
+        emote: Salute
+        probability: 0.05
+
+# 3. RAINBOW JUICE — what the corporate unicorn drinks. Tastes like sparkles.
+- type: reagent
+  id: SolreignRainbowJuice
+  name: reagent-name-solreign-rainbow-juice
+  group: Foods
+  desc: reagent-desc-solreign-rainbow-juice
+  physicalDesc: reagent-physical-desc-glowing
+  flavor: magical
+  color: "#ff66cc"
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:Satiate
+        satiationType: Thirst
+        factor: 2
+    Bloodstream:
+      effects:
+      - !type:PopupMessage
+        type: Local
+        messages:
+        - "solreign-rainbow-effect-sparkles"
+        - "solreign-rainbow-effect-unicorn"
+        - "solreign-rainbow-effect-colors"
+        probability: 0.1
+      - !type:Emote
+        emote: Laugh
+        probability: 0.05
+
+# 4. SYNERGY — the power-up fruit's secret. Heals small, budgeted amounts.
+- type: reagent
+  id: SolreignSynergy
+  name: reagent-name-solreign-synergy
+  group: Special
+  desc: reagent-desc-solreign-synergy
+  physicalDesc: reagent-physical-desc-vibrant
+  flavor: profits
+  color: "#ffd75e"
+  metabolisms:
+    Bloodstream:
+      effects:
+      # Small, even healing — deliberately weaker than real medicine
+      # (upstream Tricordrazine heals -1/-1; synergy is a snack, not a doctor).
+      - !type:EvenHealthChange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Alive
+        damage:
+          Brute: -0.5
+          Burn: -0.5
+      - !type:PopupMessage
+        type: Local
+        messages: [ "solreign-synergy-effect-aligned" ]
+        probability: 0.05
+
+# 5. LUMEN SAP — the glow crops' filling, faintly luminous syrup.
+- type: reagent
+  id: SolreignLumenSap
+  name: reagent-name-solreign-lumen-sap
+  group: Foods
+  desc: reagent-desc-solreign-lumen-sap
+  physicalDesc: reagent-physical-desc-glowing
+  flavor: light
+  color: "#b6ff7a"
+  metabolisms:
+    Metabolites: # same stage upstream Nutriment satiates hunger in
+      effects:
+      - !type:Satiate
+        satiationType: Hunger
+    Bloodstream:
+      effects:
+      - !type:PopupMessage
+        type: Local
+        messages: [ "solreign-lumensap-effect-luminous" ]
+        probability: 0.05
+
+# 6. OVERTIME OIL — night-shift mushroom brew. Keeps the eyelids on payroll.
+- type: reagent
+  id: SolreignOvertimeOil
+  name: reagent-name-solreign-overtime-oil
+  group: Special
+  desc: reagent-desc-solreign-overtime-oil
+  physicalDesc: reagent-physical-desc-oily
+  flavor: coffee
+  color: "#3d2f1e"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectDrowsiness
+        time: 6
+        type: Remove
+      - !type:ResetNarcolepsy
+        conditions:
+        - !type:ReagentCondition
+          reagent: SolreignOvertimeOil
+          min: 5
+      - !type:PopupMessage
+        type: Local
+        messages:
+        - "solreign-overtime-effect-awake"
+        - "solreign-overtime-effect-shift"
+        probability: 0.08

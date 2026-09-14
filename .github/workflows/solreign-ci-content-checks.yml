@@ -1,0 +1,113 @@
+name: Solreign CI — Content Checks
+
+# CI-TRIAGE 2026-07-17: consolidates four formerly-separate workflows (RSI Validator,
+# RGA schema validator, Map file schema validator, Solreign orphan-reachability scanner)
+# into one, so a push produces one workflow-run notification instead of four. Each check
+# keeps running as its own job (same runtime cost, same independent pass/fail per job) —
+# this only reduces the *notification* count, not the coverage. All four were already
+# lightweight/bounded (schema or filtered-test checks, not full engine builds), which is
+# why they were chosen for the consolidated "light checks" bundle recommended in the
+# CI-TRIAGE receipt (docs/receipts/CI-TRIAGE-2026-07-17.md) — Build & Test Debug,
+# Build & Test Map Renderer, YAML Linter, and Test Packaging need full engine builds and
+# were deliberately left as their own separate workflows (see receipt for why).
+#
+# Every job here was billing-blocked (J3, docs/ROADMAP-PHASE3.md) before this branch;
+# local re-implementations of each check are recorded as passing in the CI-TRIAGE
+# receipt. This file cannot be verified green in Actions until GitHub Actions billing
+# is restored on the account — that is a push-to-verify item.
+
+on:
+  push:
+    branches: [ master, staging, stable ]
+  merge_group:
+  pull_request:
+    types: [ opened, reopened, synchronize, ready_for_review ]
+
+jobs:
+  rsi-validator:
+    name: RSI Validator
+    if: github.actor != 'PJBot' && github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Submodule
+        run: git submodule update --init
+      - name: Pull engine updates
+        uses: space-wizards/submodule-dependency@v0.1.5
+      - name: Install Python dependencies
+        run: |
+          pip3 install --ignore-installed --user pillow jsonschema
+      - name: Validate RSIs
+        run: |
+          python3 RobustToolbox/Schemas/validate_rsis.py Resources/
+
+  rga-schema-validator:
+    name: YAML RGA schema validator
+    if: github.actor != 'PJBot' && github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Submodule
+        run: git submodule update --init
+      - name: Pull engine updates
+        uses: space-wizards/submodule-dependency@v0.1.5
+      - uses: PaulRitter/yaml-schema-validator@v1
+        with:
+          schema: RobustToolbox/Schemas/rga.yml
+          path_pattern: .*attributions.ya?ml$
+          validators_path: RobustToolbox/Schemas/rga_validators.py
+          validators_requirements: RobustToolbox/Schemas/rga_requirements.txt
+
+  mapfile-schema-validator:
+    name: YAML map schema validator
+    if: github.actor != 'PJBot' && github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Submodule
+        run: git submodule update --init
+      - name: Pull engine updates
+        uses: space-wizards/submodule-dependency@v0.1.5
+      - uses: PaulRitter/yaml-schema-validator@v1
+        with:
+          schema: RobustToolbox/Schemas/mapfile.yml
+          path_pattern: .*Resources/Maps/.*
+          validators_path: RobustToolbox/Schemas/mapfile_validators.py
+          validators_requirements: RobustToolbox/Schemas/mapfile_requirements.txt
+
+  orphan-reachability:
+    name: Solreign orphan-reachability
+    # Phase-3 Wave 22: fail the build when a non-abstract Solreign entity prototype is
+    # unreachable (no map/vendor/spawner/gamerule/craft/seed/contract/loadout path and
+    # not allowlisted).
+    if: github.actor != 'PJBot' && github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Submodule
+        run: git submodule update --init --recursive
+
+      - name: Pull engine updates
+        uses: space-wizards/submodule-dependency@v0.1.5
+
+      - name: Update Engine Submodules
+        run: |
+          cd RobustToolbox/
+          git submodule update --init --recursive
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore Content.Tests/Content.Tests.csproj
+
+      - name: Orphan-reachability gate
+        run: >
+          dotnet test Content.Tests/Content.Tests.csproj
+          --filter FullyQualifiedName~SolreignOrphanReachability
+          -- NUnit.ConsoleOut=0

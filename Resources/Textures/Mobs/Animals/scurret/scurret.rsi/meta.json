@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "AI-generated (MiniMax image-01) for Solreign, human-curated; replaces CC-BY-NC art",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "scurret",
+      "directions": 4
+    },
+    {
+      "name": "scurret_rip"
+    },
+    {
+      "name": "scurret_oof"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+# Solreign — Talent Acquisition Specialist round integration (the _Solreign/Changeling antag).
+# Spec: docs/specs/2026-07-11-changeling-spec.md §6 (the explicitly-deferred follow-up this file
+# fulfils). NOT the same prototype-ID space as upstream's own "Changeling" GameRule/antag
+# (Content.Server/Changeling — a completely different devour/sting mechanic); every id here is
+# Solreign-prefixed so the two coexist with zero collision.
+#
+# C# side: Content.Server/_Solreign/Changeling/SolreignChangelingRuleSystem.cs (+ Component).
+# Selection itself is 100% the standard upstream AntagSelection/AntagSpecifierPrototype framework
+# (same idiom GameRules/roundstart.yml's Traitor uses) — the antagSpecifier + MindRole live in
+# Resources/Prototypes/_Solreign/Roles/changeling_antag.yml.
+#
+# Conservative spawn rate (task instruction — "maxAntags small"): the population FLOOR is tuned to
+# Solreign's actual 8-15 pop (see secret_solreign.yml's own rationale for why upstream's 20+ floors
+# are dead weight here — Nukeops/Zombie/Rev were dropped from the secret table for exactly that
+# reason), but the antag COUNT stays small — never more than 2 changelings in one round regardless
+# of headcount, and only 1 below 24 players.
+
+- type: entity
+  id: SolreignChangeling
+  parent: [ BaseGameRule, BaseRoundstartAntagRule ]
+  components:
+  - type: GameRule
+    minPlayers: 8
+  - type: SolreignChangelingRule
+  - type: AntagSelection
+    agentName: solreign-changeling-round-end-agent-name
+    lateJoinAdditional: true
+    antags:
+    - !type:LinearAntagCount
+      proto: SolreignChangeling
+      playerRatio: 12
+      range:
+        min: 1
+        max: 2
+  - type: AntagRandomObjectives
+    sets:
+    - groups: SolreignChangelingObjectiveGroups
+      maxPicks: 1
+    maxDifficulty: 3
+
+# ── Secret-table entry point (spec §6): the gamePreset that wraps the round above. ──
+# The SolreignSecret weight table (secret_solreign.yml) is rolled by SecretRuleSystem.TryPickPreset
+# (Content.Server/GameTicking/Rules/SecretRuleSystem.cs), which resolves each weighted id via
+# ProtoMan.TryIndex<GamePresetPrototype> — i.e. it expects a *gamePreset*, NOT a GameRule. The
+# `SolreignChangeling` GameRule above is `type: entity`, so a table entry pointing straight at it
+# fails to resolve ("Invalid preset ... in secret rule weights") and re-rolls, wasting the ~5% share.
+# This thin preset is the fix: it wraps the changeling antag rule so a changeling round is pickable,
+# mirroring SolreignAntagsOnSpawn (antags_on_spawn.yml) — antag rule + the standard Solreign
+# scheduler/variation scaffold (same trio Survival uses in game_presets.yml). No new C#.
+- type: gamePreset
+  id: SolreignChangelingPreset
+  alias:
+  - changeling
+  - talentacquisition
+  name: solreign-changeling-preset-title
+  description: solreign-changeling-preset-description
+  showInVote: true
+  rules:
+  - SolreignChangeling # the antag GameRule defined above (minPlayers 8, 1-2 changelings)
+  - SolreignCorporate # Solreign flavor layer (game_rules_corporate.yml); cosmetic-only, never cancels.
+  - RampingStationEventScheduler
+  - SpaceTrafficControlEventScheduler
+  - BasicRoundstartVariation

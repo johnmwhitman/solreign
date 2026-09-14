@@ -1,0 +1,42 @@
+# Station-identity ambient music, one track per parallax set.
+# Ported from the deleted rules: field to inline conditions: (upstream #44696).
+#
+# None of these stations exist on a map yet. Gated via InSpaceCondition (never
+# true on a station grid) as a stand-in for NeverTrue. When a station ships,
+# replace with a NearbyComponentsCondition on that station's marker entity.
+
+- type: ambientMusic
+  id: SolreignNocturneTheme
+  sound:
+    params:
+      volume: -12
+    path: /Audio/_Solreign/stations/nocturne.ogg
+  conditions:
+  - !type:InSpaceCondition
+  - !type:OnMapGridCondition
+    inverted: true
+  priority: 0
+
+- type: ambientMusic
+  id: SolreignPerihelionTheme
+  sound:
+    params:
+      volume: -12
+    path: /Audio/_Solreign/stations/perihelion.ogg
+  conditions:
+  - !type:InSpaceCondition
+  - !type:OnMapGridCondition
+    inverted: true
+  priority: 0
+
+- type: ambientMusic
+  id: SolreignVerdantTheme
+  sound:
+    params:
+      volume: -12
+    path: /Audio/_Solreign/stations/verdant.ogg
+  conditions:
+  - !type:InSpaceCondition
+  - !type:OnMapGridCondition
+    inverted: true
+  priority: 0

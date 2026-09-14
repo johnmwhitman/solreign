@@ -1,0 +1,37 @@
+# Solreign dress-up-able ghosts (LJ's direct request).
+#
+# No custom rendering code is needed: upstream ClientClothingSystem draws equipped clothing
+# as sprite layers on ANY entity with Inventory + InventorySlots + Sprite (the stock aghost
+# template already ships head/mask slots "for drip reasons"). These variants just carry the
+# full-visual solreignWardrobe template so the whole outfit renders.
+
+# Admin dress-up ghost: the stock AdminObserver (hands, aghost input context, admin gear)
+# with the wardrobe template swapped in. Reachable by spawning it directly, or — the primary
+# flow — by using the "Solreign Wardrobe" admin verb on a stock aghost, which upgrades its
+# template in place (SolreignWardrobeSystem).
+- type: entity
+  parent: AdminObserver
+  id: SolreignAdminGhost
+  name: Solreign admin observer
+  description: Management, but make it fashion. This apparition holds full wardrobe privileges; the dress code is enforced even in the afterlife.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Inventory
+    templateId: solreignWardrobe
+
+# Guest dress-up ghost: a regular observer that can WEAR clothing but cannot interact
+# (Ghost canInteract stays false and it has no hands), so outfits can only be applied by an
+# admin via the Solreign Wardrobe verb or the setoutfit command. It is not Strippable, so
+# players cannot stuff items onto it either. Safe because every path that puts an item on it
+# is admin-gated and spawns fresh cosmetic copies. Letting guests dress THEMSELVES would
+# need a player-facing, spawn-gated picker — out of scope for this spike (see
+# SolreignWardrobeSystem remarks).
+- type: entity
+  parent: [ MobObserver, InventoryBase ]
+  id: SolreignGuestGhost
+  name: Solreign guest observer
+  description: A valued visitor from the afterlife, styled by corporate. All outfits remain company property.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Inventory
+    templateId: solreignWardrobe

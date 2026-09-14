@@ -1,0 +1,52 @@
+# SOLREIGN Horizon 3: one-slot field specialist for off-station expeditions.
+# The live expedition console and shuttle loop are Cargo-owned.
+- type: playTimeTracker
+  id: JobSolreignExpeditionSpecialist
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSolreignExpeditionSpecialist
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: ShaftMiner
+  jobName: job-name-solreign-expedition-specialist
+
+- type: job
+  id: SolreignExpeditionSpecialist
+  name: job-name-solreign-expedition-specialist
+  description: job-description-solreign-expedition-specialist
+  playTimeTracker: JobSolreignExpeditionSpecialist
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Cargo
+    time: 2h
+  startingGear: SolreignExpeditionSpecialistGear
+  icon: JobIconSolreignExpeditionSpecialist
+  supervisors: job-supervisors-qm
+
+  access:
+  - Cargo
+  - Salvage
+  - Maintenance
+  - External
+
+- type: startingGear
+  id: SolreignExpeditionSpecialistGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    shoes: ClothingShoesBootsSalvage
+    id: SalvagePDA
+    ears: ClothingHeadsetCargo
+    outerClothing: ClothingOuterHardsuitSalvage
+    belt: ClothingBeltSalvageWebbing
+    pocket1: HandheldGPSBasic
+    pocket2: GeigerCounter
+
+- type: roleLoadout
+  id: JobSolreignExpeditionSpecialist
+  groups:
+  - SalvageSpecialistBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool

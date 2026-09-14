@@ -1,0 +1,64 @@
+# Solreign map rotation + per-round map vote config preset.
+#
+# Idiom: matches Resources/ConfigPresets/WizardsDen/*.toml — a TOML config
+# layer meant to be loaded on top of the server's base config (or merged into
+# it) via Robust's config-file loading (each [section] is a CVar prefix, each
+# key underneath is the CVar's suffix, e.g. [game] map_pool = ... sets the
+# `game.map_pool` CVar). Land this file wherever lane 2's deploy pipeline loads
+# WizardsDen-style preset layers from; it is NOT wired into the config loader
+# by this wave — hand-off only.
+#
+# Every CVar below is cited from source, not guessed:
+#   - game.map_pool     Content.Shared/CCVar/CCVars.Game.cs:97
+#                        CVarDef.Create("game.map_pool", "DefaultMapPool", CVar.SERVERONLY)
+#   - game.map_rotation  Content.Shared/CCVar/CCVars.Game.cs:110
+#                        CVarDef.Create("game.map_rotation", true, CVar.SERVERONLY)
+#   - vote.enabled       Content.Shared/CCVar/CCVars.Vote.cs:11
+#                        CVarDef.Create("vote.enabled", true, CVar.SERVERONLY)
+#   - vote.map_enabled   Content.Shared/CCVar/CCVars.Vote.cs:41
+#                        CVarDef.Create("vote.map_enabled", false, CVar.SERVERONLY)
+#   - vote.timermap      Content.Shared/CCVar/CCVars.Vote.cs:65
+#                        CVarDef.Create("vote.timermap", 90, CVar.SERVERONLY)
+#
+# Wiring: Content.Server/Maps/GameMapManager.cs `AllVotableMaps()` indexes the
+# `GameMapPoolPrototype` named by `game.map_pool` (or a game preset's own
+# MapPool override, which none of ours set) to build BOTH the random-map-select
+# candidate list and the map-vote candidate list — one CVar drives both paths.
+# The vote itself is gated separately by `vote.enabled` (master switch, already
+# true upstream) AND `vote.map_enabled` (map-vote-specific switch, false
+# upstream — this is the "re-enable per-round map voting" knob).
+
+[game]
+# Which gameMapPool prototype AllVotableMaps() indexes. Points at the pool
+# defined in Resources/Prototypes/_Solreign/map_pool.yml (id: SolreignMapPool),
+# which contains ONLY SolreignOasis / SolreignNocturne / SolreignPerihelion /
+# SolreignVerdant / SolreignMeridian / SolreignLeviathan / SolreignTerminus.
+# This is what actually restricts selection+voting to the seven-map
+# Solreign-only set — everything else here just re-enables the vote UI.
+map_pool = "SolreignMapPool"
+
+# Keep upstream's round-robin queue behavior (least-recently-played map first)
+# rather than pure random selection between rounds. Upstream default is
+# already `true`; set explicitly here so the preset is self-documenting and
+# order-of-load-independent.
+map_rotation = true
+
+[vote]
+# Master vote switch. Upstream default is already `true`; set explicitly so
+# this preset doesn't depend on whatever the base config layer underneath it
+# says. If some other loaded layer sets this to `false`, no votes of any kind
+# (map/preset/restart) will fire regardless of the map_enabled setting below.
+enabled = true
+
+# Map-vote-specific switch. Upstream default is `false` (map voting is OFF
+# by default even though the vote system itself is on) — this is the CVar
+# that must flip to actually get a per-round map vote. When true, at the
+# start of each round players are offered a vote whose options come from
+# AllVotableMaps() -> the pool selected by game.map_pool above, i.e. the seven
+# Solreign maps only.
+map_enabled = true
+
+# Optional: how long (seconds) the map vote stays open. Upstream default is
+# 90; called out here only for visibility since lane 2 may want to tune it.
+# Leave commented to inherit upstream default unless a change is wanted.
+# timermap = 90

@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC0-1.0",
+  "copyright": "Entire folder drawn procedurally from scratch for Solreign (docs/receipts/wave6/draw_interface_default.py, 2026); original glyph designs, no prior art pixels used or referenced",
+  "states": [
+    {
+      "name": "SlotBackground"
+    },
+    {
+      "name": "Slots/back"
+    },
+    {
+      "name": "Slots/belt"
+    },
+    {
+      "name": "Slots/ContrabandOverlay/camo"
+    },
+    {
+      "name": "Slots/ContrabandOverlay/contra"
+    },
+    {
+      "name": "Slots/ContrabandOverlay/has_contra1"
+    },
+    {
+      "name": "Slots/ContrabandOverlay/has_contra2"
+    },
+    {
+      "name": "Slots/ContrabandOverlay/has_contra3"
+    },
+    {
+      "name": "Slots/ContrabandOverlay/has_contra4"
+    },
+    {
+      "name": "Slots/ContrabandOverlay/has_contra5"
+    },
+    {
+      "name": "Slots/ContrabandOverlay/has_contra6"
+    },
+    {
+      "name": "Slots/ContrabandOverlay/has_contra7"
+    },
+    {
+      "name": "Slots/ContrabandOverlay/has_contra8"
+    },
+    {
+      "name": "Slots/ContrabandOverlay/has_contra9"
+    },
+    {
+      "name": "Slots/ears"
+    },
+    {
+      "name": "Slots/glasses"
+    },
+    {
+      "name": "Slots/gloves"
+    },
+    {
+      "name": "Slots/hand_l"
+    },
+    {
+      "name": "Slots/hand_l_no_letter"
+    },
+    {
+      "name": "Slots/hand_m"
+    },
+    {
+      "name": "Slots/hand_r"
+    },
+    {
+      "name": "Slots/hand_r_no_letter"
+    },
+    {
+      "name": "Slots/head"
+    },
+    {
+      "name": "Slots/id"
+    },
+    {
+      "name": "Slots/mask"
+    },
+    {
+      "name": "Slots/neck"
+    },
+    {
+      "name": "Slots/pocket"
+    },
+    {
+      "name": "Slots/shoes"
+    },
+    {
+      "name": "Slots/suit"
+    },
+    {
+      "name": "Slots/suit_storage"
+    },
+    {
+      "name": "Slots/toggle"
+    },
+    {
+      "name": "Slots/uniform"
+    },
+    {
+      "name": "Slots/web"
+    },
+    {
+      "name": "Storage/back"
+    },
+    {
+      "name": "Storage/exit"
+    },
+    {
+      "name": "Storage/marked_first"
+    },
+    {
+      "name": "Storage/marked_second"
+    },
+    {
+      "name": "Storage/piece_bottom"
+    },
+    {
+      "name": "Storage/piece_bottomLeft"
+    },
+    {
+      "name": "Storage/piece_bottomRight"
+    },
+    {
+      "name": "Storage/piece_center"
+    },
+    {
+      "name": "Storage/piece_left"
+    },
+    {
+      "name": "Storage/piece_right"
+    },
+    {
+      "name": "Storage/piece_top"
+    },
+    {
+      "name": "Storage/piece_topLeft"
+    },
+    {
+      "name": "Storage/piece_topRight"
+    },
+    {
+      "name": "Storage/sidebar_bottom"
+    },
+    {
+      "name": "Storage/sidebar_fat"
+    },
+    {
+      "name": "Storage/sidebar_mid"
+    },
+    {
+      "name": "Storage/sidebar_top"
+    },
+    {
+      "name": "Storage/tile_blocked"
+    },
+    {
+      "name": "Storage/tile_blocked_opaque"
+    },
+    {
+      "name": "Storage/tile_empty"
+    },
+    {
+      "name": "Storage/tile_empty_opaque"
+    },
+    {
+      "name": "blocked"
+    },
+    {
+      "name": "filled_left_arrow.svg.192dpi"
+    },
+    {
+      "name": "filled_right_arrow.svg.192dpi"
+    },
+    {
+      "name": "item_status_left"
+    },
+    {
+      "name": "item_status_left_highlight"
+    },
+    {
+      "name": "item_status_right"
+    },
+    {
+      "name": "item_status_right_highlight"
+    },
+    {
+      "name": "left_arrow.svg.192dpi"
+    },
+    {
+      "name": "right_arrow.svg.192dpi"
+    },
+    {
+      "name": "slot_highlight"
+    },
+    {
+      "name": "template_small"
+    }
+  ]
+}

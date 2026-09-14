@@ -1,0 +1,9 @@
+- files: ["arrow_nock.ogg"]
+  license: "CC0-1.0"
+  copyright: "Created by Paveroux on freesound.org, trimmed/converted to mono OGG for the Solreign free-swap wave (2026-07-17 staging)."
+  source: "https://freesound.org/people/Paveroux/sounds/490556/"
+
+- files: ["selector.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Modified from 'Change Weapon Sound' by freesound user 'knova'. Trimmed and converted to mono OGG."
+  source: "https://freesound.org/people/knova/sounds/170273/"

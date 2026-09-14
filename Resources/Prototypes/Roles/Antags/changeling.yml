@@ -1,0 +1,55 @@
+﻿- type: antag
+  id: Changeling
+  name: roles-antag-changeling-name
+  antagonist: true
+  setPreference: false # TODO: set this to true once Changeling exits WIP status
+  objective: roles-antag-changeling-objective
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Changeling
+  prefRoles: [ Changeling ]
+  briefing:
+    text: changeling-role-greeting
+    color: Red
+    sound: /Audio/Ambience/Antag/changeling_start.ogg
+  components: # When updating components, remember to copy the changes over to MobLing !!!!!
+  - type: ChangelingDevour
+  - type: ChangelingIdentity
+  - type: ChangelingTransform
+  - type: AddMetabolism
+    addedMetabolizer: Changeling
+  # _Solreign arm-blade visual fix (docs/specs/FX-LANGUAGE-V1-SPEC-2026-07-16.md §6): the
+  # server already networks enum.SolreignChangelingVisuals.ArmBladeExtended via SetData
+  # (SolreignChangelingSystem.ArmBlade.cs) — that part was already correct. The client-side
+  # reaction is NOT a `GenericVisualizer` component grant here (deliberately, unlike a first
+  # attempt this worktree tried and grk adversarial review caught): a real changeling keeps
+  # whatever species/entity prototype it already had before this component list is granted at
+  # role-assignment time (AntagSelectionSystem.AssignAntagComponents, applied onto an
+  # ALREADY-SPAWNED entity, not via prototype composition) — and `GenericVisualizerComponent`
+  # is a Robust.Client-only, non-networked type with no server-side representation at all, so
+  # it can never be granted this way (the server's IComponentFactory resolves it as Unknown and
+  # ComponentRegistrySerializer silently drops it before this list is even built in memory — see
+  # docs/receipts/fx-w4/FX-W4-2026-07-16.md). The real fix is
+  # Content.Client._Solreign.Changeling.SolreignChangelingArmBladeVisualsSystem, which reacts to
+  # the appearance flag on ANY entity with an AppearanceComponent (every humanoid body already
+  # has one) — no component grant needed here at all.
+  - type: DestructionResistance
+  - type: RevolutionaryImmune
+  - type: ZombieImmune
+  - type: ActionGrant
+    actions:
+    - ActionChangelingStore
+    - ActionChangelingStasis
+  - type: Store
+    name: store-preset-name-changeling
+    categories:
+    - ChangelingStoreCombat
+    - ChangelingStoreStealth
+    - ChangelingStoreUtility
+    currencyWhitelist:
+    - ChangelingDNA
+    balance:
+      ChangelingDNA: 60
+  mindRoles:
+  - MindRoleChangeling

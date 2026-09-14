@@ -1,0 +1,60 @@
+- type: job
+  id: ChiefEngineer
+  name: job-name-ce
+  description: job-description-ce
+  playTimeTracker: JobChiefEngineer
+  # Solreign J4 (ROADMAP-SEASON1-VISION.md #2): department-time floor trimmed 10h -> 5h
+  # to match the roadmap's modest engineering threshold. The junior-role subrequirements
+  # below already sum to 7.5h, so this isn't a loosening of the effective gate — it just
+  # stops stacking an extra, now-redundant 10h department requirement on top of them.
+  requirements:
+    - !type:RoleTimeRequirement
+      role: JobAtmosphericTechnician
+      time: 2.5h
+    - !type:RoleTimeRequirement
+      role: JobStationEngineer
+      time: 5h
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 5h
+  startingGear: ChiefEngineerGear
+  icon: "JobIconChiefEngineer"
+  supervisors: job-supervisors-captain
+  access:
+  - Maintenance
+  - Engineering
+  - Command
+  - External
+  - ChiefEngineer
+  - Atmospherics
+  - Brig
+  - Cryogenics
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: CommandStaff
+
+- type: startingGear
+  id: ChiefEngineerGear
+  equipment:
+    id: CEPDA
+    eyes: ClothingEyesGlassesMeson
+    ears: ClothingHeadsetCE
+    belt: ClothingBeltUtilityEngineering
+  storage:
+    back:
+    - Flash
+
+- type: chameleonOutfit
+  id: ChiefEngineerChameleonOutfit
+  job: ChiefEngineer
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatBeretEngineering
+    mask: ClothingMaskBreath
+    neck: ClothingNeckCloakCe
+    outerClothing: ClothingOuterWinterCE
+    gloves: ClothingHandsGlovesColorYellow
+    shoes: ClothingShoesBootsMagAdv

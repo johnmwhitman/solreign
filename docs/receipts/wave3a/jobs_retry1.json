@@ -1,0 +1,52 @@
+[
+ {
+  "asset": "singularityhammer",
+  "state": "icon",
+  "prompt": "a stylized fantasy warhammer held diagonally, dark obsidian-black hammer head rimmed in glowing orange-gold, dark maroon-purple handle",
+  "key": "cyan",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "capgun",
+  "state": "icon",
+  "prompt": "a small grey and black toy cap-gun revolver with a brown wooden grip and a tiny light blue accent near the muzzle tip",
+  "key": "magenta",
+  "variants": [
+   3
+  ]
+ },
+ {
+  "asset": "chainsaw",
+  "state": "icon",
+  "prompt": "a compact chainsaw tool viewed diagonally, grey serrated blade bar, red motor housing and handle",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "energy_crossbow",
+  "state": "icon",
+  "prompt": "a compact grey sci-fi crossbow with a black body and a glowing green energy bowstring",
+  "key": "magenta",
+  "variants": [
+   3
+  ]
+ },
+ {
+  "asset": "machete",
+  "state": "icon",
+  "prompt": "a diagonal steel machete blade with dark camouflage-spot patterning along the blade, dark green wrapped handle grip",
+  "key": "green",
+  "variants": [
+   2,
+   3
+  ]
+ }
+]

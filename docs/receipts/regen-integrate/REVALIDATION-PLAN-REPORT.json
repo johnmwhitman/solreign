@@ -1,0 +1,1183 @@
+{
+  "generated_from_verdict": "/private/tmp/claude-501/-Users-johnwhitman-AI/d4343975-777a-4f1c-89c4-58e26c7f041a/scratchpad/verdict-batches-2-9.yaml",
+  "game_repo": "/Users/johnwhitman/AI/Kolton-SS14/server",
+  "current_live_nc_census": 49,
+  "projected_nc_census_after_apply": 4,
+  "assets_total_staged": 77,
+  "assets_planned": 45,
+  "assets_blocked": 0,
+  "assets_skipped_or_rejected": 32,
+  "total_states_planned": 468,
+  "plan": [
+    {
+      "batch": "production-batch-2-artifacts",
+      "name": "item_artifacts",
+      "grade": "BORDERLINE",
+      "dest": "Resources/Textures/Objects/Specific/Xenoarchaeology/item_artifacts.rsi",
+      "states_replaced": [
+        "ano01",
+        "ano01-inhand-left",
+        "ano01-inhand-right",
+        "ano01_on",
+        "ano02",
+        "ano02-inhand-left",
+        "ano02-inhand-right",
+        "ano02_on",
+        "ano03",
+        "ano03-inhand-left",
+        "ano03-inhand-right",
+        "ano03_on",
+        "ano04",
+        "ano04-inhand-left",
+        "ano04-inhand-right",
+        "ano04_on",
+        "ano05",
+        "ano05-inhand-left",
+        "ano05-inhand-right",
+        "ano05_on",
+        "ano06",
+        "ano06-inhand-left",
+        "ano06-inhand-right",
+        "ano06_on",
+        "ano07",
+        "ano07-inhand-left",
+        "ano07-inhand-right",
+        "ano07_on",
+        "ano08",
+        "ano08-inhand-left",
+        "ano08-inhand-right",
+        "ano08_on",
+        "ano09",
+        "ano09-inhand-left",
+        "ano09-inhand-right",
+        "ano09_on",
+        "ano10",
+        "ano10-inhand-left",
+        "ano10-inhand-right",
+        "ano10_on",
+        "ano11",
+        "ano11-inhand-left",
+        "ano11-inhand-right",
+        "ano11_on"
+      ],
+      "n_states": 44,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-3-xeno-guardians",
+      "name": "guardians",
+      "grade": "BORDERLINE",
+      "dest": "Resources/Textures/Mobs/Aliens/Guardians/guardians.rsi",
+      "states_replaced": [
+        "holoclown",
+        "holoclown_base",
+        "holoclown_flare",
+        "magic",
+        "magic_base",
+        "magic_flare",
+        "miner",
+        "miner_base",
+        "miner_flare",
+        "tech",
+        "tech_base",
+        "tech_flare"
+      ],
+      "n_states": 12,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-3-xeno-guardians",
+      "name": "xeno_artifacts",
+      "grade": "BORDERLINE",
+      "dest": "Resources/Textures/Objects/Specific/Xenoarchaeology/xeno_artifacts.rsi",
+      "states_replaced": [
+        "ano01",
+        "ano01_on",
+        "ano02",
+        "ano02_on",
+        "ano03",
+        "ano03_on",
+        "ano04",
+        "ano04_on",
+        "ano05",
+        "ano05_on",
+        "ano06",
+        "ano06_on",
+        "ano07",
+        "ano07_on",
+        "ano08",
+        "ano08_on",
+        "ano09",
+        "ano09_on",
+        "ano10",
+        "ano10_on",
+        "ano11",
+        "ano11_on",
+        "ano12",
+        "ano12_on",
+        "ano13",
+        "ano13_on",
+        "ano14",
+        "ano14_on",
+        "ano15",
+        "ano15_on",
+        "ano16",
+        "ano16_on",
+        "ano17",
+        "ano17_on",
+        "ano18",
+        "ano18_on",
+        "ano19",
+        "ano19_on",
+        "ano20",
+        "ano20_on",
+        "ano21",
+        "ano21_on",
+        "ano22",
+        "ano22_on",
+        "ano23",
+        "ano23_on",
+        "ano24",
+        "ano24_on",
+        "ano25",
+        "ano25_on",
+        "ano26",
+        "ano26_on",
+        "ano27",
+        "ano27_on",
+        "ano28",
+        "ano28_on",
+        "ano29",
+        "ano29_on",
+        "ano30",
+        "ano30_on",
+        "ano31",
+        "ano31_on",
+        "ano32",
+        "ano32_on",
+        "ano33",
+        "ano33_on",
+        "ano34",
+        "ano34_on",
+        "ano35",
+        "ano35_on",
+        "ano36",
+        "ano36_on",
+        "artifact-activation"
+      ],
+      "n_states": 73,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-4-toilets",
+      "name": "golden_toilet",
+      "grade": "BORDERLINE",
+      "dest": "Resources/Textures/Structures/Furniture/golden_toilet.rsi",
+      "states_replaced": [
+        "condisposal",
+        "disposal",
+        "disposal-charging",
+        "disposal-closed",
+        "disposal-down",
+        "disposal-flush",
+        "disposal-open",
+        "disposal-up",
+        "dispover-charge",
+        "dispover-full",
+        "dispover-handle",
+        "dispover-ready"
+      ],
+      "n_states": 12,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-4-toilets",
+      "name": "toilet",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Structures/Furniture/toilet.rsi",
+      "states_replaced": [
+        "condisposal",
+        "disposal",
+        "disposal-charging",
+        "disposal-closed",
+        "disposal-down",
+        "disposal-flush",
+        "disposal-open",
+        "disposal-up",
+        "dispover-charge",
+        "dispover-ready"
+      ],
+      "n_states": 10,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-5-icononly",
+      "name": "greyscale",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Decals/Overlays/greyscale.rsi",
+      "states_replaced": [
+        "brick_box",
+        "brick_corner_ne",
+        "brick_corner_nw",
+        "brick_corner_se",
+        "brick_corner_sw",
+        "brick_end_e",
+        "brick_end_n",
+        "brick_end_s",
+        "brick_end_w",
+        "brick_line_e",
+        "brick_line_n",
+        "brick_line_s",
+        "brick_line_w",
+        "checkerNESW",
+        "checkerNWSE",
+        "diagonal",
+        "diagonal_checker_a",
+        "diagonal_checker_b",
+        "fulltile_overlay",
+        "halftile_overlay",
+        "halftile_overlay_180",
+        "halftile_overlay_270",
+        "halftile_overlay_90",
+        "herringbone",
+        "horizontalslats_bordered_full",
+        "horizontalslats_bordered_inner_n",
+        "horizontalslats_bordered_inner_s",
+        "horizontalslats_bordered_outer_n",
+        "horizontalslats_bordered_outer_s",
+        "horizontalslats_continuous_full",
+        "horizontalslats_continuous_inner_n",
+        "horizontalslats_continuous_inner_s",
+        "horizontalslats_continuous_outer_n",
+        "horizontalslats_continuous_outer_s",
+        "minitile",
+        "minitile_box",
+        "minitile_checker_a",
+        "minitile_checker_b",
+        "minitile_corner_ne",
+        "minitile_corner_nw",
+        "minitile_corner_se",
+        "minitile_corner_sw",
+        "minitile_diagonal",
+        "minitile_diagonal_a",
+        "minitile_diagonal_b",
+        "minitile_end_e",
+        "minitile_end_n",
+        "minitile_end_s",
+        "minitile_end_w",
+        "minitile_inner_ne",
+        "minitile_inner_nw",
+        "minitile_inner_se",
+        "minitile_inner_sw",
+        "minitile_line_e",
+        "minitile_line_n",
+        "minitile_line_s",
+        "minitile_line_w",
+        "mono",
+        "offset",
+        "offset_checker_a",
+        "offset_checker_b",
+        "pavement",
+        "pavement_checker_a",
+        "pavement_checker_b",
+        "pavement_vertical",
+        "pavement_vertical_checker_a",
+        "pavement_vertical_checker_b",
+        "quartertile_overlay",
+        "quartertile_overlay_180",
+        "quartertile_overlay_270",
+        "quartertile_overlay_90",
+        "threequartertile_overlay",
+        "threequartertile_overlay_180",
+        "threequartertile_overlay_270",
+        "threequartertile_overlay_90",
+        "verticalslats_bordered_full",
+        "verticalslats_bordered_inner_e",
+        "verticalslats_bordered_inner_w",
+        "verticalslats_bordered_outer_e",
+        "verticalslats_bordered_outer_w",
+        "verticalslats_continuous_full",
+        "verticalslats_continuous_inner_e",
+        "verticalslats_continuous_inner_w",
+        "verticalslats_continuous_outer_e",
+        "verticalslats_continuous_outer_w"
+      ],
+      "n_states": 85,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "AI",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/AI.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "arachnid",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/arachnid.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "atmosian",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/atmosian.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "bee",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/bee.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "hampter",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/hampter.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "human",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/human.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "moth",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/moth.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "narsie",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/narsie.rsi",
+      "states_replaced": [
+        "equipped-NECK",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "nukie",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/nukie.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "penguin",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/penguin.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "ratvar",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/ratvar.rsi",
+      "states_replaced": [
+        "equipped-NECK",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "rouny",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/rouny.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "slime",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/slime.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "toy_ian",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/toy_ian.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "toy_mouse",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/toy_mouse.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "toy_nuke",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/toy_nuke.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "vulp",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/vulp.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-6-r5",
+      "name": "xeno",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/xeno.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-7-r6",
+      "name": "db_shotgun_inhands_64x",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Guns/Shotguns/db_shotgun_inhands_64x.rsi",
+      "states_replaced": [
+        "inhand-left",
+        "inhand-right",
+        "wielded-inhand-left",
+        "wielded-inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-7-r6",
+      "name": "enforcer_inhands_64x",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Guns/Shotguns/enforcer_inhands_64x.rsi",
+      "states_replaced": [
+        "inhand-left",
+        "inhand-right",
+        "wielded-inhand-left",
+        "wielded-inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-7-r6",
+      "name": "glass_clear",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Consumable/Drinks/glass_clear.rsi",
+      "states_replaced": [
+        "fill-1",
+        "fill-2",
+        "fill-3",
+        "fill-4",
+        "fill-5",
+        "fill-6",
+        "fill-7",
+        "fill-8",
+        "fill-9",
+        "icon",
+        "icon-front",
+        "inhand-left",
+        "inhand-left-fill-1",
+        "inhand-left-fill-2",
+        "inhand-left-fill-3",
+        "inhand-right",
+        "inhand-right-fill-1",
+        "inhand-right-fill-2",
+        "inhand-right-fill-3"
+      ],
+      "n_states": 19,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-7-r6",
+      "name": "glue-tube",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Consumable/Drinks/glue-tube.rsi",
+      "states_replaced": [
+        "fill-1",
+        "fill-2",
+        "fill-3",
+        "fill-4",
+        "fill-5",
+        "fill-6",
+        "icon-front",
+        "icon_empty",
+        "icon_open",
+        "inhand-left",
+        "inhand-left-fill-1",
+        "inhand-left-fill-2",
+        "inhand-left-fill-3",
+        "inhand-right",
+        "inhand-right-fill-1",
+        "inhand-right-fill-2",
+        "inhand-right-fill-3"
+      ],
+      "n_states": 17,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-7-r6",
+      "name": "improvised_shotgun_inhands_64x",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Guns/Shotguns/improvised_shotgun_inhands_64x.rsi",
+      "states_replaced": [
+        "inhand-left",
+        "inhand-right",
+        "wielded-inhand-left",
+        "wielded-inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-7-r6",
+      "name": "lube-tube",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Consumable/Drinks/lube-tube.rsi",
+      "states_replaced": [
+        "fill-1",
+        "fill-2",
+        "fill-3",
+        "fill-4",
+        "fill-5",
+        "fill-6",
+        "icon-front",
+        "icon_empty",
+        "icon_open",
+        "inhand-left",
+        "inhand-left-fill-1",
+        "inhand-left-fill-2",
+        "inhand-left-fill-3",
+        "inhand-right",
+        "inhand-right-fill-1",
+        "inhand-right-fill-2",
+        "inhand-right-fill-3"
+      ],
+      "n_states": 17,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-7-r6",
+      "name": "pump_inhands_64x",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Guns/Shotguns/pump_inhands_64x.rsi",
+      "states_replaced": [
+        "inhand-left",
+        "inhand-right",
+        "wielded-inhand-left",
+        "wielded-inhand-right"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-7-r6",
+      "name": "sawn_inhands_64x",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Guns/Shotguns/sawn_inhands_64x.rsi",
+      "states_replaced": [
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 2,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-8-r7",
+      "name": "baseball_bat",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Melee/baseball_bat.rsi",
+      "states_replaced": [
+        "equipped-BACKPACK",
+        "icon",
+        "inhand-left",
+        "inhand-right",
+        "storage",
+        "wielded-inhand-left",
+        "wielded-inhand-right"
+      ],
+      "n_states": 7,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-8-r7",
+      "name": "db_shotgun",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Guns/Shotguns/db_shotgun.rsi",
+      "states_replaced": [
+        "bolt-open",
+        "equipped-BACKPACK",
+        "equipped-SUITSTORAGE",
+        "icon"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-8-r7",
+      "name": "energy_magnum",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Guns/Battery/energy_magnum.rsi",
+      "states_replaced": [
+        "base",
+        "equipped-BELT",
+        "equipped-SUITSTORAGE",
+        "icon",
+        "inhand-left",
+        "inhand-right",
+        "mag-unshaded-0",
+        "mag-unshaded-1",
+        "mag-unshaded-2",
+        "mag-unshaded-3"
+      ],
+      "n_states": 10,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-8-r7",
+      "name": "fireaxe",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Melee/fireaxe.rsi",
+      "states_replaced": [
+        "equipped-BACKPACK",
+        "equipped-SUITSTORAGE",
+        "icon",
+        "inhand-left",
+        "inhand-right",
+        "wielded-inhand-left",
+        "wielded-inhand-right"
+      ],
+      "n_states": 7,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-8-r7",
+      "name": "fireaxeflaming",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Melee/fireaxeflaming.rsi",
+      "states_replaced": [
+        "equipped-BACKPACK",
+        "equipped-SUITSTORAGE",
+        "icon",
+        "inhand-left",
+        "inhand-right",
+        "wielded-inhand-left",
+        "wielded-inhand-right"
+      ],
+      "n_states": 7,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-8-r7",
+      "name": "pump",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Guns/Shotguns/pump.rsi",
+      "states_replaced": [
+        "bolt-open",
+        "equipped-BACKPACK",
+        "equipped-SUITSTORAGE",
+        "icon"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-8-r7",
+      "name": "sawn",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Weapons/Guns/Shotguns/sawn.rsi",
+      "states_replaced": [
+        "bolt-open",
+        "equipped-BACKPACK",
+        "equipped-SUITSTORAGE",
+        "icon"
+      ],
+      "n_states": 4,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-9-r8",
+      "name": "diona",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/diona.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "inhand-left",
+        "inhand-right",
+        "plushie_diona",
+        "plushie_diona1"
+      ],
+      "n_states": 5,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-9-r8",
+      "name": "lizard",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/lizard.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "icon",
+        "inhand-left",
+        "inhand-right",
+        "plushie_lizard_inversed",
+        "plushie_spacelizard",
+        "plushielizardinversed-equipped-HELMET",
+        "plushielizardinversed-inhand-left",
+        "plushielizardinversed-inhand-right",
+        "rainbowlizardplush",
+        "rainbowlizardplush-equipped-HELMET",
+        "rainbowlizardplush-inhand-left",
+        "rainbowlizardplush-inhand-right",
+        "spacelizard-equipped-HELMET",
+        "spacelizard-inhand-left",
+        "spacelizard-inhand-right"
+      ],
+      "n_states": 16,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-9-r8",
+      "name": "performer",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Clothing/Uniforms/Jumpskirt/performer.rsi",
+      "states_replaced": [
+        "equipped-INNERCLOTHING",
+        "equipped-INNERCLOTHING-monkey",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 5,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-9-r8",
+      "name": "snake",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/snake.rsi",
+      "states_replaced": [
+        "equipped-NECK",
+        "equipped-NECK-vox",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 5,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-9-r8",
+      "name": "tennisball",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Balls/tennisball.rsi",
+      "states_replaced": [
+        "equipped-MASK",
+        "equipped-MASK-dog",
+        "equipped-MASK-fox",
+        "equipped-MASK-puppy",
+        "equipped-MASK-reptilian",
+        "equipped-MASK-vox",
+        "equipped-MASK-vulpkanin",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 10,
+      "compose_notes": [],
+      "warnings": []
+    },
+    {
+      "batch": "production-batch-9-r8",
+      "name": "vox",
+      "grade": "PASS",
+      "dest": "Resources/Textures/Objects/Fun/Plushies/vox.rsi",
+      "states_replaced": [
+        "equipped-HELMET",
+        "equipped-HELMET-vox",
+        "icon",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "n_states": 5,
+      "compose_notes": [],
+      "warnings": []
+    }
+  ],
+  "blocked": [],
+  "skipped_or_rejected": [
+    {
+      "batch": "production-batch-1",
+      "name": "bronx",
+      "verdict": "reject",
+      "grade": "BORDERLINE"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "crushdepth",
+      "verdict": "reject",
+      "grade": "BORDERLINE"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "dark&stormy",
+      "verdict": "reject",
+      "grade": "PASS"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "electricshark",
+      "verdict": "reject",
+      "grade": "BORDERLINE"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "foam_dart",
+      "verdict": "reject",
+      "grade": "BORDERLINE"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "jackrose",
+      "verdict": "reject",
+      "grade": "PASS"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "junglebird",
+      "verdict": "reject",
+      "grade": "PASS"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "monkeybusiness",
+      "verdict": "reject",
+      "grade": "BORDERLINE"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "omnitool",
+      "verdict": "reject",
+      "grade": "FAIL"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "radler",
+      "verdict": "reject",
+      "grade": "BORDERLINE"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "snap_pops",
+      "verdict": "reject",
+      "grade": "BORDERLINE"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "tortuga",
+      "verdict": "reject",
+      "grade": "BORDERLINE"
+    },
+    {
+      "batch": "production-batch-1",
+      "name": "xeno_toxic",
+      "verdict": "reject",
+      "grade": "PASS"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "crowbar",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "egg07",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "egg10",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "egg16",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "egg18",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "egg20",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "feathered",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "flight",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "foam_crossbow_solreign",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "founders_seal",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "fowl",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "gs_armor",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "gs_jumpsuit",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "hoverpack",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "lenses",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "necktie",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "sabre",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "satchel",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    },
+    {
+      "batch": "production-batch-10-worn",
+      "name": "trench",
+      "verdict": "reject",
+      "grade": "UNKNOWN"
+    }
+  ],
+  "montages": {
+    "production-batch-1": "/private/tmp/claude-501/-Users-johnwhitman-AI/d4343975-777a-4f1c-89c4-58e26c7f041a/scratchpad/revalidate-output/montages/production-batch-1-plan-montage.png",
+    "production-batch-10-worn": "/private/tmp/claude-501/-Users-johnwhitman-AI/d4343975-777a-4f1c-89c4-58e26c7f041a/scratchpad/revalidate-output/montages/production-batch-10-worn-plan-montage.png",
+    "production-batch-2-artifacts": "/private/tmp/claude-501/-Users-johnwhitman-AI/d4343975-777a-4f1c-89c4-58e26c7f041a/scratchpad/revalidate-output/montages/production-batch-2-artifacts-plan-montage.png",
+    "production-batch-3-xeno-guardians": "/private/tmp/claude-501/-Users-johnwhitman-AI/d4343975-777a-4f1c-89c4-58e26c7f041a/scratchpad/revalidate-output/montages/production-batch-3-xeno-guardians-plan-montage.png",
+    "production-batch-4-toilets": "/private/tmp/claude-501/-Users-johnwhitman-AI/d4343975-777a-4f1c-89c4-58e26c7f041a/scratchpad/revalidate-output/montages/production-batch-4-toilets-plan-montage.png",
+    "production-batch-5-icononly": "/private/tmp/claude-501/-Users-johnwhitman-AI/d4343975-777a-4f1c-89c4-58e26c7f041a/scratchpad/revalidate-output/montages/production-batch-5-icononly-plan-montage.png",
+    "production-batch-6-r5": "/private/tmp/claude-501/-Users-johnwhitman-AI/d4343975-777a-4f1c-89c4-58e26c7f041a/scratchpad/revalidate-output/montages/production-batch-6-r5-plan-montage.png",
+    "production-batch-7-r6": "/private/tmp/claude-501/-Users-johnwhitman-AI/d4343975-777a-4f1c-89c4-58e26c7f041a/scratchpad/revalidate-output/montages/production-batch-7-r6-plan-montage.png",
+    "production-batch-8-r7": "/private/tmp/claude-501/-Users-johnwhitman-AI/d4343975-777a-4f1c-89c4-58e26c7f041a/scratchpad/revalidate-output/montages/production-batch-8-r7-plan-montage.png",
+    "production-batch-9-r8": "/private/tmp/claude-501/-Users-johnwhitman-AI/d4343975-777a-4f1c-89c4-58e26c7f041a/scratchpad/revalidate-output/montages/production-batch-9-r8-plan-montage.png"
+  }
+}

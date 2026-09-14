@@ -1,0 +1,22 @@
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineBlackMarket
+  name: The Under-Counter
+  description: A shady-looking vending machine that dispenses contraband and illicit goods. It has no brand name.
+  components:
+  - type: VendingMachine
+    pack: BlackMarketInventory
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/cigs.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 2.0
+    color: "#cc0000"

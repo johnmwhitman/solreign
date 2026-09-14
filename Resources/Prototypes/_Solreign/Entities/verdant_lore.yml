@@ -1,0 +1,42 @@
+# Solreign Verdant — "the first expedition" lore trail.
+#
+# Station 4 (Solreign Verdant, docs comment in
+# Resources/Prototypes/Maps/_Solreign/solreign_verdant.yml) is an overgrown bio-station: corporate
+# kudzu and glow flora reclaimed the place after the original botanical survey team went quiet.
+# These 3 papers are Secret #1 of that map's 3-secret set — an abandoned "first expedition" camp
+# tucked in a south-west maintenance pocket, told in found-document order (read 1 -> 2 -> 3).
+# Pattern copied from lore_papers.yml (PaperOffice-derived base, Paper.content locale key, no map
+# placement baked into the prototype — placement lives in the grid file only).
+#
+# Placement: Resources/Maps/_Solreign/solreign_verdant.yml, SW maintenance pocket near the existing
+# ClosetMaintenanceFilledRandom (-11.5,-23.5) / Rack (-13.5,-24.5) props (verified real floor tiles
+# — grep-anchored against Resources/Maps/packed.yml before the copy, same technique as
+# docs/specs/2026-07-11-map-graft-plan.md). Not walked in the mapping editor (no dotnet build this
+# session) — treat as "walk here and confirm," not "paint blind."
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperVerdantExpeditionLog1
+  name: "expedition log, page 1"
+  description: A field journal page, warped soft with damp. The ink has run but held.
+  components:
+  - type: Paper
+    content: solreign-verdant-log-1
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperVerdantExpeditionLog2
+  name: "expedition log, page 2"
+  description: Page two of the same journal. Something has been pressed flat between this page and the next — a leaf, or what used to be one.
+  components:
+  - type: Paper
+    content: solreign-verdant-log-2
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperVerdantExpeditionLog3
+  name: "expedition log, final page"
+  description: The last page. The handwriting changes halfway down.
+  components:
+  - type: Paper
+    content: solreign-verdant-log-3

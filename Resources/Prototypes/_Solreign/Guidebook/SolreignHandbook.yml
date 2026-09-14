@@ -1,0 +1,63 @@
+# Solreign feature guidebook — UX-SIMPLE FIX 3 (docs/receipts/ux-simple/UX-SIMPLE-2026-07-16.md).
+#
+# Before this, exactly one Solreign guidebook page existed (FirstShift.yml/.xml, priority 1) and it
+# only namechecked the Contracts Board in passing — the Directive Terminal/Oracle, Requisitions
+# Anonymous, the Liability Board, Wingmates, Salary/Standing, and Season Ledger titles had ZERO
+# in-game guidance anywhere. This adds one parent section ("SOLREIGN Employee Handbook") with one
+# concise page per remaining feature, following the exact same guideEntry + ServerInfo XML +
+# locale pattern FirstShift.yml already established (see that file's own header comment).
+#
+# Priority 2: sorts just after the existing FirstShift entry (priority 1) and the upstream
+# default-priority guides (priority 0), well ahead of the ruleset entries (priority 10, see
+# Resources/Prototypes/Guidebook/rules.yml).
+#
+# IDs are suffixed "Guide" throughout to stay clear of same-named EntityPrototypes elsewhere in
+# the Solreign tree (e.g. the SolreignDirectiveTerminal entity) even though guideEntry and
+# entityPrototype occupy separate prototype-kind namespaces — belt and suspenders, no ambiguity
+# for a human scanning IDs across both trees.
+#
+# Locale: Locale/en-US/_solreign/guidebook-solreign.ftl
+# NO EasterEgg/lore-mystery spoilers anywhere in this section, per the fix's own scope.
+
+- type: guideEntry
+  id: SolreignHandbook
+  name: guide-entry-solreign-handbook
+  priority: 2
+  text: "/ServerInfo/_Solreign/Guidebook/SolreignHandbook.xml"
+  children:
+  - SolreignDirectiveTerminalGuide
+  - SolreignRequisitionsAnonymousGuide
+  - SolreignLiabilityBoardGuide
+  - SolreignWingmatesGuide
+  - SolreignSalaryStandingGuide
+  - SolreignSeasonLedgerGuide
+
+- type: guideEntry
+  id: SolreignDirectiveTerminalGuide
+  name: guide-entry-solreign-directive-terminal
+  text: "/ServerInfo/_Solreign/Guidebook/DirectiveTerminal.xml"
+
+- type: guideEntry
+  id: SolreignRequisitionsAnonymousGuide
+  name: guide-entry-solreign-requisitions-anonymous
+  text: "/ServerInfo/_Solreign/Guidebook/RequisitionsAnonymous.xml"
+
+- type: guideEntry
+  id: SolreignLiabilityBoardGuide
+  name: guide-entry-solreign-liability-board
+  text: "/ServerInfo/_Solreign/Guidebook/LiabilityBoard.xml"
+
+- type: guideEntry
+  id: SolreignWingmatesGuide
+  name: guide-entry-solreign-wingmates
+  text: "/ServerInfo/_Solreign/Guidebook/WingmatesGuide.xml"
+
+- type: guideEntry
+  id: SolreignSalaryStandingGuide
+  name: guide-entry-solreign-salary-standing
+  text: "/ServerInfo/_Solreign/Guidebook/SalaryStanding.xml"
+
+- type: guideEntry
+  id: SolreignSeasonLedgerGuide
+  name: guide-entry-solreign-season-ledger
+  text: "/ServerInfo/_Solreign/Guidebook/SeasonLedger.xml"

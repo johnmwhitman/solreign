@@ -1,0 +1,22 @@
+- type: job
+  id: Smuggler
+  name: job-name-smuggler
+  description: job-description-smuggler
+  playTimeTracker: JobSmuggler
+  startingGear: SmugglerGear
+  icon: "JobIconSmuggler"
+  supervisors: job-supervisors-qm
+  access:
+  - Cargo
+  - Maintenance
+  - External
+
+- type: startingGear
+  id: SmugglerGear
+  equipment:
+    id: SmugglerPDA
+    ears: ClothingHeadsetCargo
+  storage:
+    back:
+    - BoxSurvival
+    - HiddenStash

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Original Solreign art (AI-generated with MiniMax image-01, hand-curated from 1-2 variants per state, post-processed: chroma-keyed, despeckled, cropped, quantized, resized) for the CC-BY-NC-SA-3.0 swap pilot Batch 2. Full RSI: all original states reproduced.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "magnum"
+    },
+    {
+      "name": "magnum_piercing"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+# Solreign — Greenshield Officer (clean-room build from upstream job idiom only).
+# Executive-protection detail for station leadership: security-adjacent kit, command-corridor access.
+# Antag exclusion: MindShieldImplant (blocks conversion) + AntagImmune component
+# (every upstream antagSpecifier inheriting BaseAntagSpecifier blacklists AntagImmune).
+
+- type: playTimeTracker
+  id: JobGreenshieldOfficer
+
+# Reuses the existing SeniorOfficer icon state for now.
+# TODO(Solreign sprite factory): custom 8x8 acid-green shield state "GreenshieldOfficer"
+# in /Textures/Interface/Misc/job_icons.rsi (or a _Solreign rsi).
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconGreenshieldOfficer
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: SeniorOfficer
+  jobName: job-name-greenshield
+
+- type: job
+  id: GreenshieldOfficer
+  name: job-name-greenshield
+  description: job-description-greenshield
+  playTimeTracker: JobGreenshieldOfficer
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 8h
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 1h
+
+  startingGear: GreenshieldOfficerGear
+  icon: "JobIconGreenshieldOfficer"
+  supervisors: job-supervisors-captain
+  access:
+  - Command
+  - Security
+  - Brig
+  - Maintenance
+  - External
+  - Cryogenics
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: AntagImmune
+
+# Greenshield Officer uniform jumpsuit. CLOSED (production batch 10, sprite-factory wave,
+# 2026-07-16): closes the gap this file's own TODO above only mentioned for the job icon --
+# the job previously wore the vanilla ClothingUniformJumpsuitDetective directly (no
+# dedicated Solreign entity existed yet, batch-10's own premise that one already existed
+# with a placeholder sprite didn't hold for the uniform/armor specifically). Real art
+# landed: own RSI at _Solreign/greenshield_jumpsuit.rsi (icon, equipped-INNERCLOTHING/
+# -monkey, inhand-left/right), rigged from detective.rsi's own geometry.
+# OWNER-EYE FLAG: reads correctly as a charcoal uniform with green piping at 8x, but is
+# quite dark at true 32px scale (comparable to the vanilla detective jumpsuit it's rigged
+# from) -- worth confirming it reads as "Greenshield" and not "generic dark uniform" at
+# gameplay zoom.
+- type: entity
+  parent: ClothingUniformJumpsuitDetective
+  id: SolreignGreenshieldOfficerUniform
+  name: Greenshield officer's uniform
+  suffix: solreign, greenshield
+  description: A charcoal duty uniform piped in acid-green, cut for close-protection work. Regulation says it should be inconspicuous. It is not.
+  components:
+  - type: Sprite
+    sprite: _Solreign/greenshield_jumpsuit.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/greenshield_jumpsuit.rsi
+      state: icon
+  - type: Clothing
+    sprite: _Solreign/greenshield_jumpsuit.rsi
+
+# Greenshield Officer armor vest. CLOSED (production batch 10, sprite-factory wave,
+# 2026-07-16): same gap, armor half -- the job previously wore the vanilla
+# ClothingOuterArmorBasicSlim directly. Real art landed: own RSI at
+# _Solreign/greenshield_armor.rsi (icon, equipped-OUTERCLOTHING/-vox, inhand-left/right).
+- type: entity
+  parent: ClothingOuterArmorBasicSlim
+  id: SolreignGreenshieldOfficerArmor
+  name: Greenshield officer's armor vest
+  suffix: solreign, greenshield
+  description: A slim armored vest in the same charcoal-and-acid-green livery as the rest of the Greenshield kit. Provides decent protection without broadcasting "riot line" to the room.
+  components:
+  - type: Sprite
+    sprite: _Solreign/greenshield_armor.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/greenshield_armor.rsi
+      state: icon
+  - type: Clothing
+    sprite: _Solreign/greenshield_armor.rsi
+
+# Non-lethal bodyguard kit assembled from existing items only.
+# No roleLoadout prototype exists for this job, so jumpsuit and backpack are explicit
+# (deathsquad.yml idiom) — otherwise the player would spawn without either.
+# UPDATED (production batch 10, sprite-factory wave, 2026-07-16): jumpsuit/outerClothing
+# now point at the dedicated Greenshield entities above instead of vanilla Detective/
+# ArmorBasicSlim directly.
+- type: startingGear
+  id: GreenshieldOfficerGear
+  equipment:
+    jumpsuit: SolreignGreenshieldOfficerUniform
+    back: ClothingBackpackSecurity
+    eyes: ClothingEyesGlassesSunglasses
+    ears: ClothingHeadsetAltCommand
+    outerClothing: SolreignGreenshieldOfficerArmor
+    shoes: ClothingShoesBootsCombatFilled
+    gloves: ClothingHandsGlovesColorBlack
+    id: SecurityPDA
+    pocket1: WeaponDisabler
+  storage:
+    back:
+    - Flash
+    - Handcuffs

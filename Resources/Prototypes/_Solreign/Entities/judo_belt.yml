@@ -1,0 +1,30 @@
+# Solreign — "Security Judo Belt" (MARTIAL ARTS TOY, roadmap: combo core judo moveset, nonlethal).
+# A certified de-escalation instrument. Grant is WEAR-CONDITIONED (unlike the Ancient Carp Scroll's
+# one-time permanent lesson): buckle it on and you're certified, take it off and you're not.
+# Combos are a sequence of existing interactions (unarmed hit, disarm shove, pull-start grab) inside
+# a 1.5s window, IN ORDER:
+#   Push (hit) -> Shove (disarm) -> Grab (start a pull) -> guaranteed nonlethal stun
+# Logic: Content.Server/_Solreign/MartialArts/SolreignJudoBeltComponent.cs (the belt) +
+# SolreignJudoBeltWearerComponent.cs (the while-worn grant) + SolreignJudoBeltSystem.cs. Pure
+# chain/window math is unit-tested in Content.Tests/_Solreign/JudoComboRulesTests.cs.
+#
+# Sprite: reuses the upstream security belt RSI for the toy.
+# TODO(SOLREIGN-ART): custom sprite wanted — acid-green webbing with a certification patch, plus a
+# matching in-hands (32x32, sprite factory lane).
+
+- type: entity
+  parent: ClothingBeltBase
+  id: SolreignJudoBelt
+  name: security judo belt
+  suffix: solreign
+  description: A Solreign Human Resources de-escalation instrument. Wearer is certified in the combo core judo moveset for the duration of wear. Certification is void the moment the belt is unbuckled. Contents are certified 100% nonlethal.
+  components:
+  # Sprite Factory judo_belt.rsi (delivery solreign-judo-belt, 4/4 ledger-approved 2026-08-02).
+  # Deliberately a NEW RSI in the fork namespace — the shared upstream Clothing/Belt/security.rsi
+  # must never be overwritten (delivery README's own warning).
+  - type: Sprite
+    sprite: _Solreign/judo_belt.rsi
+  - type: Clothing
+    sprite: _Solreign/judo_belt.rsi
+    quickEquip: true
+  - type: SolreignJudoBelt

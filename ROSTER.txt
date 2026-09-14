@@ -1,0 +1,5 @@
+# ROSTER.txt - Accepted RSVP list for the closed test
+johnwhitman
+Kolton_Admin
+BetaTester01
+Player_XYZ

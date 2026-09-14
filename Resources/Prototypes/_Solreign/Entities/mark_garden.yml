@@ -1,0 +1,232 @@
+# "The Mark" — the Continuity Garden fixture + the closed 3x4 mark prototype table
+# (docs/specs/MARK-SPEC-2026-07-17-DRAFT.md §4.1, wave MG-W2).
+#
+# ANTI-GRIEF BY CONSTRUCTION (spec rail 5): the base is component-EXPLICIT rather than parenting
+# BaseStructure — the W1 receipt's T3 audit found BaseStructure clean of Damageable/Destructible/
+# Anchorable but carrying Pullable, and W2's ruling is SUPPRESS (an anchored keepsake shouldn't be
+# draggable), which prototype composition can't do subtractively. So the component list below is
+# BaseStructure minus Pullable minus Tag, plus InteractionOutline. Deliberately ABSENT everywhere
+# in this file: Damageable, Destructible, Anchorable (no unanchor verb), Rotatable, Pullable,
+# construction graphs, containers, ActivatableUI. What has no health cannot be broken; what has no
+# unanchor verb cannot be dragged into a shape; what takes no text cannot spell anything.
+# (Admin delete still works and costs one round — the ledger row respawns the projection.)
+#
+# Entities here are ROUND-LOCAL PROJECTIONS of Season Ledger `mark` rows (spec §3.3), spawned in
+# code by SolreignMarkGardenSystem; SolreignMarkComponent is attached at spawn, never in YAML.
+# Names/descriptions are public surfaces: kind + stage flavor only, never a player name.
+#
+# Wired approved states from solreign-marks (latest reviews.jsonl verdicts: sapling-*/lamp-*/plate-*/garden approved; CC0-1.0). Skipped all rejected states.
+#
+# NO map placement here — MG-W5 (map lane) owns per-map garden placement; until then
+# SolreignMarkGardenSystem fallback-spawns the garden beside the wingmate beacon (spec §4.3).
+
+- type: entity
+  id: SolreignMarkBase
+  abstract: true
+  suffix: Solreign, Mark
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 60
+        hard: false
+
+# ---------------------------------------------------------------- sapling (growth unit: cm)
+
+- type: entity
+  id: SolreignMarkSapling0
+  parent: SolreignMarkBase
+  name: continuity sapling
+  description: A crew keepsake, rooted in the Continuity Garden.
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    state: sapling-0
+    noRot: true
+
+- type: entity
+  id: SolreignMarkSapling1
+  parent: SolreignMarkSapling0
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    state: sapling-1
+    noRot: true
+
+- type: entity
+  id: SolreignMarkSapling2
+  parent: SolreignMarkSapling0
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    state: sapling-2
+    noRot: true
+
+- type: entity
+  id: SolreignMarkSapling3
+  parent: SolreignMarkSapling0
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    state: sapling-3
+    noRot: true
+
+# ---------------------------------------------------------------- lamp (growth unit: lumens)
+# Stage steps a PointLight radius/energy/color from cold white toward settled amber (the
+# signage.yml PointLight precedent) — legible from across the room without examining.
+
+- type: entity
+  id: SolreignMarkLamp0
+  parent: SolreignMarkBase
+  name: continuity lamp
+  description: A crew keepsake, fixed to the Continuity Garden's grid.
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    noRot: true
+    layers:
+      - state: lamp-0
+      - state: lamp-0
+        shader: unshaded
+  - type: PointLight
+    enabled: true
+    radius: 1.5
+    energy: 1.0
+    color: "#E8F4FF"
+
+- type: entity
+  id: SolreignMarkLamp1
+  parent: SolreignMarkLamp0
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    noRot: true
+    layers:
+      - state: lamp-1
+      - state: lamp-1
+        shader: unshaded
+  - type: PointLight
+    enabled: true
+    radius: 2.0
+    energy: 1.4
+    color: "#FFF2D5"
+
+- type: entity
+  id: SolreignMarkLamp2
+  parent: SolreignMarkLamp0
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    noRot: true
+    layers:
+      - state: lamp-2
+      - state: lamp-2
+        shader: unshaded
+  - type: PointLight
+    enabled: true
+    radius: 2.5
+    energy: 1.8
+    color: "#FFE0A8"
+
+- type: entity
+  id: SolreignMarkLamp3
+  parent: SolreignMarkLamp0
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    noRot: true
+    layers:
+      - state: lamp-3
+      - state: lamp-3
+        shader: unshaded
+  - type: PointLight
+    enabled: true
+    radius: 3.0
+    energy: 2.2
+    color: "#FFD083"
+
+# ---------------------------------------------------------------- name-plate (growth unit: sheen)
+# Stage deepens a warm patina tint over the blank plaque.
+
+- type: entity
+  id: SolreignMarkPlate0
+  parent: SolreignMarkBase
+  name: continuity name-plate
+  description: A crew keepsake, seated in the Continuity Garden's register.
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    state: plate-0
+    noRot: true
+
+- type: entity
+  id: SolreignMarkPlate1
+  parent: SolreignMarkPlate0
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    state: plate-1
+    noRot: true
+
+- type: entity
+  id: SolreignMarkPlate2
+  parent: SolreignMarkPlate0
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    state: plate-2
+    noRot: true
+
+- type: entity
+  id: SolreignMarkPlate3
+  parent: SolreignMarkPlate0
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    state: plate-3
+    noRot: true
+
+# ---------------------------------------------------------------- the garden fixture (C5)
+# Name/description are authored inline (the signage.yml EntityLocData-fallback idiom); the same
+# strings live as solreign-mark-garden-name/-desc in mark.ftl as the copy-pack contract source.
+
+- type: entity
+  id: SolreignMarkGarden
+  name: Continuity Garden
+  suffix: Solreign, Mark
+  description: Company exhibit for long-horizon personnel retention. Fixed fixtures only. Objects here outlive rounds, excuses, and several middle managers. Do not rearrange. Do not ask for Task 4.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.1"
+        density: 190
+        hard: false
+  - type: Sprite
+    sprite: _Solreign/solreign-marks.rsi
+    state: garden
+    noRot: true
+  - type: SolreignMarkGarden

@@ -1,0 +1,126 @@
+schema: solreign.game.execution-queue/v1
+updated_at: 2026-08-09T09:46:38Z
+north_star: >-
+  A newcomer completes an understandable, useful first session and has a reason to return.
+cadence: biweekly_player_value_bundle
+wip:
+  limit: 2
+  occupied:
+    - PR-14
+    - FIRST-SESSION-ORIENT
+  law: PR #14 plus at most one local dependent successor; no additional repository WIP.
+
+states:
+  - candidate
+  - ready
+  - active
+  - blocked
+  - landed
+  - verified
+
+items:
+  - id: PR-14
+    priority: 0
+    title: Land the v15.x player-friction and map-truth bundle
+    state: blocked
+    player_value: Removes dead interactions, stale feedback, and dormant arrival clutter.
+    repository: johnmwhitman/kolton-ss14
+    pull_request: 14
+    base_sha: 637d102a00d6599b328e34b49cd5db4c61440871
+    head_sha: 4e0d1842c5c7a0fd1b09e767a3fd2613e2c3a47f
+    blocker:
+      fingerprint: runner_id=0; zero steps; failed-payment or Actions spending-limit annotation
+      class: hosted_infrastructure_refusal
+      code_evidence: false
+    launch_condition: >-
+      A human-approved zero-hosted-cost path or restored funded gate runs the required exact-head checks.
+    next_action: Preserve exact head and blocker evidence; do not rerun hosted compute autonomously.
+
+  - id: ARRIVALS-REPLAY
+    priority: 1
+    title: Prevent repeat latejoin antagonist rolls for arrivals-shuttle re-boarders
+    state: verified
+    player_value: Established players can re-board safely without receiving another antagonist roll.
+    replay_required: false
+    held_commit: 8500070bd0f2f373eb634bcc5db0763dc36e6d39
+    contained_by:
+      origin_master: 637d102a00d6599b328e34b49cd5db4c61440871
+      pull_request_14: 4e0d1842c5c7a0fd1b09e767a3fd2613e2c3a47f
+    exact_blobs:
+      Content.Server/_Solreign/Shuttles/SolreignArrivalsReboardRescueSystem.cs: ef8866cb5c1f07fcaff60893c292ce269b04a8c6
+      Content.IntegrationTests/Tests/_Solreign/SolreignArrivalsReboardRescueTest.cs: eb93c031d34e54976a77bbffcafefb14204cbf8e
+    verification:
+      - git merge-base --is-ancestor returned zero for held commit against fetched master.
+      - git merge-base --is-ancestor returned zero for held commit against PR #14 head.
+      - Both changed-file blobs match across the held commit, master, PR #14, and successor.
+      - No redundant test or quick gate was run because there was no implementation delta.
+    production_status: unknown; repository containment is not deployment proof
+    acceptance:
+      - Established re-boarder never receives PendingClockInComponent.
+      - Vanilla dump is followed by rescue onto a real station grid.
+      - Intentional off-grid exit is not rescued or teleported.
+      - Missing latejoin spawn fails safe by returning the player aboard.
+      - Genuine first arrivals remain on vanilla's coupon and antagonist-selection path.
+    plan: docs/superpowers/plans/2026-08-09-solreign-arrivals-repeat-antag-replay.md
+
+  - id: FIRST-SESSION-ORIENT
+    priority: 2
+    title: Make arrival lead to one understandable useful action
+    state: active
+    player_value: A newcomer knows where they are, what they can do, and what happens next.
+    depends_on:
+      - ARRIVALS-REPLAY verified
+    successor_branch: codex/solreign-first-session-next-20260809
+    constraints:
+      - Reuse First Shift, Wingmates, contracts, and current map affordances.
+      - Do not salvage the unwired static-only orientation commit from codex/restore-solreign-integration-gate-20260802.
+      - Do not advertise dormant Market, Bounties, Records, or Noticeboard front doors.
+    acceptance:
+      - One bounded newcomer scenario reaches and attempts a useful action.
+      - Success and rejection both provide truthful visible feedback.
+      - The scenario gives an explicit next step without requiring operator instrumentation.
+    implementation_receipt:
+      scope:
+        - Resources/Locale/en-US/_solreign/lobby-newcomer.ftl
+        - Resources/Locale/en-US/_solreign/first-shift.ftl
+      player_change: >-
+        Lobby and first-spawn prompts now name the same First Shift beacon and truthfully describe
+        press, department choice, and the resulting private harmless starter assignment.
+      focused_proof: >-
+        FirstShiftContentTests passed 12/12 after initializing the exact pinned RobustToolbox
+        nested submodules; no copy-only wording test was added.
+      quick_gate: >-
+        One attempted gate was invalid before test execution because those nested submodules were
+        absent. It was not repeated under the overnight one-run ceiling.
+      independent_review: >-
+        HOLD: MeshFleet fleet 07a101eb-2f85-45a9-9fde-e749861de582 lost both bounded MiniMax and
+        Grok roles after three empty-stdout attempts; no output counted as evidence.
+      release_readiness: hold_pending_independent_review_and_clean_quick_gate
+    plan: docs/superpowers/plans/2026-08-09-solreign-first-session-orientation.md
+
+  - id: FIRST-SESSION-CONNECT
+    priority: 3
+    title: Turn the first useful action into a cooperative handoff
+    state: candidate
+    player_value: The first session creates a real reason to interact with another player.
+    depends_on:
+      - FIRST-SESSION-ORIENT verified
+    acceptance:
+      - One real cooperative handoff succeeds in the bounded first-session scenario.
+      - Failure is specific and private rather than a dead click.
+      - Low population cannot assign an impossible objective.
+
+  - id: RETURN-CALLBACK
+    priority: 4
+    title: Recall one meaningful prior-round choice on return
+    state: candidate
+    player_value: A returning player sees that the station remembers something that mattered.
+    depends_on:
+      - FIRST-SESSION-CONNECT verified
+    constraints:
+      - Reuse Season Ledger, First Death, or Shift Archive durable state.
+      - Add no progression currency, grind loop, analytics platform, or private-player exposure.
+    acceptance:
+      - A returning player sees one truthful prior-round callback.
+      - Missing history has a coherent fresh-player fallback.
+      - Stale or mismatched identity fails closed.

@@ -1,0 +1,12 @@
+- type: species
+  id: Shadow
+  name: species-name-shadow
+  roundStart: true
+  prototype: MobShadow
+  dollPrototype: AppearanceShadow
+  skinColoration: Hues
+  # Every other coloured species sets this (arachnid #385878, diona #cdb369, moth #ffda93,
+  # reptilian #34a223, slime #b8b8b8). Shadow did not, so SpeciesPrototype's fallback made a
+  # DEFAULT SHADOW RENDER WHITE — the opposite of the concept. Dark charcoal with a cold cast.
+  # Pure taste: change the hex freely, but do not remove the field.
+  defaultSkinTone: "#2b2b38"

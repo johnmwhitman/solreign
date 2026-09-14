@@ -1,0 +1,274 @@
+# Finite, reviewed First Assignment deck. Literal instructions and optional PROVIDENCE flavor
+# remain separate so the client can always offer plain instructions. All routes fall back to Arrivals.
+
+- type: firstShiftAssignment
+  id: FirstShiftEngineeringThreshold
+  department: Engineering
+  eligibleSafeJobs: [SolreignEngineeringApprentice]
+  title: first-shift-card-engineering-threshold-title
+  why: first-shift-card-engineering-threshold-why
+  orient: first-shift-card-engineering-threshold-orient
+  try: first-shift-card-engineering-threshold-try
+  ifStuck: first-shift-card-engineering-threshold-stuck
+  safetyStop: first-shift-safety-engineering
+  flavor: [first-shift-omen-engineering-1, first-shift-omen-engineering-2, first-shift-omen-engineering-3]
+  anchors: [DefaultStationBeaconEngineering, DefaultStationBeaconArrivals]
+  guideEntry: Engineering
+  safetyClassification: SafeOrientation
+  taskCategory: Orientation
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftEngineeringApcExterior
+  department: Engineering
+  eligibleSafeJobs: [SolreignEngineeringApprentice]
+  title: first-shift-card-engineering-apc-title
+  why: first-shift-card-engineering-apc-why
+  orient: first-shift-card-engineering-apc-orient
+  try: first-shift-card-engineering-apc-try
+  ifStuck: first-shift-card-engineering-apc-stuck
+  safetyStop: first-shift-safety-engineering
+  flavor: [first-shift-omen-engineering-1, first-shift-omen-engineering-2, first-shift-omen-engineering-3]
+  anchors: [DefaultStationBeaconEngineering, DefaultStationBeaconArrivals]
+  guideEntry: Engineering
+  safetyClassification: SafeOrientation
+  taskCategory: Observation
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftEngineeringPublicTool
+  department: Engineering
+  eligibleSafeJobs: [SolreignEngineeringApprentice]
+  title: first-shift-card-engineering-tool-title
+  why: first-shift-card-engineering-tool-why
+  orient: first-shift-card-engineering-tool-orient
+  try: first-shift-card-engineering-tool-try
+  ifStuck: first-shift-card-engineering-tool-stuck
+  safetyStop: first-shift-safety-engineering
+  flavor: [first-shift-omen-engineering-1, first-shift-omen-engineering-2, first-shift-omen-engineering-3]
+  anchors: [DefaultStationBeaconEngineering, DefaultStationBeaconArrivals]
+  guideEntry: Engineering
+  safetyClassification: SafeOrientation
+  taskCategory: GuideReference
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftMedicalThreshold
+  department: Medical
+  eligibleSafeJobs: [SolreignMedicalIntern]
+  title: first-shift-card-medical-threshold-title
+  why: first-shift-card-medical-threshold-why
+  orient: first-shift-card-medical-threshold-orient
+  try: first-shift-card-medical-threshold-try
+  ifStuck: first-shift-card-medical-threshold-stuck
+  safetyStop: first-shift-safety-medical
+  flavor: [first-shift-omen-medical-1, first-shift-omen-medical-2, first-shift-omen-medical-3]
+  anchors: [DefaultStationBeaconMedical, DefaultStationBeaconArrivals]
+  guideEntry: Medical
+  safetyClassification: SafeOrientation
+  taskCategory: Orientation
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftMedicalEmergencyLabels
+  department: Medical
+  eligibleSafeJobs: [SolreignMedicalIntern]
+  title: first-shift-card-medical-labels-title
+  why: first-shift-card-medical-labels-why
+  orient: first-shift-card-medical-labels-orient
+  try: first-shift-card-medical-labels-try
+  ifStuck: first-shift-card-medical-labels-stuck
+  safetyStop: first-shift-safety-medical
+  flavor: [first-shift-omen-medical-1, first-shift-omen-medical-2, first-shift-omen-medical-3]
+  anchors: [DefaultStationBeaconMedbay, DefaultStationBeaconMedical, DefaultStationBeaconArrivals]
+  guideEntry: Medical
+  safetyClassification: SafeOrientation
+  taskCategory: Observation
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftMedicalFirstAidReference
+  department: Medical
+  eligibleSafeJobs: [SolreignMedicalIntern]
+  title: first-shift-card-medical-reference-title
+  why: first-shift-card-medical-reference-why
+  orient: first-shift-card-medical-reference-orient
+  try: first-shift-card-medical-reference-try
+  ifStuck: first-shift-card-medical-reference-stuck
+  safetyStop: first-shift-safety-medical
+  flavor: [first-shift-omen-medical-1, first-shift-omen-medical-2, first-shift-omen-medical-3]
+  anchors: [DefaultStationBeaconMedical, DefaultStationBeaconArrivals]
+  guideEntry: Medical
+  safetyClassification: SafeOrientation
+  taskCategory: GuideReference
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftScienceThreshold
+  department: Science
+  eligibleSafeJobs: [SolreignResearchAssistant]
+  title: first-shift-card-science-threshold-title
+  why: first-shift-card-science-threshold-why
+  orient: first-shift-card-science-threshold-orient
+  try: first-shift-card-science-threshold-try
+  ifStuck: first-shift-card-science-threshold-stuck
+  safetyStop: first-shift-safety-science
+  flavor: [first-shift-omen-science-1, first-shift-omen-science-2, first-shift-omen-science-3]
+  anchors: [DefaultStationBeaconScience, DefaultStationBeaconArrivals]
+  guideEntry: Science
+  safetyClassification: SafeOrientation
+  taskCategory: Orientation
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftScienceInertExterior
+  department: Science
+  eligibleSafeJobs: [SolreignResearchAssistant]
+  title: first-shift-card-science-inert-title
+  why: first-shift-card-science-inert-why
+  orient: first-shift-card-science-inert-orient
+  try: first-shift-card-science-inert-try
+  ifStuck: first-shift-card-science-inert-stuck
+  safetyStop: first-shift-safety-science
+  flavor: [first-shift-omen-science-1, first-shift-omen-science-2, first-shift-omen-science-3]
+  anchors: [DefaultStationBeaconRND, DefaultStationBeaconScience, DefaultStationBeaconArrivals]
+  guideEntry: Science
+  safetyClassification: SafeOrientation
+  taskCategory: Observation
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftScienceResearchSurface
+  department: Science
+  eligibleSafeJobs: [SolreignResearchAssistant]
+  title: first-shift-card-science-surface-title
+  why: first-shift-card-science-surface-why
+  orient: first-shift-card-science-surface-orient
+  try: first-shift-card-science-surface-try
+  ifStuck: first-shift-card-science-surface-stuck
+  safetyStop: first-shift-safety-science
+  flavor: [first-shift-omen-science-1, first-shift-omen-science-2, first-shift-omen-science-3]
+  anchors: [DefaultStationBeaconScience, DefaultStationBeaconArrivals]
+  guideEntry: Science
+  safetyClassification: SafeOrientation
+  taskCategory: GuideReference
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftCargoThreshold
+  department: Cargo
+  eligibleSafeJobs: [SolreignCargoTrainee]
+  title: first-shift-card-cargo-threshold-title
+  why: first-shift-card-cargo-threshold-why
+  orient: first-shift-card-cargo-threshold-orient
+  try: first-shift-card-cargo-threshold-try
+  ifStuck: first-shift-card-cargo-threshold-stuck
+  safetyStop: first-shift-safety-cargo
+  flavor: [first-shift-omen-cargo-1, first-shift-omen-cargo-2, first-shift-omen-cargo-3]
+  anchors: [DefaultStationBeaconCargoReception, DefaultStationBeaconCargoBay, DefaultStationBeaconArrivals]
+  guideEntry: Cargo
+  safetyClassification: SafeOrientation
+  taskCategory: Orientation
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftCargoBenignAppraisal
+  department: Cargo
+  eligibleSafeJobs: [SolreignCargoTrainee]
+  title: first-shift-card-cargo-appraisal-title
+  why: first-shift-card-cargo-appraisal-why
+  orient: first-shift-card-cargo-appraisal-orient
+  try: first-shift-card-cargo-appraisal-try
+  ifStuck: first-shift-card-cargo-appraisal-stuck
+  safetyStop: first-shift-safety-cargo
+  flavor: [first-shift-omen-cargo-1, first-shift-omen-cargo-2, first-shift-omen-cargo-3]
+  anchors: [DefaultStationBeaconCargoReception, DefaultStationBeaconCargoBay, DefaultStationBeaconArrivals]
+  guideEntry: Cargo
+  safetyClassification: SafeOrientation
+  taskCategory: BenignAppraisal
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftCargoDeliverySurface
+  department: Cargo
+  eligibleSafeJobs: [SolreignCargoTrainee]
+  title: first-shift-card-cargo-delivery-title
+  why: first-shift-card-cargo-delivery-why
+  orient: first-shift-card-cargo-delivery-orient
+  try: first-shift-card-cargo-delivery-try
+  ifStuck: first-shift-card-cargo-delivery-stuck
+  safetyStop: first-shift-safety-cargo
+  flavor: [first-shift-omen-cargo-1, first-shift-omen-cargo-2, first-shift-omen-cargo-3]
+  anchors: [DefaultStationBeaconCargoReception, DefaultStationBeaconCargoBay, DefaultStationBeaconArrivals]
+  guideEntry: Cargo
+  safetyClassification: SafeOrientation
+  taskCategory: Observation
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftServiceThreshold
+  department: Service
+  eligibleSafeJobs: [SolreignKitchenHand]
+  title: first-shift-card-service-threshold-title
+  why: first-shift-card-service-threshold-why
+  orient: first-shift-card-service-threshold-orient
+  try: first-shift-card-service-threshold-try
+  ifStuck: first-shift-card-service-threshold-stuck
+  safetyStop: first-shift-safety-service
+  flavor: [first-shift-omen-service-1, first-shift-omen-service-2, first-shift-omen-service-3]
+  anchors: [DefaultStationBeaconService, DefaultStationBeaconArrivals]
+  guideEntry: Service
+  safetyClassification: SafeOrientation
+  taskCategory: Orientation
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftServicePantryLabel
+  department: Service
+  eligibleSafeJobs: [SolreignKitchenHand]
+  title: first-shift-card-service-pantry-title
+  why: first-shift-card-service-pantry-why
+  orient: first-shift-card-service-pantry-orient
+  try: first-shift-card-service-pantry-try
+  ifStuck: first-shift-card-service-pantry-stuck
+  safetyStop: first-shift-safety-service
+  flavor: [first-shift-omen-service-1, first-shift-omen-service-2, first-shift-omen-service-3]
+  anchors: [DefaultStationBeaconKitchen, DefaultStationBeaconService, DefaultStationBeaconArrivals]
+  guideEntry: Service
+  safetyClassification: SafeOrientation
+  taskCategory: Observation
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftServiceCleaningSurface
+  department: Service
+  eligibleSafeJobs: [SolreignKitchenHand]
+  title: first-shift-card-service-cleaning-title
+  why: first-shift-card-service-cleaning-why
+  orient: first-shift-card-service-cleaning-orient
+  try: first-shift-card-service-cleaning-try
+  ifStuck: first-shift-card-service-cleaning-stuck
+  safetyStop: first-shift-safety-service
+  flavor: [first-shift-omen-service-1, first-shift-omen-service-2, first-shift-omen-service-3]
+  anchors: [DefaultStationBeaconJanitorsCloset, DefaultStationBeaconService, DefaultStationBeaconArrivals]
+  guideEntry: Service
+  safetyClassification: SafeOrientation
+  taskCategory: Observation
+  enabled: true
+
+- type: firstShiftAssignment
+  id: FirstShiftUniversalWelcome
+  department: Universal
+  eligibleSafeJobs: []
+  title: first-shift-card-universal-title
+  why: first-shift-card-universal-why
+  orient: first-shift-card-universal-orient
+  try: first-shift-card-universal-try
+  ifStuck: first-shift-card-universal-stuck
+  safetyStop: first-shift-safety-universal
+  flavor: [first-shift-omen-universal-1, first-shift-omen-universal-2, first-shift-omen-universal-3]
+  anchors: [DefaultStationBeaconArrivals]
+  guideEntry: NewPlayer
+  safetyClassification: SafeOrientation
+  taskCategory: GuideReference
+  enabled: true

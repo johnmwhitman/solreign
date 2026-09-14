@@ -1,0 +1,132 @@
+# Solreign — "Camera Car" (RC VEHICLES SPIKE, recreation & vehicles pack).
+# A drivable toy car with a live wireless camera feed. YAML-only: driving = ghost role
+# (the car IS the driver, upstream bot pattern — honkbot/silicon.yml), camera feed = the
+# upstream xenoborg trick (base_borg_chassis.yml: SurveillanceCamera on a moving mob).
+# Spec: docs/specs/2026-07-11-rc-vehicles-spike.md. Handheld-controller driving
+# (RelayInputMover bind from an item) is Wave 2 — needs new C#, see spec gap list.
+#
+# Feed chain (all existing upstream infrastructure, nothing custom):
+#   this car (rx: SurveillanceCameraEntertainment, tx: SurveillanceCamera)
+#   -> SurveillanceCameraWirelessRouterEntertainment (powered, on-map)
+#   -> any WallmountTelevision or ComputerSurveillanceWirelessCameraMonitor.
+#
+# Sprite: reuses the orphaned upstream vehicle sprite (Objects/Vehicles/atv.rsi,
+# CC-BY-SA-3.0 ex-tgstation — left behind when upstream removed rideable vehicles),
+# scaled down to read as a toy.
+# TODO(SOLREIGN-ART): custom sprite wanted — chunky acid-green toy RC car with a
+# roof-mounted camera bump and "SOLREIGN: CUSTOMER VISIBILITY DIVISION" livery
+# (32x32, 4 directions, sprite factory lane), plus a cracked "dead" state.
+#
+# --- WAVE 2 (this file's addition) --------------------------------------------------
+# Gap #1 shipped: `RcControllable` (Content.Server/_Solreign/Vehicles/RcControllableComponent.cs)
+# makes this car bindable to the new `SolreignItemRcController` handheld below —
+# RcControllerSystem relays the holder's movement input into the car via
+# SharedMoverController.SetRelay, same primitive the ghost-role driving already piggybacks off.
+# The ghost role stays: nobody's holding a controller? A ghost can still take over and drive
+# for free, same as before. Both paths coexist (SetRelay just wins whichever binds last).
+#
+# Gap #2(a) shipped: `SolreignItemRcController` is *also* a tiny wireless camera monitor
+# (SurveillanceCameraMonitor + ActivatableUI, same idiom as the upstream syndicate "camera bug"),
+# so the same handheld item doubles as the driver's screen onto this car's own feed.
+#
+# Gap #3 (pause the driver's body) falls out of SetRelay itself: movement input is redirected
+# to the car, not doubled — see RcControllerSystem doc comment for the full behavior list
+# (auto-unbind on drop/range/car-death/holder-damage).
+#
+# Remaining from the spec's gap list, explicitly NOT in this wave: #4 (toy vendor/lathe catalog
+# entry — touches shared upstream catalog files, coordinate separately), #5 (rideable go-karts —
+# its own spike), #6 (custom art, sprite factory lane).
+
+- type: entity
+  parent: MobSiliconBase
+  id: SolreignMobRcCameraCar
+  name: solreign camera car
+  suffix: solreign, ghost role
+  description: A remote-operated toy car from the Solreign Customer Visibility Division. Everything it sees is a memory worth monetizing. Please smile.
+  components:
+  - type: Sprite
+    sprite: Objects/Vehicles/atv.rsi
+    state: vehicle
+    scale: 0.55, 0.55
+  - type: MovementSpeedModifier # zippy little thing — faster than walking crew, slower than sprinting
+    baseWalkSpeed: 4
+    baseSprintSpeed: 5.5
+  - type: Access # override: a toy does not get silicon door access
+    tags: []
+  - type: PointLight # tiny acid-green headlight
+    radius: 2
+    energy: 1.2
+    color: "#9acd32"
+  # --- the camera feed (xenoborg pattern: a camera that drives around) ---
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: SurveillanceCameraEntertainment
+    transmitFrequencyId: SurveillanceCamera
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: SurveillanceCamera
+    nameSet: true
+    networkSet: true
+    useEntityNameAsCameraId: true
+  - type: SurveillanceCameraMicrophone # TV audiences hear what the car hears, like upstream entertainment cams
+    blacklist:
+      components:
+      - SurveillanceCamera
+      - SurveillanceCameraMonitor
+      - RadioSpeaker
+  - type: ActiveListener
+    range: 10
+  # --- Wave 2: bindable to a SolreignItemRcController handheld (RcControllerSystem) ---
+  - type: RcControllable
+  # --- the driver (ghost role, upstream bot pattern) ---
+  - type: GhostRole
+    makeSentient: true
+    name: ghost-role-information-solreign-rc-car-name
+    description: ghost-role-information-solreign-rc-car-description
+    rules: ghost-role-information-solreign-rc-car-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgentHarmless
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
+  - type: InteractionPopup
+    interactSuccessString: petting-success-solreign-rc-car
+    interactFailureString: petting-failure-solreign-rc-car
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+
+# --- WAVE 2 --- the handheld RC controller. Point it at (AfterInteract) a SolreignMobRcCameraCar
+# to bind — RcControllerSystem relays your movement input into the car. Right-click for a
+# "let go of the wheel" verb to release early (dropping it also releases). It is *also* a tiny
+# wireless camera monitor (gap #2a): activate it in-hand (Z) to open the same feed the car streams
+# to TVs — that's the ActivatableUI/SurveillanceCameraMonitor stack below, not RcController itself.
+# Sprite: reuses the upstream remote-signaller item (Objects/Devices/signaller.rsi) — same
+# "handheld clicker" silhouette, free art, has in-hand states already.
+# TODO(SOLREIGN-ART): custom sprite wanted — a chunkier two-stick RC transmitter with a small
+# screen bezel and acid-green Solreign trim (32x32, has-inhand, sprite factory lane).
+- type: entity
+  parent: BaseItem
+  id: SolreignItemRcController
+  name: solreign rc controller
+  description: A palm-sized clicker with a joystick nub and a tiny screen. Point it at a Solreign camera car to take the wheel — the screen doubles as the car's live feed once you're driving. Customer Visibility Division property; please return to the play area.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/signaller.rsi
+    state: signaller
+  - type: RcController
+  # --- the screen half: a tiny wireless camera monitor, same idiom as the upstream syndicate "camera bug" ---
+  - type: ActivatableUI
+    requireActiveHand: false
+    inHandsOnly: true
+    key: enum.SurveillanceCameraMonitorUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SurveillanceCameraMonitorUiKey.Key:
+        type: SurveillanceCameraMonitorBoundUserInterface
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: SurveillanceCamera
+    transmitFrequencyId: SurveillanceCamera
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: SurveillanceCameraMonitor

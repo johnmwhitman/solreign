@@ -1,0 +1,145 @@
+# Solreign Perihelion — Station 3, sun-scraper chassis.
+#
+# Chassis: a modified copy of upstream Packed (Resources/Maps/packed.yml, authors unattributed in
+# Resources/map_attributions.txt as of this fork — see the new entry this wave adds for
+# "_Solreign/solreign_perihelion.yml"). Picked deliberately as the one remaining member of the
+# "compact station" trio this portfolio keeps citing: Saltern (minPlayers 0/maxPlayers 35, taken by
+# solreign_oasis.yml) and Reach (minPlayers 0/maxPlayers 7, taken by solreign_nocturne.yml) were
+# both already spoken for by the time this wave started — Packed is the third, and per Nocturne's
+# own header comment was already explicitly considered and set aside for Reach's sake, making it
+# the natural, uncontested third pick to complete the set rather than reaching for a bigger chassis
+# (Relic/Snowball/Elkridge and up, all 1.5M+ vs. Packed's 2.1M single-grid file).
+#
+# Identity pass applied on top of the untouched Packed grid (grid/tile data unmodified — every new
+# entity below is an ADDITION, not an edit to an existing tile or entity):
+#   * Perihelion Cupola — CUT by the Wave 14 verifier (see Content.IntegrationTests/Tests/
+#     PostMapInitTest.cs's GameMapsLoadableTest). The original plan was a SECOND, separate MapGrid
+#     (uid 900001) tagged with the SAME `BecomesStation id: SolreignPerihelion` as the main hull
+#     (uid 2), its shell a byte-for-byte copy of upstream Resources/Maps/Shuttles/
+#     escape_pod_small.yml's tile chunks. That copy is unsafe: RobustToolbox's per-file `tilemap:`
+#     dictionary assigns tile-prototype IDs per-file, not globally, so escape_pod_small.yml's chunk
+#     bytes (e.g. its own id 121 = Plating) don't carry their meaning into this file's tilemap
+#     (which has no id 121 at all, and where IDs coincidentally overlap they name different tiles —
+#     e.g. this file's 120 = FloorWood, not escape_pod's Lattice). Loading it threw
+#     KeyNotFoundException in MapChunkSerializer.Read. Removed entirely (grid entity + its ~28 child
+#     entities) rather than hand-remapping the copied chunk bytes; the main hull (uid 2) and all its
+#     identity content are untouched. A real second grid, if wanted later, needs either a fresh
+#     RobustToolbox map-editor grid (own consistent tilemap) or an explicit chunk tile-ID remap
+#     script — not a raw byte copy from a different file.
+#   * Radiation-suit locker — one new `ClosetRadiationSuitFilled` at 60.5,29.5, by the Artifact
+#     Lab's external airlocks (Packed's own EVA-storage room off the bridge already has ordinary
+#     `SuitStorageEVA` cabinets; this is a Perihelion-specific radiation-rated addition — originally
+#     framed as the Cupola's departure point, now just an EVA overlook since the Cupola was cut).
+#   * Warm palette — two new `PoweredlightSodium` (amber) fixtures at 58.5,29.5 and 60.5,30.5
+#     around the same overlook point; existing station lighting elsewhere is untouched.
+#   * Signage — `SignRadiation` (61.5,26.5) and `SignSpace` (59.5,28.5), both co-located with
+#     existing wall tiles at the Artifact Lab's external boundary.
+#   * Solar-flare weather event, configured via the mood component — this station's `stations:`
+#     block below adds `SolreignStationMoodComponent` (Content.Server/_Solreign/StationIdentity/
+#     SolreignStationMoodComponent.cs, a concurrent StationIdentity-wave system; "the mood
+#     component" in this station's brief) with `WeatherEventPrototypes: [SolreignSolarFlare]`,
+#     declaring Perihelion prefers the real `SolreignSolarFlare` GameRule entity (Resources/
+#     Prototypes/_Solreign/StationIdentity/game_rules_weather.yml, backed by
+#     Content.Server/_Solreign/StationIdentity/SolreignSolarFlareRule.cs) — when an event director
+#     eventually reads that preference (not built yet; see that system's own doc comment), or when
+#     admins `event start SolreignSolarFlare` directly, this station leans harder into the effect
+#     (more APCs flicker) via `SolreignStationMoodSystem.IsWeatherEventPreferred`. The same
+#     component also drives this station's warm day/night ambient lerp (amber↔warm-white,
+#     `ColorA`/`ColorB` below) and three ambient mood-popup lines. `SolreignPaperSolarFlarePlacard`
+#     at 62.6,25.6 is a laminated in-fiction card citing the protocol by name — flavor only, the
+#     mechanical reference is the component override below.
+#   * 3 secrets: a melted maintenance shrine (`StatueIronsandTall`, reused verbatim from upstream
+#     Lavaland decoration, at 22.5,6.5 — a maintenance tech's heat-warped idol, not the station's
+#     official Chapel/altar), sun-bleached lore papers (`SolreignPaperPerihelionLog1`/`2` at
+#     22.5,7.5 and 64.5,19.5), and one showpiece (`SolreignPerihelionCoronaCrown` at 60.9,22.3, by
+#     the Artifact Lab's science locker — per docs/specs/2026-07-11-showpiece-placement.md §1's
+#     "never-announce rule," no alert/announcement is attached to finding it).
+#
+# Job roster carried over VERBATIM from Packed (same convention solreign_oasis.yml used for
+# Saltern): the copied hull's existing SpawnPointComponent/ContainerSpawnPointComponent placements
+# already satisfy every one of these jobs, which is required for the engine's own
+# GameMapsLoadableTest (Content.IntegrationTests/Tests/PostMapInitTest.cs) to pass — re-tune the
+# roster only alongside a real mapping pass over the copied grid, not blind from this prototype.
+# `minPlayers: 0` is this station's explicit ask (STATION 3 brief), overriding Packed's native 7.
+
+- type: gameMap
+  id: SolreignPerihelion
+  mapName: 'Solreign Perihelion'
+  mapPath: /Maps/_Solreign/solreign_perihelion.yml
+  minPlayers: 0
+  maxPlayers: 35
+  stations:
+    SolreignPerihelion:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Solreign Perihelion {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'SR'
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/Shuttles/emergency_crimson.yml
+        - type: SolreignStationMood
+          dayNightCycle: true
+          cyclePeriodSeconds: 2400
+          colorA: '#3A2A14'
+          colorB: '#FFE9C7'
+          weatherEventPrototypes:
+          - SolreignSolarFlare
+          moodPopupLines:
+          - solreign-perihelion-mood-popup-1
+          - solreign-perihelion-mood-popup-2
+          - solreign-perihelion-mood-popup-3
+        - type: StationJobs
+          availableJobs: # carried over from Packed verbatim; re-tune once a full mapping pass lands
+            #command (7)
+            Captain: [ 1, 1 ]
+            HeadOfPersonnel: [ 1, 1 ]
+            HeadOfSecurity: [ 1, 1 ]
+            ChiefMedicalOfficer: [ 1, 1 ]
+            ChiefEngineer: [ 1, 1 ]
+            ResearchDirector: [ 1, 1 ]
+            Quartermaster: [ 1, 1 ]
+            #service (8 - 10)
+            Bartender: [ 1, 1 ]
+            Botanist: [ 1, 2 ]
+            Chef: [ 1, 1 ]
+            Janitor: [ 1, 2 ]
+            Chaplain: [ 1, 1 ]
+            Librarian: [ 1, 1 ]
+            ServiceWorker: [ 2, 2 ]
+            #engineering (6)
+            AtmosphericTechnician: [ 2, 2 ]
+            StationEngineer: [ 4, 4 ]
+            TechnicalAssistant: [ 3, 3 ] #intern, not counted
+            #medical (6)
+            Chemist: [ 2, 2 ]
+            MedicalDoctor: [ 3, 3 ]
+            MedicalIntern: [ 2, 2 ] #intern, not counted
+            Paramedic: [ 1, 1 ]
+            #science (4)
+            Scientist: [ 4, 4 ]
+            ResearchAssistant: [ 2, 2 ] #intern, not counted
+            #security (6)
+            Warden: [ 1, 1 ]
+            SecurityOfficer: [ 3, 3 ]
+            Detective: [ 1, 1 ]
+            SecurityCadet: [ 2, 2 ] #intern, not counted
+            Lawyer: [ 1, 1 ]
+            #supply (6)
+            SalvageSpecialist: [ 2, 2 ]
+            CargoTechnician: [ 2, 2 ]
+            SolreignSectorFreightMaster: [ 1, 1 ]
+            SolreignExpeditionSpecialist: [ 1, 1 ]
+            #civilian (3+)
+            Passenger: [ -1, -1 ] #infinite, not counted
+            # Pair-up onboarding roles; both present as Passenger in-game and share a
+            # private radio channel. Unlimited like Passenger so onboarding is never capped.
+            Wingmate: [ -1, -1 ]
+            WingmateMentor: [ -1, -1 ]
+            Clown: [ 1, 1 ]
+            Mime: [ 1, 1 ]
+            Musician: [ 1, 1 ]
+            #silicon (3)
+            StationAi: [ 1, 1 ]
+            Borg: [ 2, 2 ]

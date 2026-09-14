@@ -1,0 +1,90 @@
+# Solreign — "Compliance Hunt" preset.
+# Ghost-role-rich casual mode + Terminator hunter lane (Compliance Auditor / CRU).
+#
+# What this ships:
+# - A dedicated event table of ghost-role-granting events (sentient pets, derelict borgs,
+#   closet skeleton, rat king) so observers keep getting bodies to claim.
+# - A fast BasicStationEventScheduler so those events fire early and often at 8-15 pop.
+# - RespawnDeadRule + RespawnTracker so nobody sits in the lobby of the afterlife for long.
+# - SolreignComplianceHunterRule: mid-round / admin-startable StationEvent that spawns a
+#   SolreignMobComplianceRetrievalUnit (GhostRole + GhostTakeoverAvailable) on a station tile.
+#   C#: Content.Server/_Solreign/Terminator/SolreignComplianceHunterRule(.cs + Component) +
+#   ComplianceHunterSpawnRules (pure concurrent-spawn gate, unit-tested,
+#   Content.Tests/_Solreign/ComplianceHunterSpawnRulesTests.cs).
+#
+# showInVote stays false — admin-startable only (`forcepreset SolreignComplianceHunt` /
+# `addgamerule SolreignComplianceHunterRule`). This is a deliberate, honest posture, not a
+# leftover TODO: compliance_retrieval_unit.yml's own header says the CRU's full pursuit/drag
+# HTN is "next wave; the spike ships target selection... only" — flip showInVote once that
+# lands. No SecretRule/GameTicker C# changes needed — the preset machinery is already data-driven.
+
+# Ghost-role-heavy event pool. Every child below spawns claimable ghost roles (upstream + hunter).
+- type: entityTable
+  id: SolreignComplianceGhostEventsTable
+  table: !type:AllSelector # list of rules; StationEvent comps carry their own restrictions
+    children:
+    - id: RandomSentience # pets wake up -> instant ghost roles
+    - id: ClosetSkeleton
+    - id: KingRatMigration
+    - !type:NestedSelector
+      tableId: DerelictBorgEventTable # drifting borg bodies to claim
+    - !type:NestedSelector
+      tableId: BasicCalmEventsTable # keeps the living crew busy between claims
+    - id: SolreignComplianceHunterRule # Terminator: Compliance Auditor ghost-role spawn
+
+- type: entity
+  parent: BaseGameRule
+  id: SolreignComplianceEventScheduler
+  components:
+  - type: BasicStationEventScheduler
+    minimumTimeUntilFirstEvent: 300 # 5 min — small pop needs action fast
+    maximumSpanUntilFirstEvent: 300
+    minMaxEventTiming:
+      min: 240 # 4 min
+      max: 600 # 10 min
+    scheduledGameRules: !type:NestedSelector
+      tableId: SolreignComplianceGhostEventsTable
+
+# Dead crew recycle quickly; bodies stay for the hunter to audit.
+- type: entity
+  parent: BaseGameRule
+  id: SolreignComplianceRespawn
+  components:
+  - type: RespawnDeadRule
+    alwaysRespawnDead: true
+  - type: RespawnTracker
+    respawnDelay: 45
+    deleteBody: false
+
+# Compliance Auditor spawn event — fire-and-forget StationEvent that places one CRU mob.
+# Admin: `addgamerule SolreignComplianceHunterRule` then `startgamerule SolreignComplianceHunterRule`.
+# Also rolled mid-round by SolreignComplianceEventScheduler via SolreignComplianceGhostEventsTable.
+- type: entity
+  parent: BaseGameRule
+  id: SolreignComplianceHunterRule
+  suffix: solreign, terminator, ghost role
+  components:
+  - type: StationEvent
+    weight: 8
+    duration: 1 # rule ends immediately after Started; the CRU mob outlives it
+    earliestStart: 10 # mid-round feel when scheduler-rolled
+    reoccurrenceDelay: 25
+    minimumPlayers: 5 # Compliance Hunt targets 8-15 pop
+  - type: SolreignComplianceHunterRule
+    hunterPrototype: SolreignMobComplianceRetrievalUnit
+    maxConcurrent: 1
+
+- type: gamePreset
+  id: SolreignComplianceHunt
+  alias:
+  - compliancehunt
+  - audit
+  name: solreign-compliance-hunt-title
+  description: solreign-compliance-hunt-description
+  showInVote: false # stays admin-only until the full CRU pursuit/drag HTN ships (see header)
+  rules:
+  - SolreignComplianceEventScheduler
+  - SolreignComplianceRespawn
+  - SolreignCorporate # cosmetic Solreign flavor layer
+  - BasicRoundstartVariation
+  - SolreignComplianceHunterRule

@@ -1,0 +1,1279 @@
+{
+ "sprites": [
+  {
+   "rsi": "egg02_trifecta",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "golden relic gleam sweeps top\u2192mid\u2192base of the stacked triangles, peak flash on the bright band",
+   "frames": 4,
+   "delays": [
+    0.55,
+    0.16,
+    0.16,
+    0.22
+   ],
+   "masks": {
+    "top": {
+     "letters": [
+      "m",
+      "c",
+      "d",
+      "u",
+      "r",
+      "g",
+      "o",
+      "e",
+      "v",
+      "t",
+      "j",
+      "n"
+     ],
+     "region": [
+      12,
+      2,
+      19,
+      8
+     ]
+    },
+    "mid": {
+     "letters": [
+      "k",
+      "d",
+      "c",
+      "b",
+      "m",
+      "u",
+      "r",
+      "g",
+      "o",
+      "e",
+      "v",
+      "a",
+      "p",
+      "j",
+      "t"
+     ],
+     "region": [
+      8,
+      9,
+      23,
+      14
+     ]
+    },
+    "bot": {
+     "letters": [
+      "k",
+      "b",
+      "c",
+      "d",
+      "m",
+      "a",
+      "e",
+      "p",
+      "g",
+      "o",
+      "u",
+      "r",
+      "v",
+      "j",
+      "t"
+     ],
+     "region": [
+      5,
+      15,
+      26,
+      21
+     ]
+    },
+    "flash": {
+     "letters": [
+      "k",
+      "m",
+      "b",
+      "c",
+      "d"
+     ],
+     "region": [
+      7,
+      16,
+      24,
+      19
+     ]
+    },
+    "gem": {
+     "letters": [
+      "D",
+      "E"
+     ],
+     "region": [
+      6,
+      15,
+      20,
+      17
+     ]
+    },
+    "spark": {
+     "pixels": [
+      [
+       12,
+       16
+      ],
+      [
+       13,
+       16
+      ]
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "top",
+       "op": "brightness",
+       "factor": 1.28
+      },
+      {
+       "mask": "top",
+       "op": "lerp",
+       "to": [
+        255,
+        250,
+        180
+       ],
+       "t": 0.18
+      },
+      {
+       "mask": "gem",
+       "op": "brightness",
+       "factor": 1.12
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "mid",
+       "op": "brightness",
+       "factor": 1.32
+      },
+      {
+       "mask": "mid",
+       "op": "lerp",
+       "to": [
+        255,
+        252,
+        200
+       ],
+       "t": 0.22
+      },
+      {
+       "mask": "top",
+       "op": "brightness",
+       "factor": 1.08
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "bot",
+       "op": "brightness",
+       "factor": 1.22
+      },
+      {
+       "mask": "flash",
+       "op": "brightness",
+       "factor": 1.4
+      },
+      {
+       "mask": "flash",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        230
+       ],
+       "t": 0.28
+      },
+      {
+       "mask": "spark",
+       "op": "brightness",
+       "factor": 1.55
+      },
+      {
+       "mask": "gem",
+       "op": "brightness",
+       "factor": 1.25
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  },
+  {
+   "rsi": "egg05_blocky_sword",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "enchant-style cyan glint races tip\u2192edge\u2192guard along the diamond blade",
+   "frames": 4,
+   "delays": [
+    0.5,
+    0.12,
+    0.14,
+    0.2
+   ],
+   "masks": {
+    "tip": {
+     "letters": [
+      "a",
+      "d",
+      "t",
+      "j",
+      "l",
+      "c",
+      "b",
+      "h",
+      "A"
+     ],
+     "region": [
+      20,
+      2,
+      28,
+      9
+     ]
+    },
+    "edge": {
+     "letters": [
+      "a",
+      "d",
+      "t",
+      "j",
+      "l",
+      "A",
+      "c",
+      "b",
+      "v",
+      "p"
+     ],
+     "region": [
+      12,
+      8,
+      24,
+      16
+     ]
+    },
+    "guard": {
+     "letters": [
+      "a",
+      "d",
+      "j",
+      "l",
+      "A",
+      "c",
+      "b",
+      "h",
+      "v"
+     ],
+     "region": [
+      8,
+      14,
+      18,
+      20
+     ]
+    },
+    "core": {
+     "letters": [
+      "a",
+      "d",
+      "t",
+      "j",
+      "l"
+     ],
+     "region": [
+      14,
+      4,
+      26,
+      14
+     ]
+    },
+    "spark": {
+     "pixels": [
+      [
+       25,
+       3
+      ],
+      [
+       24,
+       3
+      ],
+      [
+       26,
+       4
+      ]
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "tip",
+       "op": "brightness",
+       "factor": 1.35
+      },
+      {
+       "mask": "tip",
+       "op": "lerp",
+       "to": [
+        200,
+        255,
+        255
+       ],
+       "t": 0.25
+      },
+      {
+       "mask": "spark",
+       "op": "brightness",
+       "factor": 1.6
+      },
+      {
+       "mask": "spark",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.35
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "edge",
+       "op": "brightness",
+       "factor": 1.38
+      },
+      {
+       "mask": "edge",
+       "op": "lerp",
+       "to": [
+        180,
+        255,
+        250
+       ],
+       "t": 0.28
+      },
+      {
+       "mask": "core",
+       "op": "brightness",
+       "factor": 1.1
+      },
+      {
+       "mask": "tip",
+       "op": "brightness",
+       "factor": 1.08
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "guard",
+       "op": "brightness",
+       "factor": 1.3
+      },
+      {
+       "mask": "guard",
+       "op": "lerp",
+       "to": [
+        160,
+        245,
+        240
+       ],
+       "t": 0.2
+      },
+      {
+       "mask": "edge",
+       "op": "brightness",
+       "factor": 1.12
+      },
+      {
+       "mask": "core",
+       "op": "hue_shift",
+       "degrees": -8
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  },
+  {
+   "rsi": "egg08_grace_flask",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "warm liquid glow breathes; a soft bubble highlight rises through glass then settles",
+   "frames": 4,
+   "delays": [
+    0.45,
+    0.28,
+    0.32,
+    0.35
+   ],
+   "masks": {
+    "liquid": {
+     "letters": [
+      "a",
+      "f",
+      "p",
+      "w",
+      "x",
+      "d",
+      "c",
+      "E"
+     ],
+     "region": [
+      7,
+      18,
+      24,
+      26
+     ]
+    },
+    "liquid_hi": {
+     "letters": [
+      "a",
+      "f",
+      "p",
+      "E",
+      "w"
+     ],
+     "region": [
+      9,
+      20,
+      22,
+      24
+     ]
+    },
+    "glass_hi": {
+     "letters": [
+      "b",
+      "o",
+      "g",
+      "n"
+     ],
+     "region": [
+      10,
+      10,
+      21,
+      17
+     ]
+    },
+    "bubble_lo": {
+     "pixels": [
+      [
+       14,
+       24
+      ],
+      [
+       15,
+       23
+      ],
+      [
+       13,
+       24
+      ]
+     ]
+    },
+    "bubble_mid": {
+     "pixels": [
+      [
+       14,
+       18
+      ],
+      [
+       13,
+       17
+      ],
+      [
+       15,
+       16
+      ],
+      [
+       14,
+       16
+      ]
+     ]
+    },
+    "bubble_hi": {
+     "pixels": [
+      [
+       14,
+       12
+      ],
+      [
+       14,
+       11
+      ],
+      [
+       13,
+       10
+      ],
+      [
+       15,
+       10
+      ]
+     ]
+    },
+    "rim": {
+     "letters": [
+      "s",
+      "w",
+      "x",
+      "m",
+      "c",
+      "q"
+     ],
+     "region": [
+      12,
+      2,
+      19,
+      5
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "liquid",
+       "op": "brightness",
+       "factor": 1.14
+      },
+      {
+       "mask": "liquid_hi",
+       "op": "lerp",
+       "to": [
+        255,
+        190,
+        90
+       ],
+       "t": 0.15
+      },
+      {
+       "mask": "bubble_lo",
+       "op": "brightness",
+       "factor": 1.45
+      },
+      {
+       "mask": "bubble_lo",
+       "op": "lerp",
+       "to": [
+        255,
+        230,
+        160
+       ],
+       "t": 0.3
+      },
+      {
+       "mask": "glass_hi",
+       "op": "brightness",
+       "factor": 1.06
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "liquid",
+       "op": "brightness",
+       "factor": 1.2
+      },
+      {
+       "mask": "liquid_hi",
+       "op": "brightness",
+       "factor": 1.18
+      },
+      {
+       "mask": "bubble_mid",
+       "op": "brightness",
+       "factor": 1.4
+      },
+      {
+       "mask": "bubble_mid",
+       "op": "lerp",
+       "to": [
+        230,
+        255,
+        240
+       ],
+       "t": 0.28
+      },
+      {
+       "mask": "glass_hi",
+       "op": "brightness",
+       "factor": 1.12
+      },
+      {
+       "mask": "glass_hi",
+       "op": "lerp",
+       "to": [
+        210,
+        255,
+        235
+       ],
+       "t": 0.12
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "liquid",
+       "op": "brightness",
+       "factor": 1.1
+      },
+      {
+       "mask": "bubble_hi",
+       "op": "brightness",
+       "factor": 1.35
+      },
+      {
+       "mask": "bubble_hi",
+       "op": "lerp",
+       "to": [
+        220,
+        255,
+        245
+       ],
+       "t": 0.22
+      },
+      {
+       "mask": "glass_hi",
+       "op": "brightness",
+       "factor": 1.16
+      },
+      {
+       "mask": "rim",
+       "op": "brightness",
+       "factor": 1.08
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  },
+  {
+   "rsi": "egg10_red_pendant",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "soft heartbeat: rest hold \u2192 quick swell \u2192 peak flash on heart face \u2192 settle",
+   "frames": 4,
+   "delays": [
+    0.55,
+    0.12,
+    0.16,
+    0.38
+   ],
+   "masks": {
+    "heart": {
+     "letters": [
+      "a",
+      "b",
+      "c",
+      "f",
+      "h",
+      "v",
+      "w",
+      "D",
+      "j",
+      "t",
+      "l",
+      "e",
+      "k",
+      "n",
+      "q"
+     ],
+     "region": [
+      6,
+      13,
+      25,
+      28
+     ]
+    },
+    "face": {
+     "letters": [
+      "a",
+      "b",
+      "c",
+      "f",
+      "h",
+      "v",
+      "w",
+      "D"
+     ],
+     "region": [
+      10,
+      14,
+      22,
+      22
+     ]
+    },
+    "peak": {
+     "letters": [
+      "a",
+      "f",
+      "v",
+      "w",
+      "D",
+      "b"
+     ],
+     "region": [
+      11,
+      16,
+      21,
+      20
+     ]
+    },
+    "cord": {
+     "letters": [
+      "d",
+      "g",
+      "x",
+      "A"
+     ],
+     "region": [
+      8,
+      2,
+      23,
+      12
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "heart",
+       "op": "brightness",
+       "factor": 1.14
+      },
+      {
+       "mask": "face",
+       "op": "lerp",
+       "to": [
+        255,
+        80,
+        60
+       ],
+       "t": 0.1
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "heart",
+       "op": "brightness",
+       "factor": 1.32
+      },
+      {
+       "mask": "peak",
+       "op": "brightness",
+       "factor": 1.42
+      },
+      {
+       "mask": "peak",
+       "op": "lerp",
+       "to": [
+        255,
+        120,
+        110
+       ],
+       "t": 0.28
+      },
+      {
+       "mask": "face",
+       "op": "lerp",
+       "to": [
+        255,
+        60,
+        40
+       ],
+       "t": 0.18
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "heart",
+       "op": "brightness",
+       "factor": 1.08
+      },
+      {
+       "mask": "face",
+       "op": "brightness",
+       "factor": 1.1
+      },
+      {
+       "mask": "cord",
+       "op": "brightness",
+       "factor": 1.05
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  },
+  {
+   "rsi": "egg19_pocket_radio",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "tiny status LEDs blink in alternation; brief speaker-grille green breath",
+   "frames": 4,
+   "delays": [
+    0.4,
+    0.22,
+    0.22,
+    0.35
+   ],
+   "masks": {
+    "led_all": {
+     "letters": [
+      "D"
+     ]
+    },
+    "led_top": {
+     "pixels": [
+      [
+       16,
+       15
+      ],
+      [
+       16,
+       16
+      ]
+     ]
+    },
+    "led_bot": {
+     "pixels": [
+      [
+       15,
+       22
+      ]
+     ]
+    },
+    "body": {
+     "letters": [
+      "a",
+      "w",
+      "j",
+      "m"
+     ],
+     "region": [
+      9,
+      13,
+      24,
+      23
+     ]
+    },
+    "grille": {
+     "letters": [
+      "c",
+      "b",
+      "d",
+      "t",
+      "A"
+     ],
+     "region": [
+      10,
+      18,
+      24,
+      27
+     ]
+    },
+    "antenna": {
+     "letters": [
+      "h",
+      "i",
+      "l",
+      "e",
+      "g",
+      "f",
+      "a",
+      "n"
+     ],
+     "region": [
+      12,
+      2,
+      22,
+      12
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "led_top",
+       "op": "brightness",
+       "factor": 1.55
+      },
+      {
+       "mask": "led_top",
+       "op": "lerp",
+       "to": [
+        160,
+        255,
+        140
+       ],
+       "t": 0.35
+      },
+      {
+       "mask": "led_bot",
+       "op": "brightness",
+       "factor": 0.55
+      },
+      {
+       "mask": "body",
+       "op": "brightness",
+       "factor": 1.06
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "led_top",
+       "op": "brightness",
+       "factor": 0.5
+      },
+      {
+       "mask": "led_bot",
+       "op": "brightness",
+       "factor": 1.6
+      },
+      {
+       "mask": "led_bot",
+       "op": "lerp",
+       "to": [
+        170,
+        255,
+        150
+       ],
+       "t": 0.4
+      },
+      {
+       "mask": "grille",
+       "op": "brightness",
+       "factor": 1.1
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "led_all",
+       "op": "brightness",
+       "factor": 1.4
+      },
+      {
+       "mask": "led_all",
+       "op": "lerp",
+       "to": [
+        150,
+        255,
+        130
+       ],
+       "t": 0.25
+      },
+      {
+       "mask": "body",
+       "op": "brightness",
+       "factor": 1.1
+      },
+      {
+       "mask": "grille",
+       "op": "brightness",
+       "factor": 1.08
+      },
+      {
+       "mask": "antenna",
+       "op": "brightness",
+       "factor": 1.05
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  },
+  {
+   "rsi": "moon_sugar_beaker",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "glowing purple brew shimmers and bubbles: surface sparkle \u2192 hue warp \u2192 deep pulse",
+   "frames": 4,
+   "delays": [
+    0.4,
+    0.2,
+    0.28,
+    0.22
+   ],
+   "masks": {
+    "brew": {
+     "letters": [
+      "c",
+      "g",
+      "j",
+      "m",
+      "o",
+      "p",
+      "i",
+      "v",
+      "z",
+      "u",
+      "y"
+     ],
+     "region": [
+      7,
+      17,
+      25,
+      27
+     ]
+    },
+    "brew_hi": {
+     "letters": [
+      "c",
+      "g",
+      "j",
+      "m",
+      "o",
+      "y",
+      "u"
+     ],
+     "region": [
+      9,
+      18,
+      23,
+      25
+     ]
+    },
+    "surface": {
+     "letters": [
+      "y",
+      "u",
+      "z",
+      "c",
+      "i",
+      "v"
+     ],
+     "region": [
+      10,
+      16,
+      22,
+      19
+     ]
+    },
+    "bubble": {
+     "pixels": [
+      [
+       17,
+       16
+      ],
+      [
+       18,
+       16
+      ],
+      [
+       17,
+       17
+      ],
+      [
+       18,
+       17
+      ],
+      [
+       15,
+       19
+      ],
+      [
+       16,
+       19
+      ]
+     ]
+    },
+    "glass": {
+     "letters": [
+      "a",
+      "n",
+      "l",
+      "t",
+      "s"
+     ],
+     "region": [
+      11,
+      3,
+      20,
+      16
+     ]
+    },
+    "leaf": {
+     "letters": [
+      "b",
+      "e",
+      "k",
+      "h",
+      "q",
+      "r"
+     ],
+     "region": [
+      7,
+      17,
+      25,
+      29
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "brew",
+       "op": "brightness",
+       "factor": 1.12
+      },
+      {
+       "mask": "surface",
+       "op": "brightness",
+       "factor": 1.22
+      },
+      {
+       "mask": "bubble",
+       "op": "brightness",
+       "factor": 1.45
+      },
+      {
+       "mask": "bubble",
+       "op": "lerp",
+       "to": [
+        240,
+        200,
+        255
+       ],
+       "t": 0.3
+      },
+      {
+       "mask": "glass",
+       "op": "brightness",
+       "factor": 1.05
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "brew",
+       "op": "brightness",
+       "factor": 1.18
+      },
+      {
+       "mask": "brew",
+       "op": "hue_shift",
+       "degrees": 18
+      },
+      {
+       "mask": "brew_hi",
+       "op": "lerp",
+       "to": [
+        220,
+        120,
+        255
+       ],
+       "t": 0.2
+      },
+      {
+       "mask": "surface",
+       "op": "brightness",
+       "factor": 1.15
+      },
+      {
+       "mask": "leaf",
+       "op": "brightness",
+       "factor": 1.06
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "brew",
+       "op": "brightness",
+       "factor": 1.28
+      },
+      {
+       "mask": "brew_hi",
+       "op": "brightness",
+       "factor": 1.32
+      },
+      {
+       "mask": "brew_hi",
+       "op": "lerp",
+       "to": [
+        255,
+        180,
+        255
+       ],
+       "t": 0.22
+      },
+      {
+       "mask": "bubble",
+       "op": "brightness",
+       "factor": 1.5
+      },
+      {
+       "mask": "bubble",
+       "op": "lerp",
+       "to": [
+        255,
+        230,
+        255
+       ],
+       "t": 0.35
+      },
+      {
+       "mask": "glass",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.08
+      }
+     ]
+    }
+   ],
+   "no_gif": true
+  }
+ ]
+}

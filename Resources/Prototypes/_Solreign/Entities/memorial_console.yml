@@ -1,0 +1,26 @@
+- type: entity
+  parent: BaseWallmountMetallic
+  id: MemorialConsole
+  name: Crypt Memorial Terminal
+  suffix: solreign
+  description: A monolithic black screen listing the fallen operatives of Solreign. 
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/signalscreen.rsi
+    state: signalscreen
+  - type: MemorialConsole
+  - type: ActivatableUI
+    key: enum.MemorialConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.MemorialConsoleUiKey.Key:
+        type: MemorialConsoleBoundUserInterface
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

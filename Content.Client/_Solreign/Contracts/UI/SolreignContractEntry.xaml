@@ -1,0 +1,47 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              Margin="10 10 10 0"
+              HorizontalExpand="True"
+              Visible="True">
+    <!-- One work-order card. Layout copies the upstream cargo BountyEntry.xaml: info column left,
+         action buttons + id right, separator, description. Buttons are all declared here and
+         toggled per contract scope in code-behind. -->
+    <PanelContainer StyleClasses="BackgroundPanel" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical"
+                      HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal">
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                    <RichTextLabel Name="TitleLabel"/>
+                    <RichTextLabel Name="RewardLabel"/>
+                    <RichTextLabel Name="ManifestLabel"/>
+                    <RichTextLabel Name="StatusLabel"/>
+                </BoxContainer>
+                <Control MinWidth="10"/>
+                <BoxContainer Orientation="Vertical" MinWidth="140">
+                    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="ClaimButton"
+                                Text="{Loc 'solreign-contracts-ui-claim-button'}"
+                                Visible="False"
+                                StyleClasses="OpenRight"/>
+                        <Button Name="JoinButton"
+                                Text="{Loc 'solreign-contracts-ui-join-button'}"
+                                Visible="False"
+                                StyleClasses="OpenRight"/>
+                        <Button Name="LaunchButton"
+                                Text="{Loc 'solreign-contracts-ui-launch-button'}"
+                                Visible="False"
+                                StyleClasses="OpenBoth"/>
+                        <Button Name="SkipButton"
+                                Text="{Loc 'solreign-contracts-ui-skip-button'}"
+                                StyleClasses="OpenLeft"/>
+                    </BoxContainer>
+                    <RichTextLabel Name="IdLabel" HorizontalAlignment="Right" Margin="0 0 5 0"/>
+                </BoxContainer>
+            </BoxContainer>
+            <customControls:HSeparator Name="DescriptionSeparator" Margin="5 10 5 10"/>
+            <BoxContainer>
+                <RichTextLabel Name="DescriptionLabel"/>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</BoxContainer>

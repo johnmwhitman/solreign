@@ -1,0 +1,112 @@
+# Solreign Pets v1 — taming + follow-owner overhaul.
+#
+# AI: reuses the upstream NPC follow idiom wholesale (Resources/Prototypes/NPCs/follow.yml
+# FollowCompound + Resources/Prototypes/NPCs/idle.yml IdleCompound — the same building blocks
+# RatKingSystem uses for servant rats and DragonRiftSystem uses for dragon-carp escorts). This
+# compound just wires them together without a combat branch, mirroring the shape of the upstream
+# DragonCarpCompound / KillerTomatoCompound (Resources/Prototypes/NPCs/mob.yml) minus the melee leg.
+# SolreignTameableSystem (Content.Server/_Solreign/Pets/) points FollowTarget at the owner once a
+# critter is fed; until then it just idles like any other station animal.
+- type: htnCompound
+  id: SolreignPetFollowCompound
+  branches:
+    - tasks:
+        - !type:HTNCompoundTask
+          task: FollowCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: IdleCompound
+
+# ---------------------------------------------------------------------------------------------
+# Tameable critters. Each is a reskin of an existing upstream animal (color tint, same pattern
+# Scarlet already established — see delighters/scarlet.yml) plus three new components:
+#   - NpcFactionMember: PetsNT   (friendly to NanoTrasen, matches every other station pet)
+#   - HTN: SolreignPetFollowCompound   (idles until tamed, then follows its owner)
+#   - SolreignTameable: whitelist components: [Edible]   (feed any food item to tame)
+# No new sprites are added; TODO(sprite factory) notes call out where a bespoke RSI would upgrade
+# each one later, same as Scarlet's TODO for a real cocker-spaniel RSI.
+# ---------------------------------------------------------------------------------------------
+
+- type: entity
+  name: Marmalade
+  parent: MobCat
+  id: MobSolreignTabby
+  suffix: solreign, pet
+  description: An orange tabby that showed up during a Compliance Week and never left. Technically a Company asset now.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Pets/_Solreign/tabby.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: cat
+  - type: NpcFactionMember
+    factions:
+    - PetsNT
+  - type: HTN
+    rootTask:
+      task: SolreignPetFollowCompound
+  - type: SolreignTameable
+    whitelist:
+      components:
+      - Edible
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: female
+
+- type: entity
+  name: Audit
+  parent: MobDuckMallard
+  id: MobSolreignDuck
+  suffix: solreign, pet
+  description: A duck that waddled out of a "team-building pond" pilot program that never got funded. Surprise compliance inspections are its love language.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Pets/_Solreign/audit_duck.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: duck-0
+  - type: NpcFactionMember
+    factions:
+    - PetsNT
+  - type: HTN
+    rootTask:
+      task: SolreignPetFollowCompound
+  - type: SolreignTameable
+    whitelist:
+      components:
+      - Edible
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: epicene
+
+- type: entity
+  name: Nugget
+  parent: MobCorgiPuppy
+  id: MobSolreignPup
+  suffix: solreign, pet
+  description: A puppy from the same litter as Scarlet. Not yet cleared for unlimited access, but working on it.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Pets/_Solreign/corgi_pup.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: puppy
+  - type: NpcFactionMember
+    factions:
+    - PetsNT
+  - type: HTN
+    rootTask:
+      task: SolreignPetFollowCompound
+  - type: SolreignTameable
+    whitelist:
+      components:
+      - Edible
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: male

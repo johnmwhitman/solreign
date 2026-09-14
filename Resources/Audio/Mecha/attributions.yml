@@ -1,0 +1,12 @@
+- files: ["mechmove03.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Derived from 'Robotic mechanic step sounds' by Lee Barkovich (Berklee College of Music archive), packaged by congusbongus as 'Footsteps on Different Surfaces' on OpenGameArt. Converted to mono OGG."
+  source: "https://opengameart.org/content/footsteps-on-different-surfaces"
+- files: ["sound_mecha_hydraulic.ogg"]
+  license: "CC0-1.0"
+  copyright: "Solreign in-house procedural DSP synthesis (numpy; piston extend, clunk-latch, pressure-release hiss for the mech-arm GrabSound; no NC-conditioning — see wave-5/synth_wave5.py). (Source provenance: In-house generation, 2026-07-17. See docs/receipts/AUDIO-FREESWAP-INTEGRATE-2026-07-17.md.)"
+  source: "NA"
+- files: ["sound_mecha_powerloader_step.ogg"]
+  license: "CC0-1.0"
+  copyright: "Created by gladkiy on freesound.org, trimmed/converted to mono OGG for the Solreign free-swap wave (2026-07-17 staging)."
+  source: "https://freesound.org/people/gladkiy/sounds/342235/"

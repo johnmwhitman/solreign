@@ -1,0 +1,314 @@
+# Solreign Contracts — Season 1 launch content (design spec §9, consolidated for Milestone 3).
+# All PG, all delivery-shaped, all achievable with existing upstream items. Voice: unsettlingly upbeat
+# internal comms. Compliance is its own reward.
+#
+# This file supersedes the split contracts_general.yml / contracts_salvage.yml (M1/M2) — same 13
+# prototypes (the spec's 10 numbered examples, three of which are 2-3-link chains, plus the 3 John's-mandate
+# salvage raids), one file, one place to read the whole Season 1 board.
+#
+# Whitelists: every tag below was verified against Resources/Prototypes/tags.yml at authoring time
+# (spec §10.4). Substitutions from the spec draft where a tag does not exist in this fork:
+#   - #7 Hydration Metrics -> Preventative Nutrition Audit (no water tag; Fruit tag exists)
+#   - #6 Incident Documentation: v1 paper fallback (no photo system; Paper tag exists) per spec §9.6
+#   - #10 Executive Lunch: fries -> donut (no fries tag; Burger/Donut/Cake tags exist)
+#
+# Milestone gating (enforced in ContractsSystem.IsIssuableInM1, not here):
+#   - Department-scope contracts are authored but dormant until Department scope ships (contribution credit).
+#   - Contracts with sabotageSpawns are authored but dormant until the sabotage spawner ships.
+#
+# Rank gating (M3): minRankIndex is enforced on BOTH personal claim and salvage-raid join
+# (ContractRules.MeetsRankGate, ContractsSystem.TryClaim / TryJoinRaid).
+#
+# ITEM REWARDS (Wave 21, S21): contracts pay Corporate Standing only — SolreignContractPrototype
+# has no item-payout field, deliberately (anti-grief by construction: the schema cannot spawn
+# loot into the world on completion). The gear.yml 10-item reward pack is therefore wired as
+# rank-gated shelf access instead: SolreignExecutiveVendorInventory (contracts_executive_vendor.yml)
+# stocks all 10, and rank is itself earned from the Standing these contracts pay out
+# (RankRules.Score). Grinding the board is, literally, how you buy the hat.
+
+# 1. Personal fetch — the bread and butter, and the M1 exit-test contract.
+- type: solreignContract
+  id: SolContractColaAudit
+  name: solreign-contract-cola-audit-name
+  description: solreign-contract-cola-audit-desc
+  scope: Personal
+  standing: 3
+  spesos: 250 # dormant until the spesos-payout API is confirmed (spec §10.5)
+  easyTier: true # low-pop guarantee pool (v14 quest-board spec §2.2): no rank/dept gate, cola is
+                  # vendor-obtainable with zero help.
+  entries:
+  - name: solreign-contract-item-cola
+    amount: 5
+    whitelist:
+      tags:
+      - Cola
+
+# 2. Personal fetch.
+- type: solreignContract
+  id: SolContractPenRecovery
+  name: solreign-contract-pen-recovery-name
+  description: solreign-contract-pen-recovery-desc
+  scope: Personal
+  standing: 2
+  easyTier: true # low-pop guarantee pool (v14 quest-board spec §2.2): no rank/dept gate, pens are
+                  # everywhere.
+  entries:
+  - name: solreign-contract-item-pen
+    amount: 10
+    whitelist:
+      tags:
+      - Pen
+
+# 3. Personal deliver.
+- type: solreignContract
+  id: SolContractMandatoryFun
+  name: solreign-contract-mandatory-fun-name
+  description: solreign-contract-mandatory-fun-desc
+  scope: Personal
+  standing: 2
+  easyTier: true # low-pop guarantee pool (v14 quest-board spec §2.2): no rank/dept gate, plushies/
+                  # rubber duck spawn on every map.
+  entries:
+  - name: solreign-contract-item-plush
+    amount: 1
+    whitelist:
+      tags:
+      - PlushieCarp
+      - PlushieCarpHolo
+      - PlushieCarpMagi
+      - PlushieGhost
+      - PlushieLizard
+      - PlushieSharkBlue
+      - PlushieSharkGrey
+      - PlushieSharkPink
+      - ToyRubberDuck
+
+# 4. Personal chain 1/2, PG-"sabotage" — targets are props THIS contract spawns (anti-grief rule 2).
+#    Dormant until the sabotage spawner exists (no unfulfillable work orders issued).
+- type: solreignContract
+  id: SolContractSignage1
+  name: solreign-contract-signage-1-name
+  description: solreign-contract-signage-1-desc
+  scope: Personal
+  standing: 2
+  minRankIndex: 1 # Associate+
+  nextContract: SolContractSignage2
+  sabotageSpawns:
+  - proto: PosterLegitNanotrasenLogo
+    amount: 3
+  entries:
+  - name: solreign-contract-item-rival-poster
+    amount: 3
+    whitelist:
+      tags:
+      - SolreignSabotageTarget
+
+# 4b. Chain 2/2 (chain-final: completing this scores 3, spec §4.1).
+- type: solreignContract
+  id: SolContractSignage2
+  name: solreign-contract-signage-2-name
+  description: solreign-contract-signage-2-desc
+  scope: Personal
+  standing: 3
+  minRankIndex: 1
+  sabotageSpawns:
+  - proto: PosterLegitNanotrasenLogo
+    amount: 5
+  entries:
+  - name: solreign-contract-item-rival-poster
+    amount: 5
+    whitelist:
+      tags:
+      - SolreignSabotageTarget
+
+# 5. Department: Engineering, repair-flavor (dormant until Department scope ships).
+- type: solreignContract
+  id: SolContractFacilitiesSweep
+  name: solreign-contract-facilities-sweep-name
+  description: solreign-contract-facilities-sweep-desc
+  scope: Department
+  department: Engineering
+  standing: 2
+  spesos: 600
+  entries:
+  - name: solreign-contract-item-floor-tile
+    amount: 10
+    whitelist:
+      components:
+      - FloorTile
+
+# 6. Personal, investigate-flavor (v1 paper fallback per spec §9.6).
+- type: solreignContract
+  id: SolContractIncidentReport
+  name: solreign-contract-incident-report-name
+  description: solreign-contract-incident-report-desc
+  scope: Personal
+  standing: 3
+  easyTier: true # low-pop guarantee pool (v14 quest-board spec §2.2): no rank/dept gate, any blank
+                  # Paper satisfies it.
+  entries:
+  - name: solreign-contract-item-incident-report
+    amount: 1
+    whitelist:
+      tags:
+      - Paper
+
+# 7. Department: Medical, fetch (dormant until Department scope ships).
+- type: solreignContract
+  id: SolContractNutritionAudit
+  name: solreign-contract-nutrition-audit-name
+  description: solreign-contract-nutrition-audit-desc
+  scope: Department
+  department: Medical
+  standing: 2
+  spesos: 500
+  entries:
+  - name: solreign-contract-item-fruit
+    amount: 10
+    whitelist:
+      tags:
+      - Fruit
+
+# 8. Department: Civilian/Botany, fetch (dormant until Department scope ships).
+- type: solreignContract
+  id: SolContractBotanyYield
+  name: solreign-contract-botany-yield-name
+  description: solreign-contract-botany-yield-desc
+  scope: Department
+  department: Civilian
+  standing: 2
+  spesos: 800
+  entries:
+  - name: solreign-contract-item-wheat
+    amount: 15
+    whitelist:
+      tags:
+      - Wheat
+
+# 9. Personal chain 1/3 — onboarding.
+- type: solreignContract
+  id: SolContractOnboarding1
+  name: solreign-contract-onboarding-1-name
+  description: solreign-contract-onboarding-1-desc
+  scope: Personal
+  standing: 1
+  nextContract: SolContractOnboarding2
+  entries:
+  - name: solreign-contract-item-donut
+    amount: 1
+    whitelist:
+      tags:
+      - Donut
+
+# 9b. Chain 2/3 — the paperwork step.
+- type: solreignContract
+  id: SolContractOnboarding2
+  name: solreign-contract-onboarding-2-name
+  description: solreign-contract-onboarding-2-desc
+  scope: Personal
+  standing: 1
+  nextContract: SolContractOnboarding3
+  entries:
+  - name: solreign-contract-item-onboarding-form
+    amount: 1
+    whitelist:
+      tags:
+      - Paper
+
+# 9c. Chain 3/3 (chain-final). You are now 4% less probationary.
+- type: solreignContract
+  id: SolContractOnboarding3
+  name: solreign-contract-onboarding-3-name
+  description: solreign-contract-onboarding-3-desc
+  scope: Personal
+  standing: 3
+  entries:
+  - name: solreign-contract-item-training-pen
+    amount: 2
+    whitelist:
+      tags:
+      - Pen
+
+# 10. Personal fetch, rank-gated: Managers get management problems.
+- type: solreignContract
+  id: SolContractExecutiveLunch
+  name: solreign-contract-executive-lunch-name
+  description: solreign-contract-executive-lunch-desc
+  scope: Personal
+  standing: 4
+  spesos: 400
+  minRankIndex: 3 # Manager+
+  entries:
+  - name: solreign-contract-item-burger
+    amount: 1
+    whitelist:
+      tags:
+      - Burger
+  - name: solreign-contract-item-donut
+    amount: 1
+    whitelist:
+      tags:
+      - Donut
+  - name: solreign-contract-item-cake
+    amount: 1
+    whitelist:
+      tags:
+      - Cake
+
+# --- SALVAGE RAID category (John's mandate, beyond the base spec) ---
+#
+# Group-scaled team-ups: players register on the raid roster at the Contracts Board, then any participant
+# launches it. At launch the objective size AND the per-head Standing lock to the roster registered at that
+# moment (accept-time scaling, ContractRules.SalvageScaledAmount / SalvageStanding):
+#   objective  = base amount x participants   (per-head workload stays flat)
+#   per-head   = base standing + 1 per teammate beyond the first  (per-head pay goes UP)
+# Recruiting a colleague is therefore always the profitable move. The Company encourages synergy.
+#
+# Anti-grief: every deliverable below is freely obtainable in bulk (salvage wrecks, mining, litter) —
+# nothing role-critical, nothing another player would carry (rule 3). Roster capped (rule 7 spirit).
+# Tags verified against Resources/Prototypes/tags.yml: SalvageScrap, Ore, Trash.
+
+# S1. The flagship raid — haul scrap back from the void.
+- type: solreignContract
+  id: SolRaidScrapReclamation
+  name: solreign-raid-scrap-reclamation-name
+  description: solreign-raid-scrap-reclamation-desc
+  scope: SalvageRaid
+  standing: 3
+  maxParticipants: 6
+  entries:
+  - name: solreign-contract-item-scrap
+    amount: 5 # per registered participant, scaled at launch
+    whitelist:
+      tags:
+      - SalvageScrap
+
+# S2. Mining crew special.
+- type: solreignContract
+  id: SolRaidOreFutures
+  name: solreign-raid-ore-futures-name
+  description: solreign-raid-ore-futures-desc
+  scope: SalvageRaid
+  standing: 3
+  maxParticipants: 6
+  entries:
+  - name: solreign-contract-item-ore
+    amount: 10 # per registered participant, scaled at launch
+    whitelist:
+      tags:
+      - Ore
+
+# S3. Janitorial synergy event.
+- type: solreignContract
+  id: SolRaidWasteRevaluation
+  name: solreign-raid-waste-revaluation-name
+  description: solreign-raid-waste-revaluation-desc
+  scope: SalvageRaid
+  standing: 2
+  maxParticipants: 6
+  entries:
+  - name: solreign-contract-item-trash
+    amount: 8 # per registered participant, scaled at launch
+    whitelist:
+      tags:
+      - Trash

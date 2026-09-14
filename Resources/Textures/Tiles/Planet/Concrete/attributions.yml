@@ -1,0 +1,9 @@
+- files: ["asphalt.png", "oldconcrete.png", "oldconcrete_mono.png", "oldconcrete_smooth.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from vgstation13, modified by EmoGarbage404 (github)"
+  source: "https://github.com/vgstation-coders/vgstation13/commit/02b9f6894af4419c9f7e699a22c402b086d8067e"
+
+- files: ["concrete.png", "concrete_mono.png", "concrete_smooth.png", "grayconcrete.png", "grayconcrete_mono.png", "grayconcrete_smooth.png"]
+  license: "CC0-1.0"
+  copyright: "Drawn procedurally from scratch for Solreign (docs/receipts/license-batch-a/draw_concrete.py, 2026); no prior art pixels used or referenced; replaces earlier goonstation-derived art. Provenance: In-house generation, 2026-07-16. See docs/receipts/LICENSE-BATCH-A-2026-07-16.md."
+  source: "NA"

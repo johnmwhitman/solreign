@@ -1,0 +1,62 @@
+# Nocturne station starfield. Procedural (GeneratedParallaxTextureSource) — no art asset
+# involved. Structure mirrors Resources/Prototypes/Parallaxes/parallax_config_stars.toml and
+# the Solreign acid-stars precedent (parallax_config_acid_stars.toml); only the palette and
+# density changed: sparse neon-violet/magenta stars scattered thin (per the station brief —
+# "deep violet nebula, sparse neon stars"), with a handful of cyan outliers for contrast.
+
+# Clear to black.
+[[layers]]
+type = "clear"
+color = "#000000"
+
+# Sparse neon-violet field stars (low count = "sparse").
+[[layers]]
+type = "points"
+closecolor = "#B026FF"
+count = 350
+seed = 4201
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 4
+maskpersistence = "0.5"
+maskpower = "0.35"
+masklacunarity = "1.5"
+maskfrequency = "3"
+maskthreshold = "0.37"
+maskseed = 4255
+
+# Dim violet edge of the same field.
+[[layers]]
+type = "points"
+closecolor = "#4A1466"
+pointsize = 2
+count = 350
+seed = 4201
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 4
+maskpersistence = "0.5"
+maskpower = "0.35"
+masklacunarity = "1.5"
+maskfrequency = "3"
+maskthreshold = "0.37"
+maskseed = 4255
+
+# A few neon-cyan outlier stars for contrast against the violet field.
+[[layers]]
+type = "points"
+closecolor = "#00FFF0"
+count = 20
+seed = 4310
+
+# And their dim edge.
+[[layers]]
+type = "points"
+closecolor = "#0A5C56"
+pointsize = 2
+count = 20
+seed = 4310
+
+# Colour-to-alpha.
+[[layers]]
+type = "toalpha"

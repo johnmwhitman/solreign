@@ -1,0 +1,21 @@
+# Flavor-role PDAs for the salvaged Smuggler / Courier / Scavenger jobs.
+# Modeled on the vanilla CargoPDA / SalvagePDA (see server pda.yml) so they
+# inherit valid Pda, Appearance, Icon and border-color components.
+
+- type: entity
+  parent: CargoPDA
+  id: SmugglerPDA
+  name: smuggler PDA
+  description: Scuffed at the corners, with a false bottom you swear wasn't there before.
+
+- type: entity
+  parent: CargoPDA
+  id: CourierPDA
+  name: courier PDA
+  description: Dented from a thousand hurried drop-offs.
+
+- type: entity
+  parent: SalvagePDA
+  id: ScavengerPDA
+  name: scavenger PDA
+  description: Grimed with asteroid dust and smelling faintly of ozone.

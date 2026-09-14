@@ -1,0 +1,19 @@
+//`smoke` primitive's slow-alpha-decay billow tint (docs/specs/FX-LANGUAGE-V1-SPEC-2026-07-16.md §2
+//row 5). Same multiply-tint-existing-texture idiom as acid_tint.swsl (recolors the pooled
+//Effects/chemsmoke.rsi sprite instead of needing new art), extended with a `progress` uniform
+//(0 at spawn, 1 at the activation's duration cap) that fades alpha out over the primitive's
+//"slow decay" lifetime — the client renderer updates `progress` every frame from the lease's
+//elapsed/duration ratio, never a fixed hardcoded fade curve baked into the shader itself.
+uniform highp vec4 tint; // = vec4(0.85, 0.85, 0.85, 1.0); default steam-white
+uniform highp float progress; // = 0.0; 0..1 elapsed/duration, drives the alpha falloff
+
+void fragment() {
+	highp vec4 texColor = zTexture(UV);
+
+	// Slow ease-out decay: stays near full opacity for the first half of the activation's life,
+	// then fades — reads as "billowing, then dissipating" rather than a linear fade the whole way.
+	highp float clampedProgress = clamp(progress, 0.0, 1.0);
+	highp float decay = 1.0 - clampedProgress * clampedProgress;
+
+	COLOR = vec4(texColor.rgb * tint.rgb, texColor.a * tint.a * decay);
+}

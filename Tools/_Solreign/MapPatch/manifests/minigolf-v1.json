@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "patch_id": "minigolf-v1",
+  "maps": [
+    {
+      "path": "Resources/Maps/_Solreign/solreign_terminus.yml",
+      "anchor": {
+        "proto": "SolreignSignGrandPrixWelcome",
+        "uid": 90005,
+        "pos": [
+          -1.5,
+          6.5
+        ],
+        "parent": 2
+      },
+      "max_manhattan_tiles": 8,
+      "placements": [
+        {
+          "key": "ball",
+          "proto": "SolreignGolfBall",
+          "uid": 901200,
+          "pos": [
+            -3.5,
+            9.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorMowedAstroGrass",
+          "expected_occupants": []
+        },
+        {
+          "key": "putter",
+          "proto": "SolreignGolfClubPutter",
+          "uid": 901201,
+          "pos": [
+            -3.5,
+            8.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorMowedAstroGrass",
+          "expected_occupants": []
+        },
+        {
+          "key": "hole",
+          "proto": "SolreignGolfHole",
+          "uid": 901202,
+          "pos": [
+            -6.5,
+            9.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorMowedAstroGrass",
+          "expected_occupants": []
+        }
+      ]
+    }
+  ]
+}

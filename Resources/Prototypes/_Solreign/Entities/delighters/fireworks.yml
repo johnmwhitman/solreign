@@ -1,0 +1,91 @@
+# Solreign delighters: FIREWORKS
+#
+# UPSTREAM CHECK (2026-07-11): upstream ships NO firework entities or components.
+# The only "firework" hits in Resources/Prototypes are a word in
+# Datasets/ion_storm.yml and pyrotechnic REAGENTS (Reagents/pyrotechnic.yml).
+# C# GAP: a real sky-burst firework (launch projectile -> timed multi-colored
+# starburst light + particle effects) needs a new component/system, e.g.
+# Content.Server/_Solreign/Fireworks/FireworkSystem.cs. Until then, this pack
+# fakes fireworks with verified existing components:
+# - SnapPop pattern (Resources/Prototypes/Entities/Objects/Fun/toys.yml):
+#   throwable, pops with sound + cosmetic explosion flash.
+# - GlowstickBase pattern (Resources/Prototypes/Entities/Objects/Tools/glowstick.yml):
+#   ExpendableLight + PointLight = ground "fountain" that ignites, glows, burns out.
+# - SnapPopBox pattern: storage crate fill.
+# TODO(sprite factory): dedicated firework RSIs; current sprites reuse
+# snap_pops.rsi and glowstick.rsi with brand tints.
+
+# 1. Throwable popper — pops on impact.
+- type: entity
+  parent: SnapPop
+  id: SolreignFireworkPopper
+  name: micro-celebration charge
+  suffix: solreign, delighter
+  description: A single-use festivity device in acid-green wrapping. Throw at the floor to deploy one (1) unit of joy. Solreign is not liable for insufficient wonder.
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/snap_pops.rsi
+    state: icon
+    color: "#9dfd39"
+
+# 2. Ground fountain — crack it and it sputters acid-green light, then burns out.
+- type: entity
+  parent: GlowstickBase
+  id: SolreignFireworkFountainGreen
+  name: stationary jubilation fountain
+  suffix: solreign, delighter
+  description: A hissing tube of pre-approved festivity. Emits corporate acid-green radiance for the duration specified in your celebration permit.
+  components:
+  - type: ExpendableLight
+    glowDuration: 60
+    fadeOutDuration: 20
+    glowColorLit: "#7cf64b"
+    litSound:
+      path: /Audio/Effects/sparks1.ogg
+  - type: PointLight
+    color: "#7cf64b"
+    radius: 6
+
+- type: entity
+  parent: SolreignFireworkFountainGreen
+  id: SolreignFireworkFountainCyan
+  name: stationary jubilation fountain (cyan)
+  description: The limited-edition cyan model. Identical joy output; the color is billed separately.
+  components:
+  - type: ExpendableLight
+    glowColorLit: "#4bf6d8"
+    litSound:
+      path: /Audio/Effects/sparks2.ogg
+  - type: PointLight
+    color: "#4bf6d8"
+
+# 3. "Launcher" — until the C# firework system exists, this is a supply crate
+#    (SnapPopBox pattern) that dispenses the pieces above.
+- type: entity
+  parent: BaseStorageItem
+  id: SolreignFireworksLauncher
+  name: mandatory fun deployment tube
+  suffix: solreign, delighter
+  description: A heavy acid-green mortar tube stenciled "POINT AWAY FROM PAYROLL." Loaded with everything required for a fully compliant celebration.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Fun/snap_pops.rsi
+    state: box
+    color: "#9dfd39"
+  - type: Storage
+    grid:
+    - 0,0,4,3
+    areaInsert: true
+    maxItemSize: Small # fountains parent GlowstickBase -> BaseItem, which is size Small
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SolreignFireworkPopper
+          amount: 4
+        - id: SolreignFireworkFountainGreen
+        - id: SolreignFireworkFountainCyan
+        - id: BoxDonkSoftBox # Solreign feedback #30: foam bullets alongside the fireworks (fits maxItemSize: Small)
+  - type: Dumpable

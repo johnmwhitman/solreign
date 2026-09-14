@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "AI-generated (MiniMax image-01), human-curated; replaces CC-BY-NC art",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "party",
+      "delays": [
+        [
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "rad0",
+      "delays": [
+        [
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "rad1",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "shipalert0",
+      "delays": [
+        [
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "shipalert1",
+      "delays": [
+        [
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "shipalert2",
+      "delays": [
+        [
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "mobilevision",
+      "directions": 4
+    },
+    {
+      "name": "television",
+      "directions": 4
+    }
+  ]
+}

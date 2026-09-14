@@ -1,0 +1,82 @@
+- type: soundCollection
+  id: GlassBreak
+  files:
+  - /Audio/Effects/glass_break1.ogg
+  - /Audio/Effects/glass_break2.ogg
+  - /Audio/Effects/glass_break3.ogg
+  - /Audio/Effects/glass_break4.ogg
+
+- type: soundCollection
+  id: GlassCrack
+  files:
+  - /Audio/Effects/glass_crack1.ogg
+  - /Audio/Effects/glass_crack2.ogg
+  - /Audio/Effects/glass_crack3.ogg
+  - /Audio/Effects/glass_crack4.ogg
+
+- type: soundCollection
+  id: WindowShatter
+  files:
+  - /Audio/Effects/window_shatter1.ogg
+  - /Audio/Effects/window_shatter2.ogg
+  - /Audio/Effects/window_shatter3.ogg
+
+- type: soundCollection
+  id: WoodDestroy
+  files:
+  - /Audio/Effects/wood_destroy1.ogg
+  - /Audio/Effects/wood_destroy2.ogg
+  - /Audio/Effects/wood_destroy3.ogg
+
+- type: soundCollection
+  id: WoodDestroyHeavy
+  files:
+  - /Audio/Effects/wood_destroy_heavy1.ogg
+
+- type: soundCollection
+  # 2026-07-16 audio-w3: repointed from metal_crunch.ogg (CC-BY-NC-4.0, PNMCarrieRailfan) to the
+  # already-clean CC-BY-SA-3.0 MetalThud files (same repo, see Effects/attributions.yml). NC file
+  # deleted. No new asset added; no audio bytes changed on the reused files.
+  id: MetalCrunch
+  files:
+  - /Audio/Effects/metal_thud1.ogg
+  - /Audio/Effects/metal_thud2.ogg
+  - /Audio/Effects/metal_thud3.ogg
+
+- type: soundCollection
+  # 2026-07-16 audio-w3: repointed off metal_break1-5.ogg. metal_break1.ogg/metal_break5.ogg were
+  # explicitly CC-BY-NC-4.0 (PNMCarrieRailfan pack, see Effects/attributions.yml); metal_break2-4.ogg
+  # had ZERO attribution entry anywhere in the repo (a documentation gap, not a labeled NC file) so
+  # were treated as unverifiable and removed on the same conservative footing. Now points at the
+  # already-clean CC-BY-SA-3.0 MetalThud files. This changes the "structure destroyed" cue's timbre
+  # to match the existing metal-hit-impact sound — flagged for a sound-design look, not just a
+  # license fix. NC/undocumented files deleted; no new asset added.
+  id: MetalBreak
+  files:
+  - /Audio/Effects/metal_thud1.ogg
+  - /Audio/Effects/metal_thud2.ogg
+  - /Audio/Effects/metal_thud3.ogg
+
+- type: soundCollection
+  # 2026-07-16 audio-w3: repointed off metal_glass_break1-2.ogg (CC-BY-NC-4.0, PNMCarrieRailfan pack)
+  # to the already-clean CC-BY-SA-3.0 GlassBreak files (same repo, CM-SS13 source) — a strong tonal
+  # match since MetalGlassBreak's consumers (TVs, screens, cabinets, mirrors) are glass-dominant.
+  # NC files deleted; no new asset added.
+  id: MetalGlassBreak
+  files:
+  - /Audio/Effects/glass_break1.ogg
+  - /Audio/Effects/glass_break2.ogg
+  - /Audio/Effects/glass_break3.ogg
+  - /Audio/Effects/glass_break4.ogg
+
+- type: soundCollection
+  # 2026-07-16 audio-w3: metal_slam5.ogg (CC-BY-NC-4.0, PNMCarrieRailfan pack) dropped. slam1-3 are
+  # CC-BY-SA-3.0 (OpenSourceWeb, already in this file's attributions); slam4 has no attribution entry
+  # anywhere (a separate documentation gap, out of this wave's scope) and was left untouched. Pool
+  # keeps 4 of 5 original members; no replacement needed since slam1-3 already carry the variety.
+  id: MetalSlam
+  files:
+  - /Audio/Effects/metal_slam1.ogg
+  - /Audio/Effects/metal_slam2.ogg
+  - /Audio/Effects/metal_slam3.ogg
+  - /Audio/Effects/metal_slam4.ogg

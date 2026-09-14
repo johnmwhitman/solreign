@@ -1,0 +1,390 @@
+{
+ "sprites": [
+  {
+   "rsi": "unicorn",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "Horn shimmer travels tip-to-shaft, with a faint mane glint on the echo frame (cdx design + grk mane accent; masks ground-truthed)",
+   "frames": 3,
+   "delays": [
+    0.55,
+    0.18,
+    0.18
+   ],
+   "masks": {
+    "horn_tip": {
+     "letters": [
+      "k"
+     ],
+     "region": [
+      26,
+      3,
+      29,
+      4
+     ]
+    },
+    "horn_shaft": {
+     "letters": [
+      "b",
+      "k",
+      "n",
+      "t"
+     ],
+     "region": [
+      26,
+      4,
+      29,
+      10
+     ]
+    },
+    "mane_glint": {
+     "letters": [
+      "x"
+     ],
+     "region": [
+      7,
+      16,
+      15,
+      21
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "horn_tip",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.65
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "horn_shaft",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.28
+      },
+      {
+       "mask": "mane_glint",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rsi": "exec_recharge_pod",
+   "state": "closed",
+   "verdict": "animate",
+   "concept": "Wellness LED breathe: the two bright-green status pixels pulse strongly, the green door inset hums faintly (cdx pixels + grk inset, both ground-truthed)",
+   "frames": 3,
+   "delays": [
+    0.45,
+    0.45,
+    0.45
+   ],
+   "masks": {
+    "led": {
+     "pixels": [
+      [
+       4,
+       19
+      ],
+      [
+       5,
+       19
+      ]
+     ]
+    },
+    "inset": {
+     "pixels": [
+      [
+       13,
+       15
+      ],
+      [
+       14,
+       15
+      ],
+      [
+       15,
+       15
+      ],
+      [
+       16,
+       15
+      ]
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "led",
+       "op": "lerp",
+       "to": [
+        150,
+        255,
+        140
+       ],
+       "t": 0.3
+      },
+      {
+       "mask": "inset",
+       "op": "brightness",
+       "factor": 1.08
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "led",
+       "op": "lerp",
+       "to": [
+        180,
+        255,
+        165
+       ],
+       "t": 0.55
+      },
+      {
+       "mask": "inset",
+       "op": "brightness",
+       "factor": 1.16
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rsi": "exec_recharge_pod",
+   "state": "open",
+   "verdict": "animate",
+   "concept": "Cushion micro-breathe on the interior greens while the lid is open (grk design, letters ground-truthed)",
+   "frames": 3,
+   "delays": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "masks": {
+    "cushion": {
+     "letters": [
+      "e",
+      "i",
+      "q"
+     ],
+     "region": [
+      4,
+      14,
+      27,
+      22
+     ]
+    },
+    "cushion_hi": {
+     "letters": [
+      "h",
+      "x"
+     ],
+     "region": [
+      6,
+      14,
+      25,
+      21
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "cushion",
+       "op": "brightness",
+       "factor": 1.08
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "cushion",
+       "op": "brightness",
+       "factor": 1.15
+      },
+      {
+       "mask": "cushion_hi",
+       "op": "brightness",
+       "factor": 1.1
+      }
+     ]
+    }
+   ],
+   "gif_name": "exec_recharge_pod_open"
+  },
+  {
+   "rsi": "pool_noodle",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "Specular sheen slides up the foam highlight ridge (cdx traveling glint, letters ground-truthed to the bright tones)",
+   "frames": 3,
+   "delays": [
+    0.4,
+    0.4,
+    0.4
+   ],
+   "masks": {
+    "lower_glint": {
+     "letters": [
+      "d",
+      "f",
+      "h"
+     ],
+     "region": [
+      6,
+      13,
+      17,
+      20
+     ]
+    },
+    "upper_glint": {
+     "letters": [
+      "d",
+      "f",
+      "h"
+     ],
+     "region": [
+      15,
+      8,
+      26,
+      14
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "lower_glint",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.2
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "upper_glint",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rsi": "scarlet",
+   "state": "scarlet",
+   "verdict": "animate",
+   "concept": "Idle breathing bob: whole tile dips 1px on the second beat (fleet ear-flick designs overridden \u2014 brightness ops are invisible on near-black fur; classic SS14 mob bob reads at any palette)",
+   "frames": 2,
+   "delays": [
+    0.9,
+    0.7
+   ],
+   "masks": {},
+   "frame_ops": [],
+   "per_direction": {
+    "S": {
+     "masks": {},
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "op": "shift_down_1"
+        }
+       ]
+      }
+     ]
+    },
+    "N": {
+     "masks": {},
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "op": "shift_down_1"
+        }
+       ]
+      }
+     ]
+    },
+    "E": {
+     "masks": {},
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "op": "shift_down_1"
+        }
+       ]
+      }
+     ]
+    },
+    "W": {
+     "masks": {},
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "op": "shift_down_1"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  }
+ ]
+}

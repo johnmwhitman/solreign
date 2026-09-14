@@ -1,0 +1,35 @@
+# Cross-season world-state consequences prototypes (SR-W-020).
+# Vetted declarative consequence templates written by season finales to alter next-season prototype structures or station policies.
+
+- type: solreignWorldStateConsequence
+  id: SolreignSeason1FinaleConsequence
+  title: "Season 1 Audit Verdict: Executive Oversight"
+  description: "The Season 1 ledger audit concluded with heightened executive scrutiny, raising baseline hazard pay and imposing strict budget controls on next-season station directives."
+  seasonId: "Season1"
+  stationPolicyModifiers:
+    audit_strictness: "high"
+    hazard_pay_multiplier: "1.25"
+    security_clearance_policy: "executive_override"
+  prototypeModifiers:
+  - targetPrototypeId: "SolreignCorporateProjectBudget"
+    operation: "OverrideValue"
+    key: "baselineFundingMultiplier"
+    value: "1.15"
+  - targetPrototypeId: "SolreignStationDirective"
+    operation: "SetPolicy"
+    key: "auditEnforcementLevel"
+    value: "Strict"
+
+- type: solreignWorldStateConsequence
+  id: SolreignSeason2PreludeConsequence
+  title: "Season 2 Prelude: Autonomous Supply Line"
+  description: "The autonomous fleet supply line decision alters cargo station policy and prototype spawner allocations for the upcoming season."
+  seasonId: "Season2"
+  stationPolicyModifiers:
+    cargo_subsidy_mode: "autonomous_fleet"
+    salvage_bounty_rate: "1.5"
+  prototypeModifiers:
+  - targetPrototypeId: "SolreignBountyBoard"
+    operation: "MultiplyNumeric"
+    key: "bountyRewardMultiplier"
+    value: "1.5"

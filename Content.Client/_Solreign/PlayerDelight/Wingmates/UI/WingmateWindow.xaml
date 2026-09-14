@@ -1,0 +1,74 @@
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    xmlns:firstShift="clr-namespace:Content.Client._Solreign.PlayerDelight.FirstShift.UI"
+    Title="{Loc 'wingmates-title'}"
+    MinSize="620 650"
+    SetSize="660 700">
+    <TabContainer Name="PlayerDelightTabs" VerticalExpand="True" HorizontalExpand="True">
+        <firstShift:FirstShiftPanel Name="FirstShiftPanel" />
+        <ScrollContainer VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" Margin="12" SeparationOverride="8">
+            <Label Name="StateHeading" Text="{Loc 'wingmates-heading-idle'}" StyleClasses="LabelHeading" />
+            <Label Name="StatusLabel" Text="{Loc 'wingmates-status-idle'}" StyleClasses="LabelSubText" />
+
+            <BoxContainer Name="RequestPanel" Orientation="Vertical" SeparationOverride="6">
+                <Label Text="{Loc 'wingmates-request-intro'}" />
+                <Label Text="{Loc 'wingmates-department-label'}" />
+                <OptionButton Name="DepartmentOptions" HorizontalExpand="True" />
+                <Label Text="{Loc 'wingmates-teaching-label'}" />
+                <OptionButton Name="TeachingModeOptions" HorizontalExpand="True" />
+                <Button Name="RequestButton" Text="{Loc 'wingmates-request-button'}" HorizontalExpand="True" />
+            </BoxContainer>
+
+            <BoxContainer Name="VolunteerPanel" Orientation="Vertical" SeparationOverride="6">
+                <Label Text="{Loc 'wingmates-charter-heading'}" StyleClasses="LabelHeading" />
+                <BoxContainer Name="CharterTerms" Orientation="Vertical" SeparationOverride="3" />
+                <CheckBox Name="CharterAccepted" Text="{Loc 'wingmates-charter-consent'}" />
+                <Button Name="VolunteerButton" Text="{Loc 'wingmates-volunteer-opt-in'}" HorizontalExpand="True" />
+                <Label Name="VolunteerIneligibleLabel" StyleClasses="LabelSubText" Visible="False" />
+            </BoxContainer>
+
+            <BoxContainer Name="WaitingPanel" Orientation="Vertical" SeparationOverride="6">
+                <!-- ALIVENESS P0 #3: the open-ended "request is open" framing only shows while a
+                     plausible peer is actually connected; a solo seeker gets the honest no-crew
+                     copy instead (labels toggled in code from WingmateUiState.PeerAvailable). -->
+                <Label Name="WaitingConsentLabel" Text="{Loc 'wingmates-waiting-consent'}" />
+                <Label Name="WaitingFallbackLabel" Text="{Loc 'wingmates-no-guide-fallback'}" />
+                <Label Name="WaitingPromptLabel" Text="{Loc 'wingmates-waiting-prompt'}" />
+                <Label Name="NoPeersLabel" Text="{Loc 'wingmates-waiting-no-peers'}" Visible="False" />
+                <Label Name="NoPeersSuggestionLabel" Text="{Loc 'wingmates-waiting-no-peers-suggestion'}" Visible="False" />
+                <Button Name="CancelRequestButton" Text="{Loc 'wingmates-cancel-request'}" HorizontalExpand="True" />
+            </BoxContainer>
+
+            <BoxContainer Name="OfferPanel" Orientation="Vertical" SeparationOverride="6">
+                <Label Name="RequestContextLabel" Text="{Loc 'wingmates-request-context-placeholder'}" />
+                <Button Name="OfferButton" Text="{Loc 'wingmates-offer-button'}" HorizontalExpand="True" />
+            </BoxContainer>
+
+            <BoxContainer Name="ProposalPanel" Orientation="Vertical" SeparationOverride="6">
+                <Label Name="ProposalLabel" Text="{Loc 'wingmates-proposal-placeholder'}" />
+                <Label Text="{Loc 'wingmates-proposal-consent'}" />
+                <Button Name="AcceptButton" Text="{Loc 'wingmates-accept'}" HorizontalExpand="True" />
+                <CheckBox Name="BlockDeclinedGuide" Text="{Loc 'wingmates-decline-block-guide'}" />
+                <Button Name="DeclineButton" Text="{Loc 'wingmates-decline'}" HorizontalExpand="True" />
+            </BoxContainer>
+
+            <BoxContainer Name="PairPanel" Orientation="Vertical" SeparationOverride="6">
+                <Label Name="PartnerLabel" Text="{Loc 'wingmates-partner-placeholder'}" />
+                <Label Text="{Loc 'wingmates-end-explanation'}" />
+                <Button Name="PauseButton" Text="{Loc 'wingmates-pause'}" HorizontalExpand="True" />
+                <Button Name="ResumeButton" Text="{Loc 'wingmates-resume'}" HorizontalExpand="True" />
+                <Button Name="DissolveButton" Text="{Loc 'wingmates-end-pairing'}" HorizontalExpand="True" />
+                <Button Name="BlockButton" Text="{Loc 'wingmates-block-current-partner'}" HorizontalExpand="True" />
+                <Button Name="ModeratorHelpButton" Text="{Loc 'wingmates-moderator-help'}" HorizontalExpand="True" />
+            </BoxContainer>
+
+            <BoxContainer Name="DisabledPanel" Orientation="Vertical" SeparationOverride="6">
+                <Label Text="{Loc 'wingmates-disabled-explanation'}" />
+                <Button Name="CloseWindowButton" Text="{Loc 'wingmates-close'}" HorizontalExpand="True" />
+            </BoxContainer>
+            </BoxContainer>
+        </ScrollContainer>
+    </TabContainer>
+</controls:FancyWindow>

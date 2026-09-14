@@ -1,0 +1,40 @@
+# Crew Noticeboard (v14 wave-1 #2) — a wall-mounted board where players pin a short,
+# classifier-gated, auto-expiring note (Content.Server/_Solreign/Noticeboards/SolreignNoticeboardSystem.cs).
+# Bounty-Board/Contracts-Board idiom (BUI on a wallmount), its own system end to end.
+#
+# ADMIN-SPAWNABLE ONLY this wave — no map placement (a future wave adds that; see
+# SolreignNoticeboardComponent's doc comment for how BoardId keeps content stable across that
+# transition without a code change).
+#
+# Sprite: reuses the SAME upstream Structures/Wallmounts/noticeboard.rsi asset SolreignContractsBoard
+# already uses, but a DIFFERENT state — "notice-3" (papers already pinned) rather than the bare
+# "noticeboard" state Contracts uses — so the two read as distinct at a glance without a new art
+# asset (this lane ships no new art). Verified on disk at
+# Resources/Textures/Structures/Wallmounts/noticeboard.rsi/meta.json.
+
+- type: entity
+  parent: BaseWallmountMetallic # same wallmount base as every other Solreign board (Damageable/Injurable stack)
+  id: SolreignNoticeboard
+  name: crew noticeboard
+  suffix: solreign
+  description: A corkboard bolted to the wall, thick with layers of old thumbtacks. Whatever's pinned here won't stay up for long.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/noticeboard.rsi
+    state: notice-3
+  - type: SolreignNoticeboard
+  - type: ActivatableUI
+    key: enum.SolreignNoticeboardUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SolreignNoticeboardUiKey.Key:
+        type: SolreignNoticeboardBoundUserInterface
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

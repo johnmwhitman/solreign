@@ -1,0 +1,78 @@
+# Solreign "weather-style" station events — StationIdentity wave (Content.Server/_Solreign/StationIdentity/),
+# plus SolreignAcidStorm (wow-wiring wave, docs/receipts/wow-wiring/WOW-WIRING-2026-07-16.md).
+#
+# All three events read only existing systems: the screen-border shader flash is the existing
+# SolreignScreenFxEvent pipe (Content.Shared._Solreign.FX — already wired client-side by an earlier
+# wave), the power flicker is the existing ApcSystem.ApcToggleBreaker (same primitive upstream's own
+# BreakerFlipRule/PowerGridCheckRule use), and the spore drift / acid storm both scatter a small
+# self-contained cosmetic entity (SolreignAcidStorm reuses the SAME SolreignSporeParticleComponent as
+# SolreignSporeDrift, just a differently-tinted, longer-lived prototype — see spores.yml). No
+# Content.Client code was touched to ship any of the three — out of scope for all these waves.
+#
+# Not wired into Resources/Prototypes/GameRules/events.yml's random-selection tables — that file is
+# outside these waves' assigned path, and (confirmed by reading BasicStationEventSchedulerSystem) no
+# per-station event-scheduling concept exists anywhere in the engine or _Solreign today for a per-map
+# preference to plug into. SolreignWeatherEventsTable below is the staged answer to
+# SolreignStationMoodComponent.WeatherEventPrototypes' own promise ("other lanes reference it by
+# prototype only") — a future event-director/scheduler wave points at this table (or the ids inside
+# it) directly. Until then, all three events are admin-startable:
+#   event start SolreignSolarFlare
+#   event start SolreignSporeDrift
+#   event start SolreignAcidStorm
+
+- type: entityTable
+  id: SolreignWeatherEventsTable
+  table: !type:AllSelector
+    children:
+    - id: SolreignSolarFlare
+    - id: SolreignSporeDrift
+    - id: SolreignAcidStorm
+
+- type: entity
+  id: SolreignSolarFlare
+  parent: BaseGameRule
+  components:
+  - type: StationEvent
+    weight: 8
+    startAnnouncement: station-event-solreign-solar-flare-start-announcement
+    endAnnouncement: station-event-solreign-solar-flare-end-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    duration: 3
+    maxDuration: 5
+  - type: SolreignSolarFlareRule
+
+- type: entity
+  id: SolreignSporeDrift
+  parent: BaseGameRule
+  components:
+  - type: StationEvent
+    weight: 6
+    startAnnouncement: station-event-solreign-spore-drift-start-announcement
+    endAnnouncement: station-event-solreign-spore-drift-end-announcement
+    duration: 1
+  - type: SolreignSporeDriftRule
+
+# Primarily atmospheric mid-round weather: an opening screen-fx sting + Providence's staged
+# EventAcidStorm voice line + a scatter of acid-green ambient motes, then ~60-120s later a text-only
+# all-clear. Zero mechanical hazard this wave (see SolreignAcidStormRule's own doc comment). Weighted
+# rare per the wow-wiring mission's explicit ask — deliberately below both siblings.
+#
+# ALIVENESS P1 #8 (2026-07-16): SolreignAcidStorm is now ALSO wired into the random-selection path
+# (Resources/Prototypes/GameRules/events.yml's BasicCalmEventsTable) so it can fire organically at
+# low weight — this file's header note about "not wired into events.yml" remains true for the two
+# SIBLING events only. The rule's Added/Ended/Started CVar-off guards were verified for the
+# scheduler-start path: a disabled storm scheduler-rolled produces no announcement and ends itself.
+- type: entity
+  id: SolreignAcidStorm
+  parent: BaseGameRule
+  components:
+  - type: StationEvent
+    weight: 3
+    startAnnouncement: station-event-solreign-acid-storm-start-announcement
+    endAnnouncement: station-event-solreign-acid-storm-end-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    duration: 60
+    maxDuration: 120
+  - type: SolreignAcidStormRule

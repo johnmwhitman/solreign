@@ -1,0 +1,52 @@
+# Solreign Leviathan — the megacorp HEADQUARTERS identity props (largest chassis, lane 1 of the
+# concurrent big-chassis maps wave — see Resources/Maps/_Solreign/solreign_leviathan.yml's own
+# header for the chassis pick rationale and full room-by-room placement notes). Three new entities,
+# all pure reflavors of existing component idioms already used elsewhere in this fork (same idiom
+# Resources/Prototypes/_Solreign/Entities/perihelion_identity.yml established) — no new C#.
+#
+#   * SolreignPaperLeviathanLog1 — "termination processing" HR-wing dark-joke secret. Parented off
+#     the existing SolreignPaperLoreBase (Resources/Prototypes/_Solreign/Entities/lore_papers.yml).
+#   * SolreignPaperLeviathanLog2 — Boardroom/ceremony-atrium secret, imperial-gravitas flavor.
+#     Same parent, different room, different content — counted as its own separate secret (this
+#     station's brief asks for 4 secrets total, one more than Perihelion's 3, so each paper here
+#     stands alone rather than being paired as one bullet the way Perihelion's two logs were).
+#   * SolreignLeviathanFoundersSeal — the "one showpiece" secret. A cosmetic reflavor of the
+#     existing gold-ingot sprite (Objects/Materials/ingots.rsi, state gold_2 — a different ingot
+#     state than Perihelion's CoronaCrown's gold_3, so the two showpieces don't look identical in
+#     hand), plain BaseItem — no PhysicalComposition/Stack/smelting, can't be melted down as a
+#     construction material. Per docs/specs/2026-07-11-showpiece-placement.md §1 (the never-announce
+#     rule): no AnnounceOnUse, no comms ping, no admin alert on pickup — this file adds no such hook.
+#     Placed quietly on the Vault's own loot table (Resources/Maps/_Solreign/solreign_leviathan.yml),
+#     not inside a new container — same "just sitting there" doctrine as Perihelion's Corona Crown.
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperLeviathanLog1
+  name: internal memo
+  description: A single sheet, corners gone soft from handling. The letterhead reads "TERMINATION PROCESSING — INTERNAL USE ONLY."
+  components:
+  - type: Paper
+    content: solreign-leviathan-log-1
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperLeviathanLog2
+  name: bound ledger page
+  description: A single page, torn loose from something thicker. The header is embossed, not printed.
+  components:
+  - type: Paper
+    content: solreign-leviathan-log-2
+
+- type: entity
+  parent: BaseItem
+  id: SolreignLeviathanFoundersSeal
+  name: the Founder's Seal
+  suffix: Solreign Leviathan showpiece
+  description: A fist-sized disc of cast metal, embossed with a crest nobody currently on the manifest can name. It is exactly as heavy as it looks.
+  components:
+  - type: Sprite
+    sprite: Objects/Materials/ingots.rsi
+    state: gold_2
+  - type: Item
+    sprite: Objects/Materials/ingots.rsi
+    size: Small

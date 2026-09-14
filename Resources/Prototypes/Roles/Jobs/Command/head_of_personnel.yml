@@ -1,0 +1,75 @@
+- type: job
+  id: HeadOfPersonnel
+  name: job-name-hop
+  description: job-description-hop
+  playTimeTracker: JobHeadOfPersonnel
+  # Solreign J4 (ROADMAP-SEASON1-VISION.md #2): HoP holds near-AllAccess + CommandStaff,
+  # so it's gated the same as Captain. See captain.yml for why the department-spread
+  # requirement was swapped for a flat overall-playtime floor.
+  # 2026-07-22: lowered 10h -> 2h in lockstep with Captain. See captain.yml for the rationale.
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 2h
+  startingGear: HoPGear
+  icon: "JobIconHeadOfPersonnel"
+  supervisors: job-supervisors-captain
+  access:
+  - Command
+  - HeadOfPersonnel
+  - Bar
+  - Service
+  - Maintenance
+  - Janitor
+  - Theatre
+  - Kitchen
+  - Chapel
+  - Hydroponics
+  - External
+  - Cryogenics
+  # I mean they'll give themselves the rest of the access levels *anyways*.
+  # As of 15/03/23 they can't do that so here's MOST of the rest of the access levels.
+  # Head level access that isn't their own was deliberately left out, get AA from the captain instead.
+  - Chemistry
+  - Engineering
+  - Research
+  - Detective
+  - Salvage
+  - Security
+  - Brig
+  - Lawyer
+  - Cargo
+  - Atmospherics
+  - Medical
+  - GenpopEnter
+  - GenpopLeave
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: CommandStaff
+
+- type: startingGear
+  id: HoPGear
+  equipment:
+    shoes: ClothingShoesColorBrown
+    id: HoPPDA
+    gloves: ClothingHandsGlovesHop
+    ears: ClothingHeadsetAltCommand
+    belt: BoxFolderClipboardThreePapers
+    eyes: ClothingEyesHudCommand
+  storage:
+    back:
+    - Flash
+
+- type: chameleonOutfit
+  id: HeadOfPersonnelChameleonOutfit
+  job: HeadOfPersonnel
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatHopcap
+    eyes: ClothingEyesHudCommand
+    mask: ClothingMaskNeckGaiterRed
+    neck: ClothingNeckCloakHop
+    outerClothing: ClothingOuterWinterHoP
+

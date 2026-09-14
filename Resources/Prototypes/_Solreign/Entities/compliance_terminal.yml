@@ -1,0 +1,26 @@
+- type: entity
+  parent: BaseComputer
+  id: ComplianceTerminal
+  name: compliance terminal
+  suffix: solreign
+  description: A heavy, asphalt-colored terminal pulsing with a sinister acid-green light. It displays the founding mandates.
+  components:
+  - type: ActivatableUI
+    key: enum.ComplianceTerminalUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.ComplianceTerminalUiKey.Key:
+        type: ComplianceTerminalBoundUserInterface
+  # Explicit layers on purpose. BaseComputer defines layered states (computer,
+  # generic_keyboard, ...) and setting `sprite:` on the child redirects EVERY inherited layer
+  # into that RSI — so the client hunted for 'computer' and 'generic_keyboard' inside
+  # ComplianceTerminal.rsi, which ships exactly one state, and logged a sprite error per layer.
+  # Declaring the layer list replaces the inherited one instead of redirecting it.
+  - type: Sprite
+    sprite: _Solreign/ComplianceTerminal.rsi
+    layers:
+      - state: compliance_terminal
+  - type: PointLight
+    radius: 1.5
+    energy: 2
+    color: "#84FF00"

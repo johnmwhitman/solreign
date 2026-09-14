@@ -1,0 +1,41 @@
+# Wingmate / WingmateMentor — the job half of the First-Shift Wingmates pairing system
+# (client UI + systems already live under Content.*/_Solreign/PlayerDelight/Wingmates).
+# Both roles present as "Passenger" to the crew; the pair shares a private radio channel
+# (Resources/Prototypes/radio_channels.yml: Wingmate) so a veteran can guide a newcomer
+# without the rest of the station hearing the tutorial.
+# Each job needs its OWN playTimeTracker: SharedJobSystem builds an inverse
+# tracker->job map (SharedJobSystem.cs:39) and duplicate keys crash prototype load.
+# Reusing vanilla JobPassenger here took the whole server down at boot.
+- type: playTimeTracker
+  id: JobWingmate
+
+- type: playTimeTracker
+  id: JobWingmateMentor
+
+- type: job
+  id: Wingmate
+  name: job-name-passenger
+  description: job-description-wingmate
+  playTimeTracker: JobWingmate
+  startingGear: WingmateGear
+  icon: "JobIconPassenger"
+  supervisors: job-supervisors-everyone
+  access:
+  - Maintenance
+
+- type: startingGear
+  id: WingmateGear
+  equipment:
+    id: PassengerPDA
+    ears: ClothingHeadsetWingmate
+
+- type: job
+  id: WingmateMentor
+  name: job-name-passenger
+  description: job-description-wingmate-mentor
+  playTimeTracker: JobWingmateMentor
+  startingGear: WingmateGear
+  icon: "JobIconPassenger"
+  supervisors: job-supervisors-everyone
+  access:
+  - Maintenance

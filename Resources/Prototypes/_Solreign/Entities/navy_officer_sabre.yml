@@ -1,0 +1,45 @@
+# Solreign — Navy officer's sabre. Player feedback item #18 (FEEDBACK-SMALL-2026-07-16): the raw
+# ask was 23 slash, but no "Navy Officer" role/job exists in this fork, and 23 would sit ABOVE the
+# Captain's own signature sidearm (CaptainSabre, 17 slash — deliberately tuned to be the top of the
+# normal melee tier, see that entity's own comment) and just under the antag-only, HighlyIllegal
+# EnergyKatana (30, +dash+reflect). Per the triage's comparable table (cutlass 16, machete 15,
+# katana 15, claymore 20, throngler 20 meme-tier), capping at 18 slash sits it alongside the
+# Captain's Sabre without outclassing it, with no new mechanics (no reflect chance, no charge
+# ability) — those would need a real supporting ask, not requested here.
+#
+# SPRITE: CLOSED (production batch 10, sprite-factory wave, 2026-07-16). Bespoke navy-branded
+# art landed (own RSI, _Solreign/navy_sabre.rsi: icon, inhand-left/right, equipped-BELT). The
+# 64x64 bag-storage icon was out of this wave's scope (only icon/inhand/equipped-BELT were
+# delivered), so storedSprite below still points at the vanilla captain_sabre_storage_64x.rsi
+# placeholder -- flagged, not silently left. This entity had NO Clothing component anywhere in
+# its chain (BaseSword/BaseMajorContraband/BaseItem are all held-only) -- added fresh below
+# (slots:[Belt]) to actually realize the equipped-BELT state the new art delivers.
+
+- type: entity
+  name: navy officer's sabre
+  parent: [ BaseSword, BaseMajorContraband ]
+  id: SolreignNavyOfficerSabre
+  suffix: solreign
+  description: A ceremonial officer's blade, engraved with a naval crest that matches no currently registered fleet. Well-balanced, well-kept, and clearly meant to be seen as much as used.
+  components:
+  - type: Sprite
+    sprite: _Solreign/navy_sabre.rsi
+  - type: MeleeWeapon
+    attackRate: 1.5
+    damage:
+      types:
+        Slash: 18
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Item
+    storedSprite:
+      state: storage
+      sprite: Objects/Weapons/Melee/captain_sabre_storage_64x.rsi #Done in 64x64 because it looks way too puny in 32x32; not delivered by batch-10, still placeholder
+    shape:
+    - 0,0,0,3
+  - type: Clothing
+    quickEquip: false
+    sprite: _Solreign/navy_sabre.rsi
+    slots:
+    - Belt
+  - type: DisarmMalus

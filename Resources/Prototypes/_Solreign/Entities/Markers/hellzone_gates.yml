@@ -1,0 +1,178 @@
+# Sublevel H entry/exit machinery — spec: docs/specs/2026-07-11-hell-heaven-zones.md §3 (Option A,
+# the only all-YAML, paceable entry mechanic). This wave reframes the destination as a standalone
+# grid (Resources/Maps/_Solreign/zone_hell.yml) rather than on-station tiles, so entry/exit is a
+# teleport, not a plain airlock — see Content.Server/_Solreign/Zones/SolreignZoneGateSystem.cs for
+# the "cheapest reliable path" writeup (mirrors upstream AdminTestArenaSystem's lazy grid-load idiom).
+#
+# Visual pattern studied and reused: Resources/Prototypes/Entities/Structures/Machines/gateway.yml
+# (frame + portal + powered sprite layers, static physics, non-hard fixture so it
+# doesn't block movement/sightline). We deliberately do NOT attach the real Gateway/Portal
+# components or UI — this is flavor-only reskin of the visual, driven entirely by our own
+# SolreignZoneGateSystem via plain ActivateInWorldEvent (click-to-use), not the Gateway destination
+# UI. Reskins > new mechanics.
+#
+# SolreignSublevelHGate is the ENTRY side. It is NOT placed anywhere by this wave — Resources/Maps/
+# _Solreign/solreign_oasis.yml (the live station map) is Wave 9's file and out of scope here. Hand-
+# placing one instance of this prototype into deep maintenance (with a Crimson Keycard seeded
+# somewhere reachable — maintenance loot table / Contracts reward / Director Console) is the
+# follow-up mapping step. SolreignSublevelHReturnGate (the EXIT side) lives inside zone_hell.yml
+# itself and IS placed by this wave.
+#
+# Wave 10 verifier fix — SolreignBoardroomLadderUp (placed in zone_hell.yml's Boardroom) and
+# SolreignAtriumExitGate (placed in zone_heaven.yml) close the gap the zone_heaven.yml build pass
+# left open by its own header's admission ("this file is not reachable in-round yet... leave
+# wiring to whoever picks this up next"): without these, the Atrium and everything on its
+# pedestals was dead, unreachable content. Both reuse SolreignZoneGateSystem's existing lazy-load
+# idiom (see SolreignHeavenZoneLadderComponent.cs), zero new mechanics.
+
+# Upstream Gateway now owns live StationTeleporter and Portal behavior. Keep the old visual-only
+# contract local so these gates cannot auto-link into vanilla teleporter networks.
+- type: entity
+  abstract: true
+  parent: BaseStructure
+  id: BaseSolreignZoneGate
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      portalFixture:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        hard: false
+  - type: Appearance
+
+# ── Crimson Keycard ────────────────────────────────────────────────────────────────────────────────
+# "PresetIdCard-pattern" per spec — a normal ID card with fixed, non-console-editable access,
+# same idiom as vanilla AgentIDCard (Access.tags baked in, no ID computer reprogramming).
+- type: entity
+  parent: IDCardStandard
+  id: SolreignCrimsonKeycard
+  name: Crimson Keycard
+  suffix: solreign, hellzone
+  description: A scorched-red access card with no station logo, no name field, and no explanation. It is warm to the touch.
+  components:
+  - type: Sprite
+    state: default
+    color: "#b31f1f"
+  - type: Access
+    tags:
+    - SolreignSublevelH
+
+# ── Sublevel H Gate (entry side) ───────────────────────────────────────────────────────────────────
+- type: entity
+  parent: BaseSolreignZoneGate
+  id: SolreignSublevelHGate
+  name: sublevel H gate
+  suffix: solreign, hellzone, DO NOT MAP (see file header)
+  description: A crimson-lit gate humming behind a scorched keycard reader. The nameplate reads, "THERMAL MOTIVATION ANNEX — AUTHORIZED PERSONNEL ONLY."
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/gateway.rsi
+    noRot: true
+    color: "#ff5a2e"
+    layers:
+    - state: frame
+    - state: portal
+      shader: unshaded
+    - state: "on"
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: PointLight
+    radius: 2.5
+    energy: 2
+    color: "#ff2e14"
+  - type: AccessReader
+    access:
+    - - SolreignSublevelH
+  - type: SolreignHellZoneEntry
+    spawnOffset: 8.5,2.5
+
+# ── Sublevel H exit gate (placed inside zone_hell.yml) ─────────────────────────────────────────────
+- type: entity
+  parent: BaseSolreignZoneGate
+  id: SolreignSublevelHReturnGate
+  name: sublevel H exit shaft
+  suffix: solreign, hellzone
+  description: A battered lift frame bolted over what used to be a maintenance hatch. A hand-written placard reads, "ONE-WAY. DO NOT PROP OPEN."
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/gateway.rsi
+    noRot: true
+    color: "#7fdba0"
+    layers:
+    - state: frame
+    - state: portal
+      shader: unshaded
+    - state: "on"
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: PointLight
+    radius: 2
+    energy: 1.5
+    color: "#8effb0"
+  - type: SolreignZoneReturnGate
+
+# ── Boardroom ladder up (placed inside zone_hell.yml, Hell -> Heaven "promotion" moment) ──────────
+- type: entity
+  parent: BaseSolreignZoneGate
+  id: SolreignBoardroomLadderUp
+  name: the ladder up
+  suffix: solreign, hellzone, placed in zone_hell.yml
+  description: A narrow shaft leads up out of the basalt, into warm white light. The company calls it "the promotion track."
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/gateway.rsi
+    noRot: true
+    color: "#ffe9a8"
+    layers:
+    - state: frame
+    - state: portal
+      shader: unshaded
+    - state: "on"
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: PointLight
+    radius: 2
+    energy: 1.5
+    color: "#fff2c8"
+  - type: SolreignHeavenZoneLadder
+
+# ── Atrium exit gate (placed inside zone_heaven.yml) ───────────────────────────────────────────────
+- type: entity
+  parent: BaseSolreignZoneGate
+  id: SolreignAtriumExitGate
+  name: atrium departure lift
+  suffix: solreign, heavenzone
+  description: A soft-lit lift alcove. A small brass plaque reads, "THANK YOU FOR YOUR SERVICE. RETURNING YOU NOW."
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/gateway.rsi
+    noRot: true
+    color: "#d7e8ff"
+    layers:
+    - state: frame
+    - state: portal
+      shader: unshaded
+    - state: "on"
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: PointLight
+    radius: 2
+    energy: 1.5
+    color: "#eaf4ff"
+  - type: SolreignZoneReturnGate

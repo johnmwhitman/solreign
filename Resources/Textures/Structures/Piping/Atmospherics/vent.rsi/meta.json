@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC0-1.0",
+  "copyright": "Solreign original (procedural lane, Sprite Factory 2026-08-03, style guide v1.0.0) + human-review-pending. SOLREIGN re-theme 'ledger-green-border-pass' (value-preserving hue remap, 7 colors preserved, Sprite Factory 2026-08-08).",
+  "states": [
+    {
+      "name": "vent_passive",
+      "directions": 4
+    },
+    {
+      "name": "vent_off",
+      "directions": 4
+    },
+    {
+      "name": "vent_welded",
+      "directions": 4
+    },
+    {
+      "name": "vent_out",
+      "directions": 4,
+      "delays": [
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ],
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ],
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ],
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "vent_in",
+      "directions": 4,
+      "delays": [
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ],
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ],
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ],
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "vent_lockout",
+      "directions": 4
+    },
+    {
+      "name": "vent_direction",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+ "sprites": [
+  {
+   "rsi": "unicorn",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "A quick white shimmer travels from the horn tip into its upper shaft, followed by a quiet pause.",
+   "frames": 3,
+   "delays": [
+    0.55,
+    0.18,
+    0.18
+   ],
+   "masks": {
+    "horn_tip": {
+     "letters": [
+      "k"
+     ],
+     "region": [
+      27,
+      3,
+      28,
+      3
+     ]
+    },
+    "horn_shaft": {
+     "letters": [
+      "b",
+      "k",
+      "n",
+      "t"
+     ],
+     "region": [
+      26,
+      4,
+      29,
+      10
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "horn_tip",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.65
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "horn_shaft",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.28
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rsi": "exec_recharge_pod",
+   "state": "closed",
+   "verdict": "animate",
+   "concept": "Animate only the closed door layer: two existing green status pixels breathe softly while base, paper, and open remain static.",
+   "frames": 3,
+   "delays": [
+    0.45,
+    0.45,
+    0.45
+   ],
+   "masks": {
+    "door_status": {
+     "pixels": [
+      [
+       4,
+       19
+      ],
+      [
+       5,
+       19
+      ]
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "door_status",
+       "op": "lerp",
+       "to": [
+        150,
+        255,
+        140
+       ],
+       "t": 0.18
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "door_status",
+       "op": "lerp",
+       "to": [
+        180,
+        255,
+        165
+       ],
+       "t": 0.38
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rsi": "pool_noodle",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "A restrained specular glint travels up the foam's diagonal highlight without bending or moving its outline.",
+   "frames": 3,
+   "delays": [
+    0.4,
+    0.4,
+    0.4
+   ],
+   "masks": {
+    "lower_glint": {
+     "letters": [
+      "d",
+      "f",
+      "h",
+      "u",
+      "B"
+     ],
+     "region": [
+      7,
+      14,
+      17,
+      19
+     ]
+    },
+    "upper_glint": {
+     "letters": [
+      "d",
+      "f",
+      "h",
+      "u",
+      "B"
+     ],
+     "region": [
+      15,
+      9,
+      25,
+      14
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "lower_glint",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.18
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "upper_glint",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.18
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rsi": "scarlet",
+   "state": "scarlet",
+   "verdict": "animate",
+   "concept": "Scarlet gives a tiny direction-aware ear flick through localized shading changes on existing pixels; her silhouette never moves.",
+   "frames": 3,
+   "delays": [
+    0.45,
+    0.45,
+    0.45
+   ],
+   "masks": {},
+   "frame_ops": [],
+   "per_direction": {
+    "S": {
+     "masks": {
+      "near_ear": {
+       "letters": [
+        "c",
+        "D",
+        "F",
+        "g",
+        "j",
+        "n"
+       ],
+       "region": [
+        12,
+        3,
+        16,
+        9
+       ]
+      }
+     },
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "mask": "near_ear",
+         "op": "brightness",
+         "factor": 0.92
+        }
+       ]
+      },
+      {
+       "frame": 2,
+       "ops": [
+        {
+         "mask": "near_ear",
+         "op": "brightness",
+         "factor": 1.1
+        }
+       ]
+      }
+     ]
+    },
+    "N": {
+     "masks": {
+      "near_ear": {
+       "letters": [
+        "c",
+        "D",
+        "F",
+        "g",
+        "j",
+        "n"
+       ],
+       "region": [
+        9,
+        3,
+        14,
+        10
+       ]
+      }
+     },
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "mask": "near_ear",
+         "op": "brightness",
+         "factor": 0.92
+        }
+       ]
+      },
+      {
+       "frame": 2,
+       "ops": [
+        {
+         "mask": "near_ear",
+         "op": "brightness",
+         "factor": 1.1
+        }
+       ]
+      }
+     ]
+    },
+    "E": {
+     "masks": {
+      "near_ear": {
+       "letters": [
+        "B",
+        "D",
+        "F",
+        "g",
+        "h",
+        "j"
+       ],
+       "region": [
+        20,
+        4,
+        25,
+        10
+       ]
+      }
+     },
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "mask": "near_ear",
+         "op": "brightness",
+         "factor": 0.92
+        }
+       ]
+      },
+      {
+       "frame": 2,
+       "ops": [
+        {
+         "mask": "near_ear",
+         "op": "brightness",
+         "factor": 1.1
+        }
+       ]
+      }
+     ]
+    },
+    "W": {
+     "masks": {
+      "near_ear": {
+       "letters": [
+        "B",
+        "D",
+        "F",
+        "g",
+        "h",
+        "j"
+       ],
+       "region": [
+        6,
+        4,
+        11,
+        10
+       ]
+      }
+     },
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "mask": "near_ear",
+         "op": "brightness",
+         "factor": 0.92
+        }
+       ]
+      },
+      {
+       "frame": 2,
+       "ops": [
+        {
+         "mask": "near_ear",
+         "op": "brightness",
+         "factor": 1.1
+        }
+       ]
+      }
+     ]
+    }
+   }
+  }
+ ]
+}

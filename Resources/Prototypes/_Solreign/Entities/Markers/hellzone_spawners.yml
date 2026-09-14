@@ -1,0 +1,96 @@
+# Sublevel H "monster nest" — recurring TimedSpawner markers, existing hostile mobs only (spec:
+# docs/specs/2026-07-11-hell-heaven-zones.md §4.1 encounter table). The vanilla one-shot
+# ConditionalSpawner markers for these same mobs already exist (Entities/Markers/Spawners/Mobs/
+# hostile.yml: SpawnMobHellspawn, SpawnMobBear, SpawnMobWatcherMagmawing, SpawnMobSpaceSpider) but
+# fire once at map init — a Doom "monster closet" needs an ongoing threat, so these are new
+# TimedSpawner reskins of the same mob ids (reskin-by-fiction only; no new mob prototypes, per spec
+# §4). Weighted toward the table's common rows by giving the common mobs shorter intervals / higher
+# chance rather than a single weighted list (TimedSpawnerComponent picks uniformly within one
+# spawner's Prototypes list — see Content.Server/Spawners/Components/TimedSpawnerComponent.cs).
+#
+# Budget: spec caps the Floor pack at ≤5 concurrent and the whole zone at ≤8 concurrent (VPS/HTN
+# budget). Four spawners, conservative intervals/max-counts, keep steady-state well under that.
+
+- type: entity
+  parent: MarkerBase
+  id: SolreignHellNestSpawnerImp
+  name: Sublevel H containment breach (imp-class)
+  suffix: solreign, hellzone
+  description: Facilities insists this corner is "fully compliant."
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: hellspawn
+      sprite: Markers/mobs.rsi
+  - type: TimedSpawner
+    prototypes:
+    - MobHellspawn
+    chance: 0.7
+    intervalSeconds: 90
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 2
+
+- type: entity
+  parent: MarkerBase
+  id: SolreignHellNestSpawnerCacocarp
+  name: Sublevel H containment breach (cacocarp-class)
+  suffix: solreign, hellzone
+  description: Facilities insists this corner is "fully compliant."
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: alive
+      sprite: Mobs/Aliens/Carps/space.rsi
+      color: "#ff5a2e"
+  - type: TimedSpawner
+    prototypes:
+    - MobCarp
+    chance: 0.7
+    intervalSeconds: 100
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 2
+
+- type: entity
+  parent: MarkerBase
+  id: SolreignHellNestSpawnerLostSoul
+  name: Sublevel H containment breach (lost-soul-class)
+  suffix: solreign, hellzone
+  description: Facilities insists this corner is "fully compliant."
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: unshaded
+      sprite: Mobs/Aliens/Lavaland/watcher.rsi
+      color: orangered
+    - state: ai
+  - type: TimedSpawner
+    prototypes:
+    - MobWatcherMagmawing
+    chance: 0.55
+    intervalSeconds: 130
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1
+
+- type: entity
+  parent: MarkerBase
+  id: SolreignHellNestSpawnerRare
+  name: Sublevel H containment breach (elevated-risk)
+  suffix: solreign, hellzone
+  description: Facilities insists this corner is "fully compliant."
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: bear
+      sprite: Mobs/Animals/bear.rsi
+  - type: TimedSpawner
+    prototypes:
+    - MobSpiderSpace
+    - MobBearSpace
+    chance: 0.35
+    intervalSeconds: 240
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1

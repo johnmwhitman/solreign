@@ -1,0 +1,67 @@
+# Solreign Perihelion — Station 3 identity props.
+# Placed by Resources/Maps/_Solreign/solreign_perihelion.yml (see that file's own header for the
+# full placement rationale / chassis notes). Four new entities, all pure reflavors of existing
+# component idioms already used elsewhere in this fork — no new C#.
+#
+#   * SolreignPaperSolarFlarePlacard — a wall/console placard near the Artifact Lab's external
+#     airlock. In-fiction reference to the real SolreignSolarFlareRule system (Content.Server/
+#     _Solreign/StationIdentity/SolreignSolarFlareRule.cs) and its SolreignSolarFlare GameRule
+#     entity (Resources/Prototypes/_Solreign/StationIdentity/game_rules_weather.yml) — the actual
+#     mechanical hookup is this station's SolreignStationMood component override (see
+#     Resources/Prototypes/Maps/_Solreign/solreign_perihelion.yml, `WeatherEventPrototypes:
+#     [SolreignSolarFlare]`); this placard is flavor text only. Content lives in
+#     Locale/en-US/_solreign/solreign-solarflare.ftl.
+#   * SolreignPaperPerihelionLog1 / 2 — the "sun-bleached lore papers" secret. Parented off the
+#     existing SolreignPaperLoreBase (Resources/Prototypes/_Solreign/Entities/lore_papers.yml) —
+#     same acid-green Solreign letterhead idiom, different content, not part of the Oasis Auditor
+#     trail (do not add these to that trail's numbering). Content in the same
+#     solreign-solarflare.ftl locale file (kept together since both are Perihelion-only text).
+#   * SolreignPerihelionCoronaCrown — the "one showpiece" secret. A cosmetic reflavor of the
+#     existing gold-ingot sprite (Objects/Materials/ingots.rsi, state gold_3) as a fused lump of
+#     solar debris, NOT parented off IngotBase/IngotGold — this is a plain BaseItem, no
+#     PhysicalComposition/Stack/smelting behavior, so it can't be melted down as a construction
+#     material like a real ingot. Per the portfolio's established showpiece doctrine
+#     (docs/specs/2026-07-11-showpiece-placement.md §1, "the never-announce rule"): no
+#     AnnounceOnUse, no comms ping, no admin alert on pickup — just quietly present, this file adds
+#     no such hook.
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperSolarFlarePlacard
+  name: laminated contingency placard
+  description: A laminated card bolted beside the analysis console. The ink has gone slightly waxy from repeated heat exposure.
+  components:
+  - type: Paper
+    content: solreign-perihelion-solarflare-placard
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperPerihelionLog1
+  name: sun-bleached logbook page
+  description: A logbook page, its ink faded almost to nothing on the side that faced the viewport.
+  components:
+  - type: Paper
+    content: solreign-perihelion-log-1
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperPerihelionLog2
+  name: sun-bleached logbook page
+  description: A logbook page, its ink faded almost to nothing on the side that faced the viewport.
+  components:
+  - type: Paper
+    content: solreign-perihelion-log-2
+
+- type: entity
+  parent: BaseItem
+  id: SolreignPerihelionCoronaCrown
+  name: the Corona Crown
+  suffix: Solreign Perihelion showpiece
+  description: A fused, teardrop-shaped lump of once-molten metal, warm to the touch even now. Nobody on the manifest ordered it, and nobody has come to collect it.
+  components:
+  - type: Sprite
+    sprite: Objects/Materials/ingots.rsi
+    state: gold_3
+  - type: Item
+    sprite: Objects/Materials/ingots.rsi
+    size: Small

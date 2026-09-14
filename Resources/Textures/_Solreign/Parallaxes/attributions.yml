@@ -1,0 +1,63 @@
+# Solreign station-identity parallax textures. All AI-generated for this project (Imagen 4 via
+# Vertex AI, no external clones, no third-party art), then resized to match the upstream
+# Parallaxes/ dimension precedent (BG layers 1024x1024, Neb layers 1920x1080 — compare
+# Resources/Textures/Parallaxes/KettleParallaxNeb.png / AspidParallaxBG.png) via a deterministic
+# Pillow resize/RGBA-convert pass, no re-generation. Full generation parameters (prompts, seeds,
+# cost) are recorded in assets/station-identity/PROVENANCE.md in the project workspace (not
+# shipped in this repo). Wired: Resources/Prototypes/_Solreign/parallax_stations.yml.
+
+- files: ["Nocturne/NocturneParallaxBG.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Tileable deep-space void base with a faint violet tint, generated with Imagen 4 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/station-identity/PROVENANCE.md."
+  source: "NA"
+
+- files: ["Nocturne/NocturneParallaxNeb.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Deep violet nebula with sparse neon stars (Nocturne station identity), generated with Imagen 4 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/station-identity/PROVENANCE.md."
+  source: "NA"
+
+- files: ["Perihelion/PerihelionParallaxBG.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Tileable deep-space void base with a faint warm-amber tint, generated with Imagen 4 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/station-identity/PROVENANCE.md."
+  source: "NA"
+
+- files: ["Perihelion/PerihelionParallaxNeb.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Massive warm star limb with corona flares (Perihelion station identity), generated with Imagen 4 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/station-identity/PROVENANCE.md."
+  source: "NA"
+
+- files: ["Verdant/VerdantParallaxBG.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Tileable deep-space void base with a faint green tint, generated with Imagen 4 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/station-identity/PROVENANCE.md."
+  source: "NA"
+
+- files: ["Verdant/VerdantParallaxNeb.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Green aurora field (Verdant station identity), generated with Imagen 4 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/station-identity/PROVENANCE.md."
+  source: "NA"
+
+# Sector/ — the generic SolreignSector backdrop (Resources/Prototypes/_Solreign/parallax.yml),
+# wired to the four rotation maps without a bespoke station identity (Meridian, Leviathan,
+# Terminus, Oasis). Base layer is fully procedural (Pillow/numpy periodic value-noise + wrapped
+# star scatter — tileable by construction, not AI-generated). Neb + Sat layers are AI-generated
+# (MiniMax image-01), then processed: resized to the stock 1920x1080 contract, toned down to the
+# restrained brand palette, and given a luminance+vignette alpha so black background and all four
+# edges fade to fully transparent (the seamless procedural BG layer shows through underneath —
+# this is what makes the tile boundary a non-issue for these two layers). Full generation
+# parameters (prompts, cost) and seam-verification numbers are recorded in
+# docs/receipts/solreign-parallax/PARALLAX-2026-07-16.md in this repo.
+
+- files: ["Sector/SectorParallaxBG.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Procedurally generated (Pillow/numpy) tileable deep-space void base with faint acid-green nebula veins and a scattered starfield — no AI image model involved in this layer, seamless by construction. Provenance: In-house generation, 2026-07-16. See docs/receipts/solreign-parallax/PARALLAX-2026-07-16.md."
+  source: "NA"
+
+- files: ["Sector/SectorParallaxNeb.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Faint acid-green nebula ribbon, generated with MiniMax image-01, then toned and alpha-vignetted (edges fade to transparent) for seamless-safe tiling. Provenance: In-house generation, 2026-07-16. See docs/receipts/solreign-parallax/PARALLAX-2026-07-16.md."
+  source: "NA"
+
+- files: ["Sector/SectorParallaxSat.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Distant silhouette of an unmanned corporate relay/satellite structure adrift in the void (the PROVIDENCE-satellite accent layer), generated with MiniMax image-01, then toned and alpha-vignetted for seamless-safe tiling. Provenance: In-house generation, 2026-07-16. See docs/receipts/solreign-parallax/PARALLAX-2026-07-16.md."
+  source: "NA"

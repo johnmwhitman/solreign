@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "AI-generated (MiniMax image-01), human-curated; replaces CC-BY-NC art",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "carpplush"
+    },
+    {
+      "name": "carpplush-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "carpplush-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "magicplush"
+    },
+    {
+      "name": "magicarpplush-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "magicarpplush-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "rainbowcarpplush"
+    },
+    {
+      "name": "rainbowcarpplush-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "rainbowcarpplush-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "holoplush",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "holocarpplush-inhand-left",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.3,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.3,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.3,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "holocarpplush-inhand-right",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.3,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.3,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.3,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

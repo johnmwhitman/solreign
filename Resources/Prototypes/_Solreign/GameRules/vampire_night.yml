@@ -1,0 +1,18 @@
+# Solreign — "Nocturnal Acquisitions Specialist" event-night entry point for the vampire antag.
+# Spec: docs/specs/2026-07-11-werewolf-vampire-spec.md §4, §8 (explicit non-goal: not a ghost role).
+#
+# C# side: Content.Server/_Solreign/Antags/Vampire/SolreignVampireNightRuleSystem.cs (+ Component).
+# On Started it drafts exactly ONE eligible crew member (SolreignVampireComponent) — unlike the
+# werewolf's Full Moon Window, there's no window to close: the thirst meter just runs for the rest of
+# the round (spec §4.2), so this rule has no ActiveTick/Ended work.
+#
+# Admin-invocable today (`addgamerule SolreignVampireNight`); can also be layered onto any preset's
+# `rules:` list, same idiom as SolreignCorporate in game_rules_corporate.yml.
+
+- type: entity
+  parent: BaseGameRule
+  id: SolreignVampireNight
+  components:
+  - type: GameRule
+    minPlayers: 10
+  - type: SolreignVampireNightRule

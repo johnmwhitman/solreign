@@ -1,0 +1,60 @@
+# Solreign — NanoTrasen Representative (clean-room build from upstream job idiom only).
+# Comedy liaison from the rival megacorp: fancy suit, briefcase, escorted-guest access
+# (mirrors the upstream Visitor access idiom), announced to the crew on arrival.
+# Antag exclusion: AntagImmune component (blacklisted by upstream antag specifiers).
+
+- type: playTimeTracker
+  id: JobNTRepresentative
+
+# Reuses the existing Nanotrasen icon state (already the NT logo — on brand for a rival rep).
+# TODO(Solreign sprite factory): optional custom "briefcase + visitor lanyard" state later.
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconNTRepresentative
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: Nanotrasen
+  jobName: job-name-nt-representative
+
+- type: job
+  id: NTRepresentative
+  name: job-name-nt-representative
+  description: job-description-nt-representative
+  playTimeTracker: JobNTRepresentative
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 4h
+
+  joinNotifyCrew: true
+  startingGear: NTRepresentativeGear
+  icon: "JobIconNTRepresentative"
+  supervisors: solreign-job-supervisors-nt-board
+  access:
+  - Maintenance
+  extendedAccess:
+  - External
+  special:
+  - !type:AddComponentSpecial
+    components:
+      - type: AntagImmune
+
+# Corporate-formal kit from existing items only. Job access is written onto the ID at spawn
+# (SetAccessToJob clears the card first), so the CentcomPDA grants no CC access.
+- type: startingGear
+  id: NTRepresentativeGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCentcomAgent
+    back: ClothingBackpackSatchel
+    head: ClothingHeadHatTophat
+    eyes: ClothingEyesGlassesCheapSunglasses
+    ears: ClothingHeadsetGrey
+    shoes: ClothingShoesBootsLaceup
+    gloves: ClothingHandsGlovesColorWhite
+    id: CentcomPDA
+    pocket1: PenCentcom
+    pocket2: BoxFolderCentComClipboardThreePapers
+  inhand:
+    - BriefcaseBrownFilled
+  storage:
+    back:
+    - RubberStampCentcom

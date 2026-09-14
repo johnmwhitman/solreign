@@ -1,0 +1,73 @@
+# Solreign — after-hours compliance lenses (battery-powered night vision goggles).
+#
+# Mechanics are a composition of three upstream idioms:
+#   - NightVision (Content.Shared/Overlays/NightVisionComponent) with relayOverlay: true grants
+#     the wearer the fullscreen green shader overlay + a toggle action (like changeling.yml).
+#   - PowerCellSlotSmallItem + PowerCellDraw is the standard powered-clothing battery idiom
+#     (like ClothingShoesBootsSpeed in Entities/Clothing/Shoes/misc.yml).
+#   - SolreignPoweredNightVision (Content.Shared/_Solreign/NightVision) bridges the two:
+#     drain while on, auto-off on empty, off on unequip, runtime estimate on examine,
+#     low-cell static on the wearer's screen.
+#
+# NOTE: sprite is a placeholder reuse of the green engineering goggles (meson.rsi) until the
+# Antigravity sprite factory delivers a bespoke Solreign NVG sheet.
+
+- type: entity
+  parent: [ ClothingEyesBase, PowerCellSlotSmallItem ]
+  id: ClothingEyesSolreignComplianceLenses
+  name: after-hours compliance lenses
+  description: Acid-green corporate eyewear that renders the dark a fully supervised workspace. The label chirps, "Productivity does not sleep. Neither does oversight." Runs on a standard power cell.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/meson.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Glasses/meson.rsi
+  - type: NightVision
+    enabled: false # Off until the wearer opts in to oversight.
+    relayOverlay: true # Worn item grants the overlay (and toggle action) to the wearer.
+    prioritized: true # Corporate hardware overrules biology (see changeling.yml's NVG note).
+    action: ActionSolreignToggleComplianceLenses
+    overlayColor: "#0BDB3822"
+    lightingColor: "#39FF5499"
+    noiseAmount: 0.4
+    noiseMultiplier: 1.5
+  - type: SolreignPoweredNightVision
+    lowChargeFraction: 0.25
+    lowChargeNoiseAmount: 1
+    lowChargeNoiseMultiplier: 6
+  - type: PowerCellDraw
+    drawRate: 1.2 # Standard small cell (360 J) = 5 minutes of after-hours oversight per charge.
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: StaticPrice
+    price: 250
+
+# Management tier: identical optics, an accountancy-grade trickle draw. Same small cell,
+# twenty minutes of oversight, marginally calmer static floor.
+- type: entity
+  parent: ClothingEyesSolreignComplianceLenses
+  id: ClothingEyesSolreignComplianceLensesExecutive
+  name: executive compliance lenses
+  description: The management cut of the after-hours compliance lenses. The optics are identical; the power budget simply had a better lawyer.
+  components:
+  - type: NightVision
+    enabled: false
+    relayOverlay: true
+    prioritized: true
+    action: ActionSolreignToggleComplianceLenses
+    overlayColor: "#0BDB3822"
+    lightingColor: "#39FF5499"
+    noiseAmount: 0.2
+    noiseMultiplier: 1
+  - type: PowerCellDraw
+    drawRate: 0.3 # 360 J small cell = 20 minutes per charge.
+  - type: StaticPrice
+    price: 750
+
+# Toggle action granted to the wearer while the lenses are equipped
+# (upstream SharedNightVisionSystem adds/removes it on equip).
+- type: entity
+  parent: ActionToggleNightVision
+  id: ActionSolreignToggleComplianceLenses
+  name: Toggle compliance lenses
+  description: Engage or disengage after-hours oversight. Drains the lenses' power cell while active.

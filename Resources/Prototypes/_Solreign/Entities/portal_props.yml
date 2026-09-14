@@ -1,0 +1,202 @@
+# Solreign Portal pack: PORTAL PROPS (props only — nothing is mapped yet; mapping is a later wave).
+#
+# Patterns studied before writing:
+# - Heavy two-handed carryable item: Entities/Objects/Misc/pet_carrier.yml (MultiHandedItem + Item size Ginormous)
+#   and Entities/Clothing/Back/duffel.yml (ClothingSpeedModifier + HeldSpeedModifier = "this is heavy" feel).
+# - Soft-sound-on-hug idiom: Entities/Objects/Fun/Plushies/plushies.yml (EmitSoundOnActivate + UseDelay);
+#   /Audio/Effects/thudswoosh.ogg is the canonical upstream hug sound (Body/species_base.yml Interaction).
+# - Locked display case: Entities/Structures/Storage/glass_box.yml (GlassBox / GlassBoxLaser + AccessReader
+#   + ItemSlots ItemCabinet slot) over Entities/Structures/Storage/base_cabinet.yml (BaseItemCabinetGlass).
+# - Wall sign: Entities/Structures/Wallmounts/Signs/base_structuresigns.yml (BaseSign) + signs.yml children.
+# - Structure showcase/destructible idiom: Entities/Structures/Decoration/showcase.yml.
+#
+# Sprites: the companion cube (item + structure variant) now has a dedicated
+# _Solreign/companion_cube.rsi, wired 2026-07-11 (sprite factory batch 1,
+# client-approved — see assets/sprites-batch1/PROVENANCE.md), single "icon" state,
+# tint dropped. The holographic cake got its dedicated RSI on 2026-07-15
+# (_Solreign/holographic_cake.rsi, hologram ramp + baked flicker) — the old
+# tinted-upstream-RSI reuse and its TODO are resolved.
+
+# ── PERSONAL SUPPORT CUBE ──────────────────────────────────────────────────────
+# Carryable heavy item variant. Two hands, slows you down, loves you anyway.
+#
+# LEDGER INTEGRATION POINT (comment only — do NOT wire yet):
+# When the Season Ledger disposal hooks land, disposing of a personal support
+# cube (trash chute / incinerator / spaced) should file a "Companion Divestiture"
+# entry against the disposing crew member's ledger record — a small permanent
+# footnote, no mechanical penalty. The cube forgives. The paperwork does not.
+
+- type: entity
+  parent: BaseItem
+  id: SolreignCompanionCube
+  name: personal support cube
+  suffix: solreign, portal
+  description: Solreign certifies this cube will never threaten to stab you. The cube requests you not test this.
+  components:
+  - type: Sprite
+    sprite: _Solreign/companion_cube.rsi
+    state: icon
+  - type: Item
+    size: Ginormous # inhand-left/right landed 2026-08-10 (Sprite Factory portal-props, human-reviewed)
+  - type: MultiHandedItem # it is a load-bearing relationship
+  - type: HeldSpeedModifier # heavy: carrying commitment slows you down
+    walkModifier: 0.9
+    sprintModifier: 0.8
+  - type: EmitSoundOnActivate # hug the cube: a soft, reassuring whump
+    sound: &SoundCubeHug
+      path: /Audio/Effects/thudswoosh.ogg
+      params:
+        volume: -4
+        variation: 0.08
+  - type: EmitSoundOnUse
+    sound: *SoundCubeHug
+  - type: EmitSoundOnLand
+    sound: *SoundCubeHug
+  - type: UseDelay
+    delay: 3.0 # one hug per three seconds; morale must be rationed
+  - type: StaticPrice
+    price: 100 # sentimental value not included
+
+# Structure variant: an anchored floor-standing cube for break rooms and vigils.
+# Destroying it is possible but rude; the carryable cube survives the wreckage.
+- type: entity
+  parent: BaseStructureDynamic
+  id: SolreignCompanionCubeStructure
+  name: personal support cube
+  suffix: solreign, portal, structure
+  description: Solreign certifies this cube will never threaten to stab you. The cube requests you not test this.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _Solreign/companion_cube.rsi
+    state: icon
+    # player-feedback batch 2026-07-16, item 6: was 1.4 (too large per feedback), -25% -> 1.05
+    scale: 1.05, 1.05
+  - type: InteractionOutline
+  - type: Anchorable
+    delay: 2
+  - type: EmitSoundOnActivate # still huggable while anchored
+    sound: # upstream idiom keeps anchors entity-local, so this is a deliberate copy of SoundCubeHug
+      path: /Audio/Effects/thudswoosh.ogg
+      params:
+        volume: -4
+        variation: 0.08
+  - type: UseDelay
+    delay: 3.0
+  - type: Damageable
+    damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SolreignCompanionCube: # the cube endures. The cube remembers nothing. Probably.
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 100
+
+# ── THE CAKE IS A LIE ──────────────────────────────────────────────────────────
+
+# Holographic cake: the only reward Solreign has ever budgeted for.
+# Untouchable in spirit — it flickers, it glows, it will never be eaten.
+- type: entity
+  parent: BaseItem
+  id: SolreignHolographicCake
+  name: holographic cake
+  suffix: solreign, portal
+  description: A perfect celebration cake rendered at a budget-friendly frame rate. It flickers when you look at it directly. Solreign lists "zero calories" as its flagship feature and "zero cake" in the footnotes.
+  components:
+  - type: Sprite
+    # Dedicated hologram RSI (sprite factory, 2026-07-15): luminance->acid-green ramp,
+    # scanlines, translucency and the 4-frame budget-frame-rate flicker are baked into
+    # the pixels — the old runtime color tint is gone. Derived from upstream cake.rsi
+    # birthday states, attribution preserved in the RSI's meta.json.
+    sprite: _Solreign/holographic_cake.rsi
+    layers:
+    - state: birthday
+      shader: unshaded # projected light, not food
+  - type: Item
+    size: Small # light as a promise
+    heldPrefix: birthday
+  - type: PointLight
+    radius: 1.2
+    energy: 0.8
+    color: "#9dfd39"
+  - type: Tag
+    tags:
+    - SolreignHolographicCake
+  - type: StaticPrice
+    price: 0 # appraised honestly
+
+# Locked display case for the Employee Reward Cake. Spawns EMPTY.
+# Sprite note: GlassBox maps a "caplaser" state onto ItemCabinetVisuals.Layer
+# (shown only while the slot is filled); we swap that layer to the cake sprite
+# so the Filled variant actually displays a cake behind the glass.
+- type: entity
+  parent: GlassBox
+  id: SolreignCakeShowcase
+  name: employee reward cake display
+  suffix: solreign, portal, empty
+  description: A locked display case labeled "EMPLOYEE REWARD CAKE — awarded upon full compliance." It is empty. Legal has confirmed the label makes no promises about when, whether, or cake.
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - sprite: Objects/Consumable/Food/Baked/cake.rsi
+      state: birthday
+      map: ["enum.ItemCabinetVisuals.Layer"]
+      visible: false
+    - state: glass
+      map: ["enum.OpenableVisuals.Layer"]
+    - state: locked
+      shader: unshaded
+      map: ["enum.LockVisualLayers.Lock"]
+  - type: AccessReader
+    access: [["Command"]] # compliance is reviewed at the highest level, indefinitely
+  - type: Construction
+    graph: GlassBox
+    node: glassBox
+  - type: ItemSlots
+    slots:
+      ItemCabinet:
+        ejectOnInteract: true
+        whitelist:
+          tags:
+          - SolreignHolographicCake # only the officially sanctioned reward fits
+        ejectSound: /Audio/Machines/machine_switch.ogg
+
+# Filled variant: the case proudly displays the holographic cake.
+# Breaking the glass dumps the hologram on the floor, which helps nobody.
+- type: entity
+  parent: SolreignCakeShowcase
+  id: SolreignCakeShowcaseFilled
+  suffix: solreign, portal, filled
+  components:
+  - type: ContainerFill
+    containers:
+      ItemCabinet:
+      - SolreignHolographicCake
+
+# ── SIGNAGE ────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: BaseSign
+  id: SolreignSignRewardPending
+  name: compliance status sign
+  suffix: solreign, portal
+  description: A corporate wall sign in soothing acid-green. It reads, "REWARD PENDING. COMPLIANCE INSUFFICIENT." The percentage counter printed underneath has been painted over.
+  components:
+  - type: Sprite
+    sprite: Structures/Wallmounts/solreign_sign_reward_pending.rsi
+    state: securearea

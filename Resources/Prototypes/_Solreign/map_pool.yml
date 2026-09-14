@@ -1,0 +1,44 @@
+# Solreign map pool — restricts round map selection (random-select and per-round
+# map vote) to ONLY the seven Solreign station chassis, in place of upstream's
+# DefaultMapPool (Resources/Prototypes/Maps/Pools/default.yml, 12 stock maps).
+#
+# Prototype idiom: Content.Server/Maps/GameMapPoolPrototype.cs
+#   - type: gameMapPool
+#     id: <string>          # indexed by the game.map_pool CVar (see below)
+#     maps: <HashSet<string>> # each entry must be a valid `gameMap` prototype ID
+#                              # (PrototypeIdHashSetSerializer<GameMapPrototype>) —
+#                              # every ID below is verified against its own
+#                              # `- type: gameMap` block, not guessed:
+#                              #   Resources/Prototypes/Maps/_Solreign/solreign_oasis.yml      -> SolreignOasis
+#                              #   Resources/Prototypes/Maps/_Solreign/solreign_nocturne.yml    -> SolreignNocturne
+#                              #   Resources/Prototypes/Maps/_Solreign/solreign_perihelion.yml  -> SolreignPerihelion
+#                              #   Resources/Prototypes/Maps/_Solreign/solreign_verdant.yml     -> SolreignVerdant
+#                              #   Resources/Prototypes/Maps/_Solreign/solreign_meridian.yml    -> SolreignMeridian
+#                              #   Resources/Prototypes/Maps/_Solreign/solreign_leviathan.yml   -> SolreignLeviathan
+#                              #   Resources/Prototypes/Maps/_Solreign/solreign_terminus.yml    -> SolreignTerminus
+#
+# W17 verifier note: SolreignTerminus was added here by the Wave 17 verifier pass — the Terminus
+# build session left this as a TODO believing map_pool.yml was Wave 15/16-exclusive territory, but
+# the Wave 17 ground rules ("if map_pool.yml exists when you finish, ADD your map id") make clear
+# map-building lanes own their own pool entry; Leviathan and Meridian both already self-registered.
+#
+# This pool is selected by setting the `game.map_pool` CVar to this prototype's
+# `id` (see Content.Server/Maps/GameMapManager.cs AllVotableMaps(), which indexes
+# `GameMapPoolPrototype` by that CVar's value — falling back to a preset's own
+# MapPool override if one is set, e.g. deathmatch). Both random map selection
+# (SelectMapRandom) and the per-round map vote candidate list
+# (VoteManager.DefaultVotes.cs -> CurrentlyEligibleMaps -> AllVotableMaps) read
+# from whichever pool is currently selected — there is no separate vote-only
+# map list. See Resources/ConfigPresets/_Solreign/solreign_rotation.toml for the
+# exact CVar snippet that activates this pool + re-enables map voting against it.
+
+- type: gameMapPool
+  id: SolreignMapPool
+  maps:
+  - SolreignOasis
+  - SolreignNocturne
+  - SolreignPerihelion
+  - SolreignVerdant
+  - SolreignMeridian
+  - SolreignLeviathan
+  - SolreignTerminus

@@ -1,0 +1,13 @@
+[
+ {
+  "asset": "beach_ball",
+  "state": "icon2",
+  "prompt": "a white spherical beach ball with red, yellow, and blue pastel colored panel stripes",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ }
+]

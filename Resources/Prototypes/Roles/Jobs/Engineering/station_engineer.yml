@@ -1,0 +1,43 @@
+- type: job
+  id: StationEngineer
+  name: job-name-engineer
+  description: job-description-engineer
+  playTimeTracker: JobStationEngineer
+  # Solreign J4 (ROADMAP-SEASON1-VISION.md #2): raised 2.5h -> 5h. Station Engineer can
+  # solo-wreck the SM/atmos/power chain at low pop, so it gets the roadmap's engineering
+  # floor. TechnicalAssistant (no requirements) remains the always-open entry point that
+  # earns this Engineering department credit.
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 5h
+  startingGear: StationEngineerGear
+  icon: "JobIconStationEngineer"
+  supervisors: job-supervisors-ce
+  access:
+  - Maintenance
+  - Engineering
+  - External
+  extendedAccess:
+  - Atmospherics
+
+- type: startingGear
+  id: StationEngineerGear
+  equipment:
+    eyes: ClothingEyesGlassesMeson
+    belt: ClothingBeltUtilityEngineering
+    ears: ClothingHeadsetEngineering
+  #storage:
+    #back:
+    #- Stuff
+
+- type: chameleonOutfit
+  id: StationEngineerChameleonOutfit
+  job: StationEngineer
+  equipment:
+    head: ClothingHeadHatHardhatYellow
+    mask: ClothingMaskBreath
+    neck: ClothingNeckScarfStripedOrange
+    outerClothing: ClothingOuterWinterEngi
+    gloves: ClothingHandsGlovesColorYellow
+    shoes: ClothingShoesBootsMag

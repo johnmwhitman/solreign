@@ -1,0 +1,28 @@
+# Spawn markers for the Wingmate pair roles. The map-health Phase A gate
+# (SolreignMapHealthScorecardIntegrationTest.CountMissingJobSpawns) requires every job
+# in a map's availableJobs to have a SpawnPoint with its job_id on a station grid -
+# offering a job without one is a hard failure, not a warning. Maps place these at the
+# same spot as SpawnPointPassenger: wingmates board exactly like passengers.
+- type: entity
+  id: SpawnPointWingmate
+  parent: SpawnPointJobBase
+  name: wingmate
+  components:
+  - type: SpawnPoint
+    job_id: Wingmate
+  - type: Sprite
+    layers:
+      - state: green
+      - state: passenger
+
+- type: entity
+  id: SpawnPointWingmateMentor
+  parent: SpawnPointJobBase
+  name: wingmate mentor
+  components:
+  - type: SpawnPoint
+    job_id: WingmateMentor
+  - type: Sprite
+    layers:
+      - state: green
+      - state: passenger

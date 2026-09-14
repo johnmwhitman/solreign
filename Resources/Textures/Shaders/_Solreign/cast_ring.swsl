@@ -1,0 +1,45 @@
+//`cast_ring` primitive's entity-anchored windup/telegraph ring (Content.Client._Solreign.FX.SolreignFxCastRingOverlay,
+//docs/specs/FX-LANGUAGE-V1-SPEC-2026-07-16.md §2 row 6). Procedural ring, no texture — a colored
+//arc that fills clockwise as `fillProgress` goes 0->1, so the shape itself IS the ability-windup
+//countdown (never gameplay-critical information carried ONLY here, per spec §4.0 — the caster's
+//own action-UI/do-after bar is the non-FX co-channel this telegraph decorates).
+//
+//`pulseEnabled` (spec §4's profile table): full/low_vfx pulse-glow the ring edge; reduced_motion
+//freezes the ring to a static linear fill with no pulse (a per-primitive
+//accessibility rule enforced client-side by the overlay, mirrored here as a uniform so the
+//pulse term itself compiles out to a no-op rather than the overlay needing two shader variants).
+light_mode unshaded;
+
+uniform highp vec4 ringColor; // = vec4(0.22, 1.0, 0.08, 1.0); acid-green default
+uniform highp float fillProgress; // = 0.0; 0..1, windup completion
+uniform highp float pulseEnabled; // = 1.0; 0.0 under reduced_motion (spec: "no pulsing/rotation")
+
+void fragment() {
+	COLOR = vec4(0.0);
+
+	highp vec2 centered = (UV - vec2(0.5)) * 2.0;
+	highp float dist = length(centered);
+
+	// A thin ring band (not a filled disc) — the telegraph reads as a ring closing, not a blob
+	// growing.
+	highp float ringWidth = 0.12;
+	highp float ringRadius = 0.75;
+	highp float ringMask = 1.0 - smoothstep(ringWidth * 0.5, ringWidth, abs(dist - ringRadius));
+	if (ringMask <= 0.0) {
+		return;
+	}
+
+	// Angular fill: starts at 12 o'clock (angle = pi/2 in atan2 terms) and sweeps clockwise as
+	// fillProgress advances, same "telegraph the remaining time visually" idiom a do-after bar uses.
+	highp float angle = atan(centered.y, centered.x); // -pi..pi
+	highp float normalizedAngle = fract((1.5707963 - angle) / 6.2831853 + 1.0); // 0..1, clockwise from top
+	highp float filled = step(normalizedAngle, clamp(fillProgress, 0.0, 1.0));
+
+	highp float pulse = 1.0;
+	if (pulseEnabled > 0.5) {
+		pulse = 0.75 + 0.25 * abs(sin(TIME * 4.0));
+	}
+
+	highp float alpha = ringMask * filled * pulse;
+	COLOR = vec4(ringColor.rgb, ringColor.a * alpha);
+}

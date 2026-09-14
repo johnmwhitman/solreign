@@ -1,0 +1,400 @@
+# Solreign orphan-reachability allowlist
+# Consumed by Content.Tests/_Solreign/SolreignOrphanReachabilityTest.cs (Phase-3 Wave 22).
+#
+# Every non-abstract Solreign entity that is intentionally unreachable via map / vendor /
+# spawner / game-rule / craft / seed / contract / loadout MUST be listed here with a
+# non-empty reason:. "Scoped-as-designed" is never silent — that is the whole point of
+# the gate (docs/AUDIT-2026-07-12.md S23; docs/ROADMAP-PHASE3.md Wave 22).
+#
+# Format (list of mappings):
+#   - id: SolreignSomeEntity
+#     reason: "Why this is admin-only / by-design unreachable, or which C# system spawns it."
+#
+# Do NOT list abstract templates (abstract: true) — the scanner already skips those.
+# Do NOT use this file to paper over real orphans; re-home them (Wave 21 class) instead.
+# EXCEPTION, called out honestly rather than hidden: the golf ball + hole were a genuine
+# "built but never mapped" gap until MapPatch minigolf-v1 landed them on solreign_terminus.yml.
+
+# --- Golf club variant (audit S23) — admin-spawn recreation prop, not round loot ---
+# The putter is now placed on solreign_terminus.yml via the mini-golf course
+# (see minigolf-v1 below), so it is no longer orphan and the entry is removed.
+- id: SolreignGolfClubDriver
+  reason: >-
+    Admin-only-by-design mini-golf club variant (audit S23). Recreation pack deliberately
+    leaves the driver as a mapper/admin toy rather than vending-machine loot. (The putter
+    counterpart is placed on solreign_terminus.yml by minigolf-v1 and no longer needs an
+    entry here.)
+
+# --- Mini-golf ball + hole (recreation.yml) — RESOLVED by MapPatch minigolf-v1 ---
+# Both prototypes are now placed on solreign_terminus.yml via
+# Tools/_Solreign/MapPatch/manifests/minigolf-v1.json (patch_id "minigolf-v1",
+# anchor SolreignSignGrandPrixWelcome uid 90005 in the Park, 3 placements on
+# FloorMowedAstroGrass within max_manhattan_tiles=8). The earlier "GENUINE GAP"
+# entries are removed in the same wave that landed the course; the driver above
+# stays as admin-only-by-design.
+
+
+# --- Awakened-Tree family (audit S23) — ghost-role mob spawned only by C# code ---
+- id: SolreignMobAwakenedTree
+  reason: >-
+    Ghost-role tree mob. Header comment in Entities/ents.yml states it is "wired to no
+    maps (per task instruction) — spawn-menu / admin-spawn / future-map-authors" only. Its
+    one live-round spawn path is Content.Server/_Solreign/Ents/SolreignDormantEntSystem.cs
+    replacing a map-placed SolreignDormantEnt in-place at runtime (Spawn(comp.AwakenedPrototype,
+    coordinates)) — a C# spawn the scanner deliberately does not parse (C# is an excluded
+    context, see test doc comment). Declared here rather than silently orphaned.
+
+- id: SolreignMobAwakenedTreeAcidGlow
+  reason: >-
+    Admin-only-by-design Awakened-Tree glow variant (audit S23). Acid-green PointLight
+    reskin of SolreignMobAwakenedTree for event/mapper use; base tree + dormant ent cover
+    the player-facing path.
+
+- id: SolreignMobAwakenedTreeCyanGlow
+  reason: >-
+    Admin-only-by-design Awakened-Tree glow variant (audit S23). Cyan PointLight reskin of
+    SolreignMobAwakenedTree for event/mapper use; base tree + dormant ent cover the
+    player-facing path.
+
+# --- Season 1 narrative-beat game rules (GameRules/season1.yml) — admin/GM-only by design ---
+# File's own header: "none of the six ids below are referenced by any entityTable/weightedRandom
+# selector anywhere in the repo... They only ever start via the admin 'Game Rules' panel or the
+# addgamerule/startgamerule console commands... so a GM can walk the crew through the Season 1
+# arc beat by beat, on purpose." Each carries `weight: 0` (StationEvent, never auto-rolled).
+- id: SolreignLedgerDiscrepancy
+  reason: >-
+    Season 1 beat 1, admin/GM-triggered only by design (weight: 0, never auto-rolled; see
+    GameRules/season1.yml file header). addgamerule SolreignLedgerDiscrepancy.
+
+- id: SolreignGreenSeep
+  reason: >-
+    Season 1 beat 2, admin/GM-triggered only by design (weight: 0, never auto-rolled; see
+    GameRules/season1.yml file header). addgamerule SolreignGreenSeep.
+
+- id: SolreignGhostCabinets
+  reason: >-
+    Season 1 beat 3, admin/GM-triggered only by design (weight: 0, never auto-rolled; see
+    GameRules/season1.yml file header). addgamerule SolreignGhostCabinets.
+
+- id: SolreignPrestigiousRadiation
+  reason: >-
+    Season 1 beat 4, admin/GM-triggered only by design (weight: 0, never auto-rolled; see
+    GameRules/season1.yml file header). addgamerule SolreignPrestigiousRadiation.
+
+- id: SolreignCosmicTypewriter
+  reason: >-
+    Season 1 beat 5, admin/GM-triggered only by design (weight: 0, never auto-rolled; see
+    GameRules/season1.yml file header). addgamerule SolreignCosmicTypewriter.
+
+- id: SolreignFinalBalanceSheet
+  reason: >-
+    Season 1 beat 6 (finale hook), admin/GM-triggered only by design (weight: 0, never
+    auto-rolled; see GameRules/season1.yml file header). addgamerule SolreignFinalBalanceSheet.
+
+# --- Season 1 physical clues — spawned only by their beat's C# rule component ---
+# Each rule's Component declares `EntProtoId CluePrototype = "<id>"`, consumed by the
+# corresponding *Rule.cs to stash the clue "in a random station locker" (season1.yml file
+# header) when the admin-only beat above runs. Same C#-spawn-only pattern as the Ents.
+- id: SolreignPaperLedgerSlip
+  reason: >-
+    Spawned only by Content.Server/_Solreign/Season1/SolreignLedgerDiscrepancyRule.cs via
+    its Component's CluePrototype field — the clue for the (allowlisted) admin-only beat 1.
+
+- id: SolreignPaperInkClipboard
+  reason: >-
+    Spawned only by Content.Server/_Solreign/Season1/SolreignGreenSeepRule.cs via its
+    Component's CluePrototype field — the clue for the (allowlisted) admin-only beat 2.
+
+- id: SolreignPaperGhostCabinetFolder
+  reason: >-
+    Spawned only by Content.Server/_Solreign/Season1/SolreignGhostCabinetsRule.cs via its
+    Component's CluePrototype field — the clue for the (allowlisted) admin-only beat 3.
+
+- id: SolreignPaperEmployeePlaque
+  reason: >-
+    Spawned only by Content.Server/_Solreign/Season1/SolreignPrestigiousRadiationRule.cs
+    via its Component's CluePrototype field — the clue for the (allowlisted) admin-only beat 4.
+
+- id: SolreignPaperTypewriterKey
+  reason: >-
+    Spawned only by Content.Server/_Solreign/Season1/SolreignCosmicTypewriterRule.cs via
+    its Component's CluePrototype field — the clue for the (allowlisted) admin-only beat 5.
+
+- id: SolreignPaperLedgerVolumeOne
+  reason: >-
+    Spawned only by Content.Server/_Solreign/Season1/SolreignFinalBalanceSheetRule.cs via
+    its Component's CluePrototype field — the clue for the (allowlisted) admin-only beat 6.
+
+# --- Event-night antag entry-point game rules — admin-invocable by design ---
+- id: SolreignFullMoonWindow
+  reason: >-
+    Werewolf event-night entry point. File's own header: "Admin-invocable today
+    (`addgamerule SolreignFullMoonWindow`)... Not yet wired into a StationEventScheduler."
+    (GameRules/full_moon_window.yml).
+
+- id: SolreignVampireNight
+  reason: >-
+    Vampire event-night entry point. File's own header: "Admin-invocable today
+    (`addgamerule SolreignVampireNight`)" (GameRules/vampire_night.yml).
+
+# --- Mini-boss game rules + mob — admin/Director-triggerable by design ---
+- id: SolreignAuditorPrime
+  reason: >-
+    Mini-boss game rule. File's own header: "Admin-invocable today (`addgamerule
+    SolreignAuditorPrime`... then `startgamerule`)... neither is wired into any random
+    event table." (GameRules/minibosses.yml).
+
+- id: SolreignSpecimenZero
+  reason: >-
+    Mini-boss game rule. File's own header: "Admin-invocable today (`addgamerule
+    SolreignSpecimenZero`... then `startgamerule`)... neither is wired into any random
+    event table." (GameRules/minibosses.yml).
+
+- id: SolreignMobSpecimenZero
+  reason: >-
+    The Specimen Zero boss mob itself, spawned only by
+    Content.Server/_Solreign/MiniBoss/SolreignSpecimenZeroRule.cs via its Component's
+    BossPrototype field when the (allowlisted) admin-invocable SolreignSpecimenZero rule runs.
+
+# --- Weather-style status effect — admin weather command only, by design ---
+- id: SolreignWeatherSporeDrift
+  reason: >-
+    File's own header (verdant_weather.yml): this engine's weather is "always applied at
+    runtime, either by an admin (`weather add <mapId> <protoId>`) or by code calling
+    SharedWeatherSystem" — never baked into a map. Ready via `weather add
+    <SolreignVerdant's MapId> SolreignWeatherSporeDrift`; no GameRule hook wired yet
+    ("out of this task's scope" per the same header).
+
+# --- Program 3 nonlethal-combat spike — distribution gated behind the spike proving clean ---
+# docs/plans/2026-07-11-solreign-master-roadmap.md Program 3: "Nonlethal combat spike: ONE
+# training weapon... The 3-zone doll + combo core (Carp Scroll, judo belt, ninjitsu, shove
+# chains) are built ONLY if the spike is clean" — i.e. wide distribution is explicitly gated
+# on a kill-criteria check (12-player balance) that hasn't run yet. Admin-spawn/testing only
+# until that gate clears.
+- id: SolreignTrainingBaton
+  reason: >-
+    Program 3 nonlethal-combat spike weapon; master-roadmap kill-criteria gate distribution
+    to players behind the spike proving clean (12-player balance test) — admin-spawn/testing
+    only until that gate clears (docs/plans/2026-07-11-solreign-master-roadmap.md Program 3).
+
+- id: SolreignTrainingSlowdownStatusEffect
+  reason: >-
+    Status-effect prototype applied only by the C# training-baton system (never YAML-
+    referenced by design — status effects are runtime-applied, not placed/vended). Paired
+    with the (allowlisted) SolreignTrainingBaton spike above.
+
+- id: SolreignCarpScroll
+  reason: >-
+    Program 3 combo-core item; master roadmap gates the full combo core (Carp Scroll/judo/
+    ninjitsu) behind the nonlethal-combat spike proving clean first — not yet distributed,
+    admin-spawn/testing only (docs/plans/2026-07-11-solreign-master-roadmap.md Program 3).
+
+# --- Terminator spike — ghost-role mob pending Wave 24's hunter rule ---
+# --- Ghost/observer system entities — spawned only by C# ghost/wardrobe machinery ---
+- id: SolreignAdminGhost
+  reason: >-
+    Spawned only by Content.Server/_Solreign/Wardrobe/SolreignWardrobeSystem.cs when
+    dressing admin ghosts (see its doc comment) — system-internal, never map/vendor placed.
+
+- id: SolreignGuestGhost
+  reason: >-
+    Spawned only by Content.Server/_Solreign/Wardrobe/SolreignWardrobeSystem.cs — "dressable
+    guests must be spawned as SolreignGuestGhost instead" (see its doc comment) —
+    system-internal, never map/vendor placed.
+
+# --- Ambient cosmetic entity — spawned only by the (allowlisted-via-table) spore-drift rule ---
+- id: SolreignAmbientSpore
+  reason: >-
+    Spawned only by Content.Server/_Solreign/StationIdentity/SolreignSporeDriftRuleComponent.cs
+    (SporeEffectPrototype field) via SolreignSporeParticleSystem.cs — a cosmetic particle
+    entity, never map/vendor placed by design.
+
+# --- Ambient cosmetic entity (wow-wiring wave) — spawned only by the acid-storm rule's C# ---
+- id: SolreignAcidMote
+  reason: >-
+    Spawned only by Content.Server/_Solreign/StationIdentity/SolreignAcidStormRuleComponent.cs
+    (MoteEffectPrototype field) via SolreignAcidStormRule.cs, reusing
+    SolreignSporeParticleSystem.cs verbatim (same component as SolreignAmbientSpore above,
+    just a differently-tinted, longer-lived entity) — a cosmetic particle entity, never
+    map/vendor placed by design. Same allowlist reasoning as SolreignAmbientSpore.
+
+# --- Portal pack empty display case — template-only parent, never independently placed ---
+- id: SolreignCakeShowcase
+  reason: >-
+    The empty display case is only ever a `parent:` for SolreignCakeShowcaseFilled, which
+    IS map-placed on all 7 Solreign stations (Wave 21). Ejecting the cake from the Filled
+    variant does not change that entity's prototype id back to this base id, so the empty
+    id never appears standalone in a live round — a template that should arguably be
+    `abstract: true` but isn't; out of Wave 22's scanner-only charter to change
+    portal_props.yml, so declared here instead of silently orphaned.
+
+# --- Placeholders for additional by-design admin-only entities ---
+# --- Player Delight D1 canary ---
+
+# --- Station Directive layer (churn-insight follow-up to the Corporate Ladder) ---
+- id: SolreignStationDirective
+  reason: >-
+    Layerable, cosmetic-only game rule spawned only by C# every round, regardless of
+    preset — Content.Server._Solreign.StationDirective.StationDirectiveLayerSystem
+    starts it on RoundStartingEvent (same additive idiom as SolreignCorporate), gated
+    by CCVars.SolreignStationDirectiveEnabled. Never referenced from a preset's rules:
+    list or any other YAML source, so the pure-scan reachability gate cannot see it.
+
+# --- Directives Fax layer (v14 wave-1 item #1) ---
+- id: SolreignDirectivesFax
+  reason: >-
+    Layerable game rule spawned only by C# every round, regardless of preset —
+    Content.Server._Solreign.DirectivesFax.DirectivesFaxLayerSystem starts it on
+    RoundStartingEvent (same additive, zero-core-edit idiom as SolreignStationDirective
+    / SolreignCorporate), gated by CCVars.SolreignDirectivesFaxEnabled (ships FALSE).
+    Never referenced from a preset's rules: list or any other YAML source, so the
+    pure-scan reachability gate cannot see it.
+
+# --- Directives Fax report keepsake (the SolreignDirectivesFax layer's shift-end paper) ---
+- id: SolreignPaperDirectivesFaxReport
+  reason: >-
+    Spawned only by Content.Server/_Solreign/DirectivesFax/DirectivesFaxRuleSystem.Report.cs
+    (SpawnReport, ReportPaperPrototype, dormant behind CCVars.SolreignDirectivesFaxEnabled=false)
+    — the shift-end compliance-report keepsake, printed at the fax. Never map/spawner placed;
+    content is real per-round directive data stamped at spawn time, not static YAML (mirrors
+    the SolreignPaperStationAudit entry below).
+
+# --- FX Language v1 pooled cosmetic sprite — spawned only by the client render pool's C# ---
+- id: SolreignFxCosmeticSprite
+  reason: >-
+    FX Language v1's client-only pooled cosmetic sprite (spec §2.1,
+    docs/specs/FX-LANGUAGE-V1-SPEC-2026-07-16.md). Spawned only by
+    Content.Client/_Solreign/FX/SolreignFxRenderPool.cs (Spawn(id, MapCoordinates.Nullspace)) and
+    Content.Client/_Solreign/FX/SolreignFxCueSystem.Rendering.cs's transformation-burst path —
+    never map/vendor placed, never referenced from any spawner/loot list by design. Dormant
+    behind solreign.fx.cue_v1 (default false); no consumer raises any FX cue yet (W4 is the first,
+    the changeling arm-blade).
+
+# --- "The Mark" (MG-W2) — Continuity Garden + the closed 3x4 keepsake projection table ---
+# All fourteen are spawned only by C# (Content.Server/_Solreign/PlayerDelight/Mark/
+# SolreignMarkGardenSystem.cs): the garden materializes at StationPostInitEvent (map-placed
+# fixture arrives with MG-W5, the map lane; until then the §4.3 runtime fallback Spawn()s it
+# beside the wingmate beacon), and each mark prototype is a round-local projection of a Season
+# Ledger `mark` row — projected at round start / seated at plant time, never map/vendor/spawner
+# placed BY DESIGN (spec rail 5: fixed slots owned by the fixture; docs/specs/
+# MARK-SPEC-2026-07-17-DRAFT.md §3.3/§4.1). Dormant behind solreign.mark.enabled (default false).
+- id: SolreignMarkGarden
+  reason: >-
+    Spawned only by SolreignMarkGardenSystem's StationPostInit fallback until MG-W5 map-places
+    it; never round loot. Dormant behind solreign.mark.enabled.
+- id: SolreignMarkSapling0
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+- id: SolreignMarkSapling1
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+- id: SolreignMarkSapling2
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+- id: SolreignMarkSapling3
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+- id: SolreignMarkLamp0
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+- id: SolreignMarkLamp1
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+- id: SolreignMarkLamp2
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+- id: SolreignMarkLamp3
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+- id: SolreignMarkPlate0
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+- id: SolreignMarkPlate1
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+- id: SolreignMarkPlate2
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+- id: SolreignMarkPlate3
+  reason: "C#-only mark projection (SolreignMarkGardenSystem, spec §3.3); never map/spawner placed."
+
+- id: SolreignPaperStationAudit
+  reason: >-
+    Spawned only by Content.Server/_Solreign/StationAudits/StationAuditSystem.cs
+    (SpawnAuditPaper, dormant behind solreign.station_audit.enabled=false) — the shift-end
+    keepsake, printed at a station comms console. Never map/spawner placed; content is
+    real per-round data stamped at spawn time, not static YAML.
+- id: SolreignLibraryBook
+  reason: >-
+    C#-only round-start projection of a library_works ledger row
+    (SolreignLibrarySystem.SpawnBook); never map/spawner/loot placed.
+
+# --- P2.2 map placement review (2026-08-08) — three terminals removed from all 7 Solreign maps ---
+# Map patcher had placed these on all 7 stations; the arrivals-clutter fix removed them per the
+# CVar-defaults audit (`v15.x-cvar-defaults-audit.txt`). Their features are dormant (default
+# OFF) and John would never have wanted them in the cargo-bay / arrivals handoff zone. The
+# prototypes remain admin-spawnable for testing once their CVars are flipped.
+- id: SolreignNoticeboard
+  reason: >-
+    P2.2 map placement review (2026-08-08). Removed from all 7 Solreign rotation maps. Dormant
+    behind solreign.noticeboards.enabled (default FALSE, Constitution §8 human gate). Prototype
+    retained for admin-spawn once John flips the CVar; doc comment on Resources/Prototypes/_Solreign/
+    Entities/noticeboard.yml still reads "ADMIN-SPAWNABLE ONLY this wave" — the v15 release
+    placement was an unintended side effect of the community-fixtures-v1 patcher. Remove this entry
+    once a future wave map-places the noticeboard (on a real wall, not at arrivals).
+- id: SolreignMarketConsole
+  reason: >-
+    P2.2 map placement review (2026-08-08). Removed from all 7 Solreign rotation maps. Dormant
+    behind solreign.market.enabled (default FALSE — no §8 gate; flagged for ops activation
+    decision in v15.0.1 evidence). Prototype retained for admin-spawn / future-wave activation.
+- id: SolreignBountyBoard
+  reason: >-
+    P2.2 map placement review (2026-08-08). Removed from all 7 Solreign rotation maps. Dormant
+    behind solreign.bounties.enabled (default FALSE — no §8 gate; flagged for ops activation
+    decision in v15.0.1 evidence). Prototype retained for admin-spawn / future-wave activation.
+
+# Add entries below as new scoped-as-designed content ships. Example:
+# - id: SolreignSomeAdminOnlyProp
+#   reason: "Admin/event-only prop; not intended for round loot or map genpop."
+- id: SolreignEcho0
+  reason: >-
+    C#-only projection of a first-death ledger row at garden aging stage 0
+    (SolreignMarkGardenSystem.Echo.TrySpawnEcho); never map/spawner/loot placed.
+    Dormant behind solreign.echo.enabled.
+- id: SolreignEcho1
+  reason: >-
+    Stage-1 echo projection — same C#-only spawn path as SolreignEcho0.
+- id: SolreignEcho2
+  reason: >-
+    Stage-2 echo projection — same C#-only spawn path as SolreignEcho0.
+- id: SolreignEcho3
+  reason: >-
+    Stage-3 echo projection — same C#-only spawn path as SolreignEcho0.
+
+
+
+# ---------------------------------------------------------------------------
+# Surfaced 2026-07-25 when the gate stopped scoping by the "Solreign" id prefix
+# and started scoping by definition path (_Solreign/). These are all granted or
+# spawned from C# and cannot be map-placed, so there is nothing to wire up —
+# unlike MemorialConsole/ComplianceTerminal/the pets, which were real omissions
+# found in the same sweep and have since been placed on all seven rotation maps.
+# ---------------------------------------------------------------------------
+- id: ActionSolreignChangelingTransform
+  reason: >-
+    Action, granted to the mind by SolreignChangelingSystem when the antag role is
+    assigned. Actions are never map-placed; the gate has no grant-path source.
+- id: ActionSolreignChangelingArmBlade
+  reason: >-
+    Changeling ability action — same C#-only grant path as ActionSolreignChangelingTransform.
+- id: ActionSolreignChangelingRevert
+  reason: >-
+    Changeling ability action — same C#-only grant path as ActionSolreignChangelingTransform.
+- id: MindRoleSolreignChangeling
+  reason: >-
+    Mind role prototype attached by the antag selection code when a changeling is
+    rolled. Mind roles attach to a mind, never to a tile.
+- id: ActionNinjitsuSilentStep
+  reason: >-
+    Ninjitsu action granted by its ability system, not placed.
+- id: ActionNinjitsuSmokeVanish
+  reason: >-
+    Ninjitsu action granted by its ability system, not placed.
+- id: ActionSolreignToggleComplianceLenses
+  reason: >-
+    Toggle action granted by the compliance-lenses eyewear when equipped; the wearable
+    itself is reachable, the action it grants is not a placeable entity.
+- id: ProvidencePowerContractor
+  reason: >-
+    Runtime-spawned by ProvidencePowerContractorSystem from station-owned HV SMES zones;
+    never map-authored. The master CVar defaults false, but activation does not make a
+    static map reference appropriate; retain this entry while C# remains the only spawn path.

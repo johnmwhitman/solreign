@@ -1,0 +1,71 @@
+# Solreign — "Compliance Retrieval Unit" (TERMINATOR SPIKE, antag & creature pack).
+# A ghost-role hunter mob that fixates on exactly ONE crew member (picked by round-state
+# criteria in Content.Server/_Solreign/Terminator/FixationRules.cs — unit-tested) and pursues
+# them for a NONLETHAL takedown: drag the target to a Compliance Desk, never kill.
+# Spec: docs/specs/2026-07-11-terminator-spike.md. Full pursuit/drag HTN = next wave; the
+# spike ships target selection, single-entity faction-exception aggro, and the EMP stagger.
+#
+# Faction note: PASSIVE on purpose. The fixation system aggros it against its one target via
+# upstream NpcFactionSystem faction EXCEPTIONS — it is never hostile to the crew at large.
+#
+# Sprite: Phase-2 Track A1 interim reskin — was wearing the stock vanilla syndicate borg skin
+# (synd_sec), which read as a normal syndicate hostile instead of a Solreign flagship antag
+# (roadmap docs/plans/2026-07-11-ROADMAP-PHASE2.md Track A1, minimum bar: "a recolor/relabel pass").
+# Repointed to xenoborg_heavy — the bulkiest, most menacing NON-syndicate chassis state in the same
+# Mobs/Silicon/chassis.rsi sheet (verified via the sheet's own meta.json state list: every synd_*
+# state is syndicate-branded and out; xenoborg_heavy is the only "big and hostile-reading" state
+# left that isn't). Same sheet upstream already uses for its own "heavy xenoborg" chassis
+# (Resources/Prototypes/Entities/Mobs/Cyborgs/xenoborgs.yml), so this is a verified, real in-repo
+# asset, not a guess.
+# Wired approved xenoborg_heavy from solreign-compliance-unit (latest reviews.jsonl verdict approved; CC0-1.0).
+
+- type: entity
+  parent: MobSiliconBase
+  id: SolreignMobComplianceRetrievalUnit
+  name: compliance retrieval unit
+  suffix: solreign, ghost role
+  description: A Solreign Retention Division chassis. It wants nothing from you except your attendance at one (1) mandatory compliance review. It can be rescheduled. It cannot be cancelled.
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-compliance-unit.rsi
+    state: xenoborg_heavy
+  - type: InputMover
+  - type: MobMover
+  - type: CombatMode
+  - type: MovementSpeedModifier
+    # Deliberately a hair slower than sprinting crew: outrunning it works until you stop.
+    baseWalkSpeed: 3
+    baseSprintSpeed: 4.2
+  - type: HTN
+    rootTask:
+      task: IdleCompound # SPIKE: full pursue-and-retrieve compound is next wave
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: FactionException # fixation aggro lands here (ComplianceRetrievalUnitSystem)
+  - type: MeleeWeapon
+    altDisarm: false
+    angle: 0
+    animation: WeaponArcFist
+    # Restraint-grade. The unit detains; it does not destroy. (Hard no-kill rails = next wave.)
+    damage:
+      types:
+        Blunt: 4
+  - type: Puller
+    needsHands: false # how it drags its target to the Compliance Desk
+  - type: ComplianceFixation
+    graceMinutes: 10
+    retargetPoll: 15
+    empStagger: 8
+  - type: GhostRole
+    makeSentient: true
+    name: ghost-role-information-solreign-cru-name
+    description: ghost-role-information-solreign-cru-description
+    rules: ghost-role-information-solreign-cru-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: default
+  - type: GhostTakeoverAvailable
+  - type: MobPrice
+    price: 3000 # Retention hardware is not cheap.

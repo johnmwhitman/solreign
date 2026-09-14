@@ -1,0 +1,41 @@
+SOLREIGN — third-party notices
+==============================
+
+This repository is a clean one-commit snapshot of the SOLREIGN Space Station 14
+content pack. It is a fork of Space Station 14 (https://github.com/space-wizards/space-station-14)
+running on RobustToolbox (https://github.com/space-wizards/RobustToolbox).
+
+Upstream code
+-------------
+Space Station 14 content is MIT. The verbatim upstream license is LICENSE.TXT
+(Copyright 2017-2026 Space Wizards Federation).
+
+RobustToolbox is a git submodule (not vendored in this snapshot). After clone:
+
+    git submodule update --init --recursive
+
+Engine licenses live in RobustToolbox/LICENSE-MIT.TXT, LICENSE-GPLv3.TXT, and
+LICENSE-ASSETS.TXT. Additional third-party notices ship beside those libraries
+(NetSerializer, cefglue, XamlX, Lidgren.Network, Resources/Audio/MidiCustom).
+
+Upstream assets
+---------------
+Most upstream sprites and sounds are CC-BY-SA 3.0 unless a meta.json or
+attributions.yml says otherwise. A remaining set of upstream files is still
+CC-BY-NC* (listed in LICENSES.md). Those files keep their original license;
+they are not re-licensed by SOLREIGN.
+
+SOLREIGN original work
+----------------------
+Original C# / YAML under Content.*/_Solreign, Resources/Prototypes/_Solreign,
+Resources/Textures/_Solreign (with a license field), and
+Resources/Audio/_Solreign is copyright 2026 John Whitman.
+
+- Code: MIT (this tree's LICENSE).
+- Original assets: CC-BY-NC-SA 4.0 unless the sidecar says CC-BY-SA-3.0 or
+  CC0-1.0 (several PixelLab / in-house textures and Vertex-AI audio loops
+  already declare CC-BY-SA-3.0 in meta.json / attributions.yml — those
+  declarations win).
+
+Do not treat this NOTICE as a grant of trademark rights in the name SOLREIGN
+or the acid-green eye emblem.

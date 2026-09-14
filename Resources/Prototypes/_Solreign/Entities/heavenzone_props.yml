@@ -1,0 +1,334 @@
+# Solreign HEAVEN ZONE props — the pieces the "Serenity & Compliance Atrium"
+# needs that the shared Doom pack file (Entities/hellzone_props.yml) does not
+# already cover. Deliberately a SEPARATE file: hellzone_props.yml is shared
+# between the Hell lane and this Heaven lane (it already carries
+# SolreignHeavenColumn / SolreignHeavenPedestal / SolreignAngelicStatue /
+# SolreignVendingMachineIndulgences + SolreignIndulgencesInventory — reused
+# by ID below, NOT redefined here) — editing it concurrently with the sibling
+# Hell lane risks a merge conflict, so every NEW heaven-only entity lives here
+# instead. See docs/specs/2026-07-11-hell-heaven-zones.md for the shared
+# fiction (referenced by the task brief; it does not exist in-repo yet as of
+# this pass — everything below was designed straight from the established
+# hellzone_props.yml idiom comments + the map-graft-plan.md technique, not
+# blocked on that doc landing).
+#
+# Fiction: the "Serenity & Compliance Atrium" — Sublevel H's calm counterpart
+# to the Thermal Motivation Annex. PG corporate-afterlife satire throughout.
+#
+# Patterns studied before writing (verified in-repo):
+# - Reagent fountain idiom: Entities/Structures/Furniture/sink.yml (SinkEmpty /
+#   Sink — SolutionTank+SolutionHuge parent, SolutionRegeneration generating a
+#   reagent into `drainBuffer`, DrainableSolution/ReagentTank/Drain/
+#   DumpableSolution so it can be dipped/drunk from like a real fountain).
+#   Retheme: generate Tricordrazine (Reagents/medicine.yml — EvenHealthChange,
+#   alive-only, no OD drama) instead of Water — a gentle communal healing
+#   font, not a heal-bomb.
+# - Passive-until-provoked "tough guardian" idiom: Entities/Mobs/NPCs/
+#   elemental.yml's MobUraniumCrab/MobBananiumCrab — NpcFactionMember:
+#   [SimpleNeutral] (won't proactively attack) + FactionException +
+#   NPCRetaliationComponent (Content.Server/NPC/Components/
+#   NPCRetaliationComponent.cs — "retaliate against those who physically
+#   attack them", with an attackMemoryLength "forgiveness" window) stacked on
+#   top of an otherwise-normal SimpleHostileCompound HTN root (same root task
+#   as hellspawn). This is the exact upstream mechanism for "won't start a
+#   fight, will absolutely finish one."
+# - Wall-mounted decor: Structures/Wallmounts/Misc/bell.yml (BoxingBell,
+#   BaseWallmountMetallic + bell.rsi) — reused for the resonance chimes.
+# - Wall sign: Wallmounts/Signs/base_structuresigns.yml (BaseSign) +
+#   signs.yml's SignChapel (state: chapel — already the calm/religious sign
+#   art, same reuse-the-state trick hellzone_props.yml used with `state: fire`
+#   for the Hell wing's Sublevel H notice).
+# - Cosmetic reward items, zero mechanical effect (task brief: "reward =
+#   blessed cosmetic items"): Clothing/Head/hats.yml's
+#   ClothingHeadHatHolyWatermelon (holyhatmelon.rsi is already a literal
+#   floating-halo silhouette) and Clothing/Neck/cloaks.yml's
+#   ClothingNeckCloakCentcom (plain ClothingNeckBase parent, no
+#   BaseCommandContraband tag — these are freebies, not restricted goods).
+#   Both reskinned via tint only, Armor component dropped entirely so they
+#   carry no stat effect whatsoever — pure fashion, matching the
+#   SolreignCompanionCube / PlushieGhost "sentimental value not included"
+#   house style.
+# - House reskin style throughout: _Solreign/Entities/portal_props.yml /
+#   hellzone_props.yml (tint an existing upstream RSI + PointLight recolor +
+#   TODO(sprite factory) marker for dedicated art later).
+#
+# Ambience marker: see Content.Shared/_Solreign/Zones/
+# HeavenAmbienceMarkerComponent.cs for the full asset-gap note. Short version:
+# there is no calm Heaven Zone ogg yet, so the marker component is placed
+# (fountain + 3 chimes below) but NO ambientMusic `rules:` entry is added in
+# this pass — wiring one now would either sit inert (fine but pointless) or
+# get pointed at hell_zone.ogg (wrong, that loop is Doom-energy, not serene).
+# Follow-up for the audio-pipeline lane once a calm loop is generated.
+#
+# DELIBERATELY NOT DONE HERE (wiring wave, to avoid concurrent-agent conflicts
+# and because it's out of this lane's scope per the task brief):
+# - No Resources/Maps/_Solreign/zone_heaven.yml placement of these three
+#   reused hellzone_props.yml entities' worth of research — that's the
+#   sibling map file, see it for the actual room layout.
+# - No portal/teleporter linking this zone to the main station (Portal pack,
+#   task #26, is a separate in-flight lane).
+# - No ambientMusic rules.yml entry (asset gap above).
+#
+# TODO(sprite factory): dedicated marble-basin fountain RSI, dedicated
+# "resonance chime" RSI (currently a tinted upstream boxing-bell sprite),
+# dedicated seraph-sentinel RSI (currently a tinted hellspawn.rsi — same
+# body plan, different soul, intentional sibling-symmetry callback).
+
+# ── FOUNTAIN OF THE COMPLIANT HEART ───────────────────────────────────────────
+# Reagent fountain: sink.yml's SolutionRegeneration idiom, retthemed to
+# generate Tricordrazine (mild universal healing, alive-only, no OD risk)
+# instead of Water. Dip a cup, fill a bottle, or just splash — same
+# Drain/DumpableSolution/ReagentTank behavior as a stock sink.
+- type: entity
+  parent: [SolutionTank, SolutionHuge]
+  id: SolreignHeavenHealingFountain
+  name: fountain of the compliant heart
+  suffix: solreign, heavenzone
+  description: A softly bubbling marble basin. Facilities insists the water is "spiritually enriched electrolytes." It is, medically speaking, extremely effective. Do not ask what happened to the last basin that wasn't.
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _Solreign/solreign-heaven-healing-fountain.rsi
+    layers:
+    - state: sink_stem
+    - map: [ "enum.SolutionContainerLayers.Fill" ]
+      state: sink-fill-1
+      visible: false
+    color: "#fdf8ec" # polished marble-white basin; wired approved sink_stem/sink-fill-1 (latest reviews.jsonl verdicts approved; CC0-1.0)
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: sink-fill-
+    solutionName: drainBuffer
+  - type: SolutionManager
+    solutions:
+    - SolutionDrainNormal
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Tricordrazine
+        Quantity: 480
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Tricordrazine
+        Quantity: 1
+  - type: DrainableSolution
+    solution: tank
+  - type: ReagentTank
+  - type: Drain
+    autoDrain: false
+  - type: DumpableSolution
+    solution: drainBuffer
+  - type: Damageable
+    damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: PointLight
+    radius: 2.2
+    energy: 1.4
+    color: "#fff3c2"
+  - type: HeavenAmbienceMarker
+
+# ── RESONANCE CHIME ────────────────────────────────────────────────────────────
+# Wall-mounted decor, BoxingBell idiom (bell.rsi) retinted. Also carries the
+# ambience marker — see the asset-gap note at the top of this file. Deliberately
+# no interact sound wired (the upstream bell's is boxingbell.ogg, wrong register
+# for a temple chime, and there's no calm chime foley in-repo yet either).
+- type: entity
+  parent: BaseWallmountMetallic
+  id: SolreignHeavenChime
+  name: resonance chime
+  suffix: solreign, heavenzone
+  description: A wall-mounted chime that rings itself, gently, on no schedule anyone has been able to document. HR insists this is "ambient wellness infrastructure" and not, as some have suggested, a listening device.
+  components:
+  - type: Sprite
+    sprite: _Solreign/PlayerDelight/solreign_heaven_chime.rsi
+    layers:
+    - state: bell
+  - type: PointLight
+    radius: 1.2
+    energy: 0.5
+    color: "#fff3c2"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: HeavenAmbienceMarker
+
+# ── SERENITY & COMPLIANCE ATRIUM SIGNAGE ──────────────────────────────────────
+# Reuses signs.yml's chapel state (already the calm/religious sign art) — same
+# reuse-the-existing-state trick hellzone_props.yml used with `state: fire`
+# for the Hell wing's own Sublevel H notice.
+- type: entity
+  parent: BaseSign
+  id: SolreignSignSerenityAtrium
+  name: serenity & compliance atrium notice
+  suffix: solreign, heavenzone
+  description: A sign in tasteful gold leaf. It reads, "SUBLEVEL H — SERENITY & COMPLIANCE ATRIUM. Inner peace has been pre-approved. Please queue quietly."
+  components:
+  - type: Sprite
+    state: chapel
+    color: "#fff3c2"
+
+# ── SERAPH SENTINEL (guardian mob, tough but passive-until-provoked) ─────────
+# Same body plan as MobHellspawn (Entities/Mobs/NPCs/hellspawn.yml — the Hell
+# wing's antagonist), deliberately: an angelic counterpart wearing the same
+# silhouette is the sibling-symmetry gag. Behaviorally it is the OPPOSITE of
+# hellspawn, though: SimpleNeutral faction + FactionException + NPCRetaliation
+# (elemental.yml's MobUraniumCrab/MobBananiumCrab idiom) means it will never
+# throw the first punch, but it remembers whoever threw one at it for a full
+# 15 seconds and hits back hard. Tough (350 HP vs. hellspawn's 450) but not a
+# slaughter machine (15 Blunt per hit vs. hellspawn's 150+70) — a guardian you
+# can walk past peacefully, not a gauntlet you're forced to run.
+#
+# Wave-9-verifier note: deliberately NOT mirroring hellspawn's BaseSlicingRefinable
+# parent. That abstract (base_item.yml's BaseSlicingRefinable -> ToolRefinable
+# component) sets a startRefinePopupType field that ToolRefinableComponent doesn't
+# expose (it's PopupType) — a pre-existing upstream content/engine field-name drift,
+# not introduced here. Fixing base_item.yml is out of this lane's scope (shared
+# upstream file, other waves/mobs reference it), so the guardian simply skips the
+# "sliceable for meat" trait rather than inheriting the broken field; it isn't load-
+# bearing for the guardian's design (unlike hellspawn it's a stated non-antagonist).
+- type: entity
+  name: seraph sentinel
+  parent:
+  - BaseSimpleMob
+  - MobCombat
+  - MobBloodstream
+  - BaseMobAnimal
+  id: SolreignHeavenGuardian
+  suffix: solreign, heavenzone
+  description: An unstoppable force of quiet disappointment. It will not move first. It will not need to.
+  components:
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: FactionException
+  - type: NPCRetaliation
+    attackMemoryLength: 15
+  - type: NpcFactionMember
+    factions:
+    - SimpleNeutral
+  - type: Damageable
+  - type: Injurable
+    damageContainer: BiologicalMetaphysical
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.5
+    baseSprintSpeed: 2.5
+  - type: Sprite
+    sprite: Mobs/Demons/hellspawn.rsi
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: alive
+    color: "#fdf6e0" # gilded-white cast; TODO(sprite factory): dedicated seraph sentinel RSI
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+      Dead:
+        Base: dead
+  - type: PointLight
+    radius: 2
+    energy: 1.2
+    color: "#fff3c2"
+  - type: NameIdentifier
+    group: GenericNumber
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      200: 0.7
+      280: 0.5
+  - type: ZombieImmune
+  - type: Perishable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.9
+        density: 300
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobState
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - DoorBumpOpener
+      - FootstepSound
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      350: Dead
+  - type: MeleeWeapon
+    attackRate: 1
+    hidden: true
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    damage:
+      types:
+        Blunt: 15
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepThud
+
+# ── HALO OF THE FINAL AUDITOR (blessed cosmetic, head slot) ──────────────────
+# holyhatmelon.rsi is already a literal floating-halo silhouette — reused
+# as-is, retinted, with the Armor component dropped entirely (the original
+# ClothingHeadHatHolyWatermelon carries a token Caustic coefficient; this is
+# a reward trinket, not gear, so it carries none).
+- type: entity
+  parent: ClothingHeadBase
+  id: SolreignHaloOfFinalAuditor
+  name: halo of the final auditor
+  suffix: solreign, heavenzone
+  description: Certified genuine halo. Certification pending peer review.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/holyhatmelon.rsi
+    color: "#fff3c2"
+  - type: Clothing
+    sprite: Clothing/Head/Hats/holyhatmelon.rsi
+
+# ── VESTMENT OF ASCENSION (blessed cosmetic, neck slot) ──────────────────────
+# cap.rsi (captain's cloak) reskinned white/gold. Based on ClothingNeckCloakCentcom's
+# plain ClothingNeckBase parent (no BaseCommandContraband) — this is a freebie
+# reward, not a restricted-goods item, and security shouldn't be flagging it.
+- type: entity
+  parent: ClothingNeckBase
+  id: SolreignVestmentOfAscension
+  name: vestment of ascension
+  suffix: solreign, heavenzone
+  description: A pristine white cloak with gold trim. The paperwork granting you the right to wear it is, itself, a separate and ongoing process.
+  components:
+  - type: Sprite
+    sprite: Clothing/Neck/Cloaks/cap.rsi
+    color: "#fdf8ec"
+  # production batch 10 (worn-sprite wave): zero-art fix -- ClothingNeckBase never sets
+  # a default Clothing.sprite, so the worn slot fell through to nothing resolvable. Same
+  # idiom already shipping correctly on SolreignHaloOfFinalAuditor two entities above.
+  - type: Clothing
+    sprite: Clothing/Neck/Cloaks/cap.rsi

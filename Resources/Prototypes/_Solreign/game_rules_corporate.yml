@@ -1,0 +1,9 @@
+# "The Corporate Ladder" — layerable, cosmetic-only game rule (Solreign, Milestone 1).
+# Started every round by SolreignCorporateLayerSystem; never cancels a preset for too-few players.
+- type: entity
+  id: SolreignCorporate
+  parent: BaseGameRule
+  components:
+  - type: SolreignCorporateRule
+  - type: GameRule
+    cancelPresetOnTooFewPlayers: false

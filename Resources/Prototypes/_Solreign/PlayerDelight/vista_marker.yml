@@ -1,0 +1,18 @@
+# First-shift vista marker (council memo docs/council/2026-07-16-design-magnetism.md, item 5:
+# "route the first-shift path past one composed vista with a PROVIDENCE line").
+#
+# Invisible in normal play: MarkerBase carries the Marker component, and the client's MarkerSystem
+# only shows marker sprites when marker visibility is toggled on (mapping/admin use). Each of the 7
+# rotation maps bakes in exactly ONE of these (asserted by
+# SolreignVistaMarkerMapPlacementIntegrationTest), at an already-composed spot on the first-shift
+# path, with the map-specific PROVIDENCE line set via a per-map SolreignVistaMarker component
+# override (lineId, vista-beat.ftl). Behavior lives in SolreignVistaBeatSystem, gated by
+# solreign.first_shift_vista_beat.
+- type: entity
+  parent: MarkerBase
+  id: SolreignVistaMarker
+  name: first-shift vista marker
+  suffix: Solreign, Vista Beat
+  description: An invisible marker for the one composed vista on this station's first-shift path.
+  components:
+  - type: SolreignVistaMarker

@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Programmatically drawn for Solreign by the sprite factory (AI-authored code, human-reviewed); replaces CC-BY-NC art",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bald",
+      "delays": [
+        [
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "cat",
+      "delays": [
+        [
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "dog",
+      "delays": [
+        [
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "furry",
+      "delays": [
+        [
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "it",
+      "delays": [
+        [
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "kill",
+      "delays": [
+        [
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "nerd",
+      "delays": [
+        [
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "peak",
+      "delays": [
+        [
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "raider",
+      "delays": [
+        [
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "stinky",
+      "delays": [
+        [
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon-hidden"
+    }
+  ]
+}

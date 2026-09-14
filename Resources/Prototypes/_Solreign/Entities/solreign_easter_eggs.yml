@@ -1,0 +1,240 @@
+# Solreign easter-egg / video-game-reference items.
+# Additive cosmetic reskins of real base items — each parents a verified vanilla
+# prototype and only overrides name + description. Homage, not copy: no
+# trademarked names, logos, or symbols are used.
+# Source: docs/research/creative-bible-antigravity.md section 2 (Custom Item entries only).
+
+# 1. Half-Life — crowbar
+- type: entity
+  parent: CrowbarRed
+  id: SolreignCrowbar
+  name: theoretical physicist's heavy pry-bar
+  description: A tool that has survived multiple resonance cascades. Smells faintly of hazardous materials and silent protagonism.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/pry_bar.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/pry_bar.rsi
+      state: icon
+  # production batch 10 (worn-sprite wave): BaseCrowbar's own Clothing.sprite pointed at
+  # crowbar.rsi (vanilla), so belt-holstered showed the plain vanilla crowbar. Overridden;
+  # new RSI carries equipped-BELT + storage/cover-* variants (matches CrowbarRed's own
+  # cover-icon idiom).
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/pry_bar.rsi
+
+# 5. Metal Gear Solid — sneaking box
+- type: entity
+  parent: StealthBox
+  id: SolreignStealthBox
+  suffix: solreign, easter egg
+  name: tactical espionage container (size m)
+  description: A cardboard box with a small viewport cut into the side. Walking under it makes you feel inexplicably safe from security cameras.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/stealth_box.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/stealth_box.rsi
+      state: icon
+
+# 6. Fallout — soda can
+- type: entity
+  parent: DrinkColaCan
+  id: SolreignSodaCan
+  name: fission-fizzy indigo
+  description: A glowing blue carbonated beverage. The label promises a burst of energy and a mild case of internal radiation.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/soda_can.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/soda_can.rsi
+      state: icon
+
+# 7. Disco Elysium — necktie
+- type: entity
+  parent: ClothingNeckTieRed
+  id: SolreignNecktie
+  name: the screaming silk necktie
+  description: A necktie with an aggressive, neon-green pattern that whispers self-destructive advice directly into your inner monologue.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/necktie.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/necktie.rsi
+      state: icon
+  # production batch 10 (worn-sprite wave): ClothingNeckTieRed's own Clothing.sprite
+  # pointed at redtie.rsi, so worn/hamster-worn showed the vanilla tie. Overridden.
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/necktie.rsi
+
+# 9. Morrowind — moon-sugar beaker
+- type: entity
+  parent: Beaker
+  id: SolreignMoonSugarBeaker
+  name: refined moon-sugar extract
+  description: A highly addictive, purple liquid that dramatically increases run speed while causing severe brain damage.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/moon_sugar_beaker.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/moon_sugar_beaker.rsi
+      state: icon
+
+# 10. Dark Souls — estus / medical flask
+# FIX (player-feedback batch 2026-07-16, item 2): DrinkFlaskBar -> FlaskBase carries
+# DrinkVisualsOpenable, whose GenericVisualizer swaps to state "icon_open" on open --
+# this RSI had only "icon", so opening it errored. Also had zero inhand states: no
+# ancestor in the drink-flask chain sets Item.InhandVisuals or Item.sprite, so this
+# takes the *checked* default-visuals path (Content.Client/Items/Systems/ItemSystem.cs
+# TryGetDefaultVisuals) -- unlike item 1's crash, a missing state here would just
+# silently show nothing in-hand rather than error. Added icon_open (procedurally
+# derived: cap-disc stripped + warm glow on the exposed neck) + inhand-left/right
+# (procedurally rigged) -- see docs/receipts/feedback-bugs/.
+- type: entity
+  parent: DrinkFlaskBar
+  id: SolreignLiquidFlameThermos
+  name: liquid flame thermos
+  description: A dull brass flask containing a warm, glowing yellow soup. Restores health at the cost of making you feel incredibly weary.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/liquid_flame_thermos.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/liquid_flame_thermos.rsi
+      state: icon
+
+# 13. Half-Life (G-Man) — briefcase
+- type: entity
+  parent: BriefcaseBrown
+  id: SolreignGManBriefcase
+  name: interstellar employer's briefcase
+  description: Contains a single pristine crowbar, a notepad with redacted coordinates, and a tiepin. It smells of static and stale air.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/gman_briefcase.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/gman_briefcase.rsi
+      state: icon
+
+# 3. Deus Ex — trench coat
+# BALANCE (feedback #7, FEEDBACK-SMALL-2026-07-16): base ClothingOuterCoatTrench only had
+# Armor.coefficients: { Slash: 0.95 } (5% reduction, armor in name only). Given real but
+# sub-vest protection here — Blunt/Slash/Piercing 0.88 vs. the standard Type I security vest's
+# 0.70 (ClothingOuterArmorBase) — because this ALSO carries free storage (parents
+# ClothingOuterStorageEdible via ClothingOuterCoatTrench) that a security vest doesn't, and it's an
+# unrestricted easter-egg find, not a Security-only issue item. Stacking full vest-tier armor onto
+# free storage on an item anyone can find would be overtuned. No Heat/Explosion bonus added.
+- type: entity
+  parent: ClothingOuterCoatTrench
+  id: SolreignNanowareTrenchCoat
+  name: nanoware trench-coat
+  description: Perfect for wearing at night, indoors, or while assassinating corporate board members.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/nanoware_trenchcoat.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/nanoware_trenchcoat.rsi
+      state: icon
+  # production batch 10 (worn-sprite wave): ClothingOuterCoatTrench's own Clothing.sprite
+  # pointed at trenchcoat.rsi (vanilla), so worn showed the plain vanilla coat. Overridden;
+  # new RSI carries the open/closed equipped-OUTERCLOTHING pair + inhand variants.
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/nanoware_trenchcoat.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.88
+        Slash: 0.88
+        Piercing: 0.88
+
+# 3. Deus Ex — tactical lenses
+- type: entity
+  parent: ClothingEyesGlassesSunglasses
+  id: SolreignTacticalLenses
+  name: tactical lenses
+  description: Augments your vision with 0% extra visibility but 100% extra cynicism.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/tactical_lenses.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/tactical_lenses.rsi
+      state: icon
+  # production batch 10 (worn-sprite wave): Clothing.sprite is inherited two levels up from
+  # ClothingEyesGlassesCheapSunglasses (= sunglasses.rsi, vanilla). Overridden; new RSI
+  # covers base + arachnid/moth/hamster equipped-EYES variants.
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/tactical_lenses.rsi
+
+# 19. Disco Elysium — bomber jacket
+- type: entity
+  parent: ClothingOuterCoatBomber
+  id: SolreignFlightJacket
+  name: precinct 57 aerostatic flight jacket
+  description: A bright orange bomber jacket that makes the wearer look exceptionally professional, patient, and cool under pressure.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/flight_jacket.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/flight_jacket.rsi
+      state: icon
+  # production batch 10 (worn-sprite wave): ClothingOuterCoatBomber's own Clothing.sprite
+  # pointed at bomber.rsi (vanilla). Overridden; new RSI carries the open/closed pair.
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/flight_jacket.rsi
+
+# 28. Slay the Spire — feathered mask
+- type: entity
+  parent: ClothingMaskRaven
+  id: SolreignFeatheredMask
+  name: avian devotee's feathered mask
+  description: A bird mask that forces the wearer to scream "CAW!" at the end of every sentence. My power is unmatched!
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/feathered_mask.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/feathered_mask.rsi
+      state: icon
+  # production batch 10 (worn-sprite wave): ClothingMaskRaven's own Clothing.sprite pointed
+  # at raven.rsi (vanilla). Overridden; new RSI covers base + reptilian equipped-MASK.
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/feathered_mask.rsi
+
+# 30. Hotline Miami — fowl mask
+- type: entity
+  parent: ClothingMaskGas
+  id: SolreignFowlMask
+  name: enigmatic fowl mask
+  description: A rubber rooster mask. Wearing it fills you with an intense urge to ask people if they like hurting other people.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/fowl_mask.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/EasterEggs/fowl_mask.rsi
+      state: icon
+  # production batch 10 (worn-sprite wave): ClothingMaskGas's own Clothing.sprite pointed
+  # at gas.rsi (vanilla). Overridden; new RSI covers base + hamster/vulpkanin/reptilian/vox.
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/fowl_mask.rsi

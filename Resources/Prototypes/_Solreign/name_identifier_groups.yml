@@ -1,0 +1,7 @@
+# Solreign custom name-identifier groups. Same rules as upstream Resources/Prototypes/name_identifier_groups.yml.
+
+# Work-order numbering for Solreign Contracts (SOL-WO-042 etc.) — the cargo bounty "Bounty" group idiom.
+- type: nameIdentifierGroup
+  id: SolreignWorkOrder
+  minValue: 0
+  maxValue: 999

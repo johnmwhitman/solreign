@@ -1,0 +1,68 @@
+<Control xmlns="https://spacestation14.io">
+    <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical" Margin="12" SeparationOverride="8">
+            <Label Name="Heading" Text="{Loc 'first-shift-heading'}" StyleClasses="LabelHeading" />
+            <Label Name="Status" Text="{Loc 'first-shift-idle-intro'}" />
+
+            <BoxContainer Name="DisabledPanel" Orientation="Vertical" SeparationOverride="6">
+                <Label Text="{Loc 'first-shift-disabled'}" />
+            </BoxContainer>
+
+            <BoxContainer Name="IdlePanel" Orientation="Vertical" SeparationOverride="6">
+                <Label Name="SuggestedDepartment" />
+                <Label Text="{Loc 'first-shift-department-label'}" />
+                <OptionButton Name="DepartmentOptions" HorizontalExpand="True" />
+                <Button Name="StartButton" Text="{Loc 'first-shift-start'}" HorizontalExpand="True" />
+            </BoxContainer>
+
+            <BoxContainer Name="ActivePanel" Orientation="Vertical" SeparationOverride="8">
+                <Label Name="TitleLabel" StyleClasses="LabelHeading" />
+                <!-- Kishōtenketsu restructure (MARK-SPEC §3.6): the numbered task-list overview.
+                     3 rows dormant, 5 once solreign.mark.enabled is live. Tasks 1-3 below are the
+                     SAME Why/Orient/Try/IfStuck/SafetyStop content this card always had — presentation
+                     framing only, per the wave's zero-mechanics law. -->
+                <Label Name="TaskListLabel" StyleClasses="LabelSubText" />
+                <Label Name="WhyLabel" />
+                <Label Name="OrientLabel" />
+                <Label Name="TryLabel" />
+                <Label Name="IfStuckLabel" />
+                <Label Name="SafetyStopLabel" />
+                <!-- Task 4 — [REASSIGNED]: a permanent, non-interactive row. Zero mechanics, zero
+                     grief surface: no system ever reads it. Visible only when the Mark is live. -->
+                <PanelContainer Name="Task4Panel" StyleClasses="LowDivider" Visible="False">
+                    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="4">
+                        <Label Text="{Loc 'first-shift-task-4-heading'}" StyleClasses="LabelSubText" />
+                        <Label Name="Task4RowLabel" />
+                        <Label Name="Task4DeflectionLabel" StyleClasses="LabelSubText" />
+                    </BoxContainer>
+                </PanelContainer>
+                <!-- Task 5 — Leave a Mark: the PROVIDENCE brief. The garden nav-marker reuses the
+                     MarkerStatus/MapButton controls below (repointed at the Continuity Garden once
+                     this stage is reached) rather than duplicating marker UI. -->
+                <PanelContainer Name="Task5Panel" StyleClasses="LowDivider" Visible="False">
+                    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="4">
+                        <Label Text="{Loc 'first-shift-task-5-heading'}" StyleClasses="LabelHeading" />
+                        <Label Text="{Loc 'first-shift-task-5-brief'}" />
+                    </BoxContainer>
+                </PanelContainer>
+                <PanelContainer Name="FlavorPanel" StyleClasses="LowDivider">
+                    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="4">
+                        <Label Text="{Loc 'first-shift-providence-omen-heading'}" StyleClasses="LabelSubText" />
+                        <Label Name="FlavorLabel" />
+                    </BoxContainer>
+                </PanelContainer>
+                <CheckBox Name="PlainInstructions" Text="{Loc 'first-shift-plain-instructions'}" />
+                <Label Name="MarkerStatus" />
+                <Button Name="MapButton" Text="{Loc 'first-shift-open-map'}" HorizontalExpand="True" />
+                <Button Name="PrimaryButton" HorizontalExpand="True" />
+                <Button Name="SkipButton" Text="{Loc 'first-shift-skip'}" HorizontalExpand="True" />
+                <Button Name="RerollButton" Text="{Loc 'first-shift-another-card'}" HorizontalExpand="True" />
+                <Label Name="RerollCooldownLabel" StyleClasses="LabelSubText" />
+                <Button Name="GuideButton" Text="{Loc 'first-shift-open-guide'}" HorizontalExpand="True" />
+                <Button Name="FindCrewmateButton" Text="{Loc 'first-shift-find-crewmate'}" HorizontalExpand="True" />
+                <Button Name="AHelpButton" Text="{Loc 'first-shift-ahelp'}" HorizontalExpand="True" />
+                <Button Name="EndButton" Text="{Loc 'first-shift-end'}" HorizontalExpand="True" />
+            </BoxContainer>
+        </BoxContainer>
+    </ScrollContainer>
+</Control>

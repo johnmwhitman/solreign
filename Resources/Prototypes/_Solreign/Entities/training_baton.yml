@@ -1,0 +1,53 @@
+# Solreign — "Compliance Training Baton" (COMBAT SPIKE, roadmap Program 3).
+# On a landed melee hit against a living humanoid the SERVER rolls one of three training
+# zones (this spike replaces player zone-selection with a weighted random pick):
+#   head  -> brief stutter + jitter stumble (mildest upstream head consequence)
+#   legs  -> short slowdown; repeat hits accumulate duration ("stack")
+#   hands -> target drops their active held item
+# Logic: Content.Server/_Solreign/TrainingCombat/. Pure zone/cooldown math is unit-tested
+# in Content.Tests/_Solreign/TrainingZoneTests.cs.
+#
+# Sprite: reuses the upstream stun baton RSI (off state — it never sparks) for the spike.
+# TODO(SOLREIGN-ART): custom sprite wanted — an acid-green foam baton with a laminated
+# "CERTIFIED SAFE-ISH" inspection tag, plus matching inhands (32x32, sprite factory lane).
+
+- type: entity
+  parent: BaseItem
+  id: SolreignTrainingBaton
+  name: compliance training baton
+  suffix: solreign
+  description: A Solreign-issue foam training baton for mandatory De-escalation Escalation Drills. Certified to leave no marks, only actionable feedback. Aim is handled by the baton; accountability is handled by you.
+  components:
+  # Sprite Factory solreign_training_baton.rsi (delivery solreign-batons-pixellab, 3/3
+  # ledger-approved). States are icon/inhand-left/inhand-right with NO off/on prefix pair —
+  # a foam training baton has no powered state, so heldPrefix goes with the stunbaton art.
+  - type: Sprite
+    sprite: _Solreign/solreign_training_baton.rsi
+    state: icon
+  - type: Item
+    size: Normal
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1
+    angle: 60
+    animation: WeaponArcThrust
+    # Foam. The feedback is the product; the bruise is complimentary.
+    damage:
+      types:
+        Blunt: 1
+  - type: SolreignTrainingBaton
+    headWeight: 1
+    legsWeight: 1
+    handsWeight: 1
+    effectCooldown: 1.5
+    headEffectDuration: 4
+    legsSlowdownDuration: 3
+    legsSpeedModifier: 0.65
+
+# Dedicated movement status effect for the legs outcome, so training slowdown stacks its own
+# duration and never fights another system's slowdown prototype (see the remarks atop upstream
+# Content.Shared/Movement/Systems/MovementModStatusSystem.cs).
+- type: entity
+  parent: StatusEffectSlowdown
+  id: SolreignTrainingSlowdownStatusEffect
+  name: compliance training slowdown

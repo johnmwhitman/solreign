@@ -1,0 +1,61 @@
+I'll review the bug-fix diff against the diagnoses and the new tests. Reading the full prompt and the relevant code.Continuing with the rest of the diff and verifying HandsSystem + the prototype/RSI changes against the diagnoses.## Verdict: **APPROVE WITH NITS**
+
+The six fixes match the engine behavior, the diagnoses hold (with one precision nit on item 2’s inhand path), and both new tests are real regression locks rather than tautologies. Nothing here looks risky enough to block.
+
+---
+
+### Diagnosis check
+
+| # | Claim | Holds? |
+|---|--------|--------|
+| 1 Omni gauntlet | Parent `ClothingHandsGlovesColorBlack` sets explicit `inhandVisuals` with no layer RSI; `HandsSystem` falls back to `Item.RsiPath` then `Sprite.BaseRSI` | **Yes.** Parent has state-only layers; egg20 overrides Sprite only. |
+| 2 Thermos | `icon_open` via `DrinkVisualsOpenable` + missing inhands | **Mostly.** `icon_open` is correct. Inhand path is *not* the same crash path as #1 (see nit). |
+| 3 Transit orb | `BeachBall` sets `Item.sprite` → held uses beach ball RSI | **Yes.** Explicit `Item.sprite` override is the right fix. |
+| 4 Punpun | No species gate; mechanism works | **Yes** for flashlight toggle/`PointLight`/`ComplexInteraction`. Headless can’t prove pixel glow. |
+| 5 Cube | `1.4 → 1.05` (−25%) | **Yes** (`1.4 × 0.75 = 1.05`). Only the structure variant was oversized. |
+| 6 Foam crossbow | Acid-green tint | **Yes**, matches `SolreignKnockoutBat` / pool-noodle convention. Comment overclaims “every sibling.” |
+
+**Engine note (wording only):** missing RSI states in `HandsSystem` → `LayerSetData` hit `Log.Error` + fallback state, not a hard exception. Still a real client error and broken held sprite; adding states is the right fix.
+
+---
+
+### Fixes
+
+- **Egg20 / thermos / egg12 RSI meta + PNGs:** states line up (`inhand-left/right` 4-dir; thermos also `icon_open`).
+- **Egg12 `Item.sprite`:** necessary and sufficient with the new inhand states.
+- **Egg20 worn gloves still black:** correctly deferred; not a hole in this fix.
+- **Foam crossbow Sprite:** reusing parent RSI + color is fine; optional nit to also set `state: icon` like the bat for clarity.
+
+---
+
+### Tests
+
+**`InhandSpriteRegressionTest`** — sound, non-tautological  
+- Raises `GetInhandVisualsEvent` and mirrors `HandsSystem` RSI fallback order.  
+- Would fail pre-fix for these three protos (egg20 missing states; thermos empty layers / missing `icon_open`; egg12 beach-ball RSI or wrong states).  
+- Scoped allowlist is appropriate.  
+- Nits: comment names wrong helper (`InhandLayersAndOpenStateResolve`); unused `resCache` in open-state test; `User` on the event is the item not a holder (harmless — no handler uses `User` today).
+
+**`PunpunHandheldLightIntegrationTest`** — sound, non-tautological  
+- Real path: `TryPickup` → `InteractionActivate` → `HandheldLight.Activated` + `PointLight.Enabled`.  
+- Matches production: `OnActivate` requires `args.Complex`; `MobBaseAncestor` has `ComplexInteraction` + single Left hand.  
+- Flashlight has a starting cell, so `TurnOn` can succeed.  
+- Client layer check is useful extra coverage for the inhand/glow states, not a substitute for the server asserts.  
+- Correctly does **not** claim to disprove GPU/shader “invisible glow.”
+
+---
+
+### Nits (non-blocking)
+
+1. **Item 2 inhand path:** thermos has no explicit `InhandVisuals`. Missing inhands take `TryGetDefaultVisuals` (which *does* existence-check) → **no held layers**, not the egg20 error path. `icon_open` is the real open error. Adding inhands is still good (held visibility); just don’t call it the same crash class.
+2. **Foam crossbow comment:** most chaos-tier siblings have **no** green tint; only the bat (and external pool noodle) do. Fix is still fine.
+3. **Test comments / unused var:** as above.
+4. **Punpun scope:** locks flashlight usability only. If the report meant room lights / other emitters / pure visual QA, that remains open — already called out in the test doc.
+
+---
+
+### Risk
+
+Low. YAML-only + RSI states + tests; no gameplay systems changed. No merge/contraband/parent inheritance landmines spotted.
+
+**Ship it.** Optional cleanup: fix thermos diagnosis wording, foam-crossbow comment accuracy, and the small test comment/unused-var nits in a follow-up.

@@ -1,0 +1,68 @@
+[
+ {
+  "asset": "football",
+  "state": "icon",
+  "prompt": "a brown oval American football with white lace stitching on top, viewed from above at a slight angle",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "corgi",
+  "state": "icon",
+  "prompt": "a round pink balloon printed with a cute corgi dog face, pointed ears and snout, thin grey curly string hanging below",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "clownrecorder",
+  "state": "icon",
+  "prompt": "a rectangular red and white striped tape recorder device with small grey buttons and a slot at the top center, boxy retro cassette player",
+  "key": "cyan",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "foam_crossbow",
+  "state": "foambox",
+  "prompt": "a green rectangular ammo box container with a row of orange foam darts sticking up out of the top, toy foam dart box",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "machete",
+  "state": "icon",
+  "prompt": "a diagonal steel machete blade with dark camouflage-spot patterning along the blade, dark green wrapped handle grip",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "mjollnir",
+  "state": "icon",
+  "prompt": "Thor's hammer held diagonally, silver-grey stone hammer head, brown wood handle with a light grey pommel, small yellow lightning spark accents around the head",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ }
+]

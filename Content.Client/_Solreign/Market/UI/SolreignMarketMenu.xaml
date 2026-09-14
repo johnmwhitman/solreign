@@ -1,0 +1,46 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'solreign-market-window-title'}"
+                      SetSize="560 420"
+                      MinSize="420 320">
+    <!-- Layout copies the Contracts Board window idiom (SolreignContractsBoardMenu.xaml): one
+         scrolling list of listing cards over a flavor footer. StatusLabel only shows when the
+         server pushed an explicit status line (e.g. "the dealer is not answering" while the
+         feature/master switch is off); NoListingsLabel covers a genuinely empty catalog instead. -->
+    <BoxContainer Orientation="Vertical"
+                  VerticalExpand="True"
+                  HorizontalExpand="True">
+        <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="10">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+            </PanelContainer.PanelOverride>
+            <ScrollContainer HScrollEnabled="False"
+                             HorizontalExpand="True"
+                             VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                    <Label Name="StatusLabel"
+                           Visible="False"
+                           Align="Center" />
+                    <Label Name="NoListingsLabel"
+                           Text="{Loc 'solreign-market-window-empty'}"
+                           Visible="False"
+                           Align="Center" />
+                    <BoxContainer Name="ListingEntriesContainer"
+                                  Orientation="Vertical"
+                                  VerticalExpand="True"
+                                  HorizontalExpand="True" />
+                </BoxContainer>
+            </ScrollContainer>
+        </PanelContainer>
+        <!-- Footer -->
+        <BoxContainer Orientation="Vertical">
+            <PanelContainer StyleClasses="LowDivider" />
+            <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
+                <Label Text="{Loc 'solreign-market-window-flavor-left'}" StyleClasses="WindowFooterText" />
+                <Label Text="{Loc 'solreign-market-window-flavor-right'}" StyleClasses="WindowFooterText"
+                       HorizontalAlignment="Right" HorizontalExpand="True" Margin="0 0 5 0" />
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

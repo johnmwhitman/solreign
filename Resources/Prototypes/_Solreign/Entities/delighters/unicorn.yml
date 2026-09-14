@@ -1,0 +1,93 @@
+# Solreign delighters: THE CORPORATE UNICORN — proof entity for the Solreign effects engine
+# (SolreignPeriodicEffect, Content.Server/_Solreign/Effects/).
+#
+# UPSTREAM CHECK (2026-07-11): upstream ships NO horse/pony/unicorn mob (only "pony" hits are
+# ponytail hair markings). Closest quadruped bases are MobSheep / MobCow / MobGoat
+# (Resources/Prototypes/Entities/Mobs/NPCs/animals.yml). We parent MobSheep — right silhouette,
+# friendly petting hooks already wired — and borrow MobSheepRainbow's PointLight+RgbLightController
+# glow trick (WITHOUT its SpaceDrugs wool; the unicorn shears plain cotton, kid-safe).
+#
+# SPRITE (2026-07-18): a full sheep-shaped 4-directional unicorn RSI now ships at
+# Resources/Textures/_Solreign/unicorn.rsi. It matches Mobs/Animals/sheep.rsi's contract
+# state-for-state (sheep_bare 4-dir + sheep_dead / sheep_wool 4-dir + sheep_wool_dead / icon,
+# same maps, same delays) so it drops straight into the MobSheepBase GenericVisualizer +
+# DamageStateVisuals wiring this mob inherits — directional turning and the wooly-layer swap
+# both keep working. The Sprite override on SolreignMobUnicorn below just repoints those two
+# inherited layers at unicorn.rsi. The mane lives on the wooly layer (index 1): recolored
+# near-white so the inherited RgbLightController tints it into a glowing rainbow mane — that
+# glowing mane, plus the horn on the base layer, is what finally reads as a UNICORN in-world
+# rather than a rainbow sheep. Provenance + contact sheet: docs/receipts/unicorn/.
+#
+# Rainbow burst: upstream has no firework/confetti particle entity, so SolreignEffectRainbowBurst
+# below follows the verified EffectHearts/EffectSparks pattern (Resources/Prototypes/Entities/Effects:
+# TimedDespawn + Sprite + EffectVisuals + AnimationPlayer) with an unshaded, RGB-hue-cycled hearts
+# sprite + a color-cycling PointLight = a brief rainbow shimmer burst.
+# Fart sound: Resources/Audio has no file literally named "fart"; the canonical SS14 flatulence
+# sound is the Parp sound collection (/Audio/Effects/Emotes/parp1.ogg) — it's what the upstream
+# WhoopieCushion ("flatulence humour", Entities/Objects/Fun/sound_maker.yml) plays.
+
+# Short-lived cosmetic rainbow shimmer, spawned at the unicorn by SolreignPeriodicEffect.
+- type: entity
+  id: SolreignEffectRainbowBurst
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.85 # matches the hearts.rsi animation length, same as upstream EffectHearts
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: Effects/hearts.rsi
+      state: hearts
+  - type: EffectVisuals
+  - type: AnimationPlayer
+  - type: PointLight
+    radius: 2.5
+    energy: 2
+    color: "#ff66cc"
+  - type: RgbLightController # hue-cycles the light and the unshaded sprite layer -> rainbow
+    cycleRate: 0.8
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# The unicorn itself. Interval 120-600s: roughly every two to ten minutes it emits a rainbow
+# burst, a proud parp, and a compliance report.
+- type: entity
+  parent: MobSheep
+  id: SolreignMobUnicorn
+  name: corporate unicorn
+  suffix: solreign, delighter
+  description: A load-bearing morale asset in the shape of a unicorn. Its horn is a registered trademark. Its magic is performance-reviewed quarterly, and it has never once missed a target.
+  components:
+  # Repoint MobSheepBase's two inherited layers at the unicorn body. Same layer maps and same
+  # state names (sheep_bare / sheep_wool) as the sheep sprite, so the inherited GenericVisualizer
+  # + DamageStateVisuals keep driving the dead-state and wooly swaps unchanged.
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Solreign/unicorn.rsi
+    layers:
+    - state: sheep_bare
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+      visible: true
+    - state: sheep_wool
+      map: [ "wooly" ]
+      visible: true
+  - type: SolreignPeriodicEffect
+    minIntervalSeconds: 120
+    maxIntervalSeconds: 600
+    effectPrototype: SolreignEffectRainbowBurst
+    soundCollection:
+      collection: Parp
+      params:
+        variation: 0.125
+    popupText: solreign-unicorn-compliance
+  # MobSheepRainbow's glow, re-tuned: layer 1 is the wooly layer — the unicorn's mane — so
+  # the RgbLightController hue-cycles the mane into a glowing rainbow.
+  - type: PointLight
+    radius: 1.5
+    energy: 0.5
+  - type: RgbLightController
+    layers: [ 1 ]

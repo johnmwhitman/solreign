@@ -1,0 +1,96 @@
+# Solreign Season 1, "The Ledger Wakes" — station events for beats 1-6 (the full season arc).
+# Source: docs/research/2026-07-11-season1-narrative-bible.md, Section 1.
+#
+# C# side: Content.Server/_Solreign/Season1/ (SolreignLedgerDiscrepancyRule, SolreignGreenSeepRule,
+# SolreignGhostCabinetsRule, SolreignPrestigiousRadiationRule, SolreignCosmicTypewriterRule,
+# SolreignFinalBalanceSheetRule + their components). Shared PA voice/color: SolreignSeason1Audit.
+# Shared announcement-cadence math: SolreignSeason1BeatSequencer (NUnit-tested, Content.Tests/_Solreign).
+#
+# Each of the six events below is a curated NARRATIVE BEAT, not a random-pool event: it carries
+# `- type: StationEvent` (so it gets the upstream StationEventSystem<T> lifecycle — timed duration,
+# admin logs, auto-end) with `weight: 0` (StationEventComponent.WeightVeryLow) as a defensive floor,
+# but none of the six ids below are referenced by any `entityTable`/`weightedRandom` selector
+# anywhere in the repo, so EventManagerSystem's random scheduler can never roll them on its own. They
+# only ever start via the admin "Game Rules" panel or the `addgamerule`/`startgamerule` console
+# commands — same "admin-invocable, not auto-rolling" idiom already used by
+# _Solreign/GameRules/full_moon_window.yml — so a GM can walk the crew through the Season 1 arc beat
+# by beat, on purpose, at a time of their choosing.
+#
+# Each beat: an A.U.D.I.T. PA burst (3 lines from the bible, cycling over the event's `duration` —
+# line 1 fires immediately, lines 2-3 cycle in every `lineCadenceSeconds`), a physical clue (see
+# Entities/lore_papers.yml) stashed in a random station locker, and a Ledger trace (an integration
+# comment in each rule's .cs file — no SeasonLedgerSystem file is touched by this wave, EXCEPT Beat 4,
+# which genuinely reads SeasonTitleComponent.RankIndex to decide who glows).
+#
+# Beat 6 ("The Final Balance Sheet") is the season finale hook: its third PA line is a deliberate
+# cliffhanger, not a resolution — the payoff is the live Grand Opening event, not this station event.
+
+- type: entity
+  id: SolreignLedgerDiscrepancy
+  parent: BaseGameRule
+  suffix: solreign, season1, beat1
+  components:
+  - type: StationEvent
+    weight: 0 # WeightVeryLow — never auto-rolled, see file header. Admin-triggered only.
+    duration: 50
+  - type: SolreignLedgerDiscrepancyRule
+
+- type: entity
+  id: SolreignGreenSeep
+  parent: BaseGameRule
+  suffix: solreign, season1, beat2
+  components:
+  - type: StationEvent
+    weight: 0 # WeightVeryLow — never auto-rolled, see file header. Admin-triggered only.
+    duration: 50
+  - type: SolreignGreenSeepRule
+
+- type: entity
+  id: SolreignGhostCabinets
+  parent: BaseGameRule
+  suffix: solreign, season1, beat3
+  components:
+  - type: StationEvent
+    weight: 0 # WeightVeryLow — never auto-rolled, see file header. Admin-triggered only.
+    duration: 50
+  - type: SolreignGhostCabinetsRule
+
+# Beat 3's clue folder rolls one of these pre-written "archived transcript" flavors at spawn time
+# (Season1GhostCabinetTranscripts loc keys live in Locale/en-US/_solreign/season1-events.ftl).
+- type: localizedDataset
+  id: Season1GhostCabinetTranscripts
+  values:
+    prefix: solreign-season1-beat3-transcript-
+    count: 4
+
+- type: entity
+  id: SolreignPrestigiousRadiation
+  parent: BaseGameRule
+  suffix: solreign, season1, beat4
+  components:
+  - type: StationEvent
+    weight: 0 # WeightVeryLow — never auto-rolled, see file header. Admin-triggered only.
+    duration: 50
+  - type: SolreignPrestigiousRadiationRule
+
+- type: entity
+  id: SolreignCosmicTypewriter
+  parent: BaseGameRule
+  suffix: solreign, season1, beat5
+  components:
+  - type: StationEvent
+    weight: 0 # WeightVeryLow — never auto-rolled, see file header. Admin-triggered only.
+    duration: 50
+  - type: SolreignCosmicTypewriterRule
+
+# Beat 6 is the season finale hook — see file header. Its cliffhanger PA line is meant to be the last
+# thing the crew hears before the beat ends; no EndAnnouncement override is set here on purpose.
+- type: entity
+  id: SolreignFinalBalanceSheet
+  parent: BaseGameRule
+  suffix: solreign, season1, beat6, finale
+  components:
+  - type: StationEvent
+    weight: 0 # WeightVeryLow — never auto-rolled, see file header. Admin-triggered only.
+    duration: 50
+  - type: SolreignFinalBalanceSheetRule

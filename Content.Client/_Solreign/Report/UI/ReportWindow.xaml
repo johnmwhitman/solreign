@@ -1,0 +1,43 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'report-window-title'}"
+                      SetSize="420 400"
+                      MinSize="360 340">
+    <!-- Simple form, no BUI/entity ownership: the "report" command opens this straight from the client,
+         and submission is a one-shot networked event (see ReportClientSystem), same shape as
+         Content.Client._Solreign.Feedback.UI.FeedbackWindow. -->
+    <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="8">
+        <Label Text="{Loc 'report-window-intro'}" HorizontalExpand="True" />
+
+        <BoxContainer Orientation="Horizontal" Margin="0 4 0 0">
+            <Label Text="{Loc 'report-window-target-label'}" VerticalAlignment="Center" />
+            <LineEdit Name="TargetEdit"
+                      HorizontalExpand="True"
+                      PlaceHolder="{Loc 'report-window-target-placeholder'}"
+                      Access="Public" />
+        </BoxContainer>
+
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'report-window-category-label'}" VerticalAlignment="Center" />
+            <OptionButton Name="CategorySelector" HorizontalExpand="True" />
+        </BoxContainer>
+
+        <TextEdit Name="TextEdit"
+                  HorizontalExpand="True"
+                  VerticalExpand="True"
+                  MinHeight="100"
+                  Access="Public" />
+
+        <Label Name="LengthLabel" Align="Right" StyleClasses="WindowFooterText" />
+
+        <Button Name="SubmitButton" Text="{Loc 'report-window-submit'}" HorizontalExpand="True" Access="Public" />
+
+        <Label Name="StatusLabel" Align="Center" HorizontalExpand="True" Access="Public" />
+
+        <PanelContainer StyleClasses="LowDivider" Margin="0 6 0 0" />
+
+        <Label Text="{Loc 'report-window-safety-heading'}" StyleClasses="highlight" />
+        <Label Text="{Loc 'report-window-safety-body'}" HorizontalExpand="True" />
+        <Button Name="SafetyButton" Text="{Loc 'report-window-safety-button'}" HorizontalExpand="True" Access="Public" />
+    </BoxContainer>
+</controls:FancyWindow>

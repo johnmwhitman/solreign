@@ -1,0 +1,86 @@
+# "Echoes of the Departed" — the closed 4-stage Echo prototype table (v14, EOD-spec §11).
+#
+# ANTI-GRIEF BY CONSTRUCTION (the SolreignMarkBase recipe, mark_garden.yml, deliberately
+# duplicated here rather than shared parentage — a future change to one family's recipe must
+# never silently reshape the other): component-EXPLICIT, BaseStructure minus Pullable minus Tag,
+# plus InteractionOutline. Deliberately ABSENT: Damageable, Destructible, Anchorable (no unanchor
+# verb), Rotatable, Pullable, construction graphs, containers, ActivatableUI. What has no health
+# cannot be broken; what has no unanchor verb cannot be dragged into a shape.
+#
+# Entities here are ROUND-LOCAL PROJECTIONS of already-claimed Season Ledger `first_death` rows
+# (EOD-spec §4), spawned in code by SolreignMarkGardenSystem.Echo.cs; SolreignEchoComponent is
+# attached at spawn, never in YAML. PROVIDENCE-authored only — no player-supplied text, ever.
+#
+# Reuses the exact placeholder asset the Mark name-plate already ships (Structures/Wallmounts/
+# signs.rsi "medium_blank"), tinted weathered-grey (rather than Mark's warm patina) so the two
+# families are legible at a glance without examining — a recolor, zero new art.
+#
+# NO map placement here — Echoes project onto the SAME Continuity Garden fixture MG-W5/§4.3
+# already resolves or fallback-spawns; there is no separate Echo fixture.
+
+- type: entity
+  id: SolreignEchoBase
+  abstract: true
+  suffix: Solreign, Echo
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 60
+        hard: false
+
+# ---------------------------------------------------------------- the closed 4-stage table
+
+- type: entity
+  id: SolreignEcho0
+  parent: SolreignEchoBase
+  name: weathered marker
+  description: A quiet marker, fixed in the Continuity Garden's register.
+  components:
+  - type: Sprite
+    sprite: Structures/Wallmounts/signs.rsi
+    state: medium_blank
+    noRot: true
+    color: "#D8D8D8"
+
+- type: entity
+  id: SolreignEcho1
+  parent: SolreignEcho0
+  components:
+  - type: Sprite
+    sprite: Structures/Wallmounts/signs.rsi
+    state: medium_blank
+    noRot: true
+    color: "#B8B8B0"
+
+- type: entity
+  id: SolreignEcho2
+  parent: SolreignEcho0
+  components:
+  - type: Sprite
+    sprite: Structures/Wallmounts/signs.rsi
+    state: medium_blank
+    noRot: true
+    color: "#909088"
+
+- type: entity
+  id: SolreignEcho3
+  parent: SolreignEcho0
+  components:
+  - type: Sprite
+    sprite: Structures/Wallmounts/signs.rsi
+    state: medium_blank
+    noRot: true
+    color: "#686860"

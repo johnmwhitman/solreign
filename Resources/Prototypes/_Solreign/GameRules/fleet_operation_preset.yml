@@ -1,0 +1,32 @@
+# Fleet Operation Night — multi-station preset scaffold (SR-W-020).
+#
+# Salvage notes (2026-07-24):
+#   - `noSpawn:` removed — the field no longer exists on EntityPrototype upstream;
+#     gamerule entities inherit their spawn-menu hiding from BaseGameRule.
+#   - The SolreignFleetGrid config block is GONE, not moved: every value it set
+#     (powerIsolated/atmosIsolated/cargoAccountIsolated true, maxEntityBudget 500,
+#     nodeType StationAlpha) restated the component's compiled-in default, and the
+#     component exposes no [DataField]s, so YAML could never have set them anyway.
+#     The bare component carries identical behaviour.
+#   - showInVote is FALSE. Solreign ships features dark and activates them
+#     deliberately; admins can still start it via the aliases below.
+- type: gamePreset
+  id: FleetOperationNight
+  alias:
+    - fleet
+    - fleetnight
+    - multistation
+  name: fleet-operation-night-title
+  showInVote: false
+  description: fleet-operation-night-description
+  rules:
+    - SolreignFleetOperationScheduler
+    - SpaceTrafficControlEventScheduler
+    - RampingStationEventScheduler
+    - BasicRoundstartVariation
+
+- type: entity
+  id: SolreignFleetOperationScheduler
+  parent: BaseGameRule
+  components:
+    - type: SolreignFleetGrid

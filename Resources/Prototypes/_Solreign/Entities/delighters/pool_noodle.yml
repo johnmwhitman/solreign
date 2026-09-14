@@ -1,0 +1,46 @@
+# Solreign delighter: POOL NOODLE
+# Harmless toy melee weapon. Based on the upstream toy-sword pattern
+# (Resources/Prototypes/Entities/Objects/Fun/weapons.yml -> BaseToySword / FoamBlade)
+# plus the knockback idiom from WeaponMeleeKnockbackStick
+# (Resources/Prototypes/Entities/Objects/Weapons/Melee/baseball_bat.yml -> MeleeThrowOnHit).
+# Sprite (wired 2026-07-12, sprite factory batch beta01 — see
+# assets/beta01-sprites/PROVENANCE.md): dedicated _Solreign/pool_noodle.rsi (bright acid-green
+# foam cylinder), icon + inhand-left/right (4-dir; the inhand frames are a deterministic
+# rotate/offset of the icon, not separate AI gens — a symmetric foam prop looks the same held
+# from any facing). Replaces the foam_blade.rsi reuse + green tint below.
+
+- type: entity
+  parent: [ BaseItem, BaseToySword ]
+  id: SolreignPoolNoodle
+  name: recreational compliance baton
+  suffix: solreign, delighter
+  description: A regulation pool noodle in corporate acid-green. Squeaks with every strike. The label reads "Morale is mandatory. Flotation is not guaranteed."
+  components:
+  - type: Sprite
+    sprite: _Solreign/pool_noodle.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: _Solreign/pool_noodle.rsi
+  - type: MeleeWeapon
+    attackRate: 1.5
+    angle: 0
+    animation: WeaponArcThrust
+    wideAnimationRotation: 90
+    damage:
+      types:
+        Blunt: 0 # completely harmless; the squeak is the point
+    soundHit: &SoundNoodleSqueak
+      path: /Audio/Items/Toys/mousesqueek.ogg
+      params:
+        variation: 0.10
+    soundNoDamage: *SoundNoodleSqueak
+  - type: MeleeThrowOnHit # gentle, hilarious knockback (upstream component, tuned way down)
+    speed: 5
+    distance: 3
+  - type: EmitSoundOnUse
+    sound: *SoundNoodleSqueak
+  - type: EmitSoundOnLand
+    sound: *SoundNoodleSqueak
+  - type: EmitSoundOnActivate
+    sound: *SoundNoodleSqueak

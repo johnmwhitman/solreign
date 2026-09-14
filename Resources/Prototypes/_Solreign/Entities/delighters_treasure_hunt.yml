@@ -1,0 +1,73 @@
+# Solreign delighters — the Salvager's Star Chart treasure hunt.
+#
+# Design rule: a gift that is HANDED to a player reads as a participation trophy and a
+# master player detects it instantly. The chart is FOUND, the cache is HUNTED, the prize
+# is EARNED. Nothing here is granted.
+#
+# ⚠️ PARENT CHOICE IS LOAD-BEARING — read before changing `parent:`.
+# The first draft of this file parented Paper / CrateGenericSteel / FlashlightLantern by
+# CONCEPT and overrode `sprite:`. SS14 merges Sprite per-DATAFIELD, so each child kept its
+# parent's layer list and pointed it at an RSI with none of those states.
+# `SolreignSpriteStateExistsTests` caught all seven, including two invisible to a
+# hand-audit: `heldPrefix: null` synthesises a state literally named `null-inhand-left`.
+#
+# These now parent `BaseItem`, which declares NO Sprite component, so the sprite contract is
+# whatever this file states and nothing is inherited. Sprite Factory emits exactly
+# `icon` + `inhand-left` + `inhand-right`; do not point these at a parent that wants more.
+#
+# Art: PixelLab-generated, human-reviewed, CC-BY-SA-3.0, staged via
+# `spritefactory pixellab-intake`, `validate --profile new-asset` passed.
+
+# 1. The chart — found in maintenance, points at a cache.
+- type: entity
+  parent: BaseItem
+  id: SolreignStarChart
+  name: salvager's star chart
+  description: A scorched sheet of survey paper, creased from being folded too many times by someone who did not want it found. A grease-pencil X sits over one section of the station. Whoever drew it is not on the manifest.
+  components:
+  - type: Sprite
+    sprite: _Solreign/Delighters/solreign_star_chart.rsi
+    state: icon
+  - type: Item
+    size: Tiny
+    storedSprite:
+      sprite: _Solreign/Delighters/solreign_star_chart.rsi
+      state: icon
+
+# 2. The cache — CUT FROM THIS SLICE, deliberately. Not an oversight.
+#
+# The cache is the thing the X is over, so it wants DELIBERATE map placement — an "X marks
+# the spot" that spawns in a random maint closet is not a spot. Every reachability source
+# SolreignOrphanReachabilityTest follows is either a vendor shelf or a map, and a strongbox
+# sold from a vending machine is absurd. Rather than allowlist it green (the allowlist is for
+# admin-only or C#-spawned content, not for content we simply have not finished), it is out.
+#
+# Its art is parked at Delighters/_staged/solreign_salvage_cache.rsi — icon only, and a crate
+# needs icon/base/closed/open/welded/sparking, so it also wants five more states authored
+# consistently before it could carry its own sprite anyway. Two blockers, both real, both
+# map/art work rather than prototype work.
+
+# 3. The prize — it actually glows, so it gets carried, so other people see it.
+#
+# A plain always-on PointLight rather than a HandheldLight: a toggleable lantern needs
+# `-on`/`-off` state art this family does not have, and a star in a jar that can be switched
+# off is a worse object anyway. It has not gone out yet.
+- type: entity
+  parent: BaseItem
+  id: SolreignStarInAJar
+  name: bottled starlight
+  description: A specimen jar with a brass rim and something small and patient burning inside it. It is warm. It has not gone out yet.
+  components:
+  - type: Sprite
+    sprite: _Solreign/Delighters/solreign_star_in_a_jar.rsi
+    state: icon
+  - type: Item
+    size: Small
+    storedSprite:
+      sprite: _Solreign/Delighters/solreign_star_in_a_jar.rsi
+      state: icon
+  - type: PointLight
+    enabled: true
+    radius: 2.5
+    energy: 1.6
+    color: "#9fd4ff"

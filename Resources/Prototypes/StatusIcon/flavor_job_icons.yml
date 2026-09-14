@@ -1,0 +1,27 @@
+# Job status icons for the salvaged flavor roles. Parented on the vanilla
+# JobIcon and pointed at existing states in job_icons.rsi (Smuggler/Courier
+# read as cargo, Scavenger reads as a miner) so they resolve cleanly.
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSmuggler
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: CargoTechnician
+  jobName: job-name-smuggler
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconCourier
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: CargoTechnician
+  jobName: job-name-courier
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconScavenger
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: ShaftMiner
+  jobName: job-name-scavenger

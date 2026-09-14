@@ -1,0 +1,12 @@
+# "Directives Fax" — layerable game rule (v14 wave-1 item #1, council C1 einstein-001 "ship first").
+# Started every round by DirectivesFaxLayerSystem, gated on CCVars.SolreignDirectivesFaxEnabled —
+# ⚠️ which ships TRUE since the 2026-07-25 activation pass; this header said "ships false" for a
+# week after that and misled a feature audit on 2026-08-02. Never cancels a preset for too-few
+# players — the feature is designed to be completable pop-1.
+- type: entity
+  id: SolreignDirectivesFax
+  parent: BaseGameRule
+  components:
+  - type: DirectivesFaxRule
+  - type: GameRule
+    cancelPresetOnTooFewPlayers: false

@@ -1,0 +1,52 @@
+//Solreign signature moment: a pulsing acid-green border on the edges of the screen.
+//
+//Same border-distance idiom as upstream's colored_screen_border.swsl (backing
+//Content.Client.CombatMode.ColoredScreenBorderOverlay), but the color/size are tunable uniforms
+//instead of a hardcoded const, so the prototype (Resources/Prototypes/_Solreign/FX/shaders.yml) can
+//theme it without touching this file.
+//
+//FLASH-FIX-2026-07-16 (grk r1 reviewed): neither this file nor the upstream one it copies ever
+//declared `light_mode unshaded;` or `preset raw;`. Both fall back to ShaderPreset.Default
+//(base-default.frag), whose `COLOR` local is declared but NEVER initialized before
+//`[SHADER_CODE]` runs, and whose final line is an unconditional `gl_FragColor =
+//zAdjustResult(COLOR * MODULATE * LIGHT)`. This shader only assigned COLOR inside the border
+//conditional, so every pixel more than borderSize from an edge fed undefined-behavior garbage
+//into that multiply -- GLSL gives no guarantee what an uninitialized local reads as, so the exact
+//tint players saw could vary by driver/GPU, but on the observed report it painted the whole
+//screen acid-green rather than leaving it untouched, which is why the "border" pulse was read by
+//players as the ENTIRE screen tinting acid-green. `COLOR = vec4(0.0)` below is the actual fix:
+//it removes the undefined-behavior read entirely, for any driver. `light_mode unshaded;` is a
+//correctness improvement alongside it (this is a screen-border accent, not something that should
+//be modulated by the station's real lightmap the way a lit sprite is), not itself sufficient to
+//fix the flash. Every codebase shader that legitimately covers the full screen (nightvision.swsl,
+//hologram.swsl, stealth.swsl, cooldown.swsl, ...) both declares `light_mode unshaded;` AND
+//unconditionally assigns COLOR on every fragment -- this shader now matches that pattern.
+//Upstream's copy of this exact bug was never caught because ColoredScreenBorderOverlay is dead
+//code (never added to any viewport) -- Solreign's Corporate Ladder "quarterly earnings call" was
+//the first live caller anywhere in this lineage.
+light_mode unshaded;
+
+uniform highp vec4 borderColor; // = vec4(0.22, 1.0, 0.08, 1.0); acid green
+uniform highp float borderSize; // = 30.0; pixel size of border, clamped further at runtime -- see
+                                 // Content.Shared._Solreign.FX.SolreignAcidBorderMath
+
+void fragment() {
+	// Explicit, unconditional init: transparent everywhere until proven otherwise by the border
+	// check below. This is the actual fix for the full-screen flash (see file header).
+	COLOR = vec4(0.0);
+
+	highp vec2 pixelSize = vec2(1.0/SCREEN_PIXEL_SIZE.x, 1.0/SCREEN_PIXEL_SIZE.y);
+	highp float smallestLength = FRAGCOORD.x;
+	if(smallestLength > FRAGCOORD.y){
+		smallestLength = FRAGCOORD.y;
+	}
+	if(smallestLength > pixelSize.x-FRAGCOORD.x){
+		smallestLength = pixelSize.x-FRAGCOORD.x;
+	}
+	if(smallestLength > pixelSize.y-FRAGCOORD.y){
+		smallestLength = pixelSize.y-FRAGCOORD.y;
+	}
+	if(smallestLength <= borderSize){
+		COLOR = vec4(borderColor.r, borderColor.g, borderColor.b, abs((1.0-(smallestLength/borderSize))*(abs(sin(TIME))*0.8+0.2)));
+	}
+}

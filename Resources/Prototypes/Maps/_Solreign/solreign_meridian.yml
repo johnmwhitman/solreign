@@ -1,0 +1,135 @@
+# Solreign Meridian — the research sprawl chassis. Third distinct LARGE chassis in the maps
+# program's big-station wave (the four earlier Solreign maps — Oasis/Saltern, Verdant/Packed,
+# Perihelion/Packed, Nocturne/Reach — are all compact 0-35-pop chassis; this wave adds the first
+# tier of genuinely large stations). Lane order for the large-chassis wave: lane 1 took the single
+# biggest candidate, lane 2 the second, this lane (3) takes the third — ranked by BOTH metrics this
+# fork already uses for chassis picks (minPlayers and raw grid-file byte size), which agree here:
+#
+#   Fland         minPlayers 70, grid 5.08 MB  -> lane 1 (largest)
+#   Box           minPlayers 50, grid 3.91 MB  -> lane 2 (second)
+#   Marathon      minPlayers 35, grid 3.15 MB  -> lane 3 (THIS ONE — third largest)
+#
+# (Serpentcrest ties Box's minPlayers-50 bracket and has a comparable grid, but was passed over as
+# a candidate: `Resources/Maps/serpentcrest.yml` is a 3-grid pirate-wreck POI — Gorlex/Interdyne/
+# Donk Co./Cybersun faction dressing baked into named rooms like "Gorlex command" — not a clean
+# StandardNanotrasenStation hull, and multi-grid besides. Exo/Bagel/Plasma all rank below Marathon
+# on both metrics. Marathon verified single-grid `StandardNanotrasenStation` before picking it:
+# `grids: [30]`, 61-76 job StationJobs roster, department layout (Science/Toxins/Xenoarch/Robotics/
+# RD Office/Sci Server Room all clustered in one wing, Library, a detached "Chapelroid" chapel
+# satellite on its own bridge) — a genuinely huge, standard-shape community station, easy to read
+# as a "research sprawl" without fighting the base building's own fiction.
+#
+# Chassis: a byte-for-byte copy of upstream Marathon (Resources/Maps/marathon.yml, see
+# Resources/map_attributions.txt) — grid file Resources/Maps/_Solreign/solreign_meridian.yml. Only
+# the identity fields below differ from the upstream prototype (id/mapName/mapPath/station key/
+# mapNameTemplate/prefixCreator/StationJobs comment header); the job roster and grid tiles/chunks
+# are byte-identical to upstream. Every new entity is an ADDITION appended to the end of the copied
+# grid file's `entities:` list, at fresh uids (900001+, comfortably clear of upstream's max uid
+# 23881) — no upstream tile chunk or entity was edited or removed. See
+# docs/specs/2026-07-11-meridian-graft.md for the full graft plan + room census this was built from.
+#
+# minPlayers/maxPlayers carried over verbatim from Marathon (35/70) — this is a big-station chassis
+# by design, re-tune only alongside a real mapping/playtest pass, not blind from this prototype.
+#
+# W14 lesson applied: BecomesStation `id:` in the grid file was renamed to SolreignMeridian to match
+# the `stations:` key below (Resources/Maps/_Solreign/solreign_meridian.yml, the file's only
+# `BecomesStation` block). No tile-chunk data was copied between files — only this one line differs
+# from the upstream grid, plus new appended entities.
+
+- type: gameMap
+  id: SolreignMeridian
+  mapName: 'Solreign Meridian'
+  mapPath: /Maps/_Solreign/solreign_meridian.yml
+  minPlayers: 35
+  maxPlayers: 70
+  stations:
+    SolreignMeridian:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Solreign Meridian {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'MD'
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/Shuttles/emergency_rod.yml
+        - type: StationJobs
+          availableJobs: # carried over from Marathon verbatim (61 jobs w/o latejoins & interns, 76 w/); re-tune once the
+            # research-sprawl graft (zoo campus + planetarium + chapel gate + library) has had a playtest pass
+            #command (7)
+            Captain: [ 1, 1 ]
+            HeadOfPersonnel: [ 1, 1 ]
+            HeadOfSecurity: [ 1, 1 ]
+            ChiefMedicalOfficer: [ 1, 1 ]
+            ChiefEngineer: [ 1, 1 ]
+            ResearchDirector: [ 1, 1 ]
+            Quartermaster: [ 1, 1 ]
+            #service (11 - 13)
+            Bartender: [ 2, 2 ]
+            Botanist: [ 2, 3 ]
+            Chef: [ 2, 2 ]
+            Janitor: [ 1, 2 ]
+            Chaplain: [ 1, 1 ]
+            Librarian: [ 1, 1 ]
+            ServiceWorker: [ 2, 2 ]
+            #engineering (7)
+            AtmosphericTechnician: [ 3, 3 ]
+            StationEngineer: [ 4, 4 ]
+            TechnicalAssistant: [ 3, 3 ] #intern, not counted
+            #medical (8)
+            Chemist: [ 2, 2 ]
+            MedicalDoctor: [ 4, 4 ]
+            MedicalIntern: [ 3, 3 ] #intern, not counted
+            Psychologist: [ 1, 1 ]
+            Paramedic: [ 1, 1 ]
+            #science (4)
+            Scientist: [ 4, 4 ]
+            ResearchAssistant: [ 3, 3 ] #intern, not counted
+            #security (12)
+            Warden: [ 1, 1 ]
+            SecurityOfficer: [ 8, 8 ]
+            Detective: [ 1, 1 ]
+            SecurityCadet: [ 4, 4 ] #intern, not counted
+            Lawyer: [ 2, 2 ]
+            #supply (8)
+            SalvageSpecialist: [ 3, 3 ]
+            CargoTechnician: [ 3, 3 ]
+            SolreignSectorFreightMaster: [ 1, 1 ]
+            SolreignExpeditionSpecialist: [ 1, 1 ]
+            #civilian (3+)
+            Passenger: [ -1, -1 ] #infinite, not counted
+            # Pair-up onboarding roles; both present as Passenger in-game and share a
+            # private radio channel. Unlimited like Passenger so onboarding is never capped.
+            Wingmate: [ -1, -1 ]
+            WingmateMentor: [ -1, -1 ]
+            Clown: [ 1, 1 ]
+            Mime: [ 1, 1 ]
+            Musician: [ 1, 1 ]
+            #silicon (3)
+            StationAi: [ 1, 1 ]
+            Borg: [ 2, 2 ]
+        # StationIdentity wave (Content.Server/_Solreign/StationIdentity/) — same mechanic as every
+        # other Solreign station's mood component, see SolreignStationMoodComponent's doc comment.
+        # Meridian's brief: "clean white + acid-green science city," a gentle day/night cycle (long,
+        # slow lerp — a research campus's calm rhythm, not a mood swing), and a spore-drift weather
+        # preference (fits a station whose zoo/xenoarch wing studies live specimens — a stray spore
+        # bloom reads as in-fiction plausible here in a way Perihelion's solar flare wouldn't).
+        # Mood rollout pass (2026-07-16): original pale-mint #B9F2C6 endpoint sat too close to
+        # Leviathan's own pale-green #E8F5D0 -- at a glance the two big-chassis stations read as
+        # the same station. First retune pass went to pure clinical blue-white and killed the
+        # "acid-green" half of this station's own brief above -- grk review pass caught that as an
+        # over-correction, not a fix. Landed on a controlled acid-mint (cooler/greyer than
+        # Leviathan's warm champagne ColorB, and a cyan-leaning green distinct from Verdant's
+        # warm yellow-green) so the "clean white + acid-green science city" brief still holds while
+        # no longer sharing Leviathan's exact hue.
+        - type: SolreignStationMood
+          dayNightCycle: true
+          cyclePeriodSeconds: 2400
+          colorA: "#C8E8DC"
+          colorB: "#F0FAF6"
+          weatherEventPrototypes:
+          - SolreignSporeDrift
+          moodPopupLines:
+          - solreign-station-mood-popup-1
+          - solreign-station-mood-popup-2
+          - solreign-station-mood-popup-3

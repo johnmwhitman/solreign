@@ -1,0 +1,42 @@
+# Head
+- type: loadout
+  id: ChefHead
+  equipment:
+    head: ClothingHeadHatChef
+
+# Mask
+- type: loadout
+  id: ChefMask
+  equipment:
+    mask: ClothingMaskItalianMoustache
+
+# Jumpsuit
+- type: loadout
+  id: ChefJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChef
+
+- type: loadout
+  id: ChefJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtChef
+
+# Outer clothing
+- type: loadout
+  id: ChefApron
+  equipment:
+    outerClothing: SolreignChefApron # Solreign feedback #3: Chef CQC, grant-while-worn (see chef_cqc.yml).
+                                      # Was plain ClothingOuterApronChef — this loadout choice now
+                                      # grants the CQC-enabled apron instead; players who pick Jacket/
+                                      # Wintercoat instead simply don't get the moveset (their choice
+                                      # is respected, not silently overwritten by starting gear).
+
+- type: loadout
+  id: ChefJacket
+  equipment:
+    outerClothing: ClothingOuterJacketChef
+
+- type: loadout
+  id: ChefWintercoat
+  equipment:
+    outerClothing: ClothingOuterWinterChef

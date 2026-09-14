@@ -1,0 +1,9 @@
+- files: ["alien_claw_flesh1.ogg", "alien_claw_flesh2.ogg", "alien_claw_flesh3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from CM-SS13"
+  source: "https://gitlab.com/cmdevs/colonial-warfare/-/tree/dev/sound/weapons"
+
+- files: ["alien_spitacid.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Modified from 'Splat.wav' by freesound user 'Audionautics'. Trimmed and converted to mono OGG."
+  source: "https://freesound.org/people/Audionautics/sounds/133968/"

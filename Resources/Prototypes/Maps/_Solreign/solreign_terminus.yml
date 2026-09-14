@@ -1,0 +1,238 @@
+# Solreign Terminus — the industrial titan (SOLREIGN TERMINUS ground rules, maps program, second
+# concurrent lane of a 3-lane wave; lane order: lane 1 = Fland (largest upstream chassis,
+# 237,364 lines), lane 2 (this station) = upstream Oasis (204,600 lines, second-largest), lane 3 =
+# Box (183,386 lines, third). Full ranking pulled from `wc -l` across every file in Resources/Maps/
+# at wave start: Fland > Oasis > Box > Serpentcrest > Plasma > Bagel > Marathon > Exo > Elkridge >
+# Snowball > Packed > Relic > Saltern > Reach. Oasis was NOT already spoken for: the existing
+# `solreign_oasis.yml` (Resources/Maps/_Solreign/solreign_oasis.yml) is Solreign's *own* station
+# named "Oasis" but its chassis is upstream Saltern, not upstream Oasis — grep-confirmed
+# (`BecomesStation` in that grid file still reads `id: SolreignOasis` over a Saltern-derived tilemap)
+# before picking upstream oasis.yml here, so there is no collision.
+#
+# Grid file: Resources/Maps/_Solreign/solreign_terminus.yml — a copy of upstream
+# Resources/Maps/oasis.yml (91-job / 70+-pop station) with `BecomesStation id:` renamed
+# Oasis -> SolreignTerminus (the grid's own tile/chunk data is untouched — W14's binding lesson:
+# never copy tile-chunk data between map files, only ever copy the whole grid file wholesale and
+# rename the one id). New identity content is ADDED as fresh top-level `- proto:` entity blocks
+# appended after the file's own DefaultStationBeacon census (fresh uids 90001+, existing max uid in
+# upstream oasis.yml was 31382 — no collision), plus ONE in-place edit on an existing entity (the
+# showpiece crate, see §5 below) — every other addition is purely additive, no existing tile or
+# entity was edited.
+#
+# Room census used for placement (verified via `DefaultStationBeacon*` NavMap markers baked into
+# the chassis itself — 54 of them, one per named room, each giving a room name + a guaranteed-real
+# open-floor anchor coordinate by construction; same anchor-and-grep discipline as
+# docs/specs/2026-07-11-map-graft-plan.md's APC-anchor technique, just using the beacon markers
+# instead of APC names since Oasis's APCs don't carry per-room `name:` overrides the way Saltern's
+# do). NOT walked in the mapping editor or a running client — no `dotnet build` this session besides
+# the one GameMapsLoadableTest exception the ground rules carve out — so every coordinate below is
+# "walk here and confirm the exact tile," not "paint blind at this pixel," the same caveat every
+# prior Solreign map session (Oasis/Nocturne/Perihelion/Verdant) already carries.
+#
+# ── 1. Cargo empire: contracts board CENTRAL + salvage-raid staging bay ────────────────────────────
+# Beacons: CargoBay (-56.5,-3.5), CargoReception (-46.5,-0.5), QMRoom (-53.5,7.5). Reuses the
+# already-built Solreign Contracts infrastructure verbatim (Entities/contracts_infrastructure.yml —
+# SolreignContractsBoard / SolreignFulfillmentDropbox) and the already-built group-contract scaling
+# (Content.Server/_Solreign/Contracts/ContractsSystem.cs's "accept-time group scaling, John's
+# salvage-raid mandate" — that C# file is Wave 15/16 territory this session, untouched; the board
+# and dropbox are placed entities only). SolreignContractsBoard placed at CargoReception (-46.5,-0.5)
+# — "CENTRAL" to the cargo/salvage cluster, the first thing a crew sees stepping off the cargo
+# shuttle/reception into the yard. SolreignFulfillmentDropbox one tile over (-45.5,-0.5). The
+# existing SolreignSignContractsHowTo (Entities/signage.yml) goes on the wall facing the board
+# (-46.5,0.5); the new SolreignSignSalvageRaidRoster (this wave's Entities/terminus_props.yml) goes
+# at the CargoBay staging end (-56.5,-2.5) where a raid party actually gathers before departure.
+#
+# ── 2. THE GRAND PRIX: full kart circuit, pit lane + spectator stand ───────────────────────────────
+# Venue: the station's "Park" — not one of the 54 DefaultStationBeacon rooms (Park has no single
+# named beacon), but independently confirmed real and roomy via its own AirAlarm network: 8
+# directional units (Park NE/South/West/North/East/NW/SE/SW Air Alarm) plus a Park Center Air Alarm,
+# a "9 sub-zones" layout only a large multi-quadrant room would need. Three of those alarms resolved
+# to reliable coordinates by cross-referencing their nearest Transform in the grid
+# (`grep`+small Python pass, not the mapping editor): Center (-1.5,5.5), West (-8.5,2.5),
+# SW (-14.5,-1.5) — a cluster roughly 13-14 tiles across, confirming Park is centered near (-8,2)
+# with real interior room for a small circuit. The other five alarms' positions did not resolve
+# cleanly from text alone (their nearest-Transform match was ambiguous/contaminated by neighboring
+# entities in the census pass) — South/North/East/NE/NW/SE checkpoints below are DERIVED by
+# reflecting the three confirmed points around Park Center, not independently verified. Treat the
+# derived points as the least-confident coordinates in this whole file; confirm the actual room
+# shape in-editor before relying on them for anything beyond "approximately here."
+#
+# Course "terminus_grand_prix", 6 gates, 3 laps (SolreignGoKart/SolreignGoKartCheckpoint,
+# Entities/recreation.yml — both driving (SolreignDriverSeat) and lap tracking
+# (SolreignLapTracker/SolreignLapCheckpoint) are fully implemented, not a stub):
+#   CP0 (start/finish, pit lane) — Park Center (-1.5,5.5), confirmed
+#   CP1 — Park West (-8.5,2.5), confirmed
+#   CP2 — Park SW (-14.5,-1.5), confirmed
+#   CP3 — (-8.5,-6.5), derived (reflects CP1 across Center)
+#   CP4 — (2.5,-1.5), derived (reflects CP2 across Center)
+#   CP5 — (5.5,2.5), derived (reflects CP1's offset the other way)
+# Pit lane: 2x SolreignGoKart at (-2.5,5.5)/(-0.5,5.5), both courseId: terminus_grand_prix,
+# checkpointCount: 6, totalLaps: 3 (per-instance override of the prototype's placeholder
+# courseId: default). Spectator stand: 3x upstream `Chair` at (-1.5,7.5)/(-0.5,7.5)/(-2.5,7.5)
+# facing the start/finish line, plus the new SolreignSignGrandPrixWelcome
+# (Entities/terminus_props.yml) at (-1.5,6.5). One SolreignGoKartBoostPad at (-8.5,4.5) (the
+# CP1->CP2 leg) and one SolreignGoKartMudPatch at (2.5,0.5) (the CP4->CP5 leg) for flavor — not an
+# exhaustive hazard pass, a representative first lap of dressing, same "representative pass, not
+# lightby-light" posture solreign_verdant.yml's own header already established for this kind of
+# spread-the-dressing-around task.
+#
+# ── 3. Mini-boss arena: disused reactor hall (Auditor Prime configured) ────────────────────────────
+# Beacon: AME (-25.5,22.5 -> actually 25.5,22.5, DefaultStationBeaconAME) — the station's antimatter
+# engine chamber, framed in-fiction (SolreignSignReactorHallWarning, terminus_props.yml) as powered
+# down since a singularity retrofit and left to sit unused: the "disused reactor hall." Auditor
+# Prime (SolreignMobAuditorPrime, Entities/GameRules/minibosses.yml — GhostRole prob: 0, a
+# deterministic scripted encounter, NOT a ghost-role wildcard) is placed directly in the chamber at
+# (25.5,22.5) as a standing pre-configured boss guarding the space, rather than relying solely on the
+# admin-invoked `addgamerule SolreignAuditorPrime` path (which still works independently and can
+# respawn/re-trigger the encounter station-wide if admins want a second one). Warning sign at the
+# chamber's approach (24.5,21.5).
+#
+# ── 4. Monster nest: Sublevel H maintenance ring (deepest ring on this chassis) ─────────────────────
+# Beacon: Disposals (-55.5,-28.5) — the map's own trash-processing dead end, the single farthest
+# interior room from Arrivals on this chassis by beacon-coordinate distance, matching the ground
+# rule's "deepest maintenance ring" ask. Three new TimedSpawner nest markers
+# (SolreignTerminusNestSpawnerAlpha/Beta/Gamma, terminus_props.yml — same recurring-spawn idiom as
+# Entities/Markers/hellzone_spawners.yml, different mob set: MobGiantSpider/MobCarp/MobSpiderSpace,
+# all existing upstream hostile mobs, zero new mob prototypes) at (-55.5,-27.5), (-54.5,-29.5),
+# (-56.5,-30.5). Hazard sign at the ring's entrance (-53.5,-28.5).
+#
+# ── 5. RC-car courier tunnels connecting departments ────────────────────────────────────────────────
+# SolreignMobRcCameraCar (Entities/rc_car.yml — ghost-role-driven OR handheld-controller-driven via
+# SolreignItemRcController/RcControllable, both paths already fully implemented) placed at three
+# maintenance-adjacent tunnel nodes so a courier can actually cross between departments:
+# Telecoms (-30.5,-6.5), ToolRoom (-31.5,4.5), Janitor's Closet (22.5,-3.5). Two new cosmetic
+# SolreignRcCarCharger docks (terminus_props.yml) at the Telecoms and ToolRoom nodes (the two ends
+# of the longest leg). One SolreignItemRcController handheld left on top of the ToolRoom charger for
+# a crew member to pick up and start driving immediately. SolreignSignRcCourierNetwork
+# (terminus_props.yml) at the Telecoms node.
+#
+# ── 6. Four secrets (incl. one showpiece) ───────────────────────────────────────────────────────────
+# Never-announce rule observed throughout (docs/specs/2026-07-11-showpiece-placement.md §1): no
+# AnnounceOnUse, no comms ping, no system-visible signal on any of the four.
+#   1. SHOWPIECE — WeaponPulseRifle (Objects/Weapons/Guns/Battery/battery_guns.yml: "A weapon that
+#      is almost as infamous as its users," BaseCentcommContraband, dormant — grep-audited zero hits
+#      across Catalog/**, Markers/Spawners/**, and every Resources/Maps/** file including all four
+#      prior Solreign chassis before picking it, same audit methodology as
+#      docs/specs/2026-07-11-showpiece-placement.md §0, just re-run against a different weapon
+#      category (Guns, not Melee, since all 6 melee showpieces from that doc's audit are already
+#      placed — 5 on solreign_oasis.yml, 1 (SpearSharkMinnow) on solreign_verdant.yml, both
+#      grep-confirmed before this pick). Placed in the existing `CratePrivateSecure` crate
+#      (uid 15009, pos -45.5,-15.5, near the TechVault beacon at -45.5,-21.5) via an in-place edit
+#      adding `AccessReader access: [["Quartermaster"]]` + `EntityTableContainerFill` — the ONE
+#      existing-entity edit in this whole file, everything else here is a net-new addition. Gated
+#      behind Quartermaster access, tucked among the salvage-specialist lockers already in that
+#      corner (LockerSalvageSpecialistFilled x3 at -52.5/-53.5,-16.5..-18.5) rather than a new
+#      standalone display case.
+#   2. Grand Prix inaugural race log (SolreignPaperTerminusLog1) at (-1.5,7.5), under the spectator
+#      stand.
+#   3. Salvage crew transmission (SolreignPaperTerminusLog2) at (-54.5,-27.5), just inside the
+#      Sublevel H nest.
+#   4. Antimatter chamber decommission order (SolreignPaperTerminusLog3) at (24.5,23.5), inside the
+#      reactor hall near Auditor Prime.
+#
+# ── Mood: eternal shift, spore+flare weather mix ────────────────────────────────────────────────────
+# `dayNightCycle: false` below — SolreignStationMoodSystem.TickDayNight (Content.Server/_Solreign/
+# StationIdentity/SolreignStationMoodSystem.cs) returns immediately when this is false and never
+# touches MapLightComponent, confirmed by reading that method: the map's baseline ambient light is
+# left exactly as the copied Oasis chassis shipped it — a true "no day cycle, eternal shift," not a
+# frozen lerp. `weatherEventPrototypes` lists BOTH SolreignSolarFlare and SolreignSporeDrift (Entities
+# backed by Content.Server/_Solreign/StationIdentity/SolreignSolarFlareRule.cs /
+# SolreignSporeDriftRule.cs) per the ground rule's "spore+flare weather mix" — same
+# admin-invoked-today / event-director-staged-for-later posture as every other Solreign station's
+# WeatherEventPrototypes list (see solreign_oasis.yml / solreign_perihelion.yml's own comments).
+#
+# Job roster: carried over VERBATIM from upstream Oasis (Resources/Prototypes/Maps/oasis.yml — 72
+# roundstart / 91 w/ latejoins+interns), same "carried over verbatim, re-tune once a real mapping
+# pass lands" convention every other Solreign station prototype uses for its base chassis's roster.
+#
+# DoNotMap check: every new prototype this wave adds (signage, RC charger, nest spawners, lore
+# papers) was checked for the `DoNotMap` category and carries none — no PostMapInitTest.cs whitelist
+# edit needed (that file is Wave 15/16 territory this session regardless). WeaponPulseRifle itself
+# also carries no DoNotMap category (checked its own entity block, Guns/Battery/battery_guns.yml).
+#
+# map_pool.yml: Resources/Prototypes/_Solreign/map_pool.yml was NOT edited by this session (see this
+# session's own ground-rules caution above) — but the Wave 17 verifier pass confirmed the map-lane
+# ground rules ("if map_pool.yml exists when you finish, ADD your map id") make map lanes responsible
+# for their own pool entry, matching what Leviathan/Meridian already did, and added `SolreignTerminus`
+# to `SolreignMapPool`'s `maps:` list accordingly.
+
+- type: gameMap
+  id: SolreignTerminus
+  mapName: 'Solreign Terminus'
+  mapPath: /Maps/_Solreign/solreign_terminus.yml
+  minPlayers: 70
+  stations:
+    SolreignTerminus:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Solreign Terminus {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'TX'
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/Shuttles/emergency_accordia.yml # carried over from upstream Oasis — sized for this chassis's 70+ pop, unlike the smaller crimson shuttle every other Solreign station uses
+        - type: SolreignStationMood
+          dayNightCycle: false # eternal shift — ground rule; TickDayNight no-ops entirely when false, see header comment
+          weatherEventPrototypes:
+          - SolreignSolarFlare
+          - SolreignSporeDrift
+          moodPopupLines:
+          - solreign-terminus-mood-popup-1
+          - solreign-terminus-mood-popup-2
+          - solreign-terminus-mood-popup-3
+        - type: StationJobs
+          availableJobs: # carried over from upstream Oasis verbatim; 72 jobs total w/o latejoins & interns, 91 jobs total w/ latejoins & interns — re-tune once a real mapping pass lands
+            #command (7)
+            Captain: [ 1, 1 ]
+            HeadOfPersonnel: [ 1, 1 ]
+            HeadOfSecurity: [ 1, 1 ]
+            ChiefMedicalOfficer: [ 1, 1 ]
+            ChiefEngineer: [ 1, 1 ]
+            ResearchDirector: [ 1, 1 ]
+            Quartermaster: [ 1, 1 ]
+            #service (15 - 16)
+            Bartender: [ 2, 2 ]
+            Botanist: [ 2, 3 ]
+            Chef: [ 2, 2 ]
+            Janitor: [ 3, 3 ]
+            Chaplain: [ 1, 1 ]
+            Librarian: [ 1, 1 ]
+            ServiceWorker: [ 2, 2 ]
+            Reporter: [ 1, 1 ]
+            #engineering (8)
+            AtmosphericTechnician: [ 3, 3 ]
+            StationEngineer: [ 5, 5 ]
+            TechnicalAssistant: [ 4, 4 ] #intern, not counted
+            #medical (11)
+            Chemist: [ 2, 2 ]
+            MedicalDoctor: [ 6, 6 ]
+            Paramedic: [ 2, 2 ]
+            MedicalIntern: [ 4, 4 ] #intern, not counted
+            Psychologist: [ 1, 1 ]
+            #science (5)
+            Scientist: [ 5, 5 ]
+            ResearchAssistant: [ 6, 6 ] #intern, not counted
+            #security (13)
+            Warden: [ 1, 1 ]
+            SecurityOfficer: [ 8, 8 ]
+            Detective: [ 1, 1 ]
+            SecurityCadet: [ 4, 4 ] #intern, not counted
+            Lawyer: [ 3, 3 ]
+            #supply (9)
+            SalvageSpecialist: [ 3, 3 ]
+            CargoTechnician: [ 4, 4 ]
+            SolreignSectorFreightMaster: [ 1, 1 ]
+            SolreignExpeditionSpecialist: [ 1, 1 ]
+            #civilian (3+)
+            Passenger: [ -1, -1 ] #infinite, not counted
+            # Pair-up onboarding roles; both present as Passenger in-game and share a
+            # private radio channel. Unlimited like Passenger so onboarding is never capped.
+            Wingmate: [ -1, -1 ]
+            WingmateMentor: [ -1, -1 ]
+            Clown: [ 1, 1 ]
+            Mime: [ 1, 1 ]
+            Musician: [ 1, 1 ]
+            #silicon (3)
+            Borg: [ 2, 2 ]
+            StationAi: [ 1, 1 ]

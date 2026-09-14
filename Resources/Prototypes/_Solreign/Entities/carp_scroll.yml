@@ -1,0 +1,29 @@
+# Solreign — "Ancient Carp Scroll" (MARTIAL ARTS TOY, roadmap: one style, three combos, nonlethal).
+# Use in hand to learn the Way of the Ornamental Carp — ONE TIME; the scroll crumbles and the
+# student is permanently marked with SolreignMartialArtistComponent. Combos are sequences of
+# existing interactions (unarmed hits + disarm shoves) inside a 1.5s window:
+#   Carp Rush      = hit, hit    -> stamina jolt + battle cry (stamina only, never health)
+#   Rising Tide    = hit, shove  -> knockdown
+#   Gentle Current = shove, shove -> disarm throw, the item flies
+# Logic: Content.Server/_Solreign/MartialArts/. Pure combo-window math is unit-tested in
+# Content.Tests/_Solreign/CarpComboRulesTests.cs.
+#
+# Sprite: reuses the upstream bureaucracy paper RSI for the toy.
+# TODO(SOLREIGN-ART): custom sprite wanted — a rolled parchment with an acid-green wax seal and a
+# tasteful koi watermark, plus matching inhands (32x32, sprite factory lane).
+
+- type: entity
+  parent: BaseItem
+  id: SolreignCarpScroll
+  name: ancient carp scroll
+  suffix: solreign
+  description: A Solreign Heritage Enrichment Module describing the Way of the Ornamental Carp. Contents are certified 100% nonlethal. Reading constitutes acceptance of the Pond.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: paper
+    - state: paper_words
+  - type: Item
+    size: Tiny
+  - type: SolreignCarpScroll

@@ -1,0 +1,6 @@
+# Solreign fork: lobby shows the corporate command-deck title card every time.
+- type: lobbyBackground
+  id: Solreign
+  background: /Textures/LobbyScreens/solreign.png
+  title: lobby-state-background-solreign-title
+  artist: lobby-state-background-solreign-artist

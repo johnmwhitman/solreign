@@ -1,0 +1,11 @@
+# Play-time trackers for the salvaged flavor roles, matching the vanilla
+# pattern in server play_time_trackers.yml (JobMusician etc.).
+
+- type: playTimeTracker
+  id: JobSmuggler
+
+- type: playTimeTracker
+  id: JobCourier
+
+- type: playTimeTracker
+  id: JobScavenger

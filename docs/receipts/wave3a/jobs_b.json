@@ -1,0 +1,79 @@
+[
+ {
+  "asset": "handdrill",
+  "state": "handdrill",
+  "prompt": "a hand-held sci-fi power drill tool pointing right, grey and silver metal body, a violet-purple cylindrical grip section in the middle, black chuck, metal drill bit tip protruding forward",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "beach_ball",
+  "state": "icon",
+  "prompt": "a white spherical beach ball with red, yellow, and blue pastel colored panel stripes",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "rubber_chicken",
+  "state": "icon",
+  "prompt": "a comical yellow rubber chicken toy lying on its side, small red comb on its head, orange beak, simple cartoon prop",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "capgun",
+  "state": "icon",
+  "prompt": "a small grey and black toy cap-gun revolver with a brown wooden grip and a tiny light blue accent near the muzzle tip",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "foam_blade",
+  "state": "icon",
+  "prompt": "a curved foam toy sword blade shaped like a scimitar, red top edge and white blade body, black handle grip",
+  "key": "cyan",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "chainsaw",
+  "state": "icon",
+  "prompt": "a compact chainsaw tool viewed diagonally, grey serrated blade bar, red motor housing and handle",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "incomplete_bat",
+  "state": "icon",
+  "prompt": "a plain wooden baseball bat held diagonally, brown wood texture with darker wood grain segments, no nails, unfinished prop",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ }
+]

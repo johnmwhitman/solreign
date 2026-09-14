@@ -1,0 +1,108 @@
+# Solreign station-identity parallaxes: three distinct backdrop sets built for the maps
+# program (task #21), following the upstream Parallaxes idiom (compare
+# Resources/Prototypes/Parallaxes/kettle.yml / default.yml) and this repo's existing
+# Solreign-sector precedent (parallax.yml alongside this file).
+#
+# Each station gets: a tileable BG image layer (AI-generated, Imagen via
+# ~/AI/Tools/gemini_image.py --vertex --engine imagen), a procedural GeneratedParallaxTextureSource
+# star layer tuned to the station's palette (parallax_config_<name>_stars.toml, siblings of this
+# file), and an AI-generated foreground Neb image layer for the station's signature feature
+# (nebula / star corona / aurora). layersLQ reuses the stock generic parallax_config.toml exactly
+# like Parallaxes/default.yml and kettle.yml do — no new low-quality asset needed.
+#
+# Prototype only. Assigning a `parallax:` to an actual station/map (ParallaxComponent, see
+# Content.Shared/Parallax/ParallaxComponent.cs) is grid work on Resources/Maps/_Solreign, owned by
+# the maps-program lane, not this asset-drop task.
+#
+# Provenance (prompts/seeds/cost/verification) recorded in
+# assets/station-identity/PROVENANCE.md in the project workspace (not shipped in this repo).
+
+# --- Nocturne: deep violet nebula, sparse neon stars --------------------------------------
+- type: parallax
+  id: SolreignNocturne
+  layers:
+    # Tileable void base, faint violet tint.
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_Solreign/Parallaxes/Nocturne/NocturneParallaxBG.png"
+      slowness: 0.998046875
+      scale: "1, 1"
+    # Sparse neon-violet/magenta starfield, procedural.
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "solreign_nocturne_stars"
+        configPath: "/Prototypes/_Solreign/parallax_config_nocturne_stars.toml"
+      slowness: 0.99
+    # Deep violet nebula foreground, AI-generated.
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_Solreign/Parallaxes/Nocturne/NocturneParallaxNeb.png"
+      slowness: 0.95
+      scale: "1, 1"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+# --- Perihelion: massive warm star limb, corona --------------------------------------------
+- type: parallax
+  id: SolreignPerihelion
+  layers:
+    # Tileable void base, faint warm-amber tint.
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_Solreign/Parallaxes/Perihelion/PerihelionParallaxBG.png"
+      slowness: 0.998046875
+      scale: "1, 1"
+    # Warm gold starfield washed by the corona, procedural.
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "solreign_perihelion_stars"
+        configPath: "/Prototypes/_Solreign/parallax_config_perihelion_stars.toml"
+      slowness: 0.99
+    # Giant star limb + corona foreground, AI-generated.
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_Solreign/Parallaxes/Perihelion/PerihelionParallaxNeb.png"
+      slowness: 0.95
+      scale: "1, 1"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false
+
+# --- Verdant: green aurora field -------------------------------------------------------------
+- type: parallax
+  id: SolreignVerdant
+  layers:
+    # Tileable void base, faint green tint.
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_Solreign/Parallaxes/Verdant/VerdantParallaxBG.png"
+      slowness: 0.998046875
+      scale: "1, 1"
+    # Pale bioluminescent-green starfield, procedural.
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "solreign_verdant_stars"
+        configPath: "/Prototypes/_Solreign/parallax_config_verdant_stars.toml"
+      slowness: 0.99
+    # Aurora-field foreground, AI-generated.
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_Solreign/Parallaxes/Verdant/VerdantParallaxNeb.png"
+      slowness: 0.95
+      scale: "1, 1"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false

@@ -1,0 +1,37 @@
+# Solreign ninjitsu flavor (Content.Server._Solreign.Ninjitsu) — three abilities layered on the
+# upstream Ninja/EnergyKatana systems without modifying them. See NinjitsuSystem.cs for the doc
+# comment covering all three; only two get action buttons (the takedown is automatic on unarmed hits).
+
+# Smoke Vanish — suit-tech gadget, granted only while a NinjitsuGear-equipped suit is worn by a ninja.
+- type: entity
+  parent: BaseAction
+  id: ActionNinjitsuSmokeVanish
+  name: Smoke vanish
+  description: Detonates a concealed smoke charge at your feet, cloaking you and quickening your escape for a few seconds.
+  components:
+  - type: Action
+    useDelay: 20
+    itemIconStyle: NoItem
+    priority: -8
+  - type: Sprite
+    sprite: Objects/Weapons/Grenades/smoke.rsi
+    state: icon
+  - type: InstantAction
+    event: !type:NinjitsuSmokeVanishEvent
+
+# Silent Step — innate toggle, granted directly to every Space Ninja regardless of gear.
+- type: entity
+  parent: BaseAction
+  id: ActionNinjitsuSilentStep
+  name: Silent step
+  description: Toggles the Way of the Silent Step — ninjitsu training that leaves no footfall for station sensors to log, boots or no boots.
+  components:
+  - type: Action
+    useDelay: 1
+    itemIconStyle: NoItem
+    priority: -7
+  - type: Sprite
+    sprite: Clothing/Shoes/Specific/spaceninja.rsi
+    state: icon
+  - type: InstantAction
+    event: !type:NinjitsuSilentStepEvent

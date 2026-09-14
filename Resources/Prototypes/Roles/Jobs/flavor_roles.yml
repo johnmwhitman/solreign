@@ -1,0 +1,50 @@
+# Salvaged flavor jobs: Courier / Scavenger.
+# (Smuggler is defined in smuggler.yml; Musician ships upstream — do not redefine.)
+# NOTE: spawnPositions/minPlayers and guideEntry prototypes were dropped — the
+# former aren't fields on this engine's JobPrototype, the latter pointed text: at
+# locale keys instead of guide-document paths. Guidebook entries can be re-added
+# later with proper /ServerInfo/Guidebook docs.
+
+- type: job
+  id: Courier
+  name: job-name-courier
+  description: job-description-courier
+  playTimeTracker: JobCourier
+  startingGear: CourierGear
+  icon: "JobIconCourier"
+  supervisors: job-supervisors-hop
+  access:
+  - Maintenance
+  - External
+  - Cargo
+
+- type: startingGear
+  id: CourierGear
+  equipment:
+    id: CourierPDA
+    ears: ClothingHeadsetCargo
+  storage:
+    back:
+    - BoxSurvival
+
+- type: job
+  id: Scavenger
+  name: job-name-scavenger
+  description: job-description-scavenger
+  playTimeTracker: JobScavenger
+  startingGear: ScavengerGear
+  icon: "JobIconScavenger"
+  supervisors: job-supervisors-qm
+  access:
+  - Maintenance
+  - External
+
+- type: startingGear
+  id: ScavengerGear
+  equipment:
+    id: ScavengerPDA
+    ears: ClothingHeadsetCargo
+  storage:
+    back:
+    - BoxSurvival
+    - Crowbar

@@ -1,0 +1,425 @@
+{
+  "sprites": [
+    {
+      "rsi": "glass_shard1",
+      "state": "shard1",
+      "verdict": "animate",
+      "concept": "Specular hop: tip ridge flash then right-facet glint on the small angular shard",
+      "frames": 4,
+      "delays": [
+        0.6,
+        0.12,
+        0.14,
+        0.18
+      ],
+      "masks": {
+        "tip": {
+          "letters": [
+            "b"
+          ],
+          "region": [
+            12,
+            9,
+            16,
+            10
+          ]
+        },
+        "right_edge": {
+          "letters": [
+            "b",
+            "f"
+          ],
+          "region": [
+            17,
+            13,
+            21,
+            15
+          ]
+        },
+        "spark_tip": {
+          "pixels": [
+            [
+              14,
+              9
+            ]
+          ]
+        },
+        "spark_mid": {
+          "pixels": [
+            [
+              18,
+              13
+            ],
+            [
+              19,
+              13
+            ]
+          ]
+        },
+        "body_dim": {
+          "letters": [
+            "a"
+          ],
+          "region": [
+            13,
+            12,
+            17,
+            17
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "tip",
+              "op": "brightness",
+              "factor": 1.28
+            },
+            {
+              "mask": "spark_tip",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.45
+            },
+            {
+              "mask": "body_dim",
+              "op": "brightness",
+              "factor": 0.94
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "right_edge",
+              "op": "brightness",
+              "factor": 1.38
+            },
+            {
+              "mask": "spark_mid",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.5
+            },
+            {
+              "mask": "body_dim",
+              "op": "brightness",
+              "factor": 0.93
+            }
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {
+              "mask": "right_edge",
+              "op": "brightness",
+              "factor": 1.12
+            },
+            {
+              "mask": "spark_tip",
+              "op": "brightness",
+              "factor": 1.18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "glass_shard2",
+      "state": "shard2",
+      "verdict": "animate",
+      "concept": "Wide-bevel sheen crawls L\u2192R then a sharp lower-lip sparkle",
+      "frames": 4,
+      "delays": [
+        0.48,
+        0.18,
+        0.2,
+        0.12
+      ],
+      "masks": {
+        "bevel_left": {
+          "letters": [
+            "d",
+            "c",
+            "g"
+          ],
+          "region": [
+            9,
+            9,
+            16,
+            11
+          ]
+        },
+        "bevel_right": {
+          "letters": [
+            "c",
+            "d"
+          ],
+          "region": [
+            17,
+            9,
+            24,
+            12
+          ]
+        },
+        "lip": {
+          "letters": [
+            "c",
+            "f"
+          ],
+          "region": [
+            10,
+            17,
+            14,
+            21
+          ]
+        },
+        "spark": {
+          "pixels": [
+            [
+              18,
+              9
+            ],
+            [
+              19,
+              9
+            ]
+          ]
+        },
+        "body_dim": {
+          "letters": [
+            "a",
+            "b"
+          ],
+          "region": [
+            10,
+            12,
+            16,
+            17
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "bevel_left",
+              "op": "brightness",
+              "factor": 1.26
+            },
+            {
+              "mask": "spark",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.28
+            },
+            {
+              "mask": "body_dim",
+              "op": "brightness",
+              "factor": 0.95
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "bevel_right",
+              "op": "brightness",
+              "factor": 1.32
+            },
+            {
+              "mask": "spark",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.55
+            },
+            {
+              "mask": "body_dim",
+              "op": "brightness",
+              "factor": 0.94
+            }
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {
+              "mask": "lip",
+              "op": "brightness",
+              "factor": 1.42
+            },
+            {
+              "mask": "bevel_right",
+              "op": "brightness",
+              "factor": 1.1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "glass_shard3",
+      "state": "shard3",
+      "verdict": "animate",
+      "concept": "Tip flash races down the long jagged spine, residual mid-facet shimmer",
+      "frames": 4,
+      "delays": [
+        0.52,
+        0.11,
+        0.14,
+        0.2
+      ],
+      "masks": {
+        "tip": {
+          "letters": [
+            "c",
+            "e"
+          ],
+          "region": [
+            18,
+            4,
+            24,
+            7
+          ]
+        },
+        "upper_spine": {
+          "letters": [
+            "c",
+            "d",
+            "h"
+          ],
+          "region": [
+            14,
+            8,
+            21,
+            11
+          ]
+        },
+        "mid_sheen": {
+          "letters": [
+            "c",
+            "d"
+          ],
+          "region": [
+            9,
+            12,
+            16,
+            18
+          ]
+        },
+        "tip_spark": {
+          "pixels": [
+            [
+              23,
+              4
+            ],
+            [
+              24,
+              4
+            ],
+            [
+              19,
+              5
+            ]
+          ]
+        },
+        "body_dim": {
+          "letters": [
+            "a",
+            "b"
+          ],
+          "region": [
+            7,
+            16,
+            14,
+            22
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "tip",
+              "op": "brightness",
+              "factor": 1.3
+            },
+            {
+              "mask": "tip_spark",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.5
+            },
+            {
+              "mask": "body_dim",
+              "op": "brightness",
+              "factor": 0.94
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "upper_spine",
+              "op": "brightness",
+              "factor": 1.34
+            },
+            {
+              "mask": "tip",
+              "op": "brightness",
+              "factor": 1.12
+            },
+            {
+              "mask": "body_dim",
+              "op": "brightness",
+              "factor": 0.93
+            }
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {
+              "mask": "mid_sheen",
+              "op": "brightness",
+              "factor": 1.22
+            },
+            {
+              "mask": "upper_spine",
+              "op": "brightness",
+              "factor": 1.1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

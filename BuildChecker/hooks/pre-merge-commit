@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# SOLREIGN pre-merge-commit — 2026-07-28 duplicate-prototype outage guard.
+# Covers the AUTOMATIC merge commit. Hand-resolved merges run pre-commit instead —
+# both are installed. Logic + design scars: _outage_guard.sh.
+GUARD_CALLER=pre-merge-commit
+export GUARD_CALLER
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+for g in "$DIR/_outage_guard.sh" \
+         "${SOLREIGN_OPS_DIR:-}/deploy/hooks/_outage_guard.sh" \
+         "$HOME/AI/solreign-trees/rel-ops/deploy/hooks/_outage_guard.sh"; do
+    [ -n "$g" ] && [ -f "$g" ] && exec bash "$g"
+done
+echo "⛔ REFUSED: _outage_guard.sh not found (fail-closed)." >&2
+exit 1

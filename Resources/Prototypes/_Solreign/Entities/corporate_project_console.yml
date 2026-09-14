@@ -1,0 +1,30 @@
+# "Corporate Projects Terminal" — SR-W-030
+# Wall-mounted terminal allowing crew to view, select, and contribute resources to active
+# player-run corporate projects across rounds.
+
+- type: entity
+  parent: BaseWallmountMetallic
+  id: SolreignCorporateProjectConsole
+  name: corporate projects terminal
+  suffix: solreign
+  description: A high-clearance Solreign logistics console displaying active corporate R&D projects. Accepts bounded crew contributions, preserves progress across shift boundaries, enforces anti-monopoly quotas, and unlocks station-wide corporate milestones.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/signalscreen.rsi
+    state: signalscreen
+  - type: SolreignCorporateProjectConsole
+  - type: ActivatableUI
+    key: enum.SolreignCorporateProjectUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SolreignCorporateProjectUiKey.Key:
+        type: SolreignCorporateProjectBoundUserInterface
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

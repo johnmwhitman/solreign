@@ -1,0 +1,128 @@
+# "Providence" — Solreign's station voice. 60 files, 12 categories: 50 original lines plus the
+# 2026-07-22 ten-line idle-musings expansion. Generated with gemini-2.5-flash-tts (Kore voice);
+# see Resources/Audio/_Solreign/Providence/ATTRIBUTION.txt for the durable in-repo provenance.
+#
+# One soundCollection per category — same idiom as upstream Resources/Prototypes/SoundCollections/
+# announcements.yml's RoundEnd/PowerOn collections. C# side reads these ids from
+# Content.Server/_Solreign/Providence/ProvidenceVoiceMap.cs; keep the two in lockstep by hand.
+#
+# Wired currently (PlayLine/PlayLineTo callers are distributed across Providence and station-identity
+# systems):
+#   shift_start, shift_end, title_ceremony, event_audit, event_acid_storm, idle_musings, hot_potato,
+#   death_commiseration, new_player_welcome.
+# Staged, not wired this wave (collections ready, no call site yet):
+#   event_raid — no production PlayLine call currently selects this category.
+#   zoo_breach — NO zoo faction-flip mechanic exists in the codebase to hook (zoo_fauna.yml's
+#     exhibit mobs are explicitly passive/PG, no NpcFactionMember); needs that mechanic built first.
+#   cake_denial — no cake entity/examine handler exists in the codebase to hook.
+
+- type: soundCollection
+  id: SolreignProvidenceShiftStart
+  files:
+  - /Audio/_Solreign/Providence/shift_start_01.ogg
+  - /Audio/_Solreign/Providence/shift_start_02.ogg
+  - /Audio/_Solreign/Providence/shift_start_03.ogg
+  - /Audio/_Solreign/Providence/shift_start_04.ogg
+  - /Audio/_Solreign/Providence/shift_start_05.ogg
+
+- type: soundCollection
+  id: SolreignProvidenceShiftEnd
+  files:
+  - /Audio/_Solreign/Providence/shift_end_01.ogg
+  - /Audio/_Solreign/Providence/shift_end_02.ogg
+  - /Audio/_Solreign/Providence/shift_end_03.ogg
+  - /Audio/_Solreign/Providence/shift_end_04.ogg
+  - /Audio/_Solreign/Providence/shift_end_05.ogg
+
+- type: soundCollection
+  id: SolreignProvidenceTitleCeremony
+  files:
+  - /Audio/_Solreign/Providence/title_ceremony_01.ogg
+  - /Audio/_Solreign/Providence/title_ceremony_02.ogg
+  - /Audio/_Solreign/Providence/title_ceremony_03.ogg
+  - /Audio/_Solreign/Providence/title_ceremony_04.ogg
+  - /Audio/_Solreign/Providence/title_ceremony_05.ogg
+
+- type: soundCollection
+  id: SolreignProvidenceEventAudit
+  files:
+  - /Audio/_Solreign/Providence/event_audit_01.ogg
+  - /Audio/_Solreign/Providence/event_audit_02.ogg
+  - /Audio/_Solreign/Providence/event_audit_03.ogg
+
+- type: soundCollection
+  id: SolreignProvidenceEventRaid
+  files:
+  - /Audio/_Solreign/Providence/event_raid_01.ogg
+  - /Audio/_Solreign/Providence/event_raid_02.ogg
+  - /Audio/_Solreign/Providence/event_raid_03.ogg
+
+- type: soundCollection
+  id: SolreignProvidenceEventAcidStorm
+  files:
+  - /Audio/_Solreign/Providence/event_acid_storm_01.ogg
+  - /Audio/_Solreign/Providence/event_acid_storm_02.ogg
+  - /Audio/_Solreign/Providence/event_acid_storm_03.ogg
+
+- type: soundCollection
+  id: SolreignProvidenceZooBreach
+  files:
+  - /Audio/_Solreign/Providence/zoo_breach_01.ogg
+  - /Audio/_Solreign/Providence/zoo_breach_02.ogg
+  - /Audio/_Solreign/Providence/zoo_breach_03.ogg
+  - /Audio/_Solreign/Providence/zoo_breach_04.ogg
+
+- type: soundCollection
+  id: SolreignProvidenceHotPotato
+  files:
+  - /Audio/_Solreign/Providence/hot_potato_01.ogg
+  - /Audio/_Solreign/Providence/hot_potato_02.ogg
+  - /Audio/_Solreign/Providence/hot_potato_03.ogg
+  - /Audio/_Solreign/Providence/hot_potato_04.ogg
+  - /Audio/_Solreign/Providence/hot_potato_05.ogg
+
+- type: soundCollection
+  id: SolreignProvidenceCakeDenial
+  files:
+  - /Audio/_Solreign/Providence/cake_denial_01.ogg
+  - /Audio/_Solreign/Providence/cake_denial_02.ogg
+  - /Audio/_Solreign/Providence/cake_denial_03.ogg
+  - /Audio/_Solreign/Providence/cake_denial_04.ogg
+
+- type: soundCollection
+  id: SolreignProvidenceIdleMusings
+  files:
+  - /Audio/_Solreign/Providence/idle_musings_01.ogg
+  - /Audio/_Solreign/Providence/idle_musings_02.ogg
+  - /Audio/_Solreign/Providence/idle_musings_03.ogg
+  - /Audio/_Solreign/Providence/idle_musings_04.ogg
+  - /Audio/_Solreign/Providence/idle_musings_05.ogg
+  - /Audio/_Solreign/Providence/idle_musings_06.ogg
+  - /Audio/_Solreign/Providence/idle_musings_07.ogg
+  - /Audio/_Solreign/Providence/idle_musings_08.ogg
+  # 2026-07-22: 8 -> 18. Idle is the ONLY timer-driven category, so it repeats far
+  # faster than the event-driven ones and a real player called the voice repetitive.
+  # Widening the low-pop cadence (a013527ac9) bought time; depth is the other half.
+  - /Audio/_Solreign/Providence/idle_musings_09.ogg
+  - /Audio/_Solreign/Providence/idle_musings_10.ogg
+  - /Audio/_Solreign/Providence/idle_musings_11.ogg
+  - /Audio/_Solreign/Providence/idle_musings_12.ogg
+  - /Audio/_Solreign/Providence/idle_musings_13.ogg
+  - /Audio/_Solreign/Providence/idle_musings_14.ogg
+  - /Audio/_Solreign/Providence/idle_musings_15.ogg
+  - /Audio/_Solreign/Providence/idle_musings_16.ogg
+  - /Audio/_Solreign/Providence/idle_musings_17.ogg
+  - /Audio/_Solreign/Providence/idle_musings_18.ogg
+
+- type: soundCollection
+  id: SolreignProvidenceDeathCommiseration
+  files:
+  - /Audio/_Solreign/Providence/death_commiseration_01.ogg
+  - /Audio/_Solreign/Providence/death_commiseration_02.ogg
+  - /Audio/_Solreign/Providence/death_commiseration_03.ogg
+
+- type: soundCollection
+  id: SolreignProvidenceNewPlayerWelcome
+  files:
+  - /Audio/_Solreign/Providence/new_player_welcome_01.ogg
+  - /Audio/_Solreign/Providence/new_player_welcome_02.ogg

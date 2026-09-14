@@ -1,0 +1,227 @@
+- type: markingsGroup
+  parent: Undergarments
+  id: Shadow
+  limits:
+    enum.HumanoidVisualLayers.HeadTop:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Hair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Chest:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.Snout:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RHand:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RFoot:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.Tail:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.Special:
+      limit: 0
+      required: false
+
+- type: entity
+  parent: BaseSpeciesAppearance
+  id: AppearanceShadow
+  categories: [ HideSpawnMenu ]
+  name: shadow appearance
+  components:
+  - type: InitialBody
+    organs:
+      Torso: OrganShadowTorso
+      Head: OrganShadowHead
+      ArmLeft: OrganShadowArmLeft
+      ArmRight: OrganShadowArmRight
+      HandRight: OrganShadowHandRight
+      HandLeft: OrganShadowHandLeft
+      LegLeft: OrganShadowLegLeft
+      LegRight: OrganShadowLegRight
+      FootLeft: OrganShadowFootLeft
+      FootRight: OrganShadowFootRight
+      Brain: OrganShadowBrain
+      Eyes: OrganShadowEyes
+      # 🔴 LIVE INCIDENT 2026-07-26: these eight were MISSING. A Shadow spawned with body parts,
+      # a brain and eyes and NO INTERNAL ORGANS — critically no LUNGS — so every Shadow player
+      # asphyxiated within seconds of spawning ("gasping for air and dying"). Human declares all
+      # twenty; Shadow declared twelve. Nothing caught it: the species is round-start selectable,
+      # but every gate spawned default humans.
+      Tongue: OrganShadowTongue
+      Appendix: OrganShadowAppendix
+      Ears: OrganShadowEars
+      Lungs: OrganShadowLungs
+      Heart: OrganShadowHeart
+      Stomach: OrganShadowStomach
+      Liver: OrganShadowLiver
+      Kidneys: OrganShadowKidneys
+  - type: HumanoidProfile
+    species: Shadow
+
+- type: entity
+  parent:
+  - AppearanceShadow
+  - BaseSpeciesMobOrganic
+  id: MobShadow
+  name: Shadow
+  components:
+  - type: Butcherable
+    spawned:
+    - id: MaterialEctoplasm
+      amount: 5
+
+- type: entity
+  parent: OrganBaseOrganic
+  id: OrganShadow
+  abstract: true
+  suffix: shadow
+
+- type: entity
+  id: OrganShadowMetabolizer
+  abstract: true
+  components:
+  - type: Metabolizer
+    metabolizerTypes: [ Human ]
+
+- type: entity
+  parent: OrganShadow
+  id: OrganShadowInternal
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/organs.rsi
+
+- type: entity
+  parent: OrganShadow
+  id: OrganShadowExternal
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/parts.rsi
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Species/Human/parts.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      group: Shadow
+
+- type: entity
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganShadowExternal ]
+  id: OrganShadowTorso
+
+- type: entity
+  parent: [ OrganBaseHeadSexed, OrganBaseHead, OrganShadowExternal ]
+  id: OrganShadowHead
+  components:
+  - type: VisualOrganMarkings
+    hideableLayers:
+    - enum.HumanoidVisualLayers.Hair
+    - enum.HumanoidVisualLayers.Snout
+
+- type: entity
+  parent: [ OrganBaseArmLeft, OrganShadowExternal ]
+  id: OrganShadowArmLeft
+
+- type: entity
+  parent: [ OrganBaseArmRight, OrganShadowExternal ]
+  id: OrganShadowArmRight
+
+- type: entity
+  parent: [ OrganBaseHandLeft, OrganShadowExternal ]
+  id: OrganShadowHandLeft
+
+- type: entity
+  parent: [ OrganBaseHandRight, OrganShadowExternal ]
+  id: OrganShadowHandRight
+
+- type: entity
+  parent: [ OrganBaseLegLeft, OrganShadowExternal ]
+  id: OrganShadowLegLeft
+
+- type: entity
+  parent: [ OrganBaseLegRight, OrganShadowExternal ]
+  id: OrganShadowLegRight
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganShadowExternal ]
+  id: OrganShadowFootLeft
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganShadowExternal ]
+  id: OrganShadowFootRight
+
+- type: entity
+  parent: [ OrganBaseBrain, OrganShadowInternal ]
+  id: OrganShadowBrain
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganShadowInternal, OrganShadowExternal ]
+  id: OrganShadowEyes
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi
+
+# 🔴 The eight internal organs Shadow was shipping without (live incident 2026-07-26).
+# Mirrors the Human definitions exactly (Resources/Prototypes/Body/Species/human.yml) so Shadow
+# metabolises, breathes and circulates like any other organic humanoid. OrganShadowMetabolizer
+# already declared metabolizerTypes:[Human], matching OrganHumanMetabolizer — it simply had no
+# organs to apply to.
+
+- type: entity
+  parent: [ OrganBaseTongue, OrganShadowInternal ]
+  id: OrganShadowTongue
+
+- type: entity
+  parent: [ OrganBaseAppendix, OrganShadowInternal ]
+  id: OrganShadowAppendix
+
+- type: entity
+  parent: [ OrganBaseEars, OrganShadowInternal ]
+  id: OrganShadowEars
+
+- type: entity
+  parent: [ OrganBaseLungs, OrganShadowInternal, OrganShadowMetabolizer ]
+  id: OrganShadowLungs
+
+- type: entity
+  parent: [ OrganBaseHeart, OrganShadowInternal, OrganShadowMetabolizer ]
+  id: OrganShadowHeart
+
+- type: entity
+  parent: [ OrganBaseStomach, OrganShadowInternal, OrganShadowMetabolizer ]
+  id: OrganShadowStomach
+
+- type: entity
+  parent: [ OrganBaseLiver, OrganShadowInternal, OrganShadowMetabolizer ]
+  id: OrganShadowLiver
+
+- type: entity
+  parent: [ OrganBaseKidneys, OrganShadowInternal, OrganShadowMetabolizer ]
+  id: OrganShadowKidneys

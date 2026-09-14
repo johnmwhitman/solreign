@@ -1,0 +1,375 @@
+{
+  "schema_version": 1,
+  "patch_id": "zoo-fauna-v1",
+  "_comment": "Fauna for the six zoo wings that had full cage hardware and no animals. Meridian is deliberately ABSENT: it already carries all three creatures hand-placed (uids 900002-4), and MapPatch's proto-uniqueness check refuses maps where the target prototype exists outside the owned block. MapFoundry validate-manifest will therefore report meridian as missing-from-manifest \u2014 expected, not a defect.",
+  "maps": [
+    {
+      "path": "Resources/Maps/_Solreign/solreign_terminus.yml",
+      "anchor": {
+        "proto": "SolreignZooContainmentEmitter",
+        "uid": 900915,
+        "pos": [
+          13.5,
+          -29.5
+        ],
+        "parent": 2
+      },
+      "max_manhattan_tiles": 4,
+      "placements": [
+        {
+          "key": "mothroach",
+          "proto": "SolreignZooMothroach",
+          "uid": 901500,
+          "pos": [
+            16.5,
+            -29.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorWood",
+          "expected_occupants": []
+        },
+        {
+          "key": "exhibitcrab",
+          "proto": "SolreignZooExhibitCrab",
+          "uid": 901501,
+          "pos": [
+            12.5,
+            -26.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorTechMaint",
+          "expected_occupants": [
+            {
+              "proto": "CableApcExtension",
+              "uid": 11025
+            },
+            {
+              "proto": "CableHV",
+              "uid": 5078
+            },
+            {
+              "proto": "CableMV",
+              "uid": 18206
+            }
+          ]
+        },
+        {
+          "key": "exhibitbat",
+          "proto": "SolreignZooExhibitBat",
+          "uid": 901502,
+          "pos": [
+            16.5,
+            -30.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorWood",
+          "expected_occupants": [
+            {
+              "proto": "CableApcExtension",
+              "uid": 10110
+            },
+            {
+              "proto": "GasPipeTJunction",
+              "uid": 14928
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "Resources/Maps/_Solreign/solreign_leviathan.yml",
+      "anchor": {
+        "proto": "SolreignZooContainmentEmitter",
+        "uid": 900910,
+        "pos": [
+          39.5,
+          -22.5
+        ],
+        "parent": 13329
+      },
+      "max_manhattan_tiles": 4,
+      "placements": [
+        {
+          "key": "mothroach",
+          "proto": "SolreignZooMothroach",
+          "uid": 901503,
+          "pos": [
+            38.5,
+            -22.5
+          ],
+          "parent": 13329,
+          "expected_tile": "FloorSteel",
+          "expected_occupants": [
+            {
+              "proto": "CableMV",
+              "uid": 14655
+            }
+          ]
+        },
+        {
+          "key": "exhibitcrab",
+          "proto": "SolreignZooExhibitCrab",
+          "uid": 901504,
+          "pos": [
+            36.5,
+            -22.5
+          ],
+          "parent": 13329,
+          "expected_tile": "FloorSteel",
+          "expected_occupants": [
+            {
+              "proto": "CableMV",
+              "uid": 14653
+            }
+          ]
+        },
+        {
+          "key": "exhibitbat",
+          "proto": "SolreignZooExhibitBat",
+          "uid": 901505,
+          "pos": [
+            37.5,
+            -23.5
+          ],
+          "parent": 13329,
+          "expected_tile": "FloorSteel",
+          "expected_occupants": [
+            {
+              "proto": "GasPipeStraight",
+              "uid": 14215
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "Resources/Maps/_Solreign/solreign_perihelion.yml",
+      "anchor": {
+        "proto": "SolreignZooContainmentEmitter",
+        "uid": 900914,
+        "pos": [
+          51.5,
+          21.5
+        ],
+        "parent": 2
+      },
+      "max_manhattan_tiles": 4,
+      "placements": [
+        {
+          "key": "mothroach",
+          "proto": "SolreignZooMothroach",
+          "uid": 901506,
+          "pos": [
+            49.5,
+            21.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorWhite",
+          "expected_occupants": [
+            {
+              "proto": "CableMV",
+              "uid": 3683
+            }
+          ]
+        },
+        {
+          "key": "exhibitcrab",
+          "proto": "SolreignZooExhibitCrab",
+          "uid": 901507,
+          "pos": [
+            49.5,
+            20.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorWhite",
+          "expected_occupants": []
+        },
+        {
+          "key": "exhibitbat",
+          "proto": "SolreignZooExhibitBat",
+          "uid": 901508,
+          "pos": [
+            50.5,
+            18.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorWhite",
+          "expected_occupants": []
+        }
+      ]
+    },
+    {
+      "path": "Resources/Maps/_Solreign/solreign_verdant.yml",
+      "anchor": {
+        "proto": "SolreignZooContainmentEmitter",
+        "uid": 900916,
+        "pos": [
+          51.5,
+          21.5
+        ],
+        "parent": 2
+      },
+      "max_manhattan_tiles": 4,
+      "placements": [
+        {
+          "key": "mothroach",
+          "proto": "SolreignZooMothroach",
+          "uid": 901509,
+          "pos": [
+            49.5,
+            21.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorWhite",
+          "expected_occupants": [
+            {
+              "proto": "CableMV",
+              "uid": 3683
+            }
+          ]
+        },
+        {
+          "key": "exhibitcrab",
+          "proto": "SolreignZooExhibitCrab",
+          "uid": 901510,
+          "pos": [
+            49.5,
+            20.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorWhite",
+          "expected_occupants": []
+        },
+        {
+          "key": "exhibitbat",
+          "proto": "SolreignZooExhibitBat",
+          "uid": 901511,
+          "pos": [
+            50.5,
+            18.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorWhite",
+          "expected_occupants": []
+        }
+      ]
+    },
+    {
+      "path": "Resources/Maps/_Solreign/solreign_oasis.yml",
+      "anchor": {
+        "proto": "SolreignZooContainmentEmitter",
+        "uid": 900957,
+        "pos": [
+          -15.5,
+          -24.5
+        ],
+        "parent": 31
+      },
+      "max_manhattan_tiles": 5,
+      "placements": [
+        {
+          "key": "mothroach",
+          "proto": "SolreignZooMothroach",
+          "uid": 901512,
+          "pos": [
+            -16.5,
+            -22.5
+          ],
+          "parent": 31,
+          "expected_tile": "FloorDarkMini",
+          "expected_occupants": [
+            {
+              "proto": "CableApcExtension",
+              "uid": 6323
+            }
+          ]
+        },
+        {
+          "key": "exhibitcrab",
+          "proto": "SolreignZooExhibitCrab",
+          "uid": 901513,
+          "pos": [
+            -16.5,
+            -21.5
+          ],
+          "parent": 31,
+          "expected_tile": "FloorDarkMini",
+          "expected_occupants": [
+            {
+              "proto": "CableApcExtension",
+              "uid": 1467
+            }
+          ]
+        },
+        {
+          "key": "exhibitbat",
+          "proto": "SolreignZooExhibitBat",
+          "uid": 901514,
+          "pos": [
+            -16.5,
+            -20.5
+          ],
+          "parent": 31,
+          "expected_tile": "FloorDarkMini",
+          "expected_occupants": [
+            {
+              "proto": "CableApcExtension",
+              "uid": 1472
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "Resources/Maps/_Solreign/solreign_nocturne.yml",
+      "anchor": {
+        "proto": "SolreignZooContainmentEmitter",
+        "uid": 900955,
+        "pos": [
+          -5.5,
+          12.5
+        ],
+        "parent": 2
+      },
+      "max_manhattan_tiles": 4,
+      "placements": [
+        {
+          "key": "mothroach",
+          "proto": "SolreignZooMothroach",
+          "uid": 901515,
+          "pos": [
+            -5.5,
+            10.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorReinforced",
+          "expected_occupants": []
+        },
+        {
+          "key": "exhibitcrab",
+          "proto": "SolreignZooExhibitCrab",
+          "uid": 901516,
+          "pos": [
+            -6.5,
+            10.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorReinforced",
+          "expected_occupants": []
+        },
+        {
+          "key": "exhibitbat",
+          "proto": "SolreignZooExhibitBat",
+          "uid": 901517,
+          "pos": [
+            -3.5,
+            10.5
+          ],
+          "parent": 2,
+          "expected_tile": "FloorDark",
+          "expected_occupants": []
+        }
+      ]
+    }
+  ]
+}

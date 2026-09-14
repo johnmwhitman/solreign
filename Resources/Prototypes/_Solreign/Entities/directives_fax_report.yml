@@ -1,0 +1,14 @@
+# Directives Fax — end-of-shift stamped compliance report (v14 gap-closure, following the
+# StationAudits "keepsake paper" precedent — Resources/Prototypes/_Solreign/Entities/station_audits.yml).
+# Content is assembled and stamped at print time by DirectivesFaxRuleSystem.Report.cs via
+# FaxSystem.Receive (primary path, printed on the same fax machine the round-start directive fax
+# used) or PaperSystem.SetContent (defensive loose-paper fallback, mirroring
+# DirectivesFaxRuleSystem.Print.cs's own fallback). No static `content:` field here: this is real
+# per-round data, never closed-YAML flavor text baked in ahead of time.
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperDirectivesFaxReport
+  suffix: solreign, directives-fax, keepsake
+  name: directive compliance report
+  description: A stamped end-of-shift compliance report from PROVIDENCE, fresh off the fax.

@@ -1,0 +1,97 @@
+# Solreign — "Nocturnal Acquisitions Specialist" (vampire antag) reachable props. Spec:
+# docs/specs/2026-07-11-werewolf-vampire-spec.md §4.
+#
+# Closes Phase-2 Track A1's second defect (docs/plans/2026-07-11-ROADMAP-PHASE2.md): SolreignCoffin
+# Component / SolreignChapelGroundComponent / SolreignGarlicWardComponent existed in C# under
+# Content.Server/_Solreign/Antags/Vampire/ with zero entity-prototype reference and zero placement
+# anywhere on Resources/Prototypes/Maps/_Solreign/solreign_oasis.yml (confirmed) — Vampire Night was
+# a live addable game rule with no coffin to rest in, no consecrated ground, no garlic counterplay
+# anywhere on the only map. This file is the prototype half of the fix. Map placement is the OTHER
+# half and is out of scope here (this pass owns prototypes only, not the map) — see the SERVER
+# repo's own docs tree: server/docs/specs/2026-07-11-vampire-props-map-graft-addendum.md (i.e.
+# docs/specs/ RELATIVE TO THIS GAME REPO'S ROOT, not the outer Kolton-SS14 ops repo's docs/) for
+# the exact placement request handed to the mapping lane. Wave 21 executed that placement:
+# coffin on Nocturne; garlic ward (Kitchen + Botany) and chapel ground (Chapel altar) on Oasis.
+#
+# All three detection paths (coffin container-enter/exit, garlic/chapel proximity scan) are ALREADY
+# implemented and unit-adjacent-tested against these exact component types in
+# Content.Server/_Solreign/Antags/Vampire/SolreignVampireSystem.Environment.cs — nothing below adds
+# new C#, it only gives that existing, working logic something real to find.
+
+# --- Coffin: "Executive Recharge Pod" (spec §4.2: "coffin regen ... reverses accrual ... doubles
+# passive healing") ---
+# Reuses upstream CrateCoffin (Resources/Prototypes/Entities/Structures/Storage/Crates/crates.yml)
+# almost verbatim — that entity's own upstream description is literally "A comfy coffin, excellent
+# place for the vampires and corpses," about as clean a reuse as this fork gets. Any entity
+# carrying SolreignCoffinComponent counts per SolreignVampireSystem.Environment's container
+# enter/exit handlers (a HasComp check on the container's OWNER, not a specific entity ID), so this
+# stays a thin wrapper — the crate's own construction/destruction/lock/weld behavior (the crew's
+# legitimate nonlethal counter, spec §4.5 rule 3: "destroying/welding it ... is a legitimate crew
+# counter that soft-disables the antag without killing anyone") is untouched.
+# Sprite (wired 2026-07-12, sprite factory batch beta01 — see
+# assets/beta01-sprites/PROVENANCE.md): dedicated _Solreign/exec_recharge_pod.rsi (sleek
+# walnut-veneer/brushed-steel sleep-pod), base/closed/open/paper states following the exact
+# upstream coffin.rsi layer idiom (base == closed, open = distinct propped-open art; paper.png
+# reused byte-for-byte from upstream, it's a generic label sticker unrelated to the pod redesign).
+# Replaces the inherited upstream coffin.rsi look with something matching the "Wellness Division"
+# flavor text.
+- type: entity
+  parent: CrateCoffin
+  id: SolreignVampireCoffin
+  name: executive recharge pod
+  suffix: solreign, vampire coffin
+  description: Walnut veneer, a barcode, and a Solreign Wellness Division sticker reading "REST IS PRODUCTIVE." Nocturnal Acquisitions staff recover here between shifts.
+  components:
+  - type: Sprite
+    sprite: _Solreign/exec_recharge_pod.rsi
+    layers:
+    - state: base
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _Solreign/exec_recharge_pod.rsi
+    state: base
+  - type: SolreignCoffin
+
+# --- Garlic ward: kitchen-grown counterplay needing zero antag knowledge (spec §4.5 rule 4) ---
+# Reuses upstream FoodGarlic (Resources/Prototypes/Entities/Objects/Consumable/Food/produce.yml) —
+# still edible. GROWABILITY (fixed Wave 21, S8): an earlier version of this header claimed the ward
+# was "still plantable via its inherited Produce/seedId" — that was FALSE. The inherited seedId is
+# upstream `garlic`, whose productPrototypes yield plain FoodGarlic (no SolreignGarlicWard
+# component), so replanting a ward only ever produced inert garlic and the hydroponics loop never
+# grew a single ward. The REAL paths, built in Wave 21:
+#   1. A distinct seed line, `solreignWardGarlic` (_Solreign/Botany/seeds.yml #7), whose produce IS
+#      this entity. Its packet, SolreignWardGarlicSeeds (_Solreign/Botany/seed_packets.yml), is
+#      stocked round-start in the upstream MegaSeed Servitor (Catalog/VendingMachines/Inventories/
+#      seeds.yml) and in SolreignBoxWeirdSeeds.
+#   2. The Produce override below points THIS entity's seed extraction at that same
+#      solreignWardGarlic line, so a harvested ward re-seeds into more wards (loop closed).
+#   3. Two pre-placed instances on Oasis (Kitchen serving counter + Botany floor) per the map-graft
+#      addendum, so the counter exists on the floor even before anyone plants.
+- type: entity
+  parent: FoodGarlic
+  id: SolreignVampireGarlicWard
+  name: warding garlic
+  suffix: solreign, vampire counter
+  description: Standard-issue kitchen garlic. Solreign Wellness notes an unusually strong effect on Nocturnal Acquisitions staff — comedic, not medical, per the memo.
+  components:
+  - type: SolreignGarlicWard
+  - type: Produce
+    plantId: SolreignWardGarlicPlants # NOT the inherited upstream GarlicPlants — see header note
+
+# --- Chapel ground: round-start-available, zero antag knowledge (spec §4.5 rule 4) ---
+# Reuses upstream CarpetChapel (Resources/Prototypes/Entities/Structures/Furniture/carpets.yml) — a
+# non-colliding floor decoration already meant for the chapel room, so placing this one IS placing
+# chapel flooring, not bolting on an extra invisible marker underfoot. See
+# SolreignChapelGroundComponent's own doc comment for why this is a coarse entity-proximity marker
+# rather than a tile/room-area system (verified: none exists upstream to key off).
+- type: entity
+  parent: CarpetChapel
+  id: SolreignVampireChapelGround
+  name: "chapel's carpet"
+  suffix: solreign, vampire counter
+  description: HR-blessed floor covering. Radiates a gentle, fully sanctioned disapproval toward any Nocturnal Acquisitions activity nearby.
+  components:
+  - type: SolreignChapelGround

@@ -1,0 +1,71 @@
+- type: entity
+  id: DelighterConfetti
+  name: confetti burst
+  description: A burst of harmless celebration, floating gently.
+  components:
+  - type: Transform
+  - type: Sprite
+    sprite: Effects/confetti.rsi
+    state: idle
+  - type: PointLight
+    radius: 1.5
+    color: "#ffaa00"
+    energy: 1
+  - type: TimedDespawn
+    lifetime: 3
+
+- type: entity
+  id: DelighterSoftGlow
+  name: soft glow
+  description: A gentle, calming ambient light that fades slowly.
+  components:
+  - type: Transform
+  - type: Sprite
+    sprite: Effects/glow.rsi
+    state: idle
+  - type: PointLight
+    radius: 2.0
+    color: "#00ffff"
+    energy: 1.5
+  - type: TimedDespawn
+    lifetime: 4
+
+- type: entity
+  id: DelighterHearts
+  name: floating hearts
+  description: Simple static hearts. Love is in the air.
+  components:
+  - type: Transform
+  - type: Sprite
+    sprite: Effects/hearts.rsi
+    state: hearts
+  - type: TimedDespawn
+    lifetime: 2.5
+
+- type: entity
+  id: DelighterBubbles
+  name: bubbles
+  description: A few shimmering bubbles that despawn harmlessly.
+  components:
+  - type: Transform
+  - type: Sprite
+    sprite: Effects/bubbles.rsi
+    state: idle
+  - type: TimedDespawn
+    lifetime: 3.5
+
+- type: entity
+  id: DelighterStardust
+  name: stardust
+  description: A stationary patch of cosmic dust.
+  components:
+  - type: Transform
+  - type: Sprite
+    sprite: Effects/stardust.rsi
+    state: idle
+  - type: PointLight
+    radius: 1.0
+    color: "#ffffff"
+    energy: 1.0
+  - type: TimedDespawn
+    lifetime: 2

@@ -1,0 +1,61 @@
+StartingGear pay-to-win perk — removed by AGX-HARDEN (2026-07-12), preserved as HOLD
+=====================================================================================
+
+Source: Content.Server/_Solreign/SeasonLedger/SeasonLedgerSystem.Perks.cs
+Removed at commit: see "AGX-HARDEN: split SeasonLedgerSystem.Perks (GoldenName kept, StartingGear
+removed)" on branch feat/agx-lane.
+Baseline this patch applies against: the disclosure-snapshot commit ("AGX lane disclosure snapshot
+2026-07-12") on branch feat/agx-lane, i.e. the file as it existed before any AGX-HARDEN changes.
+
+Disposition per AGX-MERGE-PLAN.md / AGX-INTEGRATION-CONTRACT.md clause 6(b) and
+ROADMAP-PHASE3.md §4 HOLD: this branch spawned `ClothingBackpackDuffelSyndicate` — a
+contraband/weapon-bearing loadout — on player-attach, keyed off a boolean from an
+UNAUTHENTICATED Director response, with the payout side wired live even though no
+storefront/OAuth purchase side exists anywhere in the codebase. Pay-to-win gear-for-spend on a PG
+server with minors; independently dangerous regardless of whether/when OAuth ever lands.
+
+Re-enters scope only once:
+  1. A storefront/OAuth authorization side exists and is reviewed together with this branch
+     (StorefrontBui.cs is currently a 9-line stub — also HOLD, John's-hands-only the moment real
+     OAuth code lands), AND
+  2. John gives explicit sign-off, per clause 6(b).
+
+Until then this is inert code living only in this file, not in any system. If/when it is
+reinstated, it should also ride the AGX-HARDEN Director-channel harness
+(Content.Server/_Solreign/Director/DirectorChannel.cs) like the surviving GoldenName path does —
+signed outbound request, verified+schema-validated inbound response, its own
+solreign.perks.starting_gear.enabled-style kill switch (default off), and fail-CLOSED on any
+sidecar error, exactly as audit S7 requires for the cosmetic path today.
+
+--- a/Content.Server/_Solreign/SeasonLedger/SeasonLedgerSystem.Perks.cs
++++ b/Content.Server/_Solreign/SeasonLedger/SeasonLedgerSystem.Perks.cs
+@@ -38,10 +38,14 @@
+             var root = doc.RootElement;
+
+             if (root.TryGetProperty("GoldenName", out var goldenNameProp) && goldenNameProp.GetBoolean())
+             {
+                 // Enqueue golden name logic or apply it directly if thread-safe
+                 _pendingPerks.Enqueue(new PendingPerk(mob, "GoldenName"));
+             }
++
++            if (root.TryGetProperty("StartingGear", out var startingGearProp) && startingGearProp.GetBoolean())
++            {
++                _pendingPerks.Enqueue(new PendingPerk(mob, "StartingGear"));
++            }
+         }
+         catch (Exception e)
+         {
+@@ -69,9 +73,13 @@
+             if (perk.PerkType == "GoldenName")
+             {
+                 var comp = EnsureComp<SeasonTitleComponent>(perk.Mob);
+                 comp.Title = "Golden " + (comp.Title ?? "Name");
+             }
++            else if (perk.PerkType == "StartingGear")
++            {
++                var coords = Transform(perk.Mob).Coordinates;
++                Spawn("ClothingBackpackDuffelSyndicate", coords); // Placeholder for starting gear
++            }
+         }
+     }
+ }

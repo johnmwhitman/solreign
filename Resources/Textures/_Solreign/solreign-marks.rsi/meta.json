@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Solreign + Spritefactory procedural code",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sapling-0"
+    },
+    {
+      "name": "sapling-1"
+    },
+    {
+      "name": "sapling-2"
+    },
+    {
+      "name": "sapling-3"
+    },
+    {
+      "name": "lamp-0",
+      "directions": 4
+    },
+    {
+      "name": "lamp-1",
+      "directions": 4
+    },
+    {
+      "name": "lamp-2",
+      "directions": 4
+    },
+    {
+      "name": "lamp-3",
+      "directions": 4
+    },
+    {
+      "name": "plate-0"
+    },
+    {
+      "name": "plate-1"
+    },
+    {
+      "name": "plate-2"
+    },
+    {
+      "name": "plate-3"
+    },
+    {
+      "name": "garden"
+    }
+  ]
+}

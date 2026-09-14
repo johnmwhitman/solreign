@@ -1,0 +1,192 @@
+# Solreign — Mini-Boss events. Two admin/Director-triggerable game rules, each spawning a reskinned
+# existing mob (no new sprites — same "tint + PointLight" reskin idiom as
+# Resources/Prototypes/_Solreign/Entities/gear.yml / hellzone_props.yml, TODO(sprite factory) noted
+# below) driven by the W2 effects engine (Content.Server/_Solreign/Effects,
+# SolreignPeriodicEffectComponent) for ambient FX.
+#
+# C# side: Content.Server/_Solreign/MiniBoss/ — SolreignAuditorPrimeRule(Component),
+# SolreignSpecimenZeroRule(Component), SolreignMiniBossComponent/System (shared death handling: reward
+# drop + defeat announcement + Ledger trace), MiniBossPopulationGate/MiniBossTelegraph (pure,
+# unit-tested spawn-gating math).
+#
+# Admin-invocable today (`addgamerule SolreignAuditorPrime` / `addgamerule SolreignSpecimenZero`, then
+# `startgamerule`, same two-step flow as every other Solreign event-night rule); neither is wired into
+# any random event table.
+#
+# Ledger trace (integration comment only — no SeasonLedgerSystem file is touched by this wave, same
+# posture as SolreignLedgerDiscrepancyRule/SolreignHotPotatoSystem): SolreignMiniBossSystem logs each
+# kill via IAdminLogManager today; a later wave can swap that for a SeasonLedgerSystem hand-off once
+# mini-boss trophies get their own ledger category.
+
+# ── Shared cosmetic FX (W2 effects engine payload) ──────────────────────────────────────────────────
+# Reuses upstream EffectSparks' shape (Resources/Prototypes/Entities/Effects/sparks.yml: TimedDespawn +
+# unshaded Sprite + EffectVisuals + AnimationPlayer), tinted Solreign acid-green, so
+# SolreignPeriodicEffectComponent has a ready-made "corporate scanner pulse" to fire on both bosses.
+- type: entity
+  id: SolreignEffectAuditPulse
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.5
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    color: "#39FF14"
+    layers:
+    - shader: unshaded
+      map: [ "enum.EffectLayers.Unshaded" ]
+      sprite: Effects/sparks.rsi
+      state: sparks
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: AnimationPlayer
+  - type: PointLight
+    radius: 2
+    energy: 2
+    color: "#39FF14"
+
+# ── The Auditor Prime ───────────────────────────────────────────────────────────────────────────────
+# Reskin of upstream's toughest ghost-role-capable elite mob, BaseMobBehonker (Resources/Prototypes/
+# Entities/Mobs/NPCs/behonker.yml: 500 HP, ranged laser HTN AI, ToolRefinable). GhostRole disabled
+# (prob: 0 — see Content.Server/Ghost/Roles/GhostRoleSystem.cs OnMapInit: Probability < 1 rolls removal
+# at map-init) so the boss is a deterministic scripted encounter, not a wildcard ghost pilot.
+- type: entity
+  parent: BaseMobBehonker
+  id: SolreignMobAuditorPrime
+  name: the Auditor Prime
+  suffix: Solreign, MiniBoss
+  description: A humming acid-green apparition in a compliance visor. It has already found three infractions and hasn't looked at you yet.
+  components:
+  - type: GhostRole
+    prob: 0
+  - type: Sprite
+    color: "#39FF14" # TODO(sprite factory): dedicated Auditor Prime RSI — placeholder tint over behonker.rsi
+  - type: PointLight
+    radius: 2.5
+    energy: 2.5
+    color: "#39FF14"
+  - type: SolreignPeriodicEffect
+    minIntervalSeconds: 8
+    maxIntervalSeconds: 20
+    effectPrototype: SolreignEffectAuditPulse
+    soundCollection:
+      path: /Audio/Machines/scanning.ogg
+    popupText: solreign-auditor-prime-scan-popup
+  - type: SolreignMiniBoss
+    rewardPrototype: SolreignAuditorPrimeCommendation
+    defeatAnnouncement: solreign-auditor-prime-defeat
+    ledgerLabel: The Auditor Prime
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SolreignAuditorPrimeCommendation
+  name: Solreign Compliance Excellence Commendation
+  description: A gaudy acid-green medal. The engraving reads "FOR EXEMPLARY AUDIT PERFORMANCE." Nobody remembers approving this.
+  components:
+  - type: Sprite
+    sprite: Clothing/Neck/Medals/gold.rsi
+    color: "#39FF14" # TODO(sprite factory): dedicated Solreign medal RSI
+  - type: Clothing
+    sprite: Clothing/Neck/Medals/gold.rsi
+
+- type: entity
+  parent: BaseGameRule
+  id: SolreignAuditorPrime
+  components:
+  - type: GameRule
+    # Informational only — upstream only checks MinPlayers at RoundStartAttemptEvent, which an
+    # admin/Director mid-round `addgamerule` never passes through. MiniBossPopulationGate (code-side,
+    # SolreignAuditorPrimeRule.Started) is the real enforcement.
+    minPlayers: 12
+  - type: SolreignAuditorPrimeRule
+    minPopulation: 12
+    maxPopulation: 0 # uncapped
+
+# ── Specimen Zero ───────────────────────────────────────────────────────────────────────────────────
+# Reskin of upstream's MobKangaroo (Resources/Prototypes/Entities/Mobs/NPCs/animals.yml), whose
+# StaminaDamageOnHit + low Blunt melee is already exactly the "nonlethal-leaning, stamina/knockdown
+# heavy" kit this boss needs — boosted here and scaled up in size/HP for boss weight. GhostRole
+# disabled (prob: 0) for the same deterministic-encounter reason as the Auditor Prime.
+- type: entity
+  parent: MobKangaroo
+  id: SolreignMobSpecimenZero
+  name: Specimen Zero
+  suffix: Solreign, MiniBoss
+  description: Zoo tag reads ORIGIN UNKNOWN, TEMPERAMENT ENTHUSIASTIC. The containment waiver was never actually signed.
+  components:
+  - type: GhostRole
+    prob: 0
+  - type: Sprite
+    scale: 1.35, 1.35
+    color: "#9dfd39" # TODO(sprite factory): dedicated Specimen Zero RSI — placeholder tint over kangaroo.rsi
+  - type: PointLight
+    radius: 2
+    energy: 1.5
+    color: "#9dfd39"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.5
+        density: 220
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      350: Critical
+      450: Dead
+  - type: StaminaDamageOnHit
+    damage: 14
+  - type: MeleeWeapon
+    attackRate: 1.5
+    damage:
+      types:
+        Blunt: 3
+    soundHit:
+      collection: BoxingHit
+    animation: WeaponArcFist
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: SolreignPeriodicEffect
+    minIntervalSeconds: 15
+    maxIntervalSeconds: 30
+    effectPrototype: SolreignEffectAuditPulse
+    soundCollection:
+      path: /Audio/Animals/space_dragon_roar.ogg
+    popupText: solreign-specimen-zero-roar-popup
+  - type: SolreignMiniBoss
+    rewardPrototype: SolreignSpecimenZeroTrophy
+    defeatAnnouncement: solreign-specimen-zero-defeat
+    ledgerLabel: Specimen Zero
+
+- type: entity
+  parent: ClothingNeckBase
+  id: SolreignSpecimenZeroTrophy
+  name: Zoo Containment Excellence Trophy
+  description: A slightly damp acid-green ribbon. It smells faintly of enclosure hay and a compliance violation that was never filed.
+  components:
+  - type: Sprite
+    sprite: Clothing/Neck/Medals/securitymedal.rsi
+    color: "#9dfd39" # TODO(sprite factory): dedicated Solreign trophy RSI
+  - type: Clothing
+    sprite: Clothing/Neck/Medals/securitymedal.rsi
+
+- type: entity
+  parent: BaseGameRule
+  id: SolreignSpecimenZero
+  components:
+  - type: GameRule
+    # Informational only — see SolreignAuditorPrime's GameRule comment above; the real gate is
+    # MiniBossPopulationGate in SolreignSpecimenZeroRule.Started.
+    minPlayers: 10
+  - type: SolreignSpecimenZeroRule
+    minPopulation: 10
+    maxPopulation: 0 # uncapped
+    warningSeconds: 60

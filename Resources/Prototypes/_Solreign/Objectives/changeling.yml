@@ -1,0 +1,51 @@
+# Solreign — Talent Acquisition Specialist round objective (round integration, spec §6:
+# docs/specs/2026-07-11-changeling-spec.md). "Collect N identities" — PG per spec §1: Absorb is a
+# nonlethal COPY, never a kill, so this objective can only ever be advanced by the harmless Absorb
+# ability (Content.Server/_Solreign/Changeling/SolreignChangelingSystem.Absorb.cs), never by
+# hurting anyone.
+#
+# Condition: Content.Server/_Solreign/Changeling/SolreignChangelingCollectIdentitiesConditionComponent.cs
+# + SolreignChangelingObjectiveSystem.cs (reads live off SolreignChangelingComponent.KnownAliases
+# through SolreignChangelingSystem's public accessor — the component stays [Access]-locked).
+
+- type: objectiveIssuer
+  id: SolreignTalentAcquisition
+  name: objective-issuer-solreign-talent-acquisition
+
+- type: weightedRandom
+  id: SolreignChangelingObjectiveGroups
+  weights:
+    SolreignChangelingObjectiveGroupCollect: 1
+
+- type: weightedRandom
+  id: SolreignChangelingObjectiveGroupCollect
+  weights:
+    SolreignChangelingCollectIdentitiesObjective: 1
+
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseSolreignChangelingObjective
+  components:
+  - type: Objective
+    issuer: SolreignTalentAcquisition
+    difficulty: 1
+  - type: RoleRequirement
+    roles:
+    - SolreignChangelingRole
+
+- type: entity
+  parent: BaseSolreignChangelingObjective
+  id: SolreignChangelingCollectIdentitiesObjective
+  components:
+  - type: Objective
+    difficulty: 1.5
+    icon:
+      sprite: Mobs/Aliens/flesh.rsi
+      state: golem
+  - type: NumberObjective
+    min: 2
+    max: 3
+    title: objective-solreign-changeling-collect-identities-name
+    description: objective-solreign-changeling-collect-identities-description
+  - type: SolreignChangelingCollectIdentitiesCondition

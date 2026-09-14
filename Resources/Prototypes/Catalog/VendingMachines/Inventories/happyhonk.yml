@@ -1,0 +1,14 @@
+- type: vendingMachineInventory
+  id: HappyHonkDispenserInventory
+  startingInventory:
+    HappyHonk: 10
+    HappyHonkMime: 4
+  contrabandInventory:
+    ToyFigurineClown: 1
+    ToyFigurineMime: 1
+    ToyFigurineNukie: 1
+    HappyHonkCluwne: 1
+    SolreignSplatPie: 1 # Solreign chaos-tier: kids'-meal surprise toy
+    SolreignFizzSoaker: 1 # Solreign chaos-tier: kids'-meal surprise toy
+  emaggedInventory:
+    HappyHonkNukie: 1

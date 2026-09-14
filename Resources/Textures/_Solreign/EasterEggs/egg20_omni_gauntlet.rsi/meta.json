@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Solreign (AI-generated, human-reviewed); inhand states re-derived 2026-07-16 (production batch 10, sprite-factory wave) from the actual parent rig (Clothing/Hands/Gloves/Color/black.rsi), superseding the icon-only quick fix; equipped-HAND added, closing the worn-art gap the entity's own YAML comment flagged",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon",
+      "delays": [
+        [
+          0.6,
+          0.14,
+          0.14,
+          0.18
+        ]
+      ]
+    },
+    {
+      "name": "equipped-HAND",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+# Verdant station starfield. Procedural (GeneratedParallaxTextureSource) — no art asset
+# involved. Structure mirrors Resources/Prototypes/Parallaxes/parallax_config_stars.toml and
+# the Solreign acid-stars precedent (parallax_config_acid_stars.toml); palette shifted to a
+# soft bioluminescent green to sit under the aurora-field nebula layer (per the station brief
+# — "green aurora field").
+
+# Clear to black.
+[[layers]]
+type = "clear"
+color = "#000000"
+
+# Pale bioluminescent-green field stars.
+[[layers]]
+type = "points"
+closecolor = "#7CFFB2"
+count = 1000
+seed = 6101
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 4
+maskpersistence = "0.5"
+maskpower = "0.35"
+masklacunarity = "1.5"
+maskfrequency = "3"
+maskthreshold = "0.37"
+maskseed = 6155
+
+# Dim green edge of the same field.
+[[layers]]
+type = "points"
+closecolor = "#1F5C39"
+pointsize = 2
+count = 1000
+seed = 6101
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 4
+maskpersistence = "0.5"
+maskpower = "0.35"
+masklacunarity = "1.5"
+maskfrequency = "3"
+maskthreshold = "0.37"
+maskseed = 6155
+
+# A few pale-white highlight stars.
+[[layers]]
+type = "points"
+closecolor = "#E8FFF0"
+count = 25
+seed = 6210
+
+# And their dim edge.
+[[layers]]
+type = "points"
+closecolor = "#5E6B62"
+pointsize = 2
+count = 25
+seed = 6210
+
+# Colour-to-alpha.
+[[layers]]
+type = "toalpha"

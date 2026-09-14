@@ -1,0 +1,44 @@
+- type: vendingMachineInventory
+  id: GoodCleanFunInventory
+  startingInventory:
+    DiceBag: 6
+    Paper: 8
+    d6Dice: 8
+    ChessBoard: 1
+    BackgammonBoard: 1
+    ParchisBoard: 1
+    CheckerBoard: 1
+    ShipBattlemap: 1
+    SnowBattlemap: 1
+    SandBattlemap: 1
+    MoonBattlemap: 1
+    GrassBattlemap: 1
+    PaperCNCSheet: 6
+    MysteryFigureBox: 2
+    BooksBag: 3
+    Magic9Ball: 2
+    # SolreignEgg01 ("aperture device"), SolreignSplatPie ("splat pie"), and SolreignPoolNoodle
+    # ("compliance baton") removed 2026-07-12 per BETA-FEEDBACK-01 Lane D (LJ: not appropriate
+    # for the genpop-facing machine). That removal re-orphaned BOTH SolreignPoolNoodle AND
+    # SolreignEgg01 — this was each one's only reachability path (SolreignSplatPie stays
+    # reachable via HappyHonkInventory; the 3 fireworks stay reachable through
+    # SolreignFireworksLauncher below, which is untouched).
+    # W21 re-home (S6): both got showpiece-doctrine map placements on Oasis instead of a vendor
+    # slot — SolreignPoolNoodle on the bar table beside the Jukebox (-1.5,1.5), SolreignEgg01 on
+    # the Science table by the scientist spawn (-16.5,-25.5). See
+    # Resources/Maps/_Solreign/solreign_oasis.yml (Wave 21 block). Do NOT re-add either here.
+    SolreignFizzSoaker: 3 # Solreign chaos-tier
+    SolreignHydroBlasterMax: 2 # Solreign chaos-tier
+    SolreignPastryPersuader: 2 # Solreign chaos-tier
+    SolreignFoamStormRifle: 2 # Solreign chaos-tier
+    SolreignFoamCrossbow: 2 # Solreign chaos-tier
+    SolreignFireworksLauncher: 2 # Solreign delighter — also the only reachability path for the
+                                 # SolreignFireworkPopper/FireworkFountainGreen/FireworkFountainCyan
+                                 # it dispenses (EntityTableContainerFill), see
+                                 # docs/specs/2026-07-11-orphan-report.md
+  contrabandInventory:
+    Basketball: 1
+    FoodSnackBoritos: 3
+    DrinkSpaceMountainWindCan: 3
+    SolreignKnockoutBat: 2 # Solreign chaos-tier, emag-gated bonus tier like Basketball above
+    SolreignLuckyMallet: 2 # Solreign chaos-tier, emag-gated bonus tier like Basketball above

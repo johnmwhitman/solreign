@@ -1,0 +1,9 @@
+# MaterialEctoplasm — the butcher-drop material yielded by the Shadow species
+# (see Body/Species/shadow.yml, MobShadow Butcherable). Modeled on the vanilla
+# Ectoplasm entity (server morgue.yml) so it reuses the revenant sprite + tags.
+
+- type: entity
+  parent: Ectoplasm
+  id: MaterialEctoplasm
+  name: ectoplasm
+  description: A cold, clinging residue left behind by things that were never quite alive.

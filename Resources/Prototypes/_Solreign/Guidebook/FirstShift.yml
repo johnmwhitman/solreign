@@ -1,0 +1,15 @@
+# Solreign onboarding guide entry — "Your First Shift at Solreign" (Greeter + onboarding wave).
+#
+# Kept as a standalone top-level entry rather than nested under the upstream NewPlayer entry
+# (Resources/Prototypes/Guidebook/newplayer.yml) — that file is outside this wave's assigned
+# paths, so we don't touch it. Priority 1 sorts it just after the default-priority guides
+# (including upstream "New? Start here!", priority 0) and well ahead of the ruleset entries
+# (priority 10, see Resources/Prototypes/Guidebook/rules.yml) — read this, then read the rules.
+#
+# Locale: Locale/en-US/_solreign/first-shift.ftl
+
+- type: guideEntry
+  id: SolreignFirstShift
+  name: guide-entry-firstshift
+  priority: 1
+  text: "/ServerInfo/_Solreign/FirstShift.xml"

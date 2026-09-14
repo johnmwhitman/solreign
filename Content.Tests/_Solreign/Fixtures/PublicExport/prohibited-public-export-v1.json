@@ -1,0 +1,115 @@
+{
+  "fixture_version": "1.1",
+  "fixture_id": "server-snapshot-prohibited-public-data-v1",
+  "test_only": true,
+  "phase_1_scope": "lexical_and_schema_containment_only",
+  "phase_1_provenance_note": "Phase 1 containment is lexical/schema shape validation only. PublicExportValidation has no authoritative-provenance check anywhere in this library, and none is represented as a Phase-1 schema property. The known_shape_collisions rows below are placements where a prohibited canary derivative is lexically IDENTICAL in shape to a legitimate contract value (a random transport UUID, a durable stream sequence number, or a prototype-shaped map id) -- no stricter regex/length/shape rule can separate them from a real value of the same field without also rejecting real values (see PublicExportContractTests.AssertProhibitedPlacements, which frozen-count-checks this list and asserts each row's disposition is explicitly DeferredToProvenancePhase, never a silent pass). Authoritative provenance enforcement is deferred to the later producer/exporter phase (SR-W-061 Phase 2+) and is out of scope for this pure/offline contract library. Orchestrator-review amendment 2026-07-15: the three payload.build_sha rows previously listed here were removed because a genuinely stricter, non-overfit shape rule DOES exist for build_sha -- this codebase's real build shas are Git SHA-1 commit hashes (40 lowercase hex characters); PublicExportValidation now rejects the 64-hex-character shape outright (BuildShaPattern narrowed to \\A[0-9a-f]{40}\\z), so those three canary derivatives are lexically RejectedByShape, not accepted collisions.",
+  "must_never_appear_in": [
+    "canonical_envelope_bytes",
+    "outbox_file_name_or_content",
+    "log_message_or_exception",
+    "metric_name_label_or_value",
+    "http_header_url_or_body",
+    "cache_key_or_value",
+    "analytics_event",
+    "built_html_script_or_source_map"
+  ],
+  "known_shape_collisions": [
+    {
+      "value": "11111111-2222-4333-8444-555555555555",
+      "accepted_field": "message_id",
+      "required_control": "random_transport_uuid",
+      "disposition": "DeferredToProvenancePhase"
+    },
+    {
+      "value": "11111111",
+      "accepted_field": "sequence",
+      "required_control": "durable_stream_sequencer",
+      "disposition": "DeferredToProvenancePhase"
+    },
+    {
+      "value": "MTExMTExMTEtMjIyMi00MzMzLTg0NDQtNTU1NTU1NTU1NTU1",
+      "accepted_field": "payload.map_id",
+      "required_control": "validated_map_prototype",
+      "disposition": "DeferredToProvenancePhase"
+    },
+    {
+      "value": "Y2FuYXJ5LXBsYXllckBleGFtcGxlLmludmFsaWQ",
+      "accepted_field": "payload.map_id",
+      "required_control": "validated_map_prototype",
+      "disposition": "DeferredToProvenancePhase"
+    },
+    {
+      "value": "MTkyLjAuMi40NA",
+      "accepted_field": "payload.map_id",
+      "required_control": "validated_map_prototype",
+      "disposition": "DeferredToProvenancePhase"
+    }
+  ],
+  "canaries": [
+    {
+      "category": "private_game_identity",
+      "field_aliases": ["guid", "user_id", "account_id", "player_id"],
+      "seed": "11111111-2222-4333-8444-555555555555",
+      "derivatives": [
+        "11111111",
+        "cf4c4732fd3b8f8a55b60871950a2f22c893ea7afd75d2146826534e3f67cc49",
+        "MTExMTExMTEtMjIyMi00MzMzLTg0NDQtNTU1NTU1NTU1NTU1"
+      ]
+    },
+    {
+      "category": "email_identity",
+      "field_aliases": ["email", "contact", "login"],
+      "seed": "canary-player@example.invalid",
+      "derivatives": [
+        "06192d2cdf755e125e9558adfd94b111d7c5dd18be292c5f0d0885650c5b7b41",
+        "Y2FuYXJ5LXBsYXllckBleGFtcGxlLmludmFsaWQ"
+      ]
+    },
+    {
+      "category": "network_identity",
+      "field_aliases": ["ip", "remote_address", "connection"],
+      "seed": "192.0.2.44",
+      "derivatives": [
+        "1a17a4b9dec75a663e54e523037f05b0e5a5e13d023247a6b0f9774cc80829a2",
+        "MTkyLjAuMi40NA"
+      ]
+    },
+    {
+      "category": "external_identity",
+      "field_aliases": ["discord_id", "discord_user", "linked_account"],
+      "seed": "123456789012345678",
+      "derivatives": []
+    },
+    {
+      "category": "private_social",
+      "field_aliases": ["wingmate", "partner", "blocked_user"],
+      "seed": "wingmate-canary-private-pair",
+      "derivatives": []
+    },
+    {
+      "category": "moderation_security",
+      "field_aliases": ["report", "ban", "admin_note", "moderation_state"],
+      "seed": "moderation-canary-do-not-export",
+      "derivatives": []
+    },
+    {
+      "category": "secret_role",
+      "field_aliases": ["antag", "secret_role", "objective"],
+      "seed": "traitor-canary-secret-role",
+      "derivatives": []
+    },
+    {
+      "category": "precise_location",
+      "field_aliases": ["coordinates", "position", "grid", "entity_uid"],
+      "seed": "grid:42:12.5:9.25",
+      "derivatives": []
+    },
+    {
+      "category": "private_message",
+      "field_aliases": ["chat", "message", "bwoink", "prayer"],
+      "seed": "private-message-canary-never-public",
+      "derivatives": []
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+# Solreign equipable gear pack — 10 items from docs/research/2026-07-11-rimworld-terraria-mining-mmx.md, Table 2.
+#
+# UPSTREAM PATTERNS VERIFIED (2026-07-11), all reskins/variants of existing prototypes,
+# existing components only:
+# - Back:   ClothingBackpack / ClothingBackpackSatchel (Entities/Clothing/Back/backpacks.yml, satchel.yml)
+# - Belt:   ClothingBeltUtility (Entities/Clothing/Belt/job.yml)
+# - Ears:   ClothingHeadsetGrey (Entities/Clothing/Ears/headsets.yml)
+# - Eyes:   ClothingEyesGlasses / ClothingEyesGlassesSunglasses (Entities/Clothing/Eyes/glasses.yml)
+# - Gloves: ClothingHandsGlovesSyntheticBase + tinted color.rsi (Entities/Clothing/Hands/colored.yml)
+# - Head:   ClothingHeadHatTophat (hats.yml), ClothingHeadHatCorpsoft (soft.yml)
+# - Neck:   ClothingNeckTieRed (Entities/Clothing/Neck/ties.yml); PointLight per glowstick/glow-plant precedent
+#
+# BALANCE NOTE: every stat here is either inherited unchanged from the upstream parent
+# (sunglasses flash protection, utility-belt storage, headset radio) or a tiny tweak via an
+# existing field (+2 storage cells on the courier satchel, a dim cosmetic PointLight on the
+# tie). Nothing exceeds what a passenger can already grab from a ClothesMate.
+#
+# TABLE 2 EFFECTS DEFERRED TO CODE (kept as examine flavor only, no new components):
+# glider hop (Hoverpack), sticker-on-pickup (Satchel), PA mute + mood (Earbuds), tile
+# metadata hover (Spectacles), Performance-Note flash (Shades), meal-quality bonus (Mitts),
+# audit antenna wave (Top Hat).
+#
+# SPAWNING (Wave 21, S21): all 10 items are stocked in SolreignExecutiveVendorInventory
+# (contracts_executive_vendor.yml), the Manager+ rank-gated machine. That IS the Contracts
+# reward pool this note always intended: SolreignContractPrototype deliberately has no
+# item-payout field (anti-grief by construction), so "contract rewards" are realized as
+# rank-gated shelf access — contracts pay Corporate Standing, Standing drives career rank
+# (RankRules.Score), rank opens the vendor. See contracts_season1.yml's header note.
+#
+# TODO(sprite factory): every item below reuses an upstream RSI as placeholder; per-item
+# sprite needs are noted inline.
+
+# ---------------------------------------------------------------------------
+# BACK
+# ---------------------------------------------------------------------------
+
+# 1. Halcyon Hoverpack — cosmetic backpack variant. Glider logic deferred; the
+#    wings are, at present, morale-supportive foam.
+#    CLOSED (production batch 10, sprite-factory wave, 2026-07-16): real art landed --
+#    soft rounded pack, two fold-out foam wings, acid-green piping. icon + equipped-BACKPACK
+#    + inhand states, own RSI at _Solreign/halcyon_hoverpack.rsi.
+- type: entity
+  parent: ClothingBackpack
+  id: SolreignClothingBackHalcyonHoverpack
+  name: Halcyon hoverpack
+  suffix: solreign, gear
+  description: A waist-cinched soft pack with two fold-out foam wings. The wings are certified for morale, not flight. Halcyon Division thanks you for gliding responsibly, which is to say, not at all.
+  components:
+  - type: Sprite
+    sprite: _Solreign/halcyon_hoverpack.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/halcyon_hoverpack.rsi
+      state: icon
+  - type: Clothing
+    sprite: _Solreign/halcyon_hoverpack.rsi
+
+# 2. Verge Courier Satchel — satchel variant with one extra stamp pocket
+#    (+2 cells vs. upstream satchel; Storage override replaces the whole grid,
+#    so the parent's three blocks are restated below plus the 1x2 pocket at x=2).
+#    CLOSED (production batch 10, sprite-factory wave, 2026-07-16): real art landed --
+#    courier-style satchel, acid-green mail chevron, stamp-pocket flap. Own RSI at
+#    _Solreign/verge_courier_satchel.rsi.
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: SolreignClothingBackVergeCourierSatchel
+  name: Verge courier satchel
+  suffix: solreign, gear
+  description: A Verge Logistics satchel with a dedicated pocket for stamps, coupons, and misdelivered feelings. Every delivery is a promise. Every promise is trackable.
+  components:
+  - type: Sprite
+    sprite: _Solreign/verge_courier_satchel.rsi
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: _Solreign/verge_courier_satchel.rsi
+      state: icon
+  - type: Clothing
+    sprite: _Solreign/verge_courier_satchel.rsi
+  - type: Storage
+    grid:
+    - 0,0,1,3
+    - 3,0,6,3
+    - 8,0,9,3
+    - 2,1,2,2 # the stamp pocket: +2 cells over a standard satchel
+
+# ---------------------------------------------------------------------------
+# BELT
+# ---------------------------------------------------------------------------
+
+# 3. Lumenbridge Toolbelt — utility belt rebrand; inherits the engineering
+#    storage whitelist and capacity unchanged from ClothingBeltUtility.
+#    ("Faster holster" from Table 2 deferred to code; flavor only.)
+#    Sprite need: utility belt with luminous acid-green stitching and a small
+#    bridge-schematic buckle. Placeholder: utility.rsi.
+- type: entity
+  parent: ClothingBeltUtility
+  id: SolreignClothingBeltLumenbridgeToolbelt
+  name: Lumenbridge toolbelt
+  suffix: solreign, gear
+  description: A pragmatic foreman's belt from the Lumenbridge Works catalog. Each loop has been ergonomically reviewed. The review found the loops adequate.
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/utility.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/utility.rsi
+
+# ---------------------------------------------------------------------------
+# EARS
+# ---------------------------------------------------------------------------
+
+# 4. Compliant Chorus Earbuds — passenger headset rebrand; still a fully
+#    functional common-channel headset (Headset + EncryptionKeyHolder inherited).
+#    ("Deep work" PA mute + mood from Table 2 deferred to code; flavor only.)
+#    Sprite need: two small in-ear buds with an acid-green status dot
+#    (icon + equipped-EARS states). Placeholder: Headsets/base.rsi, icon tinted.
+- type: entity
+  parent: ClothingHeadsetGrey
+  id: SolreignClothingEarsCompliantChorusEarbuds
+  name: Compliant Chorus earbuds
+  suffix: solreign, gear
+  description: Wellness-issue earbuds playing a curated hum of productivity. Side effects may include focus, serenity, and humming the quarterly anthem in your sleep.
+  components:
+  - type: Sprite
+    sprite: _Solreign/compliant_chorus_earbuds.rsi
+    # tint removed: it existed only to green the grey placeholder, and this line's
+    # own comment said the worn state was waiting on the sprite factory. It has
+    # arrived, already coloured (#cdff70), and `color:` multiplies.
+  - type: Clothing
+    # ClothingHeadset (abstract, two levels up) pins Clothing.sprite to
+    # Clothing/Ears/Headsets/base.rsi, and THAT component draws the worn item.
+    # Without this override the icon is ours and every player still sees a vanilla
+    # grey headset on the wearer, with equipped-EARS delivered and never read.
+    sprite: _Solreign/compliant_chorus_earbuds.rsi
+
+# ---------------------------------------------------------------------------
+# EYES
+# ---------------------------------------------------------------------------
+
+# 5. Synapse Spectacles — prescription glasses rebrand; inherits VisionCorrection.
+#    (Tile-metadata hover for new players deferred to code; flavor only.)
+#    Sprite need: chunky geometric frames, acid-green temple arms. Placeholder: glasses.rsi.
+- type: entity
+  parent: ClothingEyesGlasses
+  id: SolreignClothingEyesSynapseSpectacles
+  name: Synapse spectacles
+  suffix: solreign, gear
+  description: Geometric frames from the Synapse Clarity Initiative. They do not actually explain the station to you. They simply make you look like someone it has been explained to.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/glasses.rsi
+
+# 6. Verge Vigile Shades — sunglasses rebrand; inherits FlashImmunity and
+#    EyeProtection (5s) unchanged from upstream sunglasses. Not OP: identical
+#    numbers to the black sunglasses already in circulation.
+#    Sprite need: sleek office-fit shades with a thin acid-green browline.
+#    Placeholder: sunglasses.rsi.
+- type: entity
+  parent: ClothingEyesGlassesSunglasses
+  id: SolreignClothingEyesVergeVigileShades
+  name: Verge Vigile shades
+  suffix: solreign, gear
+  description: Sleek office-fit shades for the employee who has seen the metrics and remained calm. Rated against flashes, glare, and direct eye contact with management.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+
+# ---------------------------------------------------------------------------
+# GLOVES
+# ---------------------------------------------------------------------------
+
+# 7. Halcyon Hospitality Mitts — colored-gloves variant (same pattern as
+#    ClothingHandsGlovesColorPurple: tinted color.rsi layers; the color.rsi set
+#    is designed for tinting, so worn/inhand tints work here).
+#    (Meal-quality bonus from Table 2 deferred to code; flavor only.)
+#    Sprite need (later): quilted oven-mitt texture with a tiny meal-tray emblem.
+- type: entity
+  parent: ClothingHandsGlovesSyntheticBase
+  id: SolreignClothingHandsHalcyonHospitalityMitts
+  name: Halcyon hospitality mitts
+  suffix: solreign, gear
+  description: Cream service mitts for commissary champions. Guaranteed to keep fingerprints off the cutlery and warmth in every regulation-portioned serving.
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/Color/color.rsi
+    layers:
+    - state: icon
+      color: "#f2ecd8"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#f2ecd8"
+      right:
+      - state: inhand-right
+        color: "#f2ecd8"
+  - type: Clothing
+    sprite: Clothing/Hands/Gloves/Color/color.rsi
+    clothingVisuals:
+      gloves:
+      - state: equipped-HAND
+        color: "#f2ecd8"
+  - type: Fiber
+    fiberMaterial: fibers-synthetic
+    fiberColor: fibers-white
+
+# ---------------------------------------------------------------------------
+# HEAD
+# ---------------------------------------------------------------------------
+
+# 8. Solreign Antennae-Top Hat — tophat variant, purely cosmetic.
+#    (Antenna waving during audit events deferred to code; flavor only.)
+#    Sprite need: tall black tophat with a springy acid-green antenna ball
+#    (icon + equipped-HELMET states). Placeholder: tophat.rsi.
+- type: entity
+  parent: ClothingHeadHatTophat
+  id: SolreignClothingHeadAntennaeTopHat
+  name: Solreign antennae-top hat
+  suffix: solreign, gear
+  description: A distinguished tophat crowned with a single quivering antenna. It receives no signals. It transmits only confidence.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/tophat.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/tophat.rsi
+
+# 9. Verge Vanguard Visor — corporate-cap variant, cosmetic department anchor.
+#    Sprite need: translucent brimmed visor, tinted per-department later;
+#    v1 ships one acid-green corporate colorway (landed: _Solreign/verge_vanguard_visor.rsi).
+- type: entity
+  # ⚠️ Reparented off ClothingHeadHatCorpsoft (2026-08-02): that parent is a FLIPPABLE ballcap —
+  # its base's Sprite layers and flip verb both demand an `icon_flipped` state the visor RSI does
+  # not (and should not) ship. The sprite-state gate caught the missing state before any client
+  # did; the flip verb would have been the second, invisible half of the same defect. A visor is
+  # not a flippable cap; plain head-clothing base carries everything it actually needs.
+  parent: ClothingHeadBase
+  id: SolreignClothingHeadVergeVanguardVisor
+  name: Verge vanguard visor
+  suffix: solreign, gear
+  description: A translucent visor in this quarter's official department tint. Wearing it does not make you the vanguard, but it does make you look available for it.
+  components:
+  - type: Sprite
+    sprite: _Solreign/verge_vanguard_visor.rsi
+  - type: Clothing
+    sprite: _Solreign/verge_vanguard_visor.rsi
+
+# ---------------------------------------------------------------------------
+# NECK
+# ---------------------------------------------------------------------------
+
+# 10. Lil'Corp Lavender Tie — tie variant with a faint lavender "Hushed
+#     Hallway" glow (PointLight, same existing component the Solreign glow
+#     plants use; dim + small radius, cosmetic mood lighting only).
+#     Sprite need: soft lavender clip-on tie with sleepy embroidered eyes
+#     (icon + storage + equipped-NECK states). Placeholder: redtie.rsi —
+#     reads wrong-colored until the sprite factory recolor lands.
+- type: entity
+  parent: ClothingNeckTieRed
+  id: SolreignClothingNeckLilCorpLavenderTie
+  name: Lil'Corp lavender tie
+  suffix: solreign, gear
+  description: A lavender clip-on from the Lil'Corp Junior Executive line. Nearby hallways feel two tiles quieter. This is not measurable, but it is company policy to believe it.
+  components:
+  - type: PointLight
+    radius: 1.5
+    energy: 0.5
+    color: "#c9a6f0"

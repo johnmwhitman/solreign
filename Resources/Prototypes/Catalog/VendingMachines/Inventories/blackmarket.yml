@@ -1,0 +1,14 @@
+- type: vendingMachineInventory
+  id: BlackMarketInventory
+  startingInventory:
+    DrinkShamblersJuiceCan: 5
+    DrinkSpaceUpCan: 5
+    ClothingHeadHatSyndie: 3
+    ToyFigurineNukieElite: 1
+    ClothingOuterCoatTrench: 2
+  contrabandInventory:
+    WeaponPistolViper: 1
+    MagazinePistolSubMachineGun: 2
+  emaggedInventory:
+    WeaponShotgunBulldog: 1
+    MagazineShotgun: 2

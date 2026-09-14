@@ -1,0 +1,37 @@
+# Solreign — "Chef CQC" (MARTIAL ARTS TOY, roadmap: combo core kitchen-brigade moveset, nonlethal).
+# Player feedback item #3 (FEEDBACK-SMALL-2026-07-16): chef's kit had zero combat items. Reuses the
+# already-shipped combo-core framework (Content.Server/_Solreign/MartialArts/) exactly like the
+# Security Judo Belt does — same wear-conditioned grant idiom, own copy of the pairwise combo math
+# (Content.Server/_Solreign/MartialArts/ChefComboRules.cs), no new mechanics invented.
+#
+# Grant is WEAR-CONDITIONED (apron on = certified, apron off = decertified). Combos are a sequence
+# of existing interactions (unarmed hit, disarm shove) inside a 1.5s window, same two-input pairwise
+# shape as the Way of the Ornamental Carp:
+#   Swat, Swat -> Heat Check (stamina jolt)
+#   Swat, Toss -> 86'd       (knockdown)
+#   Toss, Toss -> Order Up   (disarm throw)
+# Logic: Content.Server/_Solreign/MartialArts/SolreignChefApronComponent.cs (the apron) +
+# SolreignChefApronWearerComponent.cs (the while-worn grant) + SolreignChefApronSystem.cs. Pure
+# chain/window math is unit-tested in Content.Tests/_Solreign/ChefComboRulesTests.cs.
+#
+# Parents the existing ClothingOuterApronChef (own sprite already set, apronchef.rsi — no sprite
+# gap) rather than introducing new art.
+#
+# WIRING NOTE (grk review caught this): this is NOT forced onto every Chef via ChefGear
+# (startingGear). Spawn order equips the role LOADOUT first, then startingGear with
+# InventorySystem.TryEquip(..., force: true) (Content.Shared/Station/SharedStationSpawningSystem.cs)
+# — a startingGear.outerClothing entry would silently strip and replace whatever outer-clothing
+# loadout choice the player made (Apron/Jacket/Wintercoat, Loadouts/Jobs/Civilian/chef.yml) on
+# EVERY spawn. Instead, the existing "ChefApron" loadout option itself now points at
+# SolreignChefApron instead of plain ClothingOuterApronChef — picking Apron in the loadout menu
+# grants Chef CQC, picking Jacket/Wintercoat doesn't, and the player's own choice is respected
+# either way.
+
+- type: entity
+  parent: ClothingOuterApronChef
+  id: SolreignChefApron
+  name: chef's apron
+  suffix: solreign, chef CQC
+  description: A high-class chef's apron-jacket. Somewhere between "kitchen brigade discipline" and "certified nonlethal combat instrument," and the wearer is never quite sure which half is in charge.
+  components:
+  - type: SolreignChefApron

@@ -1,0 +1,45 @@
+# Solreign — Talent Acquisition Specialist antag definition (round integration, spec §6:
+# docs/specs/2026-07-11-changeling-spec.md). Reuses the upstream RestrictedAntag job-blacklist
+# idiom (the same parent Traitor's own antagSpecifier uses, Resources/Prototypes/Roles/Antags/
+# traitor.yml) — Command/Security/Cyborg/Intern roles stay out of the identity-theft pool, same
+# rationale upstream already applied to Traitor and its own (unrelated) Changeling.
+#
+# `components:` here is what actually attaches SolreignChangelingComponent (Content.Server/
+# _Solreign/Changeling/SolreignChangelingComponent.cs) to the selected player's body at selection
+# time — see AntagSpecifierPrototype.Components (Content.Shared/Antag/AntagSpecifierPrototype.cs).
+# Everything mechanical (ability grants, TrueForm snapshot) already runs off that component's own
+# ComponentStartup handler, so no extra AfterAntagEntitySelectedEvent hook is needed.
+
+- type: antag
+  id: SolreignChangeling
+  name: roles-antag-solreign-changeling-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-solreign-changeling-objective
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 1h
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: SolreignChangeling
+  prefRoles:
+  - SolreignChangeling
+  briefing:
+    text: solreign-changeling-role-greeting
+    color: "#9acd32" # Solreign acid-green brand color (matches gear.yml's own annotation)
+  components:
+  - type: SolreignChangeling
+  mindRoles:
+  - MindRoleSolreignChangeling
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleSolreignChangeling
+  name: Talent Acquisition Specialist Role
+  components:
+  - type: MindRole
+    antagPrototype: SolreignChangeling
+    exclusiveAntag: true
+    subtype: role-subtype-solreign-changeling
+  - type: SolreignChangelingRole

@@ -1,0 +1,8 @@
+# HiddenStash — a small concealable storage box handed to the Smuggler in
+# their back slot. Modeled on the vanilla BoxCardboard storage entity.
+
+- type: entity
+  parent: BoxCardboard
+  id: HiddenStash
+  name: hidden stash
+  description: A nondescript container, easy to overlook and easier to forget you checked.

@@ -1,0 +1,62 @@
+# Perihelion station starfield. Procedural (GeneratedParallaxTextureSource) — no art asset
+# involved. Structure mirrors Resources/Prototypes/Parallaxes/parallax_config_stars.toml and
+# the Solreign acid-stars precedent (parallax_config_acid_stars.toml); palette shifted warm
+# gold/white to read as starlight washed out near a massive star's corona (per the station
+# brief — "massive warm star limb, corona").
+
+# Clear to black.
+[[layers]]
+type = "clear"
+color = "#000000"
+
+# Warm gold field stars.
+[[layers]]
+type = "points"
+closecolor = "#FFD700"
+count = 900
+seed = 5101
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 4
+maskpersistence = "0.5"
+maskpower = "0.35"
+masklacunarity = "1.5"
+maskfrequency = "3"
+maskthreshold = "0.37"
+maskseed = 5155
+
+# Dim amber edge of the same field.
+[[layers]]
+type = "points"
+closecolor = "#5C4A1A"
+pointsize = 2
+count = 900
+seed = 5101
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 4
+maskpersistence = "0.5"
+maskpower = "0.35"
+masklacunarity = "1.5"
+maskfrequency = "3"
+maskthreshold = "0.37"
+maskseed = 5155
+
+# A few white-hot highlight stars (corona flare-outs).
+[[layers]]
+type = "points"
+closecolor = "#FFF6E0"
+count = 25
+seed = 5210
+
+# And their dim edge.
+[[layers]]
+type = "points"
+closecolor = "#665A3D"
+pointsize = 2
+count = 25
+seed = 5210
+
+# Colour-to-alpha.
+[[layers]]
+type = "toalpha"

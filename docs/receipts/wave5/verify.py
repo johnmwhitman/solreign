@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+"""Ground-truth verification for wave-5 (the wave-3/4 bar, fully programmatic):
+- frame 0 byte-identical to `git show HEAD:<path>` (the pre-wave5 committed original)
+- PNG grid width == declared frame count * 32, height == 32
+- per-frame diff > 0 vs the previous frame (no dead frames)
+- license/copyright in meta.json preserved verbatim vs the pre-wave5 committed original
+- meta.json delays match what the spec declared
+- sibling states in the same RSI (not touched this wave) are byte/meta unchanged
+"""
+import io, json, os, subprocess, sys
+from PIL import Image
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from execute_spec import resolve_png
+
+REPO = "/Users/johnwhitman/AI/solreign-trees/sprite-idle-anims"
+TEXTURES = f"{REPO}/Resources/Textures"
+
+
+def git_show(rel_path):
+    return subprocess.run(["git", "show", f"HEAD:{rel_path}"], cwd=REPO,
+                           capture_output=True, check=True).stdout
+
+
+def check(cond, msg, fails):
+    if not cond:
+        fails.append(msg)
+    print(("PASS " if cond else "FAIL ") + msg)
+
+
+def main():
+    fails = []
+    touched = set()
+    for batch in sys.argv[1:]:
+        spec = json.load(open(batch))
+        for s in spec["sprites"]:
+            if s.get("verdict") == "skip":
+                continue
+            png = resolve_png(s)
+            rel_dir = os.path.dirname(png)
+            touched.add((rel_dir, s["state"]))
+
+    for batch in sys.argv[1:]:
+        spec = json.load(open(batch))
+        for s in spec["sprites"]:
+            if s.get("verdict") == "skip":
+                continue
+            rsi, state = s["rsi"], s["state"]
+            new_png = resolve_png(s)
+            rel_dir = os.path.dirname(new_png)
+            rel_dir_repo = os.path.relpath(rel_dir, TEXTURES)
+            new_meta_path = os.path.join(rel_dir, "meta.json")
+            orig_png_bytes = git_show(f"Resources/Textures/{rel_dir_repo}/{state}.png")
+            orig_meta_j = json.loads(git_show(f"Resources/Textures/{rel_dir_repo}/meta.json"))
+
+            n = s["frames"]; delays = s["delays"]
+            im = Image.open(new_png).convert("RGBA")
+            check(im.size == (32*n, 32), f"{rsi}/{state}: grid size {im.size} == ({32*n},32)", fails)
+
+            frame0 = im.crop((0, 0, 32, 32))
+            orig = Image.open(io.BytesIO(orig_png_bytes)).convert("RGBA")
+            check(list(frame0.getdata()) == list(orig.getdata()),
+                  f"{rsi}/{state}: frame 0 byte-identical to git HEAD original", fails)
+
+            frames = [im.crop((i*32, 0, i*32+32, 32)) for i in range(n)]
+            all_diff = True
+            for i in range(1, n):
+                prev, cur = list(frames[i-1].getdata()), list(frames[i].getdata())
+                ndiff = sum(1 for a, b in zip(prev, cur) if a != b)
+                if ndiff == 0:
+                    all_diff = False
+                    print(f"  frame {i-1}->{i}: {ndiff} px differ")
+            check(all_diff, f"{rsi}/{state}: every consecutive frame pair differs (no dead frames)", fails)
+
+            meta = json.load(open(new_meta_path))
+            check(meta.get("license") == orig_meta_j.get("license"),
+                  f"{rsi}/{state}: license preserved verbatim", fails)
+            check(meta.get("copyright") == orig_meta_j.get("copyright"),
+                  f"{rsi}/{state}: copyright preserved verbatim", fails)
+
+            st = next(x for x in meta["states"] if x["name"] == state)
+            check(st.get("delays") == [list(delays)],
+                  f"{rsi}/{state}: meta delays == spec delays {delays}", fails)
+
+            orig_states = {x["name"]: x for x in orig_meta_j["states"]}
+            for sib in meta["states"]:
+                if sib["name"] == state:
+                    continue
+                if (rel_dir, sib["name"]) in touched:
+                    continue  # intentionally animated elsewhere in this same wave
+                check(sib == orig_states.get(sib["name"]),
+                      f"{rsi}: sibling state {sib['name']!r} meta unchanged", fails)
+
+    print()
+    if fails:
+        print(f"{len(fails)} FAILURE(S)")
+        sys.exit(1)
+    print("ALL CHECKS PASSED")
+
+
+main()

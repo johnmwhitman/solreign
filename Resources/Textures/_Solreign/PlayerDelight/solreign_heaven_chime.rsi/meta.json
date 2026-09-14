@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Solreign + Sprite Factory 2026",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bell",
+      "directions": 4
+    }
+  ]
+}

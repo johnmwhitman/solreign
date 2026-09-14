@@ -1,0 +1,21 @@
+# Solreign — "Full Moon Window" event-night entry point for the werewolf antag.
+# Spec: docs/specs/2026-07-11-werewolf-vampire-spec.md §3.2, §3.5 rule 6.
+#
+# C# side: Content.Server/_Solreign/Antags/Werewolf/SolreignFullMoonWindowRuleSystem.cs (+ Component).
+# On Started it drafts exactly ONE eligible crew member (SolreignWerewolfComponent) and flips
+# SolreignWerewolfSystem.MoonWindowActive; on Ended (WindowSeconds elapsed) it flips it back off.
+# The transformation cycle itself is the pure WerewolfStateMachine — this rule only supplies the flag.
+#
+# Admin-invocable today (`addgamerule SolreignFullMoonWindow`); can also be layered onto any preset's
+# `rules:` list, same idiom as SolreignCorporate in game_rules_corporate.yml. Not yet wired into a
+# StationEventScheduler — that's the "event-night scheduler ... at build time" spec calls out as a
+# later step (§3.2), once a fixed weight/cooldown against the rest of the event pool is council-picked.
+
+- type: entity
+  parent: BaseGameRule
+  id: SolreignFullMoonWindow
+  components:
+  - type: GameRule
+    minPlayers: 10
+  - type: SolreignFullMoonWindowRule
+    windowSeconds: 300

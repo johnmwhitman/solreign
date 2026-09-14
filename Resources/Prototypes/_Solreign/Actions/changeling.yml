@@ -1,0 +1,49 @@
+# Talent Acquisition Specialist ability actions (spec: docs/specs/2026-07-11-changeling-spec.md §2.2/§2.3).
+# Shape studied from Resources/Prototypes/Actions/polymorph.yml (ActionPolymorphWizardSpider /
+# ActionRevertPolymorph) — no Magic component, no upgrade tiers, targets our own
+# SolreignChangelingSystem instead of PolymorphSystem (spec §2.1: a changeling never swaps bodies).
+
+- type: entity
+  parent: BaseAction
+  id: ActionSolreignChangelingTransform
+  name: Assume Persona
+  description: Reshape yourself into the most recently sampled identity.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    useDelay: 8
+  - type: Sprite
+    sprite: Interface/Actions/voice-mask.rsi
+    state: icon
+  - type: InstantAction
+    event: !type:SolreignChangelingTransformActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionSolreignChangelingRevert
+  name: Revert to True Form
+  description: Reshape yourself back into your original identity.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    useDelay: 8
+  - type: Sprite
+    sprite: Interface/Actions/voice-mask.rsi
+    state: icon
+  - type: InstantAction
+    event: !type:SolreignChangelingRevertActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionSolreignChangelingArmBlade
+  name: Deploy Retention Tool
+  description: Toggle your forearm between its ordinary shape and an augmented bio-blade.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    useDelay: 2
+  - type: Sprite
+    sprite: _Solreign/solreign_changeling_armblade.rsi
+    state: inhand-right
+  - type: InstantAction
+    event: !type:SolreignChangelingArmBladeToggleActionEvent

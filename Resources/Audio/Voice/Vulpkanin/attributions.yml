@@ -1,0 +1,60 @@
+- files: ["dog_bark1.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/abhisheky948/sounds/625497/"
+  source: "https://freesound.org/people/abhisheky948/sounds/625497/"
+
+- files: ["dog_bark2.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/michael_grinnell/sounds/464400/"
+  source: "https://freesound.org/people/michael_grinnell/sounds/464400/"
+
+- files: ["dog_bark3.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/Geoff-Bremner-Audio/sounds/688201/"
+  source: "https://freesound.org/people/Geoff-Bremner-Audio/sounds/688201/"
+
+- files: ["dog_growl1.ogg", "dog_growl2.ogg", "dog_growl3.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/Glitchedtones/sounds/372533/ - cut out three clips of dog growling, cleaned up, converted to ogg"
+  source: "https://freesound.org/people/Glitchedtones/sounds/372533/"
+
+- files: ["dog_growl4.ogg", "dog_growl5.ogg", "dog_growl6.ogg"]
+  license: "CC0-1.0"
+  copyright: "Created by Jofae on freesound.org, trimmed/converted to mono OGG for the Solreign free-swap wave (2026-07-17 staging)."
+  source: "https://freesound.org/people/Jofae/sounds/366837/"
+
+
+- files: ["dog_snarl1.ogg", "dog_snarl2.ogg", "dog_snarl3.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/strongbot/sounds/341090/ - cut out three clips of dog snarling, cleaned up, converted to ogg"
+  source: "https://freesound.org/people/strongbot/sounds/341090/"
+
+- files: ["dog_whine.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/Sruddi1/sounds/34878/ - cleaned up, converted to ogg"
+  source: "https://freesound.org/people/Sruddi1/sounds/34878/"
+
+- files: ["howl.ogg"]
+  license: "CC0-1.0"
+  copyright: "Created by NaturesTemper on freesound.org, trimmed/converted to mono OGG for the Solreign free-swap wave (2026-07-17 staging). [SPOT-CHECK]: continuous howl field recording, cut point picked by an automated loudness-relative heuristic — worth an ear check (also used by the Solreign werewolf polymorph)."
+  source: "https://freesound.org/people/NaturesTemper/sounds/398430/"
+
+- files: ["vulp_scream1.ogg", "vulp_scream2.ogg", "vulp_scream3.ogg", "vulp_scream4.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/lordomega/sounds/514959/ - cut out four clips, cleaned up, converted to ogg"
+  source: "https://freesound.org/people/lordomega/sounds/514959/"
+
+- files: ["vulp_yawn1.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/jinxycat49/sounds/490164/, cleaned up, cut, converted to ogg"
+  source: "https://freesound.org/people/jinxycat49/sounds/490164/"
+
+- files: ["vulp_yawn2.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/qubodup/sounds/827660/, cleaned up, cut, converted to ogg"
+  source: "https://freesound.org/people/qubodup/sounds/827660/"
+
+- files: ["vulp_sneeze.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by blukotek on freesound.org, Modified by Minemoder5000 on github by cleaning the audio, cropping, and re-encoding to Ogg Vorbis"
+  source: "https://freesound.org/people/blukotek/sounds/424949/"

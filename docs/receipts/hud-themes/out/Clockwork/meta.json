@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC0-1.0",
+  "copyright": "Entire folder drawn procedurally from scratch for Solreign (docs/receipts/hud-themes/draw_hud_themes.py, 2026); parameterized re-render of the Solreign wave-6 CC0 glyph set with an original per-theme chrome design; no prior art pixels used or referenced",
+  "states": [
+    {
+      "name": "SlotBackground"
+    },
+    {
+      "name": "Slots/back"
+    },
+    {
+      "name": "Slots/belt"
+    },
+    {
+      "name": "Slots/ears"
+    },
+    {
+      "name": "Slots/glasses"
+    },
+    {
+      "name": "Slots/gloves"
+    },
+    {
+      "name": "Slots/hand_l"
+    },
+    {
+      "name": "Slots/hand_l_no_letter"
+    },
+    {
+      "name": "Slots/hand_r"
+    },
+    {
+      "name": "Slots/hand_r_no_letter"
+    },
+    {
+      "name": "Slots/head"
+    },
+    {
+      "name": "Slots/id"
+    },
+    {
+      "name": "Slots/mask"
+    },
+    {
+      "name": "Slots/neck"
+    },
+    {
+      "name": "Slots/pocket"
+    },
+    {
+      "name": "Slots/shoes"
+    },
+    {
+      "name": "Slots/suit"
+    },
+    {
+      "name": "Slots/suit_storage"
+    },
+    {
+      "name": "Slots/toggle"
+    },
+    {
+      "name": "Slots/uniform"
+    },
+    {
+      "name": "Slots/web"
+    },
+    {
+      "name": "Storage/piece_bottom"
+    },
+    {
+      "name": "Storage/piece_bottomLeft"
+    },
+    {
+      "name": "Storage/piece_bottomRight"
+    },
+    {
+      "name": "Storage/piece_center"
+    },
+    {
+      "name": "Storage/piece_left"
+    },
+    {
+      "name": "Storage/piece_right"
+    },
+    {
+      "name": "Storage/piece_top"
+    },
+    {
+      "name": "Storage/piece_topLeft"
+    },
+    {
+      "name": "Storage/piece_topRight"
+    },
+    {
+      "name": "Storage/sidebar_bottom"
+    },
+    {
+      "name": "Storage/sidebar_mid"
+    },
+    {
+      "name": "Storage/sidebar_top"
+    },
+    {
+      "name": "item_status_left"
+    },
+    {
+      "name": "item_status_left_highlight"
+    },
+    {
+      "name": "item_status_right"
+    },
+    {
+      "name": "item_status_right_highlight"
+    },
+    {
+      "name": "slot_highlight"
+    },
+    {
+      "name": "template_small"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              Margin="10 10 10 0"
+              HorizontalExpand="True"
+              Visible="True">
+    <!-- One note row: author line (PROVIDENCE badge or in-character name) + body + a per-row
+         Report button. Plain Labels, not RichTextLabel: note text is player-authored content that
+         has already passed the daemon classifier, but markup interpolation would still let a
+         crafted note inject BBCode-style formatting into the client UI — never trust it as markup. -->
+    <PanelContainer StyleClasses="BackgroundPanel" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                <Label Name="AuthorLabel" StyleClasses="LabelHeading" HorizontalExpand="True" />
+                <Button Name="ReportButton" MinWidth="70" />
+            </BoxContainer>
+            <customControls:HSeparator Margin="5 4 5 4" />
+            <BoxContainer>
+                <Label Name="BodyLabel" />
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</BoxContainer>

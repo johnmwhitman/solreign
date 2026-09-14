@@ -1,0 +1,104 @@
+[
+ {
+  "asset": "cutlass",
+  "state": "icon",
+  "prompt": "a curved cutlass sword held diagonally, silver-white blade, ornate gold hilt and guard with a dark brown grip wrap",
+  "key": "cyan",
+  "variants": [
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "capgun",
+  "state": "icon",
+  "prompt": "a small grey and black toy cap-gun revolver with a brown wooden grip and a tiny light blue accent near the muzzle tip",
+  "key": "magenta",
+  "variants": [
+   3
+  ]
+ },
+ {
+  "asset": "foam_blade",
+  "state": "icon",
+  "prompt": "a curved foam toy sword blade shaped like a scimitar, red top edge and white blade body, black handle grip",
+  "key": "cyan",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "chainsaw",
+  "state": "icon",
+  "prompt": "a compact chainsaw tool viewed diagonally, grey serrated blade bar, red motor housing and handle",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "incomplete_bat",
+  "state": "icon",
+  "prompt": "a plain wooden baseball bat held diagonally, brown wood texture with darker wood grain segments, no nails, unfinished prop",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "energy_crossbow",
+  "state": "icon",
+  "prompt": "a compact grey sci-fi crossbow with a black body and a glowing green energy bowstring",
+  "key": "magenta",
+  "variants": [
+   3
+  ]
+ },
+ {
+  "asset": "cult_halberd",
+  "state": "icon",
+  "prompt": "a polearm halberd held diagonally, tan bone-colored haft wrapped with red cloth at the grip, dark reddish curved axe blade at the top",
+  "key": "cyan",
+  "variants": [
+   1
+  ]
+ },
+ {
+  "asset": "machete",
+  "state": "icon",
+  "prompt": "a diagonal steel machete blade with dark camouflage-spot patterning along the blade, dark green wrapped handle grip",
+  "key": "green",
+  "variants": [
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "mjollnir",
+  "state": "icon",
+  "prompt": "Thor's hammer held diagonally, silver-grey stone hammer head, brown wood handle with a light grey pommel, small yellow lightning spark accents around the head",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "beach_ball",
+  "state": "icon2",
+  "prompt": "a white spherical beach ball with red, yellow, and blue pastel colored panel stripes",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ }
+]

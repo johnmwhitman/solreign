@@ -1,0 +1,31 @@
+{
+  "fixture_version": "1.0",
+  "test_only": true,
+  "test_key_utf8": "solreign-public-export-test-key!",
+  "envelope": {
+    "idempotency_key": "status:game-host-primary:public-status-2026-07:42",
+    "key_id": "publisher-2026-q3",
+    "message_id": "018f3f7e-9d2a-7c11-8a22-7f4a9a2c0101",
+    "message_type": "ServerSnapshotV1",
+    "occurred_at": "2026-07-15T02:30:00Z",
+    "payload": {
+      "build_sha": "0123456789abcdef0123456789abcdef01234567",
+      "capacity": 80,
+      "fresh_until": "2026-07-15T02:31:30Z",
+      "generated_at": "2026-07-15T02:30:00Z",
+      "map_id": "SolreignOasis",
+      "population": 24,
+      "round_phase": "in_round",
+      "season_id": "season-1"
+    },
+    "published_at": "2026-07-15T02:30:05Z",
+    "publisher_id": "game-host-primary",
+    "schema_version": "1.0",
+    "sequence": 42,
+    "stream_id": "public-status-2026-07"
+  },
+  "canonical_body_utf8": "{\"idempotency_key\":\"status:game-host-primary:public-status-2026-07:42\",\"key_id\":\"publisher-2026-q3\",\"message_id\":\"018f3f7e-9d2a-7c11-8a22-7f4a9a2c0101\",\"message_type\":\"ServerSnapshotV1\",\"occurred_at\":\"2026-07-15T02:30:00Z\",\"payload\":{\"build_sha\":\"0123456789abcdef0123456789abcdef01234567\",\"capacity\":80,\"fresh_until\":\"2026-07-15T02:31:30Z\",\"generated_at\":\"2026-07-15T02:30:00Z\",\"map_id\":\"SolreignOasis\",\"population\":24,\"round_phase\":\"in_round\",\"season_id\":\"season-1\"},\"published_at\":\"2026-07-15T02:30:05Z\",\"publisher_id\":\"game-host-primary\",\"schema_version\":\"1.0\",\"sequence\":42,\"stream_id\":\"public-status-2026-07\"}",
+  "body_sha256_lower_hex": "48d1ab381a37dff16ff46cb82d751803475b9d6d10d18b4bff3bb7b622fb0438",
+  "signing_input_utf8": "SOLREIGN-V1\n2026-07-15T02:30:05Z\ngame-host-primary\npublic-status-2026-07\n42\n48d1ab381a37dff16ff46cb82d751803475b9d6d10d18b4bff3bb7b622fb0438",
+  "signature_hmac_sha256_base64url_unpadded": "BQymDG_E3Q6aJ-hyj01eGAqNoVlToTSwNwaQiwKi5z0"
+}

@@ -1,0 +1,167 @@
+# Solreign — ENTS (sentient trees). Living-nature pack, task #20.
+#
+# UPSTREAM CHECK (2026-07-11): upstream ships no sentient-tree mob and no "Ent"/"treant" prototype
+# at all. Base ingredients pulled from two different corners of upstream:
+#   - The mob shape (MobState/Physics/HTN/ghost-role wiring) parents [ SimpleMobBase, MobCombat ],
+#     the same combo the upstream kangaroo and gorilla use
+#     (Resources/Prototypes/Entities/Mobs/NPCs/animals.yml). Kangaroo in particular is the
+#     "GhostRole + GhostTakeoverAvailable idiom from the zoo work" this task references, and it is
+#     ALSO the nonlethal "shove-class" melee idiom copied below almost verbatim: low Blunt damage
+#     paired with StaminaDamageOnHit, i.e. it staggers, it doesn't kill.
+#   - The look (bark sprite + glow) reuses upstream BaseTree/LightTree
+#     (Resources/Prototypes/Entities/Objects/Decoration/flora.yml) — the same base Solreign's own
+#     SolreignGlowTreeAcid delighter already rebrands
+#     (Resources/Prototypes/_Solreign/Entities/delighters/glow_plants.yml). This file follows that
+#     delighter's exact glow-variant idiom: parent a tree entity, override ONLY the PointLight.
+#
+# Display name is "awakened tree", not "Ent" — D&D's own "treant" workaround for the Tolkien
+# Estate's "Ent" trademark is the industry-standard reason to keep that specific word out of
+# player-facing text; the task/family name "Ents" is internal shorthand only, never shown in-game.
+#
+# Naming: prototype id keeps "AwakenedTree" per the task's own naming, with the repo's usual
+# "SolreignMob" prefix for mobs (SolreignMobUnicorn, SolreignMobRcCameraCar, ...).
+#
+# No dead/felled sprite state exists for this bark art, so DamageStateVisuals pins Alive/Critical/
+# Dead to the same static state (TODO(SOLREIGN-ART): a toppled/felled variant would be a nice
+# upgrade, sprite factory lane, task #9).
+#
+# Wired to no maps (per task instruction) — these are spawn-menu / admin-spawn / future-map-authors
+# entities only.
+
+# ---------------------------------------------------------------------------------------------
+# 1. The Ent itself: a ghost-role tree mob. Slow, strong, nonlethal gentle giant.
+# ---------------------------------------------------------------------------------------------
+- type: entity
+  name: awakened tree
+  parent: [ SimpleMobBase, MobCombat ]
+  id: SolreignMobAwakenedTree
+  suffix: solreign, ghost role
+  description: >-
+    An old trunk of impossible girth, standing on roots that end well past where any planter box
+    would. It moves like it has nowhere urgent to be. Stand close, go quiet, and it's easy to
+    imagine it remembers being planted here — a sapling, a work order, a name on a manifest
+    nobody kept.
+  components:
+  - type: MovementSpeedModifier # slow: a gentle giant is never in a hurry
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2.3
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true # bark art has no directional frames, same reasoning as upstream BaseTree
+    sprite: Objects/Decoration/Flora/flora_treeslarge.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: treelarge03
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: treelarge03
+      Critical:
+        Base: treelarge03
+      Dead:
+        Base: treelarge03
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.5
+        density: 260 # heavier than upstream's gorilla (200) — strongest thing in the room
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds # sturdy: a gentle giant is very hard to knock over
+    thresholds:
+      0: Alive
+      350: Critical
+      450: Dead
+  - type: Tag # DoorBumpOpener would look wrong on something this slow/deliberate; StunImmune fits
+    tags:
+    - StunImmune
+  # --- gentle-giant kit: shoves, not kills. Copied wholesale from upstream MobKangaroo. ---
+  - type: StaminaDamageOnHit
+    damage: 12 # a bit stronger than the kangaroo's 8 — this thing is strong, not fast
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 1 # deliberately minimal: the stagger is the point, not the bruise
+    soundHit:
+      collection: BoxingHit
+    animation: WeaponArcFist
+  - type: NPCRetaliation
+  - type: FactionException
+  - type: NpcFactionMember
+    factions:
+    - Passive
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: Puller
+    needsHands: false # strong enough to drag things around without hands
+  # --- the ghost role itself ---
+  - type: GhostRole
+    name: solreign-ghost-role-ent-name
+    description: solreign-ghost-role-ent-description
+    rules: ghost-role-information-nonantagonist-rules
+  - type: GhostTakeoverAvailable
+
+# ---------------------------------------------------------------------------------------------
+# 2. Glow-bark variants. Idiom copied from delighters/glow_plants.yml's SolreignGlowTreeAcid:
+#    parent the tree, override ONLY the PointLight. No sprite retint — the glow reads as the bark
+#    itself giving off light, same visual language the acid unicorn/glow-plant family already use.
+# ---------------------------------------------------------------------------------------------
+
+# 2a. Acid-green — the Solreign brand color. Same hex as SolreignGlowTreeAcid/SolreignGlowPlantAcid.
+- type: entity
+  parent: SolreignMobAwakenedTree
+  id: SolreignMobAwakenedTreeAcidGlow
+  name: acid-glow awakened tree
+  suffix: solreign, ghost role, glow
+  description: >-
+    Bark that glows the exact acid-green of every compliance placard on the station. Legal
+    maintains this is a coincidence.
+  components:
+  - type: PointLight
+    radius: 2.5
+    energy: 3.5
+    color: "#7cf64b"
+
+# 2b. Soft cyan — the "after-hours" model, same tone as SolreignGlowPlantCyan.
+- type: entity
+  parent: SolreignMobAwakenedTree
+  id: SolreignMobAwakenedTreeCyanGlow
+  name: cyan-glow awakened tree
+  suffix: solreign, ghost role, glow
+  description: >-
+    Bark that glows a calm, after-hours cyan. Standing near it for too long has been informally
+    linked to feelings of gratitude toward your employer.
+  components:
+  - type: PointLight
+    radius: 2.3
+    energy: 3.0
+    color: "#4bf6d8"
+
+# ---------------------------------------------------------------------------------------------
+# 3. Rare ambient awakening: a completely ordinary decorative tree that, very occasionally, wakes
+#    up. Parents upstream BaseTree directly (static, Destructible, no mob components at all) so it
+#    reads as normal set-dressing right up until SolreignDormantEntSystem's low-probability roll
+#    hits — then it plays a creak, pops "The tree stirs.", and is replaced in-place by
+#    SolreignMobAwakenedTree (Content.Server/_Solreign/Ents/SolreignDormantEntSystem.cs).
+#    Deliberately undocumented in its own description — a mapper who places this should get the
+#    same surprise a player would.
+# ---------------------------------------------------------------------------------------------
+- type: entity
+  parent: BaseTree
+  id: SolreignDormantEnt
+  name: tree
+  suffix: solreign, ghost role, dormant
+  description: Yep, it's a tree. Facilities logged it as decorative some time ago.
+  components:
+  - type: SolreignDormantEnt
+    creakSound:
+      path: /Audio/Machines/airlock_creaking.ogg # closest "creak" cue in the upstream library;
+      # TODO(SOLREIGN-AUDIO): a bespoke wood-creak recording would read better than a door hinge.
+    awakenPopup: solreign-ent-awaken-creak-popup

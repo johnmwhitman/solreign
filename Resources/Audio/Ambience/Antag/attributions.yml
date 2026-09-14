@@ -1,0 +1,32 @@
+- files: ["nukeops_start.ogg, traitor_start.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from TG station"
+  source: "https://github.com/tgstation/tgstation/commit/827967c9650c23af64280ad1491405fed8f644c5#diff-6cc910b7cad9ac4333c8d0885fc844746066120b465d8d4ba8f7019169316574"
+- files: ["traitor_wawa.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from TG station, edited by FairlySadPanda (Github)"
+  source: "https://github.com/tgstation/tgstation/commit/827967c9650c23af64280ad1491405fed8f644c5#diff-6cc910b7cad9ac4333c8d0885fc844746066120b465d8d4ba8f7019169316574"
+- files: ["zombie_start.ogg"]
+  license: "CC0-1.0"
+  copyright: "Solreign in-house procedural DSP synthesis (numpy; zombie patient-zero reveal stinger, stereo 13s, once-per-round infected-only cue; no NC-conditioning — see wave-4/synth_wave4.py). (Source provenance: In-house generation, 2026-07-17. See docs/receipts/AUDIO-FREESWAP-INTEGRATE-2026-07-17.md.)"
+  source: "NA"
+- files: ["headrev_start.ogg"]
+  license: "CC0-1.0"
+  copyright: "Made by https://www.youtube.com/@a-guy173"
+  source: https://github.com/A-Guy173/Music/blob/main/revolution.mp3
+- files: ["emagged_borg.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Made by @ps3moira on github"
+  source: https://www.youtube.com/watch?v=4-R-_DiqiLo
+- files: ["silicon_lawboard_antimov.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Made by @ps3moira on Discord for SS14"
+  source: "https://www.youtube.com/watch?v=jf1sYGYVLsw"
+- files: ["changeling_start.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Edited by @chillyconmor on Discord for SS14. Original audio file was taken from TG station at commit https://github.com/tgstation/tgstation/commit/436ba869ebcd0b60b63973fb7562f447ee655205"
+  source: "https://github.com/tgstation/tgstation/blob/master/sound/music/antag/ling_alert.ogg"
+- files: ["xenoborg_start.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Made by DarkIcedCoffee (discord)"
+  source: "https://github.com/space-wizards/space-station-14/pull/40042/"

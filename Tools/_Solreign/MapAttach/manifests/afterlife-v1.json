@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "patch_id": "afterlife-v1",
+  "maps": [
+    {
+      "path": "Resources/Maps/_Solreign/solreign_terminus.yml",
+      "attachments": [
+        {
+          "key": "arcade-corner",
+          "proto": "BlockGameArcade",
+          "uid": 19106,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Arcade Corner (Recreation)",
+              "description": "Spectate the block-game high-score chase. Polite heckling encouraged."
+            }
+          }
+        },
+        {
+          "key": "organ-loft",
+          "proto": "ChurchOrganInstrument",
+          "uid": 1536,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Organ Loft (Chapel)",
+              "description": "The organist plays on, funeral or not. Good spot for a quiet dirge and some emotional distance."
+            }
+          }
+        },
+        {
+          "key": "kitchen-corner",
+          "proto": "KitchenMicrowave",
+          "uid": 503,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Kitchen Corner (Culinary)",
+              "description": "Watch the cook work the line. Better view of tonight's mystery meat than any camera feed."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": "Resources/Maps/_Solreign/solreign_meridian.yml",
+      "attachments": [
+        {
+          "key": "arcade-corner",
+          "proto": "BlockGameArcade",
+          "uid": 1281,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Arcade Corner (Recreation)",
+              "description": "Spectate the block-game high-score chase. Polite heckling encouraged."
+            }
+          }
+        },
+        {
+          "key": "organ-loft",
+          "proto": "ChurchOrganInstrument",
+          "uid": 17399,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Organ Loft (Chapel)",
+              "description": "The organist plays on, funeral or not. Good spot for a quiet dirge and some emotional distance."
+            }
+          }
+        },
+        {
+          "key": "kitchen-corner",
+          "proto": "KitchenMicrowave",
+          "uid": 483,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Kitchen Corner (Culinary)",
+              "description": "Watch the cook work the line. Better view of tonight's mystery meat than any camera feed."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": "Resources/Maps/_Solreign/solreign_nocturne.yml",
+      "attachments": [
+        {
+          "key": "kitchen-corner",
+          "proto": "KitchenMicrowave",
+          "uid": 1637,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Kitchen Corner (Culinary)",
+              "description": "Watch the cook work the line. Better view of tonight's mystery meat than any camera feed."
+            }
+          }
+        },
+        {
+          "key": "jukebox-vigil",
+          "proto": "Jukebox",
+          "uid": 3000,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Jukebox Vigil (Bar)",
+              "description": "Nobody can hear your requests. Haunt the playlist anyway."
+            }
+          }
+        },
+        {
+          "key": "coffin-nap",
+          "proto": "SolreignVampireCoffin",
+          "uid": 3003,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Coffin Nap (Vampire Wing)",
+              "description": "Keep the resident vampire's box warm. Silence not required, but appreciated."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": "Resources/Maps/_Solreign/solreign_perihelion.yml",
+      "attachments": [
+        {
+          "key": "arcade-corner",
+          "proto": "BlockGameArcade",
+          "uid": 5457,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Arcade Corner (Recreation)",
+              "description": "Spectate the block-game high-score chase. Polite heckling encouraged."
+            }
+          }
+        },
+        {
+          "key": "organ-loft",
+          "proto": "ChurchOrganInstrument",
+          "uid": 8921,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Organ Loft (Chapel)",
+              "description": "The organist plays on, funeral or not. Good spot for a quiet dirge and some emotional distance."
+            }
+          }
+        },
+        {
+          "key": "kitchen-corner",
+          "proto": "KitchenMicrowave",
+          "uid": 5461,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Kitchen Corner (Culinary)",
+              "description": "Watch the cook work the line. Better view of tonight's mystery meat than any camera feed."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": "Resources/Maps/_Solreign/solreign_verdant.yml",
+      "attachments": [
+        {
+          "key": "arcade-corner",
+          "proto": "BlockGameArcade",
+          "uid": 5457,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Arcade Corner (Recreation)",
+              "description": "Spectate the block-game high-score chase. Polite heckling encouraged."
+            }
+          }
+        },
+        {
+          "key": "organ-loft",
+          "proto": "ChurchOrganInstrument",
+          "uid": 8921,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Organ Loft (Chapel)",
+              "description": "The organist plays on, funeral or not. Good spot for a quiet dirge and some emotional distance."
+            }
+          }
+        },
+        {
+          "key": "kitchen-corner",
+          "proto": "KitchenMicrowave",
+          "uid": 5461,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Kitchen Corner (Culinary)",
+              "description": "Watch the cook work the line. Better view of tonight's mystery meat than any camera feed."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": "Resources/Maps/_Solreign/solreign_leviathan.yml",
+      "attachments": [
+        {
+          "key": "arcade-corner",
+          "proto": "BlockGameArcade",
+          "uid": 1076,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Arcade Corner (Recreation)",
+              "description": "Spectate the block-game high-score chase. Polite heckling encouraged."
+            }
+          }
+        },
+        {
+          "key": "jukebox-vigil",
+          "proto": "Jukebox",
+          "uid": 36020,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Jukebox Vigil (Bar)",
+              "description": "Nobody can hear your requests. Haunt the playlist anyway."
+            }
+          }
+        },
+        {
+          "key": "kitchen-corner",
+          "proto": "KitchenMicrowave",
+          "uid": 1222,
+          "component": {
+            "type": "SolreignGhostActivity",
+            "fields": {
+              "name": "Kitchen Corner (Culinary)",
+              "description": "Watch the cook work the line. Better view of tonight's mystery meat than any camera feed."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

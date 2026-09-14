@@ -1,0 +1,62 @@
+# Solreign acid-green corporate starfield. Procedural (GeneratedParallaxTextureSource) — no art asset
+# involved. Structure mirrors Resources/Prototypes/Parallaxes/parallax_config_stars.toml; only the
+# palette changed: acid green for the bulk of the field, HR gold (#c0a062 — the Solreign Corporate
+# rule's own brand accent, see Content.Server/_Solreign/Corporate/SolreignCorporateRuleSystem.cs) for a
+# handful of "quarterly highlight" stars.
+
+# Clear to black.
+[[layers]]
+type = "clear"
+color = "#000000"
+
+# Bright acid-green field stars.
+[[layers]]
+type = "points"
+closecolor = "#39FF14"
+count = 1000
+seed = 3472
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 4
+maskpersistence = "0.5"
+maskpower = "0.35"
+masklacunarity = "1.5"
+maskfrequency = "3"
+maskthreshold = "0.37"
+maskseed = 3551
+
+# Dim edge of the same field.
+[[layers]]
+type = "points"
+closecolor = "#146629"
+pointsize = 2
+count = 1000
+seed = 3472
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 4
+maskpersistence = "0.5"
+maskpower = "0.35"
+masklacunarity = "1.5"
+maskfrequency = "3"
+maskthreshold = "0.37"
+maskseed = 3551
+
+# A few corporate-gold "quarterly highlight" stars.
+[[layers]]
+type = "points"
+closecolor = "#c0a062"
+count = 30
+seed = 6454
+
+# And their dim edge.
+[[layers]]
+type = "points"
+closecolor = "#5c4a2e"
+pointsize = 2
+count = 30
+seed = 6454
+
+# Colour-to-alpha.
+[[layers]]
+type = "toalpha"

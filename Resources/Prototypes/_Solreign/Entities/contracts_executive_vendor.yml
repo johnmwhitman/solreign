@@ -1,0 +1,177 @@
+# Solreign Executive Vendor (Contracts M4, "the ladder buys things", design spec §4.3/§4-adjacent): a
+# vending machine gated on career rank rather than an ID-card access tag.
+#
+# Rank-gating happens by canceling the UI OPEN ATTEMPT (SolreignExecutiveAccessComponent +
+# SolreignExecutiveAccessSystem, Content.Server/_Solreign/Contracts) — additive analogues of the upstream
+# ActivatableUIRequiresAccessComponent/System pattern (Content.Shared/Access/Systems), studied before
+# writing this. A sub-rank asset never even sees the vendor's shelf, so there is no separate purchase check
+# to bolt onto SharedVendingMachineSystem/VendingMachineSystem — no edits to upstream vending code, and no
+# second subscription on (VendingMachineComponent, ActivatableUIOpenAttemptEvent) (that pair stays owned by
+# upstream's own Broken-state cancel; ours is the distinct (SolreignExecutiveAccessComponent, ...) pair).
+# Deep per-item UI surgery was NOT needed, so the vendor's whole shelf is gated rather than the fallback
+# (gating the vendor's door/access instead).
+#
+# minRankIndex 3 (Manager+) matches the existing Executive Lunch contract gate (spec-consistent tier, see
+# ContractRulesTests' "Executive Lunch gate" comment) — Managers get management problems AND a vending
+# machine.
+#
+# Wired approved states from solreign-executive-vendor (latest reviews.jsonl verdicts only; CC0-1.0).
+
+- type: entity
+  parent: VendingMachine
+  id: SolreignExecutiveVendor
+  name: Solreign Executive Vendor
+  suffix: solreign, rank-gated
+  description: A vending machine that radiates quiet menace and quarterly bonuses. It only opens for assets who have, in some sense, made it.
+  components:
+  - type: VendingMachine
+    pack: SolreignExecutiveVendorInventory
+  - type: Sprite
+    sprite: _Solreign/solreign-executive-vendor.rsi
+    # Layer maps are REQUIRED, not cosmetic (fixed Wave 21): the client VendingMachineSystem drives
+    # VendingMachineVisualLayers.Base/BaseUnshaded on appearance changes, and a bare `sprite:` with
+    # no mapped layers made every map-placed instance log "Layer with key 'Base' does not exist"
+    # each frame. Same three-layer block as the upstream VendingMachineCentDrobe this reskins.
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: SolreignExecutiveAccess
+    minRankIndex: 3 # Manager+ — see file header
+    popupMessage: solreign-executive-vendor-popup-denied
+  - type: PointLight
+    enabled: true
+    radius: 4.0
+    energy: 2.5
+    color: "#9acd32"
+  - type: LightBehaviour
+    behaviours:
+      - !type:PulseBehaviour
+        id: pulsing
+        interpolate: Nearest
+        maxDuration: 2.0
+        startValue: 2.0
+        endValue: 3.0
+        isLooped: true
+  - type: AmbientSound
+    enabled: true
+    volume: -5
+    range: 5
+    sound:
+      path: /Audio/Effects/Weather/wind_2_1.ogg
+
+- type: vendingMachineInventory
+  id: SolreignExecutiveVendorInventory
+  startingInventory:
+    SolreignGoldenStapler: 2
+    SolreignExecutiveMug: 3
+    SolreignCornerOfficeHologram: 1
+    SolreignComplianceMedal: 2
+    SolreignQuarterlyReport: 2
+    SolreignExecutiveBell: 2
+    # ── Delighters (2026-08-01): the salvager's prize. Rank-gated on purpose — a gift that is
+    # HANDED to a player reads as a participation trophy, and the shelf's whole idiom is that
+    # rank is earned from the Standing contracts pay out. One unit: it is meant to be the thing
+    # somebody is carrying, not the thing everybody has.
+    SolreignStarInAJar: 1
+    # ── Wave 21 (S8): executive tier of the NVG pack. The base tier is in the upstream
+    # EngiVendInventory (Catalog/VendingMachines/Inventories/engivend.yml); this shelf carries the
+    # management cut, gated behind the same Manager+ rank check as everything else in this machine.
+    ClothingEyesSolreignComplianceLensesExecutive: 2
+    # ── Wave 21 (S8): SolreignHotPotatoBomb re-home. Deliberately NOT in any genpop machine
+    # (BETA-FEEDBACK-01 Lane D pulled bomb-like items from the Good Clean Fun shelf) — the
+    # "mandatory team-building exercise" is HR-issued, so it dispenses only to Manager+ assets
+    # who have, in some sense, earned the right to inflict team-building on their colleagues.
+    # PG payload (flash + shove tier, see hot_potato.yml), rank gate = the kid-safe gate.
+    SolreignHotPotatoBomb: 2
+    # ── Wave 21 (S21): the 10-item Solreign gear pack (Entities/gear.yml). gear.yml's own header
+    # always intended these to be Contracts-progression rewards; the contract schema deliberately
+    # has no item-payout field (SolreignContractPrototype — anti-grief by construction), so the
+    # reward surface IS this rank-gated shelf: completing contracts raises career Corporate
+    # Standing, Standing raises rank (RankRules.Score), and rank opens this machine. All 10 are
+    # passenger-tier balance per gear.yml's BALANCE NOTE — the gate is prestige, not power.
+    SolreignClothingBackHalcyonHoverpack: 2
+    SolreignClothingBackVergeCourierSatchel: 2
+    SolreignClothingBeltLumenbridgeToolbelt: 2
+    SolreignClothingEarsCompliantChorusEarbuds: 2
+    SolreignClothingEyesSynapseSpectacles: 2
+    SolreignClothingEyesVergeVigileShades: 2
+    SolreignClothingHandsHalcyonHospitalityMitts: 2
+    SolreignClothingHeadAntennaeTopHat: 2
+    SolreignClothingHeadVergeVanguardVisor: 2
+    SolreignClothingNeckLilCorpLavenderTie: 2
+
+# ---------------------------------------------------------------- the six status goods
+
+- type: entity
+  parent: RubberStampBase
+  id: SolreignGoldenStapler
+  name: golden stapler
+  suffix: solreign
+  description: HR insists this is a stapler. Legal insists it's a rubber stamp. Either way, it leaves a mark on your permanent record.
+  components:
+  - type: Stamp
+    stampedName: solreign-executive-vendor-stamp-name
+    stampedColor: "#9acd32" # Solreign acid-green brand color (matches the board's examine markup)
+    stampState: "paper_stamp-generic"
+    sound:
+      path: /Audio/Items/Stamp/thick_stamp_sub.ogg
+      params:
+        volume: -2
+        maxDistance: 5
+  - type: Sprite
+    state: stamp-centcom # TODO(SOLREIGN-ART): placeholder — closest existing "serious corporate stamp" icon
+
+- type: entity
+  parent: DrinkGoldenCup
+  id: SolreignExecutiveMug
+  name: executive mug
+  suffix: solreign
+  description: A mug so opulent it convinces people you deserve the corner office. Holds coffee, gravitas, or both.
+  # No sprite override: DrinkGoldenCup's existing golden_cup.rsi art already reads as "executive," no
+  # placeholder mismatch needed here.
+
+- type: entity
+  parent: Holoprojector
+  id: SolreignCornerOfficeHologram
+  name: corner-office hologram
+  suffix: solreign
+  description: Projects a life-size hard-light corner office, complete with a floor-length window and a faint, unplaceable smell of success. Mind the hologram; it is not licensed for structural realism.
+  # TODO(SOLREIGN-ART): reuses Holoprojector's stock custodial.rsi icon and its default HolosignWetFloor
+  # sign proto pending a bespoke "corner office" hologram sprite/sign.
+
+- type: entity
+  parent: ClothingNeckGoldmedal
+  id: SolreignComplianceMedal
+  name: Solreign compliance medal
+  suffix: solreign
+  description: Awarded for compliance, not achievement. Wear it proudly — nobody checks which kind.
+  # No component overrides: inherits ClothingNeckGoldmedal's gold-medal art (already fits a "status good,"
+  # no placeholder mismatch) and its StealTarget stealGroup as-is — a new stealGroup id would need its own
+  # stealTargetGroup prototype, which is out of scope here.
+
+- type: entity
+  parent: BoxFolderBaseEmpty
+  id: SolreignQuarterlyReport
+  name: leatherbound quarterly report
+  suffix: solreign
+  description: Bound in leather, weighted with numbers nobody reads twice. Carrying one visibly is 90% of looking busy.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/folders.rsi
+    layers:
+    - state: folder-colormap
+      color: "#9acd32" # Solreign acid-green brand color
+    - state: folder-base
+
+- type: entity
+  parent: DeskBell
+  id: SolreignExecutiveBell
+  name: executive call bell
+  suffix: solreign
+  description: Ring it. Someone else will handle it.
+  # No sprite override: a desk bell is a desk bell, no placeholder mismatch to flag.

@@ -1,0 +1,55 @@
+//`electrical` primitive's world-space arc/crackle overlay (Content.Client._Solreign.FX.SolreignFxArcOverlay,
+//docs/specs/FX-LANGUAGE-V1-SPEC-2026-07-16.md §2 row 3). Procedural — no texture asset, per the
+//mission's "prefer procedural/existing textures" instruction: a handful of jittering line segments
+//radiating from the quad's own center, driven by TIME and a per-instance `seedPhase` uniform (so
+//concurrent activations never crackle in lockstep — see the overlay's remarks on why a shared
+//shader instance would otherwise make every arc pulse identically).
+//
+//Same "tunable uniforms on a `kind: source` shader prototype" idiom as acid_screen_border.swsl
+//(Resources/Prototypes/_Solreign/FX/shaders.yml's SolreignFxArcDistortion entry) — the color/
+//intensity are prototype params, never hardcoded here.
+light_mode unshaded;
+
+uniform highp vec4 arcColor; // = vec4(1.0, 0.89, 0.23, 1.0); mains-arc yellow default
+uniform highp float arcIntensity; // = 1.0; overall opacity multiplier, spec's Intensity field
+uniform highp float seedPhase; // = 0.0; per-activation deterministic time offset (SolreignFxSeedMixing-derived)
+
+// Cheap deterministic hash, NOT the wire seed mixer itself (that's a C#-side uint finalizer per
+// spec §1.2/cdx #18) — this is purely a local shader-space jitter helper, never used to derive an
+// index that crosses back into game logic.
+highp float solreignFxHash(highp vec2 p) {
+	return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+void fragment() {
+	COLOR = vec4(0.0);
+
+	// UV in [-1, 1] centered on the quad, so the arc pattern radiates from the anchor.
+	highp vec2 centered = (UV - vec2(0.5)) * 2.0;
+	highp float dist = length(centered);
+	if (dist > 1.0) {
+		return;
+	}
+
+	highp float t = TIME + seedPhase;
+	highp float angle = atan(centered.y, centered.x);
+
+	// Three jittering "arc" bands at different angular offsets, each a thin ring whose radius
+	// wobbles with a per-band hashed phase — reads as a crackling burst, not a smooth pulse.
+	highp float accum = 0.0;
+	for (int i = 0; i < 3; i++) {
+		highp float bandSeed = solreignFxHash(vec2(float(i) * 7.31, seedPhase));
+		highp float wobble = sin(t * (6.0 + bandSeed * 4.0) + bandSeed * 6.2831) * 0.15;
+		highp float bandRadius = 0.35 + float(i) * 0.22 + wobble;
+		highp float ringWidth = 0.05;
+		highp float band = 1.0 - smoothstep(0.0, ringWidth, abs(dist - bandRadius));
+
+		// Angular gating so each band only lights up a jittering arc-length slice, not the full
+		// ring — the "crackle" look.
+		highp float angleGate = step(0.4, fract(sin((angle + t * (1.5 + bandSeed)) * 3.0) * 43758.5453));
+		accum += band * angleGate;
+	}
+
+	accum = clamp(accum, 0.0, 1.0) * arcIntensity;
+	COLOR = vec4(arcColor.rgb, arcColor.a * accum);
+}

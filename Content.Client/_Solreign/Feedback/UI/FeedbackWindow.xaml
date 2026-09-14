@@ -1,0 +1,35 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'feedback-window-title'}"
+                      SetSize="420 420"
+                      MinSize="360 360">
+    <!-- Simple form, no BUI/entity ownership: the "feedback" command opens this straight from the
+         client, and submission is a one-shot networked event (see FeedbackClientSystem), the same
+         "plain window over a request/response event" shape as WarDeclaratorWindow. -->
+    <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="8">
+        <Label Text="{Loc 'feedback-window-intro'}" HorizontalExpand="True" />
+
+        <BoxContainer Orientation="Horizontal" Margin="0 4 0 0">
+            <Label Text="{Loc 'feedback-window-category-label'}" VerticalAlignment="Center" />
+            <OptionButton Name="CategorySelector" HorizontalExpand="True" />
+        </BoxContainer>
+
+        <TextEdit Name="TextEdit"
+                  HorizontalExpand="True"
+                  VerticalExpand="True"
+                  MinHeight="140"
+                  Access="Public" />
+
+        <Label Name="LengthLabel" Align="Right" StyleClasses="WindowFooterText" />
+
+        <Button Name="SubmitButton" Text="{Loc 'feedback-window-submit'}" HorizontalExpand="True" Access="Public" />
+
+        <Label Name="StatusLabel" Align="Center" HorizontalExpand="True" Access="Public" />
+
+        <PanelContainer StyleClasses="LowDivider" Margin="0 6 0 0" />
+
+        <Label Text="{Loc 'feedback-window-safety-heading'}" StyleClasses="highlight" />
+        <Label Text="{Loc 'feedback-window-safety-body'}" HorizontalExpand="True" />
+        <Button Name="SafetyButton" Text="{Loc 'feedback-window-safety-button'}" HorizontalExpand="True" Access="Public" />
+    </BoxContainer>
+</controls:FancyWindow>

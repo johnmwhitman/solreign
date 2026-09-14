@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "KalimbaMachine (github) & CaasGit (github) for Space Station 14. SOLREIGN re-theme 'ledger-green' (value-preserving hue remap, 590 colors preserved, Sprite Factory 2026-08-03); derivative, share-alike retained.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "solar_assembly"
+    },
+    {
+      "name": "solar_assembly_tracker_circuit"
+    },
+    {
+      "name": "solar_panel_glass_broken"
+    },
+    {
+      "name": "solar_panel_plasma_broken"
+    },
+    {
+      "name": "solar_panel_uranium_broken"
+    },
+    {
+      "name": "solar_panel_glass"
+    },
+    {
+      "name": "solar_panel_plasma"
+    },
+    {
+      "name": "solar_panel_uranium"
+    },
+    {
+      "name": "solar_tracker"
+    },
+    {
+      "name": "solar_tracker_broken"
+    },
+    {
+      "name": "solar_assembly_uncabled"
+    },
+    {
+      "name": "solar_assembly_tracker_circuit_uncabled"
+    },
+    {
+      "name": "solar_panel_glass_uncabled"
+    },
+    {
+      "name": "solar_panel_plasma_uncabled"
+    },
+    {
+      "name": "solar_panel_uranium_uncabled"
+    },
+    {
+      "name": "solar_tracker_uncabled"
+    },
+    {
+      "name": "solar_tracker_broken_uncabled"
+    }
+  ]
+}

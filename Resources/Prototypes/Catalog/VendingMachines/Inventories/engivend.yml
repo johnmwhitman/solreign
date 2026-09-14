@@ -1,0 +1,26 @@
+- type: vendingMachineInventory
+  id: EngiVendInventory
+  startingInventory:
+    SolreignEgg15: 1 # Solreign easter egg
+    ClothingEyesGlassesMeson: 4
+    ClothingEyesGlassesThermal: 4
+    ClothingEyesHudDiagnostic: 4
+    ClothingHeadHatWelding: 6
+    CrowbarYellow: 8
+    Multitool: 4
+    NetworkConfigurator: 5
+    PowerCellMedium: 5
+    ClothingHandsGlovesColorYellow: 6
+    BoxInflatable: 2
+    ClothingHeadHatCone: 4
+    SolreignEgg12: 1 # Solreign easter egg
+    ClothingEyesSolreignComplianceLenses: 2 # Solreign NVG base tier (W21/S8): battery-powered night
+                                            # vision beside the meson/thermal goggles it shelves with.
+                                            # The executive tier lives in SolreignExecutiveVendorInventory
+                                            # (contracts_executive_vendor.yml); the toggle action
+                                            # (ActionSolreignToggleComplianceLenses) is granted on equip
+                                            # by the lenses themselves, so this entry makes all three
+                                            # NVG-pack prototypes player-reachable.
+  contrabandInventory:
+    CowToolboxFilled: 1
+    DrinkBeerCan: 3

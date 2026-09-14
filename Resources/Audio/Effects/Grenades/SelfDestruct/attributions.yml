@@ -1,0 +1,5 @@
+- files:
+    - SDS_Charge2.ogg
+  license: "CC0-1.0"
+  copyright: "Solreign in-house procedural DSP synthesis (numpy; self-destruct charge-then-boom countdown; no NC-conditioning — see wave-4/synth_wave4.py). Replaces the prior Custom-licensed multi-source mashup (not part of the strict CC-BY-NC census; closed as license-debt cleanup). (Source provenance: In-house generation, 2026-07-17. See docs/receipts/AUDIO-FREESWAP-INTEGRATE-2026-07-17.md.)"
+  source: "NA"

@@ -1,0 +1,105 @@
+# STATION-LIBRARY (wave-2 item) — the Station Archive ("PROVIDENCE Records Annex"): a
+# bookshelf-class structure where a player alt-clicks to submit a written work
+# (Content.Server/_Solreign/Library/SolreignLibrarySystem.cs). Persistent player-authored
+# literature, the mine's own take on cross-round library/curator boards — clean-room built from OUR
+# idioms (Bookshelf furniture + Noticeboard write path + Mark Garden round-start projection); only
+# public feature DESCRIPTIONS of comparable community fixtures were ever consulted, no third-party
+# source was read.
+#
+# ADMIN-SPAWNABLE ONLY this wave — no map placement (the Noticeboard precedent; see
+# SolreignLibraryAnnexComponent's doc comment for how ArchiveId keeps content stable across that
+# transition without a code change).
+#
+# The component list below duplicates (rather than inherits) upstream's Bookshelf prototype on
+# purpose: Bookshelf's own UserInterface component only declares the StorageUiKey interface, and
+# this entity needs a SECOND interface key (the submission form) alongside it. Redeclaring the full
+# component set here keeps that merge unambiguous instead of relying on prototype-inheritance
+# dictionary-merge semantics for a component this load-bearing. No new art — same
+# Structures/Furniture/bookshelf.rsi asset Bookshelf itself uses.
+
+- type: entity
+  id: SolreignLibraryAnnex
+  parent: BaseStructure
+  name: "PROVIDENCE Records Annex"
+  suffix: solreign
+  description: A tall shelf bolted to the wall, its lower rows stacked with bound volumes. A small brass plate below the top shelf reads SUBMIT A WORK.
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/bookshelf.rsi
+    snapCardinals: true
+    layers:
+      - state: base
+      - state: book-0
+      - map: ["enum.StorageFillLayers.Fill"]
+  - type: Appearance
+  - type: StorageFillVisualizer
+    maxFillLevels: 21
+    fillBaseName: book
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Injurable
+    damageContainer: StructuralInorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroyHeavy
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialWoodPlank:
+            min: 2
+            max: 3
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Tag
+    tags:
+    - Structure
+    - Wooden
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+  - type: Pullable
+  - type: Occluder
+  - type: Storage
+    grid:
+    - 0,0,9,3
+    maxItemSize: Normal
+    whitelist:
+      tags:
+        - Document
+        - Folder
+        - Write
+        - Book
+        - Spellbook
+  - type: SolreignLibraryAnnex
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+      enum.SolreignLibrarySubmitUiKey.Key:
+        type: SolreignLibrarySubmitBoundUserInterface
+  - type: InteractionOutline
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+  - type: BlockWeather
+
+# The physical projection of one library_works ledger row (SolreignLibrarySystem.SpawnBook).
+# Title/description are stamped dynamically at spawn time (MetaDataSystem.SetEntityName/
+# SetEntityDescription) and Paper content via PaperSystem.SetContent — the prototype-level
+# name/description below are never seen by a player, only a fallback before that stamp runs.
+- type: entity
+  id: SolreignLibraryBook
+  parent: BookBase
+  name: archived work
+  suffix: solreign, projection
+  description: A book from the Station Archive.
+  components:
+  - type: SolreignLibraryBook

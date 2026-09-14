@@ -1,0 +1,54 @@
+# Solreign delighter: SCARLET, station pet
+# Black cocker spaniel. Cloned from the upstream pet-corgi pattern
+# (Resources/Prototypes/Entities/Mobs/NPCs/pets.yml -> MobCorgiIan / MobCorgiLisa,
+# base MobCorgi in Entities/Mobs/NPCs/animals.yml).
+# SPRITE (wired 2026-07-11, sprite factory batch 1, client-approved w/ docked-tail
+# adjustment — see assets/sprites-batch1/PROVENANCE.md): dedicated
+# _Solreign/scarlet.rsi, 4-dir "scarlet" + 1-dir "scarlet_dead", matching the
+# upstream corgi.rsi mob-sprite idiom exactly (DamageStateVisualLayers.Base).
+#
+# Pets v1 (Content.Server/_Solreign/Pets/ + Resources/Prototypes/_Solreign/Entities/pets.yml):
+# Scarlet is now tameable and follows her owner once fed, same as the three new reskin critters
+# in pets.yml. See pets.yml for the SolreignPetFollowCompound doc comment.
+
+- type: entity
+  name: Scarlet
+  parent: MobCorgi
+  id: MobScarlet
+  suffix: solreign, pet
+  description: The station's beloved black cocker spaniel. Silky dark coat, tragic eyes, zero security clearance, unlimited access anyway.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _Solreign/scarlet.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: scarlet
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: scarlet
+      Critical:
+        Base: scarlet_dead
+      Dead:
+        Base: scarlet_dead
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: female
+  - type: InteractionPopup
+    successChance: 0.7 # extra pettable; she is a very good dog
+    interactSuccessString: petting-success-dog
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Animals/small_dog_bark_happy.ogg
+  - type: NpcFactionMember
+    factions:
+    - PetsNT
+  - type: HTN
+    rootTask:
+      task: SolreignPetFollowCompound
+  - type: SolreignTameable
+    whitelist:
+      components:
+      - Edible

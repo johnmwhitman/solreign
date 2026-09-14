@@ -1,0 +1,40 @@
+# Solreign Liability Board — the second v11 front door: click it, browse the Director daemon's
+# active bounties (Content.Server/_Solreign/Bounties/SolreignBountySystem.cs), type a short claim,
+# submit it, get an out-of-band verdict popup. Contracts-Board/Directive-Terminal idiom (BUI on a
+# wallmount console), but its own system end to end — nothing here touches ContractsSystem or
+# SolreignOracleSystem.
+#
+# Sprite deliberately differs from BOTH existing Solreign wall fixtures so the three read as
+# distinct at a glance: SolreignContractsBoard uses noticeboard.rsi (Resources/Prototypes/_Solreign/
+# Entities/contracts_infrastructure.yml), SolreignDirectiveTerminal uses screen.rsi
+# (Resources/Prototypes/_Solreign/Entities/oracle_terminal.yml). This one reuses the upstream
+# wallmount Structures/Wallmounts/signalscreen.rsi (state "signalscreen" — verified on disk at
+# Resources/Textures/Structures/Wallmounts/signalscreen.rsi/meta.json), otherwise only used by the
+# upstream WallmountMachines/timer.yml chassis, unrelated to this board's function.
+
+- type: entity
+  parent: BaseWallmountMetallic # same wallmount base as SolreignContractsBoard/SolreignDirectiveTerminal (Damageable/Injurable stack)
+  id: SolreignBountyBoard
+  name: liability board
+  suffix: solreign
+  description: A backlit acid-green ledger, bolted where everyone can see it. Names, deeds, and dollar amounts scroll past in corporate optimism. It is always listening for a confession.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/signalscreen.rsi
+    state: signalscreen
+  - type: SolreignBountyBoard
+  - type: ActivatableUI
+    key: enum.SolreignBountyUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SolreignBountyUiKey.Key:
+        type: SolreignBountyBoardBoundUserInterface
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

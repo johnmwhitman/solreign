@@ -1,0 +1,15 @@
+- type: vendingMachineInventory
+  id: GetmoreChocolateCorpInventory
+  startingInventory:
+    SolreignEgg13: 2 # Solreign easter egg
+    FoodSnackRaisins: 3
+    FoodSnackChocolate: 3
+    FoodSnackCnDs: 3
+    FoodSnackPistachios: 3
+    FoodSnackSus: 3
+    FoodSnackSemki: 3
+    SolreignEgg09: 2 # Solreign easter egg
+    SolreignEgg11: 2 # Solreign easter egg
+  contrabandInventory:
+    FoodSnackSwirlLollipop: 2
+    FoodSnackSyndi: 3

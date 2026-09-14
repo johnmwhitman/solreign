@@ -1,0 +1,196 @@
+# Solreign — Assistant Jobs (clean-room build from upstream job idiom only).
+# Five entry-level onboarding positions, one per department, deliberately more
+# restricted than their upstream "intern"-tier counterparts (Medical Intern,
+# Research Assistant, Technical Assistant, Cargo Technician all already exist
+# upstream with Department + Maintenance access — these Solreign variants trade
+# that Maintenance token away for a genuinely low-access, new-player-friendly
+# first job). Kitchen Hand has no upstream low-tier equivalent at all.
+#
+# NOTE (naming overlap, flagged for review): two of these share display text
+# with existing upstream jobs ("Medical Intern", "Research Assistant") because
+# the assigning brief named them explicitly. Prototype IDs and loc keys are
+# fully distinct (Solreign-prefixed) so there is no load-time collision, but
+# a player will see two differently-scoped jobs with the same on-screen name
+# in the character setup / late-join menus. See reviewer checklist.
+#
+# All five are ordinary crew — no AntagImmune/MindShieldImplant special (unlike
+# greenshield.yml / nt_representative.yml, which are political Solreign-board
+# seats deliberately excluded from antag selection). No requirements: these are
+# meant to be pickable immediately by a brand-new player.
+
+# ---------------------------------------------------------------------------
+# Medical Intern (Solreign onboarding track)
+# ---------------------------------------------------------------------------
+- type: playTimeTracker
+  id: JobSolreignMedicalIntern
+
+# Reuses the existing MedicalIntern icon state (exact thematic match).
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSolreignMedicalIntern
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: MedicalIntern
+  jobName: job-name-solreign-medical-intern
+
+- type: job
+  id: SolreignMedicalIntern
+  name: job-name-solreign-medical-intern
+  description: job-description-solreign-medical-intern
+  playTimeTracker: JobSolreignMedicalIntern
+  startingGear: SolreignMedicalInternGear
+  icon: "JobIconSolreignMedicalIntern"
+  supervisors: job-supervisors-medicine
+  access:
+  - Medical
+
+- type: startingGear
+  id: SolreignMedicalInternGear
+  equipment:
+    shoes: ClothingShoesColorWhite
+    id: MedicalInternPDA
+    ears: ClothingHeadsetMedical
+    pocket2: BookMedicalReferenceBook
+
+# ---------------------------------------------------------------------------
+# Research Assistant (Solreign onboarding track)
+# ---------------------------------------------------------------------------
+- type: playTimeTracker
+  id: JobSolreignResearchAssistant
+
+# Reuses the existing ResearchAssistant icon state (exact thematic match).
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSolreignResearchAssistant
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: ResearchAssistant
+  jobName: job-name-solreign-research-assistant
+
+- type: job
+  id: SolreignResearchAssistant
+  name: job-name-solreign-research-assistant
+  description: job-description-solreign-research-assistant
+  playTimeTracker: JobSolreignResearchAssistant
+  startingGear: SolreignResearchAssistantGear
+  icon: "JobIconSolreignResearchAssistant"
+  supervisors: job-supervisors-science
+  access:
+  - Research
+
+- type: startingGear
+  id: SolreignResearchAssistantGear
+  equipment:
+    shoes: ClothingShoesColorWhite
+    id: ResearchAssistantPDA
+    ears: ClothingHeadsetScience
+    pocket2: BookScientistsGuidebook
+
+# ---------------------------------------------------------------------------
+# Engineering Apprentice (Solreign onboarding track)
+# ---------------------------------------------------------------------------
+- type: playTimeTracker
+  id: JobSolreignEngineeringApprentice
+
+# Reuses the existing TechnicalAssistant icon state (nearest match).
+# TODO(Solreign sprite factory): custom "apprentice" state — safety-vest-over-
+# civvies rather than a full hardhat, to read as one rung below Technical
+# Assistant at a glance.
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSolreignEngineeringApprentice
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: TechnicalAssistant
+  jobName: job-name-solreign-engineering-apprentice
+
+- type: job
+  id: SolreignEngineeringApprentice
+  name: job-name-solreign-engineering-apprentice
+  description: job-description-solreign-engineering-apprentice
+  playTimeTracker: JobSolreignEngineeringApprentice
+  startingGear: SolreignEngineeringApprenticeGear
+  icon: "JobIconSolreignEngineeringApprentice"
+  supervisors: job-supervisors-engineering
+  access:
+  - Engineering
+
+- type: startingGear
+  id: SolreignEngineeringApprenticeGear
+  equipment:
+    shoes: ClothingShoesBootsWork
+    id: TechnicalAssistantPDA
+    belt: ClothingBeltUtilityEngineering
+    ears: ClothingHeadsetEngineering
+    pocket2: BookEngineersHandbook
+
+# ---------------------------------------------------------------------------
+# Cargo Trainee (Solreign onboarding track)
+# ---------------------------------------------------------------------------
+- type: playTimeTracker
+  id: JobSolreignCargoTrainee
+
+# Reuses the existing CargoTechnician icon state (nearest match).
+# TODO(Solreign sprite factory): custom "trainee" state (bare cap, no headset
+# visor) to distinguish from full Cargo Technician at a glance.
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSolreignCargoTrainee
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: CargoTechnician
+  jobName: job-name-solreign-cargo-trainee
+
+- type: job
+  id: SolreignCargoTrainee
+  name: job-name-solreign-cargo-trainee
+  description: job-description-solreign-cargo-trainee
+  playTimeTracker: JobSolreignCargoTrainee
+  startingGear: SolreignCargoTraineeGear
+  icon: "JobIconSolreignCargoTrainee"
+  supervisors: job-supervisors-qm
+  access:
+  - Cargo
+
+- type: startingGear
+  id: SolreignCargoTraineeGear
+  equipment:
+    id: CargoPDA
+    ears: ClothingHeadsetCargo
+    pocket1: AppraisalTool
+
+# ---------------------------------------------------------------------------
+# Kitchen Hand (Solreign onboarding track — no upstream low-tier equivalent)
+# ---------------------------------------------------------------------------
+- type: playTimeTracker
+  id: JobSolreignKitchenHand
+
+# Reuses the existing Chef icon state (nearest match — no dedicated kitchen-hand
+# state exists upstream).
+# TODO(Solreign sprite factory): custom "kitchen hand" state — hairnet + apron,
+# no chef's hat, to read as junior kitchen staff rather than the Chef themself.
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSolreignKitchenHand
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: Chef
+  jobName: job-name-solreign-kitchen-hand
+
+- type: job
+  id: SolreignKitchenHand
+  name: job-name-solreign-kitchen-hand
+  description: job-description-solreign-kitchen-hand
+  playTimeTracker: JobSolreignKitchenHand
+  startingGear: SolreignKitchenHandGear
+  icon: "JobIconSolreignKitchenHand"
+  supervisors: job-supervisors-service
+  access:
+  - Kitchen
+
+- type: startingGear
+  id: SolreignKitchenHandGear
+  equipment:
+    shoes: ClothingShoesChef
+    id: ChefPDA
+    ears: ClothingHeadsetService

@@ -1,0 +1,94 @@
+# Solreign in-house audio. All files on this list are AI-generated for this
+# project (Google Lyria 2 for music, Gemini-TTS for voice, both via Vertex AI —
+# no external clones, no third-party clips). Full generation parameters
+# (prompts, seeds, cost, loudness/loop-seam verification) are recorded in
+# assets/soundtrack/PROVENANCE.md and assets/audio-tests/PROVENANCE.md in the
+# project workspace (not shipped in this repo).
+
+- files: ["lobby_main.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Dark ambient corporate sci-fi loop, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/soundtrack/PROVENANCE.md."
+  source: "NA"
+
+- files: ["maintenance_depths.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Sparse dread ambient loop for maintenance tunnels, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/soundtrack/PROVENANCE.md."
+  source: "NA"
+
+- files: ["ceremony_stinger.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Triumphant dark corporate fanfare one-shot for HR title ceremonies, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/soundtrack/PROVENANCE.md."
+  source: "NA"
+
+- files: ["hell_zone.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Doom-inspired dark energy loop for the Heaven & Hell zone, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/soundtrack/PROVENANCE.md."
+  source: "NA"
+
+- files: ["zoo_wing.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Curious playful dark ambient loop for the alien zoo wing, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/soundtrack/PROVENANCE.md."
+  source: "NA"
+
+- files: ["kart_track.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Upbeat retro racing synthwave loop for the go-kart track, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/soundtrack/PROVENANCE.md."
+  source: "NA"
+
+- files: ["announcer_test.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Test clip of the compliance-broadcast announcer voice, synthesized with Gemini-TTS (voice: Kore) via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/audio-tests/PROVENANCE.md."
+  source: "NA"
+
+# PROVIDENCE reading the Corporate Compliance Sweep announcement (the same words the
+# announcement bar shows — locale key station-event-solreign-corporate-sweep-start-announcement).
+# Same voice/style/route as announcer_test.ogg above so the station keeps one announcer.
+#   model gemini-2.5-flash-tts (Cloud Text-to-Speech v1) · voice Kore · 19.0s mono 24 kHz Ogg Vorbis
+#   style "calm, polished, unsettling corporate AI, slight digital coldness, female-coded synthetic voice"
+- files: ["compliance_mandatory.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Compliance-sweep announcement in the PROVIDENCE announcer voice, synthesized with Gemini-TTS (voice: Kore). Provenance: In-house generation, 2026-07-24."
+  source: "NA"
+
+# The four files below came from a second in-house pack, assets/sfx-pack/ (not
+# assets/soundtrack/) — same no-external-clones / Vertex-AI-only sourcing, see
+# assets/sfx-pack/PROVENANCE.md for prompts/seeds/cost/loop-seam verification.
+
+- files: ["zoo_exhibit_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Alien zoo exhibit ambience: curious chittering alien wildlife, soft bioluminescent hum, gentle exotic wonder. 15s seamless loop, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11 (seed 3001). See assets/sfx-pack/PROVENANCE.md. Wired: Resources/Prototypes/_Solreign/Entities/zoo_fauna.yml, AmbientSound on SolreignZooMothroach via soundCollection SolreignZooAmbienceExhibit1."
+  source: "NA"
+
+- files: ["zoo_exhibit_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Alien zoo exhibit ambience: low resonant hum, distant clicking insectoid chatter, mysterious pocket biome. 15s seamless loop, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11 (seed 3002). See assets/sfx-pack/PROVENANCE.md. Wired: Resources/Prototypes/_Solreign/Entities/zoo_fauna.yml, AmbientSound on SolreignZooExhibitCrab via soundCollection SolreignZooAmbienceExhibit2."
+  source: "NA"
+
+- files: ["zoo_exhibit_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Alien zoo exhibit ambience: playful high-pitched chitter swarm, airy vent hum, whimsical exotic creature pen. 15s seamless loop, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11 (seed 3003). See assets/sfx-pack/PROVENANCE.md. Wired: Resources/Prototypes/_Solreign/Entities/zoo_fauna.yml, AmbientSound on SolreignZooExhibitBat via soundCollection SolreignZooAmbienceExhibit3."
+  source: "NA"
+
+- files: ["hot_potato_countdown.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. 60s accelerating sine-beep countdown (700Hz->1400Hz, 115 onsets scheduled straight off the shipped HotPotatoFuseMath curve). Pure ffmpeg synthesis, no model call, $0.00. Provenance: In-house generation, 2026-07-11. See assets/sfx-pack/PROVENANCE.md. STAGED, NOT WIRED — see the gap note in Resources/Prototypes/_Solreign/Entities/hot_potato.yml: this is one pre-mixed 60s track, not a discrete one-shot beep, so it does not drop into SolreignHotPotato's per-tick beepSound field (played on a shrinking interval, see Content.Server/_Solreign/HotPotato/SolreignHotPotatoSystem.cs) without a C# change to play it once at arm-time instead — out of scope for this lane (only SeasonLedgerSystem.Ceremony.cs was budgeted)."
+  source: "NA"
+
+# The three files below are the station-identity soundtrack pack (assets/station-identity/, not
+# assets/soundtrack/ or assets/sfx-pack/) — same no-external-clones / Vertex-AI-only sourcing, see
+# assets/station-identity/PROVENANCE.md for prompts/seeds/cost/loop-seam verification.
+
+- files: ["stations/nocturne.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Dark jazz-noir synth station theme (Nocturne — deep violet nebula, sparse neon stars). 30.77s seamless loop, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11 (seed 7101). See assets/station-identity/PROVENANCE.md. STAGED, NOT WIRED — prototype entry SolreignNocturneTheme in Resources/Prototypes/AmbientMusic/_Solreign/parallax_stations_ambient.yml is gated NeverTrue; the Nocturne station doesn't exist on a map yet."
+  source: "NA"
+
+- files: ["stations/perihelion.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Radiant slow solar-drone station theme (Perihelion — massive warm star limb, corona). 30.77s seamless loop, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11 (seed 7102). See assets/station-identity/PROVENANCE.md. STAGED, NOT WIRED — prototype entry SolreignPerihelionTheme in Resources/Prototypes/AmbientMusic/_Solreign/parallax_stations_ambient.yml is gated NeverTrue; the Perihelion station doesn't exist on a map yet."
+  source: "NA"
+
+- files: ["stations/verdant.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign AI-generated. Organic bio-ambient chime station theme (Verdant — green aurora field). 30.77s seamless loop, composed with Google Lyria 2 via Vertex AI. Provenance: In-house generation, 2026-07-11 (seed 7103). See assets/station-identity/PROVENANCE.md. STAGED, NOT WIRED — prototype entry SolreignVerdantTheme in Resources/Prototypes/AmbientMusic/_Solreign/parallax_stations_ambient.yml is gated NeverTrue; the Verdant station doesn't exist on a map yet."
+  source: "NA"

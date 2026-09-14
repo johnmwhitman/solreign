@@ -1,0 +1,27 @@
+# MAPSEED-AUDIT-2026-07-16 doc-hygiene fix: this comment predates the 2026-07-15 Wingmates
+# rollout wave, which placed exactly one SolreignWingmateBeacon on all 7 SolreignMapPool rotation
+# maps (see each solreign_<map>.yml's own "Wingmates rollout" comment block, and
+# SolreignWingmateBeaconMapPlacementIntegrationTest.cs, which asserts exactly one safely-placed
+# beacon per map). The prototype is still admin-spawn-only in the sense that
+# solreign.wingmates_enabled stays default-off, so the *feature* isn't live for players yet -- but
+# the entity itself is no longer absent from maps or inventories the way this comment used to
+# claim.
+- type: entity
+  parent: BaseWallmountMetallic
+  id: SolreignWingmateBeacon
+  name: first-shift wingmates beacon
+  suffix: Solreign, Admin Only
+  description: A private station service for finding a friendly first-shift connection.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _Solreign/PlayerDelight/wingmate_beacon.rsi
+    state: icon
+  - type: WingmateBeacon
+  - type: FirstShiftBeacon
+  - type: ActivatableUI
+    key: enum.WingmateUiKey.Beacon
+  - type: UserInterface
+    interfaces:
+      enum.WingmateUiKey.Beacon:
+        type: WingmateBoundUserInterface

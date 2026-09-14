@@ -1,0 +1,27 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              Margin="10 10 10 0"
+              HorizontalExpand="True"
+              Visible="True">
+    <!-- One bounty row: title bold + description underneath. No per-row buttons — the daemon's
+         claim API takes no bounty id, so claiming happens once via the board's single claim
+         input, not per entry (see SolreignBountyBoardWindow). Plain Labels rather than
+         RichTextLabel: title/description are UNSIGNED daemon-supplied display data (see
+         SolreignBountySystem's doc comment) — markup interpolation would let a compromised or
+         malfunctioning daemon inject BBCode-style formatting into the client UI. -->
+    <PanelContainer StyleClasses="BackgroundPanel" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+            <Label Name="TitleLabel" StyleClasses="LabelHeading" />
+            <customControls:HSeparator Margin="5 4 5 4" />
+            <!-- RichTextLabel, not Label: Label does not word-wrap, so a long claim ran off the
+                 panel and could not be read at any window width (player report 2026-07-30).
+                 RichTextLabel.MeasureOverride wraps to availableSize.X, which only bounds the text
+                 if this row actually expands — hence HorizontalExpand here too. Its sibling
+                 containers already set it; this one did not, so the label had unbounded width.
+                 The no-markup property is preserved in the code-behind via FromUnformatted. -->
+            <BoxContainer HorizontalExpand="True">
+                <RichTextLabel Name="DescriptionLabel" HorizontalExpand="True" />
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</BoxContainer>

@@ -1,0 +1,375 @@
+# Solreign Season 1 lore papers — "The Ledger Wakes".
+# Source: docs/research/2026-07-11-season1-narrative-bible.md sections 3 + 4.
+#
+# Contents:
+#   * 8 Auditor's Memos     — the treasure-hunt trail (Section 3). Each memo's
+#                             clue text is baked in via the upstream pre-written
+#                             paper idiom (Paper component `content:` locale key,
+#                             see Catalog/Fills/Paper/manuals.yml).
+#   * 20 handbook fragments — collectible Employee Handbook pages (Section 4).
+#   * Vault Reward          — a locked secure crate ("the Golden Parachute
+#                             compensation vault") for the end of the trail,
+#                             plus its two reward reskins.
+#   * Season 1 event clues  — physical clue props for the admin-triggerable
+#                             beat 1-3 station events (Section 1). Content is
+#                             stamped at spawn time by the event rule, not
+#                             baked into the prototype — see the section below.
+#
+# NO map placement here — the mapping wave places memos along the trail
+# (Arrival Hub → Crew Quarters → Hydroponics → Tech Storage → Cargo Bay →
+# Atmospherics → Maintenance B → AI Core Duct → hidden vault) and scatters
+# the handbook pages. Locale: Locale/en-US/_Solreign/lore-papers.ftl.
+
+# ──────────────────────────────────────────────────────────────────────────
+# THE AUDITOR'S MEMOS (Section 3) — 8-step trail
+# ──────────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperLoreBase
+  abstract: true
+  suffix: solreign, lore
+  description: A crisp Solreign document. The letterhead is printed in an unsettlingly cheerful acid green.
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperAuditorMemo1
+  name: "auditor's memo #1"
+  description: A numbered corporate memo in faded acid-green ink. Someone wanted this found.
+  components:
+  - type: Paper
+    content: solreign-lore-memo-1
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperAuditorMemo2
+  name: "auditor's memo #2"
+  description: A numbered corporate memo in faded acid-green ink. The handwriting is impeccably filed.
+  components:
+  - type: Paper
+    content: solreign-lore-memo-2
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperAuditorMemo3
+  name: "auditor's memo #3"
+  description: A numbered corporate memo in faded acid-green ink. It smells faintly of potting soil.
+  components:
+  - type: Paper
+    content: solreign-lore-memo-3
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperAuditorMemo4
+  name: "auditor's memo #4"
+  description: A numbered corporate memo in faded acid-green ink. The corner is singed, but only slightly.
+  components:
+  - type: Paper
+    content: solreign-lore-memo-4
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperAuditorMemo5
+  name: "auditor's memo #5"
+  description: A numbered corporate memo in faded acid-green ink. It crinkles like it has seen some pressure.
+  components:
+  - type: Paper
+    content: solreign-lore-memo-5
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperAuditorMemo6
+  name: "auditor's memo #6"
+  description: A numbered corporate memo in faded acid-green ink. There are water stains along one edge.
+  components:
+  - type: Paper
+    content: solreign-lore-memo-6
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperAuditorMemo7
+  name: "auditor's memo #7"
+  description: A numbered corporate memo in faded acid-green ink. The margins are full of anxious arithmetic.
+  components:
+  - type: Paper
+    content: solreign-lore-memo-7
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperAuditorMemo8
+  name: "auditor's memo #8"
+  description: The final numbered memo. The acid-green ink here is fresh, which raises questions.
+  components:
+  - type: Paper
+    content: solreign-lore-memo-8
+
+# ──────────────────────────────────────────────────────────────────────────
+# EMPLOYEE HANDBOOK FRAGMENTS (Section 4) — 20 collectible pages
+# Read in page order they tell the Solreign Corp origin story.
+# ──────────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperHandbookBase
+  abstract: true
+  description: A page torn from the Solreign Employee Handbook. The page number is stamped in acid green.
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage3
+  name: handbook page 3
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-3
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage12
+  name: handbook page 12
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-12
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage27
+  name: handbook page 27
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-27
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage34
+  name: handbook page 34
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-34
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage45
+  name: handbook page 45
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-45
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage58
+  name: handbook page 58
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-58
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage62
+  name: handbook page 62
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-62
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage79
+  name: handbook page 79
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-79
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage83
+  name: handbook page 83
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-83
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage94
+  name: handbook page 94
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-94
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage101
+  name: handbook page 101
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-101
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage115
+  name: handbook page 115
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-115
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage128
+  name: handbook page 128
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-128
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage134
+  name: handbook page 134
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-134
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage147
+  name: handbook page 147
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-147
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage160
+  name: handbook page 160
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-160
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage172
+  name: handbook page 172
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-172
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage189
+  name: handbook page 189
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-189
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage195
+  name: handbook page 195
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-195
+
+- type: entity
+  parent: SolreignPaperHandbookBase
+  id: SolreignPaperHandbookPage200
+  name: handbook page 200
+  components:
+  - type: Paper
+    content: solreign-lore-handbook-page-200
+
+# ──────────────────────────────────────────────────────────────────────────
+# VAULT REWARD — end of the Auditor's Memo trail (Section 3 final reward)
+# A locked secure crate for the hidden vault behind the AI core wall panel.
+# Locked to Command access; the mapping wave decides final placement and may
+# swap the access list once the vault room exists. Reward items are cosmetic
+# name/description reskins of verified vanilla prototypes (same idiom as
+# solreign_easter_eggs.yml) — a dedicated gold sprite is a later art-wave task.
+# ──────────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: ClothingBackpackSatchel
+  id: SolreignGoldenParachutePack
+  suffix: solreign, lore, vault reward
+  name: the Golden Parachute
+  description: A gleaming gold pack styled like a futuristic parachute. It will not save you from anything, but everyone who sees it will know you survived the boardroom.
+
+- type: entity
+  parent: TreasureCoinGold
+  id: SolreignPlatinumShare
+  suffix: solreign, lore, vault reward
+  name: Solreign platinum share
+  description: A legendary token of vested interest. Redeemable, allegedly, wherever Season Ledgers are balanced.
+
+- type: entity
+  parent: CrateBaseSecure
+  id: SolreignVaultRewardCrate
+  suffix: solreign, lore, vault
+  name: Solreign compensation vault
+  description: A heavily secured Solreign container stamped 'FINAL COMPENSATION PACKAGE — AUTHORIZED PERSONNEL ONLY'. The lock indicator glows acid green.
+  components:
+  - type: AccessReader
+    access: [["Command"]]
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SolreignGoldenParachutePack
+        - id: SolreignPlatinumShare
+        - id: SolreignPaperAuditorMemo8
+
+# ──────────────────────────────────────────────────────────────────────────
+# SEASON 1 STATION-EVENT CLUES (beats 1-6) — "The Ledger Wakes"
+# Source: docs/research/2026-07-11-season1-narrative-bible.md Section 1.
+#
+# Physical clues spawned by the admin-triggerable station events in
+# Content.Server/_Solreign/Season1/ (see Prototypes/_Solreign/GameRules/season1.yml).
+# Beats 1, 2, 3, 5 and 6 deliberately have no `content:` field here: each rule stamps the
+# Paper component's text at spawn time via SharedPaperSystem.SetContent (Beat 1 personalizes
+# the slip with a currently-alive crew member's name; Beat 2 with the round's live player
+# count; Beat 3 rolls one of several pre-written transcript flavors; Beat 5 with how far into
+# the round the rift tore open; Beat 6 with the live crew roster). Beat 4's plaque is the one
+# exception — its engraved text never varies, so it's baked straight in below, the same idiom
+# as the Auditor's Memos above.
+# ──────────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperLedgerSlip
+  suffix: solreign, season1, clue, beat1
+  name: carbon-copied ledger slip
+  description: A ledger slip signed in shimmering acid-green ink. It smells faintly of old copper and elderberries.
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperInkClipboard
+  suffix: solreign, season1, clue, beat2
+  name: melted clipboard
+  description: A clipboard half-fused into the deck plating. Whatever did this left a stamped serial number behind.
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperGhostCabinetFolder
+  suffix: solreign, season1, clue, beat3
+  name: dusty manila folder
+  description: A folder that smells of ozone and old paper, pulled from a filing cabinet that shouldn't exist.
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperEmployeePlaque
+  suffix: solreign, season1, clue, beat4
+  name: employee-of-the-month plaque
+  description: A bronze plaque, crudely hand-engraved over its original inscription.
+  components:
+  - type: Paper
+    content: solreign-season1-beat4-plaque-content
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperTypewriterKey
+  suffix: solreign, season1, clue, beat5
+  name: detached typewriter key
+  description: A massive metal key stamped with the letter "S", still warm to the touch and smeared with acid-green ink.
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperLedgerVolumeOne
+  suffix: solreign, season1, clue, beat6, finale
+  name: "The Ledger of Solreign: Volume I"
+  description: A heavy leather-bound book. The final page is still being written.

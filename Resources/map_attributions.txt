@@ -1,0 +1,91 @@
+- files: ["aspid.yml"]
+  authors: Checkraze
+
+- files: ["bagel.yml"]
+  authors: Emisse
+
+- files: ["barratry.yml"]
+  authors: Emogarbage, Scribbles0
+ 
+- files: ["box.yml"]
+  authors: ACJM, Emisse
+
+- files: ["centcomm.yml"]
+  authors: Emisse
+
+- files: ["cluster.yml"]
+  authors: Scribbles0
+
+- files: ["elkridge.yml"]
+  authors: Deerstop
+
+- files: ["fland.yml"]
+  authors: Emisse
+
+- files: ["infiltrator.yml"]
+  authors: DogZeroX, Emisse
+
+- files: ["kettle.yml"]
+  authors: Checkraze
+
+- files: ["gemini.yml"]
+  authors: Checkraze, TsjipTsjip, Luckyshotpictures
+
+- files: ["marathon.yml"]
+  authors: Emisse
+
+- files: ["moose.yml"]
+  authors: checkraze
+
+- files: ["nukieplanet.yml"]
+  authors: DogZeroX, Emisse, metalgearsloth
+
+- files: ["omega.yml"]
+  authors: Emisse
+
+- files: ["origin.yml"]
+  authors: brainfood1183
+
+- files: ["saltern.yml"]
+  authors: deltanedas, Emisse, PJB
+
+- files: ["core.yml"]
+  authors: Ubaser
+
+- files: ["oasis.yml"]
+  authors: CptJeanLuc
+
+- files: ["cog.yml"]
+  authors: Spacemann
+
+- files: ["convex.yml"]
+  authors: Spacemann
+
+- file: ["amber.yml"]
+  authors: Southbridge, Flipsie27
+
+- files: ["snowball.yml"]
+  authors: Spacemann
+
+- files: ["_Solreign/solreign_oasis.yml"]
+  authors: deltanedas, Emisse, PJB — Solreign chassis copy of saltern.yml (station identity fields only: id/mapName/mapPath/station key/mapNameTemplate/prefixCreator; grid/layout unmodified pending the graft, see docs/specs/2026-07-11-map-graft-plan.md)
+
+- files: ["_Solreign/solreign_nocturne.yml"]
+  authors: reach.yml's original authors (unattributed in this file for reach.yml itself as of this fork) — Solreign noir identity pass on the Reach chassis: dim/removed a portion of the baseline lighting, added acid-green/violet neon pools, a bar centerpiece + stage, a vampire coffin corner (references Antags/vampire.yml, not copied), a day/night LightCycle, Solreign signage, and 3 secrets. See Resources/Maps/_Solreign/solreign_nocturne.yml's own header for the full list.
+
+- files: ["_Solreign/solreign_perihelion.yml"]
+  authors: packed.yml's original authors (unattributed in this file for packed.yml itself as of this fork) + deltanedas/Emisse/PJB for the escape_pod_small.yml shuttle chassis reused verbatim as the added second grid — Solreign sun-scraper identity pass on the Packed chassis: a genuinely zero-g second grid ("the Cupola", glass-windowed, no gravity generator by design), amber/white relighting around the Artifact Lab's external airlocks, a radiation-suit locker, solar-flare protocol signage, and 3 secrets. See Resources/Maps/_Solreign/solreign_perihelion.yml's own header and Resources/Prototypes/Maps/_Solreign/solreign_perihelion.yml for the full list.
+
+- files: ["_Solreign/solreign_verdant.yml"]
+  authors: packed.yml's original authors (unattributed in this file for packed.yml itself as of this fork, same posture as the solreign_perihelion.yml entry above — a different Solreign identity pass on the same Packed chassis) — Solreign overgrown-bio-station ("reclaimed by nature") identity pass on the Packed chassis: corporate kudzu and acid/cyan glow flora creeping through the station, a central atrium garden built into the Botany/Hydroponics room, dormant awakening-tree Ents standing in as ordinary decorative trees until they aren't (SolreignDormantEnt's first-ever map placement), a SolreignVerdant parallax backdrop assignment, and 3 secrets. See Resources/Maps/_Solreign/solreign_verdant.yml's own header and Resources/Prototypes/Maps/_Solreign/solreign_verdant.yml for the full list.
+
+- files: ["_Solreign/solreign_leviathan.yml"]
+  authors: Emisse (fland.yml's original author, per this file's own "fland.yml" entry above) — Solreign megacorp-HQ identity pass on the Fland chassis: the Captain's private dining nook reframed as a corporate Boardroom (long table, twin ChairBrass thrones, the Employee Reward Cake showcase), the Captain's-quarters entry stairs dressed as a ceremony atrium, the Vault's windowed gallery as the Executive Vendor's flagship home plus a five-belt Executive Concourse moving walkway, the Sublevel H entry gate placed in deep maintenance for the first time in the fork, an HR wing "termination processing" dark joke, and 4 secrets. See Resources/Maps/_Solreign/solreign_leviathan.yml's own header and Resources/Prototypes/Maps/_Solreign/solreign_leviathan.yml for the full list.
+
+- files: ["_Solreign/solreign_terminus.yml"]
+  authors: CptJeanLuc (oasis.yml's original author, per this file's own "oasis.yml" entry above) — Solreign industrial-titan identity pass on the Oasis chassis: a cargo empire (Contracts board + salvage-raid staging bay), a full go-kart Grand Prix circuit with pit lane and spectator stand, a mini-boss arena in the disused reactor hall (Auditor Prime), a monster nest in the Sublevel H maintenance ring, RC-car courier tunnels linking departments, and 4 secrets. See Resources/Maps/_Solreign/solreign_terminus.yml's own header and Resources/Prototypes/Maps/_Solreign/solreign_terminus.yml for the full list.
+
+- files: ["_Solreign/solreign_meridian.yml"]
+  authors: Emisse (marathon.yml's original author, per this file's own "marathon.yml" entry above) — Solreign research-sprawl identity pass on the Marathon chassis: a clean white + acid-green science-city mood with a gentle day/night cycle and spore-drift weather preference. See Resources/Maps/_Solreign/solreign_meridian.yml's own header and Resources/Prototypes/Maps/_Solreign/solreign_meridian.yml for the full list.
+- files: ["sushi.yml"]
+  authors: SuperDicq, Codebreak

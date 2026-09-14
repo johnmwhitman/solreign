@@ -1,0 +1,126 @@
+# Solreign Oasis — Milestone map-graft START chassis.
+#
+# Chassis: a byte-for-byte copy of upstream Saltern (Resources/Maps/saltern.yml,
+# authors deltanedas/Emisse/PJB — see Resources/map_attributions.txt), picked from
+# the compact 8-20-pop class (Saltern minPlayers 0/maxPlayers 35, Packed
+# minPlayers 7/maxPlayers 35 were the two candidates; Saltern's smaller grid
+# file — 1.4M vs Packed's 2.1M — and 0-floor minPlayers made it the safer base
+# for a heavily-modified custom station). Only the identity fields below differ
+# from the upstream prototype (id/mapName/mapPath/station key/mapNameTemplate/
+# prefixCreator); the job roster and grid are untouched pending the graft.
+#
+# Grid file: Resources/Maps/_Solreign/solreign_oasis.yml — its BecomesStation
+# `id:` was updated to SolreignOasis to match the `stations:` key below.
+#
+# Known cosmetic leftover (NOT fixed here, flagged for the mapping session):
+# the grid still carries a `PosterMapSaltern` decal-poster prop (a framed map
+# graphic labeled "Saltern"). Harmless, but no longer matches the station's
+# name post-rename — swap for any other PosterMap* / PosterContraband* variant
+# during the graft pass (see docs/specs/2026-07-11-map-graft-plan.md).
+#
+# See docs/specs/2026-07-11-map-graft-plan.md for the zoo wing + lore-paper
+# trail + cake case + fauna-spawner graft plan that turns this chassis into
+# the actual Solreign Oasis station.
+#
+# Deliberately dropped `fallback: true` (Saltern has it) — a still-being-grafted
+# custom map should not be an engine-selected emergency fallback until the
+# graft lands and gets a playtest pass. Revisit once the plan below ships.
+
+- type: gameMap
+  id: SolreignOasis
+  mapName: 'Solreign Oasis'
+  mapPath: /Maps/_Solreign/solreign_oasis.yml
+  minPlayers: 0
+  maxPlayers: 35
+  stations:
+    SolreignOasis:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Solreign Oasis {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'SR'
+        - type: StationJobs
+          availableJobs: # carried over from Saltern verbatim; re-tune once the zoo wing adds/removes rooms
+            #command (7)
+            Captain: [ 1, 1 ]
+            HeadOfPersonnel: [ 1, 1 ]
+            HeadOfSecurity: [ 1, 1 ]
+            ChiefMedicalOfficer: [ 1, 1 ]
+            ChiefEngineer: [ 1, 1 ]
+            ResearchDirector: [ 1, 1 ]
+            Quartermaster: [ 1, 1 ]
+            #service (8 - 9)
+            Bartender: [ 1, 1 ]
+            Botanist: [ 1, 2 ]
+            Chef: [ 1, 1 ]
+            Janitor: [ 1, 1 ]
+            Chaplain: [ 1, 1 ]
+            Librarian: [ 1, 1 ]
+            ServiceWorker: [ 2, 2 ]
+            #engineering (6)
+            AtmosphericTechnician: [ 2, 2 ]
+            StationEngineer: [ 4, 4 ]
+            TechnicalAssistant: [ 4, 4 ] #intern, not counted
+            #medical (6)
+            Chemist: [ 2, 2 ]
+            MedicalDoctor: [ 3, 3 ]
+            MedicalIntern: [ 4, 4 ] #intern, not counted
+            Paramedic: [ 1, 1 ]
+            #science (4)
+            Scientist: [ 4, 4 ]
+            ResearchAssistant: [ 2, 2 ] #intern, not counted
+            #security (6)
+            Warden: [ 1, 1 ]
+            Detective: [ 1, 1 ]
+            SecurityOfficer: [ 4, 4 ]
+            SecurityCadet: [ 4, 4 ] #intern, not counted
+            #supply (5 - 7)
+            SalvageSpecialist: [ 1, 3 ]
+            CargoTechnician: [ 2, 2 ]
+            SolreignSectorFreightMaster: [ 1, 1 ]
+            SolreignExpeditionSpecialist: [ 1, 1 ]
+            #civilian (3+)
+            Passenger: [ -1, -1 ] #infinite, not counted
+            # Pair-up onboarding roles; both present as Passenger in-game and share a
+            # private radio channel. Unlimited like Passenger so onboarding is never capped.
+            Wingmate: [ -1, -1 ]
+            WingmateMentor: [ -1, -1 ]
+            Clown: [ 1, 1 ]
+            Mime: [ 1, 1 ]
+            Musician: [ 1, 1 ]
+            #silicon (3) — V13.5 wire-up (census #9): StationAi added after re-verifying the AI
+            # core prerequisite the census flagged (was absent — placed `PlayerStationAi` in
+            # the Robotics wing, see solreign_oasis.yml grid file for the placement note).
+            StationAi: [ 1, 1 ]
+            Borg: [ 2, 2 ]
+        # StationIdentity wave (Content.Server/_Solreign/StationIdentity/): the shared ambient-identity
+        # engine, YAML-declared here the same way StationNameSetup/StationJobs above are — see
+        # SolreignStationMoodComponent's doc comment for the full mechanic breakdown. The two weather
+        # event ids below are staged for a future event-director/scheduler wave (see
+        # game_rules_weather.yml's SolreignWeatherEventsTable); they're not yet in any live random
+        # rotation, but ARE what SolreignSolarFlareRule/SolreignSporeDriftRule check via
+        # SolreignStationMoodSystem.IsWeatherEventPreferred to lean harder into their own effect.
+        # Mood rollout pass (2026-07-16): Oasis previously shipped on this component's raw engine
+        # defaults (dark-indigo #2B2B44 -> pale-lavender #D8D8F2, 1800s) -- nobody had actually
+        # designed this station's identity yet. Retuned to its own "waystation oasis at dusk"
+        # read: deep blue-teal night pool -> turquoise pool, distinct from every other station's
+        # palette (not Perihelion's amber, not a generic indigo/lavender). ColorA deliberately
+        # blue-dominant (B>G>R) rather than green-dominant, so its night phase doesn't collide with
+        # Verdant's green-dominant forest-dark at a glance (grk review pass caught the two reading
+        # as the same "desaturated green-black" family at the original #2E3834). Both weather
+        # events fit: desert open-sky rest-stop (solar flare) + the zoo/menagerie wing's live
+        # specimens (spore drift).
+        - type: SolreignStationMood
+          dayNightCycle: true
+          cyclePeriodSeconds: 2100
+          colorA: "#243038"
+          colorB: "#D4F0E8"
+          weatherEventPrototypes:
+          - SolreignSolarFlare
+          - SolreignSporeDrift
+          moodPopupLines:
+          - solreign-station-mood-popup-1
+          - solreign-station-mood-popup-2
+          - solreign-station-mood-popup-3

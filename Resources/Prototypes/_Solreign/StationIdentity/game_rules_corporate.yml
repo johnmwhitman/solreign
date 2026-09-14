@@ -1,0 +1,21 @@
+# Corporate Compliance Sweep — a PROVIDENCE-flavoured station event.
+#
+# Two defects fixed on merge from wave-6:
+#   * it declared `- type: StationEventAnnouncement`, a component that exists NOWHERE in the
+#     codebase. That is boot-fatal: prototype load throws UnknownComponentException and the
+#     server never starts. StationEvent already carries startAnnouncement/startAudio, so the
+#     extra component was redundant as well as imaginary.
+#   * startAnnouncement held a raw English sentence. Every other Solreign station event passes a
+#     LOCALE KEY here (see game_rules_weather.yml), and the raw string would have shipped
+#     untranslatable text straight to the announcement bar.
+- type: entity
+  id: SolreignCorporateSweep
+  parent: BaseGameRule
+  components:
+  - type: StationEvent
+    weight: 5
+    startAnnouncement: station-event-solreign-corporate-sweep-start-announcement
+    startAudio:
+      path: /Audio/_Solreign/compliance_mandatory.ogg
+    duration: 1
+    earliestStart: 5

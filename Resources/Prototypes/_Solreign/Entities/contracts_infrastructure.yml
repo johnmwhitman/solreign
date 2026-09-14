@@ -1,0 +1,49 @@
+# Solreign Contracts infrastructure (design spec §7.2) — the board players claim at and the dropbox they
+# deposit into. Parents verified in-repo at build time (spec §10.3): the board reuses the upstream
+# NoticeBoard wallmount stack (Resources/Prototypes/Entities/Structures/Wallmounts/Misc/noticeboard.yml),
+# the dropbox reuses CrateGenericSteel (Resources/Prototypes/Entities/Structures/Storage/Crates/crates.yml).
+#
+# Interaction model: the board opens a client window (Milestone 2 BUI — ActivatableUI + UserInterface,
+# wired exactly like the upstream cargo bounty console in
+# Resources/Prototypes/Entities/Structures/Machines/Computers/computers.yml); the Milestone 1
+# examine + alt-click verbs remain as a fallback surface. The dropbox is "hit it with the deliverable
+# in hand".
+#
+# TODO(SOLREIGN-ART): custom acid-green sprite passes for both (32x32, sprite factory lane) — the board
+# wants a glowing terminal look, the dropbox wants a "pneumatic compliance chute" with a Solreign seal.
+
+- type: entity
+  parent: BaseWallmountMetallic # brings the Damageable/Injurable wallmount stack (base_wallmount.yml)
+  id: SolreignContractsBoard
+  name: solreign contracts board
+  suffix: solreign
+  description: A cheerful acid-green work-order board. It knows what you did last quarter. Click to browse contracts; alt-click still works for assets who prefer paperwork the hard way.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/solreign_contracts_board.rsi
+    state: noticeboard
+  - type: SolreignContractsBoard
+  - type: ActivatableUI
+    key: enum.SolreignContractsUiKey.Board
+  - type: UserInterface
+    interfaces:
+      enum.SolreignContractsUiKey.Board:
+        type: SolreignContractsBoardBoundUserInterface
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: CrateGenericSteel
+  id: SolreignFulfillmentDropbox
+  name: fulfillment dropbox
+  suffix: solreign
+  description: Deposit deliverables here by hand. The Company is already proud of you.
+  components:
+  - type: SolreignDropbox

@@ -1,0 +1,188 @@
+# Solreign Mystery Arc — "OPEN BUNK" (Subject 07 / S-07).
+# Source: docs/receipts/lore-mystery/LORE-MYSTERY-2026-07-16.md (arc bible, spoiler-marked).
+#
+# A self-contained, cross-round mystery about who or (per its own undercut) WHAT "Subject 07"
+# is: a permanently-reserved, permanently-vacant crew berth, an asset that shows on the Season
+# Ledger with zero recorded shifts, and a designation the station's paperwork keeps re-filing
+# under different theories of what it means. Deliberately unresolved — the arc lives on
+# ambiguity, not a twist reveal. Built to sit alongside (never contradict) the existing public
+# Season 1 tease ("It has questions about Subject 07...") and the ongoing lore-drip queue
+# (deploy/lore-queue/) — this is the IN-GAME findable-object half; the drip queue's Discord/
+# website narrative is a separate, out-of-game channel this lane does not touch.
+#
+# Contents (10 fragments):
+#   * 7 Paper documents      — HR/security/housing/compliance/crypt paperwork.
+#   * 3 "recovered log" props — thermal printouts / archive slips / a petition transcript,
+#     same idiom this fork already uses for its Season 1 clues (melted clipboard, ghost
+#     cabinet folder): a Paper entity reskinned as a machine-sourced record rather than a
+#     memo. This reuses the EXISTING Paper interaction/UI — no new terminal UI, no new C#.
+#   * 2 placement markers    — RandomSpawner-component marker entities (verified vanilla
+#     component, same idiom as SpawnMobSolreignUnicorn in Markers/verdant_markers.yml),
+#     each holding a weighted pool of 5 of the fragments above. One map-anchor per marker;
+#     see the receipt for exact placement coordinates and the two touched map lines.
+#
+# Locale: Locale/en-US/_solreign/lore-mystery-subject07.ftl
+#
+# Explicitly NOT touching: the 20-page Employee Handbook collectible set (Section 4 of
+# lore_papers.yml) — that set is already complete and closed ("Twenty pages... survive," per
+# the public /lore copy). This arc's HR-policy fragment (SolreignPaperS07PolicyAddendum) is a
+# stamped SEPARATE volume ("Addendum 7-C... NOT FOR FILING WITH EMPLOYEE HANDBOOK") so it
+# cannot be mistaken for an undiscovered 21st handbook page.
+
+# ──────────────────────────────────────────────────────────────────────────
+# PAPER DOCUMENTS
+# ──────────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperS07TransferDenial
+  name: transfer denial slip
+  suffix: solreign, mystery, subject07
+  description: An HR carbon copy, denial stamped twice for emphasis.
+  components:
+  - type: Paper
+    content: solreign-mystery-s07-transfer-denial
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperS07BadgePhotoMemo
+  name: badge photo exception memo
+  suffix: solreign, mystery, subject07
+  description: A Security IT memo, corners curled from being reread too many times.
+  components:
+  - type: Paper
+    content: solreign-mystery-s07-badge-photo-memo
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperS07BerthCard
+  name: berth assignment card
+  suffix: solreign, mystery, subject07
+  description: A Housing berth card, laminate worn soft at the edges. Someone has handled this often.
+  components:
+  - type: Paper
+    content: solreign-mystery-s07-berth-card
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperS07WingmateRoster
+  name: "wingmate pairing log, torn page"
+  suffix: solreign, mystery, subject07
+  description: A page torn from the Wingmate program's binder, ragged along one edge.
+  components:
+  - type: Paper
+    content: solreign-mystery-s07-wingmate-roster
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperS07CryptObituary
+  name: uncut obituary proof
+  suffix: solreign, mystery, subject07
+  description: A Crypt obituary proof sheet, never sent to print. Someone has annotated it in pencil.
+  components:
+  - type: Paper
+    content: solreign-mystery-s07-crypt-obituary
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperS07DirectiveScrap
+  name: compliance scheduling note
+  suffix: solreign, mystery, subject07
+  description: An internal Compliance scrap, marked DO NOT POST in handwriting, not print.
+  components:
+  - type: Paper
+    content: solreign-mystery-s07-directive-scrap
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperS07PolicyAddendum
+  name: "HR policy addendum, uncatalogued"
+  suffix: solreign, mystery, subject07
+  description: A loose HR policy leaf, deliberately not filed with the Employee Handbook. The stamp on it seems to change depending on how you tilt it.
+  components:
+  - type: Paper
+    content: solreign-mystery-s07-policy-addendum
+
+# ──────────────────────────────────────────────────────────────────────────
+# "RECOVERED LOG" PROPS — Paper entity, machine-record flavor (reuses Paper UI)
+# ──────────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperS07LedgerPrintout
+  name: ledger anomaly printout
+  suffix: solreign, mystery, subject07
+  description: A curling strip of thermal paper, still faintly warm, ejected from a Season Ledger kiosk that no one asked to print anything.
+  components:
+  - type: Paper
+    content: solreign-mystery-s07-ledger-printout
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperS07ArchiveSlip
+  name: "archive slip, pre-commission"
+  suffix: solreign, mystery, subject07
+  description: A brittle archive slip, older than the paper stock Solreign currently issues.
+  components:
+  - type: Paper
+    content: solreign-mystery-s07-archive-slip
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperS07PetitionTranscript
+  name: "petition transcript, unlogged"
+  suffix: solreign, mystery, subject07
+  description: A transcript of an Oracle petition, printed from a terminal that has no matching entry for it in its own outgoing log.
+  components:
+  - type: Paper
+    content: solreign-mystery-s07-petition-transcript
+
+# ──────────────────────────────────────────────────────────────────────────
+# PLACEMENT MARKERS — RandomSpawner (vanilla component, ConditionalSpawner
+# idiom already used by SpawnMobSolreignUnicorn in Markers/verdant_markers.yml).
+# Each marker guarantees exactly one of its 5 fragments spawns, then deletes
+# itself (RandomSpawnerComponent default DeleteSpawnerAfterSpawn: true) — so
+# a single map anchor yields a different find across different rounds, the
+# same cross-round-accumulation model the Auditor's Memos / Handbook pages
+# already use.
+# ──────────────────────────────────────────────────────────────────────────
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnSolreignS07PersonnelWing
+  name: "Open Bunk Fragment Spawner (Personnel Wing)"
+  suffix: solreign, mystery, subject07, marker
+  components:
+  - type: Sprite
+    layers:
+    - state: red # MarkerBase's own Markers/cross.rsi, editor-visible only
+    - state: paper
+      sprite: Objects/Misc/bureaucracy.rsi
+  - type: RandomSpawner
+    chance: 1.0
+    prototypes:
+    - SolreignPaperS07TransferDenial
+    - SolreignPaperS07BadgePhotoMemo
+    - SolreignPaperS07BerthCard
+    - SolreignPaperS07DirectiveScrap
+    - SolreignPaperS07PolicyAddendum
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnSolreignS07RecordsWing
+  name: "Open Bunk Fragment Spawner (Records Wing)"
+  suffix: solreign, mystery, subject07, marker
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - state: paper
+      sprite: Objects/Misc/bureaucracy.rsi
+  - type: RandomSpawner
+    chance: 1.0
+    prototypes:
+    - SolreignPaperS07WingmateRoster
+    - SolreignPaperS07CryptObituary
+    - SolreignPaperS07LedgerPrintout
+    - SolreignPaperS07ArchiveSlip
+    - SolreignPaperS07PetitionTranscript

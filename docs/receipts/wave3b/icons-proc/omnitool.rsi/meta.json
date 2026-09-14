@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "AI-generated (MiniMax image-01 base + Gemini 2.5 Flash Image self-conditioned img2img for cross-state identity) for Solreign, human-curated; replaces CC-BY-NC-SA art",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "omnitool-prying"
+    },
+    {
+      "name": "omnitool-screwing"
+    },
+    {
+      "name": "omnitool-pulsing"
+    },
+    {
+      "name": "omnitool-snipping"
+    },
+    {
+      "name": "omnitool-wrenching"
+    }
+  ]
+}

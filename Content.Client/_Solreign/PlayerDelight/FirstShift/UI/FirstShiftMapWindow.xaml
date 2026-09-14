@@ -1,0 +1,11 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      xmlns:ui="clr-namespace:Content.Client.Pinpointer.UI"
+                      Title="{Loc 'first-shift-map-title'}"
+                      MinSize="620 650"
+                      SetSize="700 700">
+    <BoxContainer Orientation="Vertical" SeparationOverride="6">
+        <Label Name="MarkerDescription" Margin="8" />
+        <ui:NavMapControl Name="NavMap" VerticalExpand="True" HorizontalExpand="True" />
+    </BoxContainer>
+</controls:FancyWindow>

@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "AI-generated (MiniMax image-01) for Solreign, human-curated; inhand states procedurally rigged; replaces CC-BY-NC-SA art",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-right",
+      "directions": 4
+    }
+  ]
+}

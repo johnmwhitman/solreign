@@ -1,0 +1,54 @@
+# Solreign — "Mandatory Team-Building Exercise" (collision-pass hot potato bomb).
+# Distinct from upstream HotPotato (melee-pass, uplink item): this one arms on first
+# pickup, can never be dropped, and transfers by bumping into a living colleague.
+#
+# Sprite (wired 2026-07-11, sprite factory batch 1, client-approved): dedicated
+# _Solreign/hot_potato.rsi, single "icon" state — see assets/sprites-batch1/PROVENANCE.md.
+# GAP (reported honestly): the new RSI is icon-only, same shape as the upstream state it
+# replaces, so it has no in-hand states of its own; Item.sprite below still points at the
+# upstream potato RSI for the held/inventory look. A matching in-hand set is a future
+# sprite-factory pass, not force-wired here.
+
+- type: entity
+  parent: BaseItem
+  id: SolreignHotPotatoBomb
+  name: mandatory team-building exercise
+  suffix: solreign
+  description: A Solreign HR-issued morale device. Once accepted it cannot be politely declined — pass it to a colleague with a firm, professional shoulder-bump before the deadline. Participation is mandatory. Enthusiasm is assumed.
+  components:
+  - type: Sprite
+    sprite: _Solreign/hot_potato.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Specific/Hydroponics/potato.rsi
+    heldPrefix: produce
+    size: Small
+  - type: SolreignHotPotato
+    fuseDuration: 60
+    transferCooldown: 1
+    maxBeepInterval: 1.25
+    minBeepInterval: 0.15
+    # AUDIO WIRING GAP (2026-07-11, documented honestly rather than force-wired): the SFX pack
+    # generated a bespoke countdown track for this exact fuse curve —
+    # assets/sfx-pack/hot_potato_countdown.ogg, now staged at
+    # Resources/Audio/_Solreign/hot_potato_countdown.ogg (see attributions.yml) — but it is one
+    # pre-mixed 60s clip with all 115 beeps baked in, not a discrete one-shot beep. beepSound below
+    # is re-played on every tick by SolreignHotPotatoSystem at a shrinking interval
+    # (Content.Server/_Solreign/HotPotato/SolreignHotPotatoSystem.cs: PlayPvs(potato.BeepSound) each
+    # time NextBeep elapses), so dropping the 60s track in here would stack dozens of full-length
+    # copies of itself on top of each other. Wiring it correctly needs a C# change (play the whole
+    # track once at arm-time instead of per-tick) — out of scope for this lane, whose one C# touch
+    # was budgeted to the ceremony-sound swap in SeasonLedgerSystem.Ceremony.cs. Left on the stock
+    # upstream beep until a future wave can either add that one-shot playback path or regenerate the
+    # SFX pack as discrete beep files.
+    beepSound:
+      path: /Audio/Machines/Nuke/general_beep.ogg
+      params:
+        volume: -2
+    # Small and PG: mostly a flash, a shove, and a strongly worded memo.
+    explosionType: Default
+    totalIntensity: 5
+    intensitySlope: 5
+    maxTileIntensity: 2
+    flashRange: 3
+    flashDuration: 4

@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Solreign + AI-authored code + human-review-pending",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "space-christian"
+    },
+    {
+      "name": "space-christian_lightning",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    }
+  ]
+}

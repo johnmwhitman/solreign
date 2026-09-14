@@ -1,0 +1,32 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              Margin="10 10 10 0"
+              HorizontalExpand="True"
+              Visible="True">
+    <!-- One black-market listing card. Layout copies SolreignContractEntry.xaml: info column
+         left, action button right, separator, description. Unlike a contract card there is no
+         client-side prototype lookup here — the daemon's (sanitized) flavor name/description ARE
+         the display text (see SolreignMarketSystem.SanitizeListings); nothing is resolved locally. -->
+    <PanelContainer StyleClasses="BackgroundPanel" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical"
+                      HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal">
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                    <RichTextLabel Name="NameLabel"/>
+                    <RichTextLabel Name="PriceLabel"/>
+                </BoxContainer>
+                <Control MinWidth="10"/>
+                <BoxContainer Orientation="Vertical" MinWidth="90">
+                    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="BuyButton"
+                                Text="{Loc 'solreign-market-ui-buy-button'}"/>
+                    </BoxContainer>
+                </BoxContainer>
+            </BoxContainer>
+            <customControls:HSeparator Name="DescriptionSeparator" Margin="5 10 5 10"/>
+            <BoxContainer>
+                <RichTextLabel Name="DescriptionLabel"/>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</BoxContainer>

@@ -1,0 +1,52 @@
+# SOLREIGN Horizon 3: one-slot logistics specialist for the sector expedition loop.
+- type: playTimeTracker
+  id: JobSolreignSectorFreightMaster
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconSolreignSectorFreightMaster
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: CargoTechnician
+  jobName: job-name-solreign-sector-freight-master
+
+- type: job
+  id: SolreignSectorFreightMaster
+  name: job-name-solreign-sector-freight-master
+  description: job-description-solreign-sector-freight-master
+  playTimeTracker: JobSolreignSectorFreightMaster
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Cargo
+    time: 3h
+  startingGear: SolreignSectorFreightMasterGear
+  icon: JobIconSolreignSectorFreightMaster
+  supervisors: job-supervisors-qm
+
+  access:
+  - Cargo
+  - Salvage
+  - Maintenance
+  - External
+
+- type: startingGear
+  id: SolreignSectorFreightMasterGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitCargo
+    shoes: ClothingShoesBootsWork
+    id: CargoPDA
+    ears: ClothingHeadsetCargo
+    outerClothing: ClothingOuterHardsuitSpatio
+    belt: BoxFolderClipboardThreePapers
+    pocket1: AppraisalTool
+
+# Starting gear deliberately owns ID, uniform, shoes, and hardsuit. The selectable
+# groups below cannot silently replace the role-defining EVA equipment.
+- type: roleLoadout
+  id: JobSolreignSectorFreightMaster
+  groups:
+  - CargoTechnicianBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool

@@ -1,0 +1,64 @@
+# Solreign-sector parallax: an acid-green corporate backdrop, following the upstream Parallaxes idiom
+# (compare Resources/Prototypes/Parallaxes/default.yml / wizard.yml).
+#
+# 2026-07-16 wow-per-effort art pass: replaced the tinted-stock-art placeholder with bespoke
+# Solreign art (Resources/Textures/_Solreign/Parallaxes/Sector/) and WIRED this prototype onto the
+# four rotation maps that had no station-identity parallax of their own — Meridian, Leviathan,
+# Terminus, Oasis (Resources/Maps/_Solreign/solreign_{meridian,leviathan,terminus,oasis}.yml, each
+# gained a `- type: Parallax / parallax: SolreignSector` component on their map-root entity,
+# alongside the untouched MetaData/Transform/Map/GridTree/Broadphase/OccluderTree block). Nocturne/
+# Perihelion/Verdant keep their own bespoke parallaxes (parallax_stations.yml) — this prototype was
+# previously an orphan (never referenced by any map) and is now the shared "generic sector" identity
+# for the remaining 4 of the 7 SolreignMapPool stations.
+#
+# Layer provenance (full detail + seam-verification numbers in
+# docs/receipts/solreign-parallax/PARALLAX-2026-07-16.md):
+#   - BG: fully procedural (Pillow/numpy periodic value-noise + modulo-wrapped star scatter, no AI
+#     model) — tileable by construction, wrap-diff measured at 0.
+#   - Neb / Sat: MiniMax image-01 renders, toned to the restrained near-black/acid-green brand
+#     palette and given a luminance+vignette alpha so black background AND all four edges fade to
+#     fully transparent — the seamless BG layer shows through underneath, so RGB seam mismatch on
+#     these two layers is a non-issue (alpha=0 meets alpha=0 at every tile boundary; wrap-diff 0).
+#   - Acid starfield mid-layer is unchanged from the prior placeholder pass: fully procedural
+#     (GeneratedParallaxTextureSource) from parallax_config_acid_stars.toml alongside this file.
+
+- type: parallax
+  id: SolreignSector
+  layers:
+    # Deep-space void base, tiled — procedural (numpy/Pillow), faint acid-green nebula veins.
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_Solreign/Parallaxes/Sector/SectorParallaxBG.png"
+      slowness: 0.998046875
+      scale: "1, 1"
+
+    # Procedural acid/corporate-gold starfield — no texture asset, generated at load per the
+    # upstream GeneratedParallaxTextureSource idiom (compare Parallaxes/default.yml).
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "solreign_acid_stars"
+        configPath: "/Prototypes/_Solreign/parallax_config_acid_stars.toml"
+      slowness: 0.99
+
+    # PROVIDENCE-satellite silhouette accent: a distant, subtle corporate relay structure glimpsed
+    # in the void. Placed between the star layer and the nebula foreground so it reads as a
+    # background object, not a moving ship.
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_Solreign/Parallaxes/Sector/SectorParallaxSat.png"
+      slowness: 0.965
+      scale: "1, 1"
+
+    # Foreground nebula ribbon, AI-generated + brand-toned, edge-transparent (see provenance above).
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_Solreign/Parallaxes/Sector/SectorParallaxNeb.png"
+      slowness: 0.95
+      scale: "1, 1"
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "solreign_acid_stars_lq"
+        configPath: "/Prototypes/_Solreign/parallax_config_acid_stars.toml"
+      slowness: 0.9
+  layersLQUseHQ: false

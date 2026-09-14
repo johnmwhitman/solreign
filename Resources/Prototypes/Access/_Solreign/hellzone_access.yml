@@ -1,0 +1,6 @@
+# Sublevel H clearance — spec: docs/specs/2026-07-11-hell-heaven-zones.md §3, Option A (recommended).
+# New subfolder rather than editing an existing Access/*.yml file — purely additive, zero collision
+# risk with anything else touching the shared access prototypes.
+- type: accessLevel
+  id: SolreignSublevelH
+  name: id-card-access-level-solreign-sublevel-h

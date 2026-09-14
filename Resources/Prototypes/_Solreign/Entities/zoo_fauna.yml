@@ -1,0 +1,130 @@
+# Solreign zoo exhibit fauna — audio wiring pass.
+#
+# Three reskins of existing upstream harmless station animals (same "parent + Sprite/PointLight
+# tweak, no new sprite" idiom as delighters/scarlet.yml and delighters/unicorn.yml), each carrying
+# a looping AmbientSound so the alien zoo wing (Resources/Maps/_Solreign/solreign_oasis.yml,
+# "Zoo Wing Entrance" / "Zoo Habitat Divider" x3, grafted Wave 7) has audible wildlife instead of
+# silence. None have an NpcFactionMember faction on their upstream parent, so all three stay
+# passive/PG — no combat, just ambience.
+#
+# UPSTREAM CHECK (2026-07-11): upstream ships no soundCollection+AmbientSound pattern on any mob;
+# AmbientSound is used only on structures/machines (Resources/Prototypes/Entities/Structures/
+# Power/smes.yml, Decoration/bonfire.yml — see those for the volume/range idiom this copies).
+# Attaching it to a mob works the same way (AmbientSoundComponent only cares about the entity's
+# Transform, not its mob-ness) and is a reasonable, precedented extension of the component.
+#
+# Sound files: Resources/Audio/_Solreign/zoo_exhibit_{1,2,3}.ogg — AI-generated 15s seamless loops,
+# see Resources/Audio/_Solreign/attributions.yml. Wrapped in soundCollection prototypes (rather than
+# referenced by bare path) so a later wave can drop in more takes per exhibit without touching the
+# entity file, same reason stock ambience tracks (collections.yml) are collections and not paths.
+#
+# MAP PLACEMENT — PARTIAL. Read this before repeating the 2026-07-26 audit mistake.
+#
+# ⚠️ The paragraph that used to live here said "zero live instances anywhere". That was true when
+# written (2026-07-11) and is now FALSE. It stayed uncorrected long enough that an audit read the
+# comment, checked the map the round happened to be on (Perihelion), found nothing, and reported
+# all three creatures as unplaced content. They are placed. A comment asserting a repo-wide
+# negative is a claim with an expiry date — verify placement by grepping every map, not by
+# reading this file.
+#
+# ACTUAL STATE (verified 2026-07-26 by grepping all 7 rotation maps):
+#   - PLACED on solreign_meridian.yml — one of each, uids 900002/900003/900004 at
+#     (43.5,7.5)/(45.5,7.5)/(47.5,7.5) on grid 30, beside SolreignSignMeridianZoo. The ambience
+#     and the NearZooExhibit music rule DO fire, on Meridian, today.
+#   - NOT placed on solreign_oasis.yml, which is the map this file was written for and the one
+#     with the real zoo wing: Zoo Wing Entrance, Zoo Keeper Door, Zoo Wing APC,
+#     SolreignZooContainmentConsole/Emitter/BioFeeder/RecoveryPad, and the three "Zoo Habitat
+#     Divider" ReinforcedWindows at (-16.5,-27.5)/(-14.5,-26.5)/(-13.5,-25.5) on grid 31.
+#     Oasis has the enclosure and no animals. NOTE the dividers are the walls BETWEEN pens, not
+#     the pens — resolve the enclosed tiles before wiring any spawn coordinate.
+#   - So the wing is silent on 6 of 7 rotation maps: presence-based rules only fire where a
+#     tagged entity actually exists.
+#
+# The rule is presence-based
+# (NearbyEntitiesRule, range-scoped around a live tagged entity), not a fixed room-boundary check —
+# once placed, a fauna that wanders out of its pen (if its HTN/enclosure allows that) will drag the
+# zoo music and its own ambience with it, and the wing will fall silent if all three ever end up
+# out of every player's AmbientSound/NearZooExhibit range at once.
+
+# ── Sound collections (one seamless loop each; wrap-in-collection lets more takes get added later) ──
+
+- type: soundCollection
+  id: SolreignZooAmbienceExhibit1
+  files:
+    - /Audio/_Solreign/zoo_exhibit_1.ogg
+
+- type: soundCollection
+  id: SolreignZooAmbienceExhibit2
+  files:
+    - /Audio/_Solreign/zoo_exhibit_2.ogg
+
+- type: soundCollection
+  id: SolreignZooAmbienceExhibit3
+  files:
+    - /Audio/_Solreign/zoo_exhibit_3.ogg
+
+# ── Exhibit 1: "curious chittering alien wildlife, soft bioluminescent hum" ──
+# Base: MobMothroach (Entities/Mobs/NPCs/animals.yml) — already the closest thing upstream ships to
+# an "alien hybrid critter" (moth-person x cockroach splice) and already emotes Chitter/Squeak.
+# The PointLight is the only new visual: sells "bioluminescent" without a new sprite.
+- type: entity
+  parent: MobMothroach
+  id: SolreignZooMothroach
+  name: exhibit specimen (mothroach)
+  suffix: solreign, zoo exhibit
+  description: Zoo placard reads GENUS UNCLASSIFIED, HABITAT WING B. It chitters at the glass and glows faintly when it thinks no one is auditing.
+  components:
+  - type: PointLight
+    radius: 1.5
+    energy: 0.6
+    color: "#7cf64b" # Solreign acid-green, soft — "bioluminescent" flavor from the exhibit's audio brief
+  - type: AmbientSound
+    volume: -8
+    range: 4
+    sound:
+      collection: SolreignZooAmbienceExhibit1
+  - type: Tag # replaces, not merges with, MobCockroach's inherited [Trash, VimPilot] Tag list — re-added below
+    tags:
+    - Trash
+    - VimPilot
+    - SolreignZooExhibit
+
+# ── Exhibit 2: "low resonant hum, distant clicking insectoid chatter, mysterious pocket biome" ──
+# Base: MobCrab (Entities/Mobs/NPCs/animals.yml) — already speaks with Click/Chitter emotes
+# (speechVerb: Arachnid), the closest upstream match to "insectoid chatter".
+- type: entity
+  parent: MobCrab
+  id: SolreignZooExhibitCrab
+  name: exhibit specimen (crab)
+  suffix: solreign, zoo exhibit
+  description: Zoo placard reads GENUS UNCLASSIFIED, HABITAT WING B. Its claw clicks in a rhythm the compliance department insists is coincidental.
+  components:
+  - type: AmbientSound
+    volume: -8
+    range: 4
+    sound:
+      collection: SolreignZooAmbienceExhibit2
+  - type: Tag # replaces, not merges with, MobCrab's own [VimPilot] Tag list — re-added below
+    tags:
+    - VimPilot
+    - SolreignZooExhibit
+
+# ── Exhibit 3: "playful high-pitched chitter swarm, airy vent hum, whimsical exotic creature pen" ──
+# Base: MobBat (Entities/Mobs/NPCs/animals.yml) — flies, squeaks high-pitched, and its InteractionPopup
+# already spawns EffectHearts on a good pet — "playful" and "whimsical" fit as-is.
+- type: entity
+  parent: MobBat
+  id: SolreignZooExhibitBat
+  name: exhibit specimen (bat)
+  suffix: solreign, zoo exhibit
+  description: Zoo placard reads GENUS UNCLASSIFIED, HABITAT WING B. Whimsical, high-pitched, and legally distinct from every Earth bat it resembles.
+  components:
+  - type: AmbientSound
+    volume: -8
+    range: 4
+    sound:
+      collection: SolreignZooAmbienceExhibit3
+  - type: Tag # replaces, not merges with, MobBat's own [VimPilot] Tag list — re-added below
+    tags:
+    - VimPilot
+    - SolreignZooExhibit

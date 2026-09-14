@@ -1,0 +1,42 @@
+# Solreign Directive Terminal — the Oracle front door. A player-reachable wall console: click it,
+# type a short petition, send it. The petition travels the EXISTING SolreignOracleMessage BUI pipe
+# (Content.Shared/_Solreign/Oracle/SharedSolreignOracle.cs) into
+# Content.Server/Administration/Systems/SolreignOracleSystem.cs's already-wired
+# SubscribeLocalEvent<SolreignOracleComponent, SolreignOracleMessage> handler — nothing about that
+# server pipeline changes here beyond the input-hardening const in OnOracleMessage. The Oracle's
+# reply is NOT rendered by this terminal's window: it arrives later, out of band, as a
+# server-driven popup on the player (SolreignOracleSystem.Update's _pendingOracleResponses drain).
+#
+# Sprite deliberately differs from SolreignContractsBoard's noticeboard.rsi
+# (Resources/Prototypes/_Solreign/Entities/contracts_infrastructure.yml) so the two Solreign wall
+# fixtures read as distinct at a glance: this one reuses the upstream wallmount
+# Structures/Wallmounts/screen.rsi (state "screen" — verified on disk at
+# Resources/Textures/Structures/Wallmounts/screen.rsi/meta.json), already used elsewhere by the
+# upstream WallmountMachines/screen.yml chassis, unrelated to this terminal's function.
+
+- type: entity
+  parent: BaseWallmountMetallic # same wallmount base as SolreignContractsBoard (Damageable/Injurable stack)
+  id: SolreignDirectiveTerminal
+  name: directive terminal
+  suffix: solreign
+  description: A dull acid-green monitor, always half-lit. It has no keyboard, no logo, no maker's mark. Somewhere behind the glass, something is deciding whether to answer.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/screen.rsi
+    state: screen
+  - type: SolreignOracle
+  - type: ActivatableUI
+    key: enum.SolreignOracleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SolreignOracleUiKey.Key:
+        type: SolreignOracleBoundUserInterface
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

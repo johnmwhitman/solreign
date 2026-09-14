@@ -1,0 +1,778 @@
+{
+  "sprites": [
+    {
+      "rsi": "crystal_grey",
+      "state": "crystal_grey",
+      "verdict": "animate",
+      "concept": "decorative wall crystal: facet light travels tip\u2192heart\u2192base, peaking on the near-white q-highlights",
+      "frames": 4,
+      "delays": [
+        0.55,
+        0.18,
+        0.14,
+        0.32
+      ],
+      "masks": {
+        "tip": {
+          "letters": [
+            "q",
+            "j",
+            "g",
+            "m",
+            "d",
+            "f"
+          ],
+          "region": [
+            8,
+            2,
+            24,
+            11
+          ]
+        },
+        "heart": {
+          "letters": [
+            "q",
+            "j",
+            "g",
+            "m",
+            "d",
+            "f",
+            "e"
+          ],
+          "region": [
+            6,
+            12,
+            24,
+            20
+          ]
+        },
+        "base": {
+          "letters": [
+            "j",
+            "g",
+            "m",
+            "d",
+            "f",
+            "e"
+          ],
+          "region": [
+            6,
+            21,
+            24,
+            30
+          ]
+        },
+        "spark": {
+          "pixels": [
+            [
+              19,
+              8
+            ],
+            [
+              19,
+              10
+            ],
+            [
+              12,
+              11
+            ]
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "tip",
+              "op": "brightness",
+              "factor": 1.28
+            },
+            {
+              "mask": "spark",
+              "op": "brightness",
+              "factor": 1.45
+            },
+            {
+              "mask": "spark",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.22
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "heart",
+              "op": "brightness",
+              "factor": 1.32
+            },
+            {
+              "mask": "tip",
+              "op": "brightness",
+              "factor": 1.1
+            },
+            {
+              "mask": "spark",
+              "op": "brightness",
+              "factor": 1.2
+            }
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {
+              "mask": "base",
+              "op": "brightness",
+              "factor": 1.2
+            },
+            {
+              "mask": "heart",
+              "op": "brightness",
+              "factor": 1.08
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "telecrystal",
+      "state": "telecrystal",
+      "verdict": "animate",
+      "concept": "syndicate currency crystal heart-pulses: core flares hot orange-red then cools to ember",
+      "frames": 3,
+      "delays": [
+        0.42,
+        0.2,
+        0.38
+      ],
+      "masks": {
+        "core": {
+          "letters": [
+            "c",
+            "d"
+          ]
+        },
+        "mid": {
+          "letters": [
+            "b"
+          ]
+        },
+        "rim": {
+          "letters": [
+            "a"
+          ]
+        },
+        "spark": {
+          "pixels": [
+            [
+              15,
+              14
+            ],
+            [
+              16,
+              15
+            ]
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "core",
+              "op": "brightness",
+              "factor": 1.35
+            },
+            {
+              "mask": "core",
+              "op": "lerp",
+              "to": [
+                255,
+                120,
+                40
+              ],
+              "t": 0.28
+            },
+            {
+              "mask": "mid",
+              "op": "brightness",
+              "factor": 1.18
+            },
+            {
+              "mask": "spark",
+              "op": "brightness",
+              "factor": 1.5
+            },
+            {
+              "mask": "spark",
+              "op": "lerp",
+              "to": [
+                255,
+                220,
+                160
+              ],
+              "t": 0.35
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "core",
+              "op": "brightness",
+              "factor": 1.12
+            },
+            {
+              "mask": "mid",
+              "op": "brightness",
+              "factor": 1.08
+            },
+            {
+              "mask": "rim",
+              "op": "brightness",
+              "factor": 0.92
+            },
+            {
+              "mask": "rim",
+              "op": "lerp",
+              "to": [
+                80,
+                0,
+                0
+              ],
+              "t": 0.15
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "crystal_shard1",
+      "state": "shard1",
+      "verdict": "animate",
+      "concept": "oblique raw shard: glint slides tip\u2192ridge\u2192tail along the bright facet letters",
+      "frames": 3,
+      "delays": [
+        0.48,
+        0.16,
+        0.22
+      ],
+      "masks": {
+        "tip": {
+          "letters": [
+            "c",
+            "f",
+            "h",
+            "a"
+          ],
+          "region": [
+            9,
+            5,
+            18,
+            11
+          ]
+        },
+        "ridge": {
+          "letters": [
+            "c",
+            "f",
+            "h",
+            "g",
+            "a",
+            "e"
+          ],
+          "region": [
+            10,
+            12,
+            21,
+            18
+          ]
+        },
+        "tail": {
+          "letters": [
+            "c",
+            "a",
+            "e",
+            "g"
+          ],
+          "region": [
+            14,
+            19,
+            23,
+            26
+          ]
+        },
+        "spark": {
+          "pixels": [
+            [
+              14,
+              11
+            ],
+            [
+              16,
+              15
+            ],
+            [
+              17,
+              15
+            ]
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "tip",
+              "op": "brightness",
+              "factor": 1.3
+            },
+            {
+              "mask": "spark",
+              "op": "brightness",
+              "factor": 1.5
+            },
+            {
+              "mask": "spark",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.25
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "ridge",
+              "op": "brightness",
+              "factor": 1.28
+            },
+            {
+              "mask": "tip",
+              "op": "brightness",
+              "factor": 1.08
+            },
+            {
+              "mask": "tail",
+              "op": "brightness",
+              "factor": 1.12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "crystal_shard2",
+      "state": "shard2",
+      "verdict": "animate",
+      "concept": "upright shard: internal shimmer rolls top\u2192mid\u2192base on the bright vertical facets",
+      "frames": 4,
+      "delays": [
+        0.5,
+        0.15,
+        0.15,
+        0.28
+      ],
+      "masks": {
+        "top": {
+          "letters": [
+            "f",
+            "d",
+            "h",
+            "e",
+            "a"
+          ],
+          "region": [
+            14,
+            6,
+            21,
+            12
+          ]
+        },
+        "mid": {
+          "letters": [
+            "f",
+            "d",
+            "h",
+            "e",
+            "i",
+            "a"
+          ],
+          "region": [
+            12,
+            13,
+            21,
+            19
+          ]
+        },
+        "bot": {
+          "letters": [
+            "f",
+            "d",
+            "e",
+            "i",
+            "a"
+          ],
+          "region": [
+            12,
+            20,
+            20,
+            29
+          ]
+        },
+        "spark": {
+          "pixels": [
+            [
+              16,
+              12
+            ],
+            [
+              17,
+              12
+            ]
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "top",
+              "op": "brightness",
+              "factor": 1.3
+            },
+            {
+              "mask": "spark",
+              "op": "brightness",
+              "factor": 1.48
+            },
+            {
+              "mask": "spark",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.22
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "mid",
+              "op": "brightness",
+              "factor": 1.28
+            },
+            {
+              "mask": "top",
+              "op": "brightness",
+              "factor": 1.08
+            }
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {
+              "mask": "bot",
+              "op": "brightness",
+              "factor": 1.2
+            },
+            {
+              "mask": "mid",
+              "op": "brightness",
+              "factor": 1.06
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "crystal_shard3",
+      "state": "shard3",
+      "verdict": "animate",
+      "concept": "chunky lateral shard soft-breathes: mid-body brightens then a brief ridge glint",
+      "frames": 3,
+      "delays": [
+        0.65,
+        0.4,
+        0.22
+      ],
+      "masks": {
+        "body": {
+          "letters": [
+            "d",
+            "g",
+            "f",
+            "a",
+            "c"
+          ],
+          "region": [
+            9,
+            12,
+            23,
+            22
+          ]
+        },
+        "ridge": {
+          "letters": [
+            "d",
+            "g",
+            "f"
+          ],
+          "region": [
+            13,
+            14,
+            21,
+            18
+          ]
+        },
+        "spark": {
+          "pixels": [
+            [
+              18,
+              15
+            ],
+            [
+              16,
+              17
+            ]
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "body",
+              "op": "brightness",
+              "factor": 1.14
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "body",
+              "op": "brightness",
+              "factor": 1.08
+            },
+            {
+              "mask": "ridge",
+              "op": "brightness",
+              "factor": 1.32
+            },
+            {
+              "mask": "spark",
+              "op": "brightness",
+              "factor": 1.45
+            },
+            {
+              "mask": "spark",
+              "op": "lerp",
+              "to": [
+                255,
+                255,
+                255
+              ],
+              "t": 0.2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "oracle_screen",
+      "state": "screen",
+      "verdict": "animate",
+      "concept": "dull acid-green half-lit glass: slow scanline roll top\u2192mid\u2192low, then a brief dark thinking-flicker",
+      "frames": 4,
+      "delays": [
+        0.48,
+        0.42,
+        0.42,
+        0.14
+      ],
+      "masks": {
+        "glass": {
+          "letters": [
+            "a"
+          ]
+        },
+        "scan_hi": {
+          "letters": [
+            "a"
+          ],
+          "region": [
+            4,
+            11,
+            27,
+            11
+          ]
+        },
+        "scan_mid": {
+          "letters": [
+            "a"
+          ],
+          "region": [
+            4,
+            15,
+            27,
+            15
+          ]
+        },
+        "scan_lo": {
+          "letters": [
+            "a"
+          ],
+          "region": [
+            4,
+            19,
+            27,
+            19
+          ]
+        },
+        "bezel_inner": {
+          "letters": [
+            "d"
+          ],
+          "region": [
+            3,
+            8,
+            28,
+            23
+          ]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {
+              "mask": "glass",
+              "op": "lerp",
+              "to": [
+                80,
+                140,
+                60
+              ],
+              "t": 0.28
+            },
+            {
+              "mask": "glass",
+              "op": "brightness",
+              "factor": 1.06
+            },
+            {
+              "mask": "scan_hi",
+              "op": "brightness",
+              "factor": 1.35
+            },
+            {
+              "mask": "scan_hi",
+              "op": "lerp",
+              "to": [
+                140,
+                200,
+                90
+              ],
+              "t": 0.2
+            },
+            {
+              "mask": "bezel_inner",
+              "op": "brightness",
+              "factor": 1.04
+            }
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {
+              "mask": "glass",
+              "op": "lerp",
+              "to": [
+                80,
+                140,
+                60
+              ],
+              "t": 0.24
+            },
+            {
+              "mask": "glass",
+              "op": "brightness",
+              "factor": 1.04
+            },
+            {
+              "mask": "scan_mid",
+              "op": "brightness",
+              "factor": 1.32
+            },
+            {
+              "mask": "scan_mid",
+              "op": "lerp",
+              "to": [
+                140,
+                200,
+                90
+              ],
+              "t": 0.18
+            }
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {
+              "mask": "glass",
+              "op": "lerp",
+              "to": [
+                60,
+                100,
+                45
+              ],
+              "t": 0.18
+            },
+            {
+              "mask": "glass",
+              "op": "brightness",
+              "factor": 0.78
+            },
+            {
+              "mask": "scan_lo",
+              "op": "brightness",
+              "factor": 0.9
+            },
+            {
+              "mask": "bezel_inner",
+              "op": "brightness",
+              "factor": 0.94
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

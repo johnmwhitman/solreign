@@ -1,0 +1,68 @@
+[
+ {
+  "asset": "handdrilldiamond",
+  "state": "handdrill",
+  "prompt": "a hand-held sci-fi power drill tool pointing right, grey and silver metal body, a violet-purple cylindrical grip section in the middle, black chuck, glowing bright cyan diamond-tipped drill bit protruding forward",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "nanotrasen",
+  "state": "icon",
+  "prompt": "a shield-shaped navy blue balloon with a bold white letter N logo centered on it, thin grey curly string hanging below",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "pondering_orb",
+  "state": "icon",
+  "prompt": "a small round glowing pale cyan-blue orb with a soft light aura, floating, simple magical sphere",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "foam_crossbow",
+  "state": "icon",
+  "prompt": "a compact grey toy crossbow with a black stock, a light blue foam-tipped dart bolt loaded across the top",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "energy_crossbow",
+  "state": "icon",
+  "prompt": "a compact grey sci-fi crossbow with a black body and a glowing green energy bowstring",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "cult_halberd",
+  "state": "icon",
+  "prompt": "a polearm halberd held diagonally, tan bone-colored haft wrapped with red cloth at the grip, dark reddish curved axe blade at the top",
+  "key": "cyan",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ }
+]

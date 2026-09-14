@@ -1,0 +1,81 @@
+# Solreign onboarding signage — 6 wall signs guiding new players through arrivals, the canteen,
+# the zoo wing, the Contracts Board, ahelp, and the Ledger (Corporate Standing). Corporate-HR
+# voice, PG throughout — continuity with Locale/en-US/_solreign/{corporate,contracts,season-ledger}.ftl
+# (e.g. "Compliance is its own reward." is the Contracts Board's own tagline, reused here on purpose).
+#
+# Reuses the upstream blank-plaque sprite (Structures/Wallmounts/signs.rsi, state "medium_blank" —
+# see SignBlankMed in Resources/Prototypes/Entities/Structures/Wallmounts/Signs/signs.yml). Same
+# idiom as this fork's atmos_plaque.yml: one shared backdrop, distinct name/description per sign.
+# Flavor text is authored inline on Name/Description, matching lore_papers.yml and
+# contracts_infrastructure.yml — that's how EntityLocData falls back (SetName/SetDesc) when no
+# `ent-<id>` Loc override exists, so no signage-specific Loc file is needed here. See
+# Locale/en-US/_solreign/first-shift.ftl for the one Loc string this wave *does* add (the
+# guidebook entry's required LocId name).
+#
+# NO map placement here — Wave 9 owns Resources/Maps/_Solreign/solreign_oasis.yml and decides
+# where (and whether) each of these gets bolted to a wall.
+
+- type: entity
+  parent: BaseSign
+  id: SolreignSignageBase
+  abstract: true
+  suffix: solreign, signage
+  components:
+  - type: Sprite
+    state: medium_blank
+  - type: PointLight
+    enabled: true
+    radius: 3.0
+    energy: 2.5
+    color: "#9acd32"
+  - type: LightBehaviour
+    behaviours:
+      - !type:FadeBehaviour
+        id: radiating
+        maxDuration: 3.0
+        startValue: 2.5
+        endValue: 1.5
+        isLooped: true
+        reverseWhenFinished: true
+  - type: AmbientSound
+    enabled: true
+    volume: -5
+    range: 5
+    sound:
+      path: /Audio/Effects/Weather/wind_2_1.ogg
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignArrivalsWelcome
+  name: arrivals welcome sign
+  description: NEW ASSET? Press F1 for HR. Say NEW in OOC. Solreign thanks you for choosing us over unemployment.
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignCanteen
+  name: canteen notice
+  description: SOLREIGN CANTEEN — Nutrition Compliance Zone. Meals are complimentary; enthusiasm is mandatory. Return trays to the belt. The belt does not judge you, but the belt is always watching.
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignZooWarning
+  name: zoo wing warning sign
+  description: LIVE SPECIMEN WING AHEAD. Do not feed, provoke, tap the glass, or attempt to unionize with the exhibits. Solreign is not liable for bites, stings, or unsolicited performance reviews from non-human staff.
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignContractsHowTo
+  name: work order board instructions
+  description: HOW TO EARN YOUR KEEP. Click the Contracts Board to browse open work orders; alt-click still works for assets who prefer paperwork the hard way. Complete the deliverable, drop it in the fulfillment dropbox, and watch your Standing grow. Compliance is its own reward.
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignAhelpReminder
+  name: admin help reminder sign
+  description: TROUBLE ON THE FLOOR? Press F1 to open an admin help ticket — real humans (mostly) read these. Please do not use OOC for emergencies; the Company cannot act on things it did not officially hear.
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignLedgerExplainer
+  name: ledger explainer sign
+  description: WHAT IS THE LEDGER? Every completed contract adds Corporate Standing to your permanent record. Standing sets your rank and title for the season. Nobody has ever been fired for having too much Standing. Nobody has been asked, either.

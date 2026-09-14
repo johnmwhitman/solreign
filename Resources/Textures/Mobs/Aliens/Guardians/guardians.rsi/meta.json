@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Solreign (AI-generated with MiniMax image-01, human-reviewed) -- 4 creature families (magic, tech, miner, holoclown), 1 front (S) + 1 profile (E) pose generated and hand-curated per family; north derived by darkening/desaturating the front pose, west by mirroring the profile pose (matching the ground truth's own near-identical S/N and mirrored E/W pairs); animated body/overlay frames (miner_base pulse, holoclown_flare twinkle) built procedurally in code. Replaces the /tg/station-derived CC-BY-NC-SA-3.0 original. SR-W-084 production batch 3.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "magic",
+      "directions": 4
+    },
+    {
+      "name": "tech",
+      "directions": 4
+    },
+    {
+      "name": "miner",
+      "directions": 4
+    },
+    {
+      "name": "magic_flare",
+      "directions": 4
+    },
+    {
+      "name": "magic_base",
+      "directions": 4
+    },
+    {
+      "name": "holoclown",
+      "directions": 4
+    },
+    {
+      "name": "holoclown_base",
+      "directions": 4
+    },
+    {
+      "name": "holoclown_flare",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "miner_flare",
+      "directions": 4
+    },
+    {
+      "name": "miner_base",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "tech_flare",
+      "directions": 4
+    },
+    {
+      "name": "tech_base",
+      "directions": 4
+    }
+  ]
+}

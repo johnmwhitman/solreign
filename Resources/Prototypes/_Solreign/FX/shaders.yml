@@ -1,0 +1,70 @@
+# Solreign signature FX shaders.
+#
+# SolreignAcidBorder backs Content.Client/_Solreign/FX/SolreignAcidBorderOverlay.cs, triggered by
+# SolreignScreenFxSystem in reaction to Content.Shared._Solreign.FX.SolreignScreenFxEvent.
+#
+# SolreignAcidTint is used by Resources/Prototypes/_Solreign/parallax.yml to recolor stock parallax
+# art acid-green without any new texture assets.
+#
+# FX Language v1 W3 additions below (docs/specs/FX-LANGUAGE-V1-SPEC-2026-07-16.md §8 W3 file
+# boundary): each backs one new Content.Client/_Solreign/FX overlay class, each instanced UNIQUE
+# per active pooled slot (never the shared cached Instance()) so concurrent activations never
+# fight over one shader's uniform state — same "InstanceUnique(), not Instance()" rule
+# SolreignAcidBorderOverlay's own doc comment already established.
+
+- type: shader
+  id: SolreignAcidBorder
+  kind: source
+  path: "/Textures/Shaders/_Solreign/acid_screen_border.swsl"
+  params:
+    borderColor: "#39FF14"
+    borderSize: 30.0
+
+- type: shader
+  id: SolreignAcidTint
+  kind: source
+  path: "/Textures/Shaders/_Solreign/acid_tint.swsl"
+  params:
+    tint: "#59FF40"
+
+# `electrical` primitive's world-space arc/crackle distortion (Content.Client._Solreign.FX.SolreignFxArcOverlay).
+- type: shader
+  id: SolreignFxArcDistortion
+  kind: source
+  path: "/Textures/Shaders/_Solreign/arc_distortion.swsl"
+  params:
+    arcColor: "#FFE23B"
+    arcIntensity: 1.0
+
+# `cast_ring` primitive's entity-anchored windup telegraph ring (Content.Client._Solreign.FX.SolreignFxCastRingOverlay).
+- type: shader
+  id: SolreignFxCastRing
+  kind: source
+  path: "/Textures/Shaders/_Solreign/cast_ring.swsl"
+  params:
+    ringColor: "#39FF14"
+    fillProgress: 0.0
+    pulseEnabled: 1.0
+
+# `smoke` primitive's slow-alpha-decay billow tint (applied to the pooled Effects/chemsmoke.rsi
+# sprite layer, same multiply-tint family as SolreignAcidTint but with a time-driven decay curve).
+- type: shader
+  id: SolreignFxSmokeFog
+  kind: source
+  path: "/Textures/Shaders/_Solreign/smoke_fog.swsl"
+  params:
+    tint: "#D8D8D8"
+    progress: 0.0
+
+# `transformation` primitive's actor-only screen sting (spec §4's profile table, full profile
+# only) — reuses acid_screen_border.swsl's existing tunable-border idiom with an INDEPENDENT
+# shader id/color from SolreignAcidBorder so a transformation sting never gets visually confused
+# with (or shares mutable shader state with) the unrelated Corporate Ladder acid-green events that
+# already use SolreignAcidBorder — zero new shader source needed.
+- type: shader
+  id: SolreignFxTransformationSting
+  kind: source
+  path: "/Textures/Shaders/_Solreign/acid_screen_border.swsl"
+  params:
+    borderColor: "#B23BFF"
+    borderSize: 24.0

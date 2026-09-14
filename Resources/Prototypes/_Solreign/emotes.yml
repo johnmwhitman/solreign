@@ -1,0 +1,36 @@
+# SOLREIGN social cheap-adds (council memo docs/council/2026-07-16-design-magnetism.md, item 5):
+# the one-key greet/thanks social verb a newcomer can use from the emotes RADIAL MENU before they
+# ever learn chat syntax. Chen's chirp.
+#
+# Why a NEW emote instead of the vanilla `Chirp`: the vanilla prototype is `available: false` and
+# species-gated (nymph/diona kit, with per-species emote-sound wiring) — flipping it on for
+# everyone would edit a vanilla file (additive-only law forbids it). This one is whitelisted to
+# Vocal like any general vocal emote. It is deliberately SILENT: the lane's audio rail allows only
+# existing CC0 _Solreign sounds or none, and no qualifying sound exists (the _Solreign pack is
+# in-house CC-BY-SA music/voice, the vanilla nymph chirp is CC-BY-SA ParadiseSS13) — so: none.
+#
+# Chat triggers: vanilla Chirp owns the words chirp/chirps/chirped/chirping (trigger words must be
+# unique across all emote prototypes), so this emote's triggers are distinct phrases. The radial
+# menu is the primary surface by design — the whole point is a verb that needs no typing.
+#
+# No dedicated default keybind: emotes have no per-emote key surface in this fork, and claiming a
+# fresh default key risks collisions with existing binds — menu-only, per the lane's rails.
+# Icon reuses the existing vanilla chirp texture (no new art).
+
+- type: emote
+  id: SolreignChirp
+  name: chat-emote-name-solreign-chirp
+  category: Vocal
+  icon: Interface/Emotes/chirp.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - SiliconEmotes
+  chatMessages: ["chat-emote-msg-solreign-chirp"]
+  chatTriggers:
+    - chirps hello
+    - chirps a greeting
+    - chirps thanks
+    - chirps cheerfully

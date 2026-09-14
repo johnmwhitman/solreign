@@ -1,0 +1,212 @@
+# Solreign Meridian identity pack — the research-sprawl station's bespoke content, laid on top of
+# the untouched upstream Marathon grid (Resources/Maps/_Solreign/solreign_meridian.yml — every new
+# entity there is an ADDITION at a fresh uid, no upstream tile or entity touched). See
+# docs/specs/2026-07-11-meridian-graft.md for the room census + full placement plan this was built
+# from, and Resources/Prototypes/Maps/_Solreign/solreign_meridian.yml for the chassis-pick writeup.
+#
+# Contents of this file:
+#   * SolreignMeridianSpecimenZero — the zoo campus's containment-arena centerpiece (passive display
+#                                    mob, same "won't throw the first punch" idiom as
+#                                    heavenzone_props.yml's SolreignHeavenGuardian). Renamed from
+#                                    the collided `SolreignSpecimenZero` (Wave 16 verifier pass,
+#                                    2026-07-12) — that id was already taken by the unrelated
+#                                    SolreignSpecimenZeroRule GameRule miniboss prototype in
+#                                    GameRules/minibosses.yml; YAMLLinter's dupe-ID check caught it.
+#   * SolreignMeridianShowpiece   — the "one showpiece" secret (docs/specs/2026-07-11-showpiece-
+#                                    placement.md's doctrine: plain BaseItem reskin, no mechanics,
+#                                    never-announce). Deliberately a NEW bespoke item, not a reuse
+#                                    of any of the 6 dormant weapons that doc's own plan already
+#                                    placed on Oasis (grep-verified: EnergyKatana/CaneSheathFilled/
+#                                    HyperEutacticBlade/UnholyHalberd/EldritchBlade/
+#                                    EnergySwordDouble all already appear in solreign_oasis.yml) —
+#                                    same idiom Perihelion used for its own showpiece
+#                                    (SolreignPerihelionCoronaCrown, perihelion_identity.yml).
+#   * SolreignMeridianMemo{1-4}   — 4 extra Auditor's-Memo-style papers, explicitly a continuation
+#                                    of the Oasis lore trail (lore_papers.yml's 8-memo trail +
+#                                    vault), NOT a renumbering of it — Meridian's memos are their
+#                                    own short coda, cross-referencing the original trail rather
+#                                    than replacing it. Locale: Locale/en-US/_Solreign/meridian-
+#                                    lore.ftl.
+#   * SolreignMeridianOldLabCoat  — secret #1: a hidden maintenance-shrine-style curio (Perihelion's
+#                                    "melted maintenance shrine" idiom), Meridian-flavored.
+#   * SolreignPaperSpecimenZeroLog — secret #2: a hidden field-log note near the containment arena.
+#   * SolreignMeridianVaultShard  — secret #3: a quiet cosmetic curio in the planetarium dome.
+#   * Signage: SolreignSignMeridianZoo, SolreignSignPlanetariumDome, SolreignSignSpecimenZero.
+#
+# All 4 secrets + the showpiece obey the never-announce rule (showpiece-placement.md §1): no
+# AnnounceOnUse, no comms ping, no admin alert on pickup/discovery — quiet finds only.
+
+# ──────────────────────────────────────────────────────────────────────────
+# SPECIMEN ZERO — zoo campus containment-arena centerpiece
+# ──────────────────────────────────────────────────────────────────────────
+# Base: MobGorilla (Entities/Mobs/NPCs/animals.yml) — the biggest upstream animal silhouette that
+# already ships the exact "won't throw the first punch, will finish it" idiom this centerpiece
+# needs (NPCRetaliation + FactionException + NpcFactionMember: [Passive], stacked on a
+# SimpleHostileCompound HTN root — verified in MobGorilla's own definition, the SAME primitive
+# combination heavenzone_props.yml's SolreignHeavenGuardian and elemental.yml's
+# MobUraniumCrab/MobBananiumCrab build from scratch). Reskinning the gorilla directly (rather than
+# assembling a fresh mob from base components) means every stat/behavior below is inherited from a
+# real, already-working upstream mob — only Sprite (full redefinition, RT entity inheritance
+# REPLACES a same-typed component rather than merging it, confirmed by zoo_fauna.yml's own
+# "replaces, not merges" comments on its Tag overrides), PointLight, Tag, description, and name are
+# new. Kept out of the hostile-xeno-body cut list entirely (docs/specs/2026-07-11-map-graft-plan.md
+# §2's kid-safe/PG doctrine for the zoo) — this is reskinned wildlife, not reskinned antag content.
+- type: entity
+  name: "specimen zero"
+  parent: MobGorilla
+  id: SolreignMeridianSpecimenZero
+  suffix: solreign, meridian, zoo centerpiece
+  description: The placard reads GENUS UNCLASSIFIED, HABITAT UNKNOWN, ACQUIRED STARDATE REDACTED. It is bigger than the enclosure paperwork admits, and it is watching you read this.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: crawling
+      sprite: Mobs/Animals/_Solreign/meridian_specimen_zero.rsi
+    # Solreign-original sprite, CC0-1.0; native palette is already acid-green.
+  - type: PointLight
+    radius: 2.5
+    energy: 1.3
+    color: "#7cf64b"
+  - type: Tag
+    tags:
+    - SolreignZooExhibit
+
+# ──────────────────────────────────────────────────────────────────────────
+# SHOWPIECE — "the one showpiece" secret (never-announce rule applies)
+# ──────────────────────────────────────────────────────────────────────────
+# Plain BaseItem (NOT parented off ArtifactFragment — that carries a live XenoArtifact-adjacent
+# RandomSprite component, which would fight a fixed single-state override), reusing one static
+# state from the existing upstream artifact-fragment art
+# (Objects/Specific/Xenoarchaeology/artifact_fragments.rsi, state "ancientball1" —
+# grep-verified against item_xenoartifacts.yml's own ArtifactFragment entity) as an "inert curio"
+# read, tinted, no mechanical behavior — same doctrine as SolreignPerihelionCoronaCrown
+# (perihelion_identity.yml). No XenoArtifact/artifact-analyzer component of any kind — pure
+# fashion/lore trinket.
+- type: entity
+  parent: BaseItem
+  id: SolreignMeridianShowpiece
+  name: "the null result"
+  suffix: solreign, meridian, showpiece, secret
+  description: A sealed sample vial, empty, labeled in three different handwritings over three different decades. Every label says the same thing — "INCONCLUSIVE. TRY AGAIN." — and every attempt after the first was clearly a lie.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Xenoarchaeology/artifact_fragments.rsi
+    state: ancientball1
+    color: "#c8f7d2"
+  - type: Item
+    size: Small
+
+# ──────────────────────────────────────────────────────────────────────────
+# 4 EXTRA MEMO PAPERS — "the trail continues on Meridian"
+# ──────────────────────────────────────────────────────────────────────────
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignMeridianMemo1
+  name: "auditor's memo — addendum, Meridian"
+  suffix: solreign, meridian, lore
+  description: A memo on Meridian letterhead, same acid-green ink, addressed to no one in particular.
+  components:
+  - type: Paper
+    content: solreign-lore-meridian-memo-1
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignMeridianMemo2
+  name: "auditor's memo — addendum, Meridian"
+  suffix: solreign, meridian, lore
+  description: The letterhead is Meridian's, but the numbering scheme is unmistakably the Oasis auditor's own hand.
+  components:
+  - type: Paper
+    content: solreign-lore-meridian-memo-2
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignMeridianMemo3
+  name: "auditor's memo — addendum, Meridian"
+  suffix: solreign, meridian, lore
+  description: Someone crossed out "Oasis" and wrote "Meridian" over it, then crossed that out too.
+  components:
+  - type: Paper
+    content: solreign-lore-meridian-memo-3
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignMeridianMemo4
+  name: "auditor's memo — addendum, Meridian"
+  suffix: solreign, meridian, lore
+  description: The final addendum. The ink is fresh. The trail, evidently, was never finished.
+  components:
+  - type: Paper
+    content: solreign-lore-meridian-memo-4
+
+# ──────────────────────────────────────────────────────────────────────────
+# SECRET #1 — hidden maintenance curio (Perihelion "melted shrine" idiom, Meridian-flavored)
+# ──────────────────────────────────────────────────────────────────────────
+# Reuses an existing upstream decorative statue prototype verbatim (same reuse Perihelion made of
+# StatueIronsandTall) — a lab-coated researcher effigy left behind in deep maintenance.
+- type: entity
+  parent: StatueIronsandTall
+  id: SolreignMeridianOldLabCoat
+  suffix: solreign, meridian, secret
+  name: forgotten labcoat effigy
+  description: A lab coat, stiffened with age, draped over a maintenance strut in a shape that is almost, but not quite, a person standing still.
+
+# ──────────────────────────────────────────────────────────────────────────
+# SECRET #2 — hidden field-log note near the containment arena
+# ──────────────────────────────────────────────────────────────────────────
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperSpecimenZeroLog
+  name: "field log — Specimen Zero, entry 1"
+  suffix: solreign, meridian, secret
+  description: A single loose page, entry 1 of an otherwise-missing log. There is no entry 2 anywhere on file.
+  components:
+  - type: Paper
+    content: solreign-lore-specimen-zero-log
+
+# ──────────────────────────────────────────────────────────────────────────
+# SECRET #3 — quiet cosmetic curio in the planetarium dome
+# ──────────────────────────────────────────────────────────────────────────
+# Plain cosmetic reflavor of TreasureCoinGold's sibling silver variant, no mechanics — a keepsake,
+# not currency.
+- type: entity
+  parent: TreasureCoinGold
+  id: SolreignMeridianVaultShard
+  suffix: solreign, meridian, secret
+  name: fused star-glass shard
+  description: A teardrop of glass, fused by something far hotter than any Meridian furnace gets. It catches the dome light and holds it for a moment too long.
+
+# ──────────────────────────────────────────────────────────────────────────
+# SIGNAGE
+# ──────────────────────────────────────────────────────────────────────────
+- type: entity
+  parent: BaseSign
+  id: SolreignSignMeridianZoo
+  suffix: solreign, meridian
+  name: Meridian zoo campus notice
+  description: "\"MERIDIAN LIVE SPECIMEN CAMPUS — 13 HABITATS. PLEASE DO NOT TAP THE GLASS. (Specimen Zero can, in fact, tell.)\""
+  components:
+  - type: Sprite
+    state: xenobio
+
+- type: entity
+  parent: BaseSign
+  id: SolreignSignPlanetariumDome
+  suffix: solreign, meridian
+  name: planetarium dome notice
+  description: "\"OBSERVATION DOME — QUIET HOURS ENFORCED BY GENTLE SOCIAL PRESSURE ONLY.\""
+  components:
+  - type: Sprite
+    state: rnd
+
+- type: entity
+  parent: BaseSign
+  id: SolreignSignSpecimenZero
+  suffix: solreign, meridian
+  name: Specimen Zero containment placard
+  description: "\"CONTAINMENT ARENA — SPECIMEN ZERO. REINFORCED GLASS RATED FOR SPECIMEN ZERO. (Rated by whom is redacted.)\""
+  components:
+  - type: Sprite
+    state: danger

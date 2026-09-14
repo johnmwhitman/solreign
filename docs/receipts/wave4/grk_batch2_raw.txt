@@ -1,0 +1,156 @@
+Designing tint-safe pulse, dual-rhythm flashlight glow/LED blink, and eyes flicker from the pixel maps only.```json
+{
+  "sprites": [
+    {
+      "rsi": "glowstick_lit",
+      "state": "glowstick_lit",
+      "verdict": "animate",
+      "concept": "Chemlight liquid breathe — grey body swells toward white then eases under base; tip glints on the peak (tint-safe).",
+      "frames": 4,
+      "delays": [0.55, 0.32, 0.48, 0.28],
+      "masks": {
+        "body": {
+          "letters": ["a", "b"],
+          "region": [9, 10, 21, 22]
+        },
+        "hot": {
+          "letters": ["d"],
+          "region": [9, 10, 21, 22]
+        },
+        "core": {
+          "letters": ["c"],
+          "region": [9, 10, 21, 22]
+        },
+        "tip": {
+          "pixels": [[11, 22]]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {"mask": "body", "op": "brightness", "factor": 1.1},
+            {"mask": "hot", "op": "brightness", "factor": 1.14},
+            {"mask": "hot", "op": "lerp", "to": [255, 255, 255], "t": 0.12}
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {"mask": "body", "op": "brightness", "factor": 1.18},
+            {"mask": "body", "op": "lerp", "to": [255, 255, 255], "t": 0.14},
+            {"mask": "hot", "op": "brightness", "factor": 1.22},
+            {"mask": "hot", "op": "lerp", "to": [255, 255, 255], "t": 0.28},
+            {"mask": "tip", "op": "brightness", "factor": 1.35},
+            {"mask": "tip", "op": "lerp", "to": [255, 255, 255], "t": 0.2}
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {"mask": "body", "op": "brightness", "factor": 0.94},
+            {"mask": "hot", "op": "brightness", "factor": 0.96},
+            {"mask": "core", "op": "brightness", "factor": 0.92},
+            {"mask": "tip", "op": "brightness", "factor": 0.88}
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "flashlight_overlay",
+      "state": "flashlight-overlay",
+      "verdict": "animate",
+      "concept": "Warm lens cone breathes; green status LED blinks off briefly on a shorter independent rhythm.",
+      "frames": 4,
+      "delays": [0.5, 0.35, 0.12, 0.4],
+      "masks": {
+        "glow": {
+          "letters": ["a", "b", "c", "d", "e"],
+          "region": [7, 14, 12, 20]
+        },
+        "core": {
+          "letters": ["b", "c"],
+          "region": [7, 16, 12, 18]
+        },
+        "rim": {
+          "letters": ["a", "d", "e"],
+          "region": [7, 14, 12, 20]
+        },
+        "led": {
+          "letters": ["f"],
+          "region": [21, 16, 22, 16]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {"mask": "glow", "op": "brightness", "factor": 1.1},
+            {"mask": "core", "op": "lerp", "to": [255, 255, 255], "t": 0.14},
+            {"mask": "rim", "op": "lerp", "to": [255, 240, 80], "t": 0.08}
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {"mask": "glow", "op": "brightness", "factor": 1.16},
+            {"mask": "core", "op": "brightness", "factor": 1.12},
+            {"mask": "core", "op": "lerp", "to": [255, 255, 255], "t": 0.22},
+            {"mask": "led", "op": "alpha", "value": 0}
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {"mask": "glow", "op": "brightness", "factor": 1.05},
+            {"mask": "rim", "op": "brightness", "factor": 1.04},
+            {"mask": "led", "op": "brightness", "factor": 1.2}
+          ]
+        }
+      ]
+    },
+    {
+      "rsi": "carp_statue_eyes",
+      "state": "eyes_unshaded",
+      "verdict": "animate",
+      "concept": "Alien guardian stare: long hold, quick dim-blink shut, pale flare reopen.",
+      "frames": 4,
+      "delays": [0.75, 0.12, 0.1, 0.35],
+      "masks": {
+        "eyes": {
+          "letters": ["a"]
+        },
+        "upper": {
+          "pixels": [[12, 5], [18, 5]]
+        },
+        "lower": {
+          "pixels": [[10, 7], [20, 7]]
+        }
+      },
+      "frame_ops": [
+        {
+          "frame": 1,
+          "ops": [
+            {"mask": "upper", "op": "brightness", "factor": 0.55},
+            {"mask": "lower", "op": "brightness", "factor": 0.72}
+          ]
+        },
+        {
+          "frame": 2,
+          "ops": [
+            {"mask": "eyes", "op": "brightness", "factor": 0.22},
+            {"mask": "eyes", "op": "alpha", "value": 70}
+          ]
+        },
+        {
+          "frame": 3,
+          "ops": [
+            {"mask": "eyes", "op": "brightness", "factor": 1.22},
+            {"mask": "eyes", "op": "lerp", "to": [255, 255, 255], "t": 0.3}
+          ]
+        }
+      ]
+    }
+  ]
+}
+```

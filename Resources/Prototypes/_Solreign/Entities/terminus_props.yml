@@ -1,0 +1,201 @@
+# Solreign Terminus — industrial-titan identity props (SOLREIGN TERMINUS ground rules, maps
+# program). Chassis: upstream Oasis (Resources/Maps/oasis.yml, 204.6K lines — second-largest
+# upstream station chassis after Fland, per this wave's lane-order pick: lane 1 = Fland (largest),
+# lane 2 (this one) = Oasis (second), lane 3 = Box (third)). Grid copy:
+# Resources/Maps/_Solreign/solreign_terminus.yml. Prototype:
+# Resources/Prototypes/Maps/_Solreign/solreign_terminus.yml.
+#
+# This file holds every NEW entity Terminus needs that doesn't already exist elsewhere in the
+# Solreign tree: signage (parented to the existing SolreignSignageBase idiom, signage.yml), a
+# cosmetic RC-car charging dock, and three "monster nest" TimedSpawner markers (same recurring-spawn
+# idiom as Entities/Markers/hellzone_spawners.yml, different mob set / different fiction — an
+# industrial maintenance-ring infestation, not a hellzone). Everything Terminus reuses wholesale
+# (SolreignContractsBoard/SolreignFulfillmentDropbox, SolreignGoKart/SolreignGoKartCheckpoint/
+# boost-mud props, SolreignMobRcCameraCar, SolreignMobAuditorPrime, WeaponPulseRifle) is placed
+# directly in the grid file — no new prototype needed for those, see that file's own header comment
+# for the full room-by-room plan and anchor coordinates (DefaultStationBeacon-verified, same
+# grep-anchor discipline as docs/specs/2026-07-11-map-graft-plan.md — NOT walked in the mapping
+# editor, no dotnet build this session besides the one GameMapsLoadableTest exception).
+#
+# NO AGPL: every sprite reused below is upstream CC-BY-SA-3.0 (checked each .rsi's meta.json before
+# reuse) or this fork's own existing acid-green signage backdrop.
+
+# ── Signage (parent: SolreignSignageBase, Entities/signage.yml — same corporate-HR-voice idiom,
+#    inline name/description, no Loc file needed for these per that file's own comment) ──────────────
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignSalvageRaidRoster
+  name: salvage-raid roster board
+  description: GROUP CONTRACT STAGING. Register your raid party at the Contracts Board before departure — objectives and payout scale to headcount at accept time. Solreign is not responsible for crew members who wander off mid-raid; their share is not redistributed, it is simply gone.
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignGrandPrixWelcome
+  name: Solreign Grand Prix welcome sign
+  description: SOLREIGN RECREATION DIVISION presents THE GRAND PRIX. Pit lane forward, spectator stand to your left. Karts are corporate property; laps are not. Buckle in, floor it, and remember — Solreign Legal has already pre-forgiven this.
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignReactorHallWarning
+  name: disused reactor hall warning sign
+  description: DECOMMISSIONED ANTIMATTER CHAMBER — SUBLEVEL ACCESS DISCOURAGED. Facilities confirms this wing has been fully powered down since the singularity retrofit. Facilities has been wrong before.
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignMaintenanceRingHazard
+  name: deep maintenance ring hazard sign
+  description: SUBLEVEL H MAINTENANCE RING — UNCONFIRMED FAUNA REPORTS. Salvage crews report scratching in the walls. Facilities has logged eleven separate tickets and closed all eleven as "no action needed."
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignRcCourierNetwork
+  name: RC courier network sign
+  description: CUSTOMER VISIBILITY DIVISION — INTERDEPARTMENT COURIER NETWORK. A camera car may be idling nearby. Do not startle the camera car. The camera car has feelings, allegedly.
+
+# ── RC-car courier charging dock (cosmetic only — SolreignMobRcCameraCar carries no Battery
+#    component, see Entities/rc_car.yml, so this is flavor/staging dressing for the courier tunnels,
+#    not a functional Charger. Sprite: upstream borg_charger.rsi, CC-BY-SA-3.0, tinted acid-green —
+#    same "reuse + tint, TODO(SOLREIGN-ART) for a dedicated sprite" idiom as every other placeholder
+#    reskin in this tree, e.g. Entities/_Solreign/GameRules/minibosses.yml's Auditor Prime.) ─────────
+
+- type: entity
+  id: SolreignRcCarCharger
+  name: solreign rc courier dock
+  suffix: solreign, terminus
+  description: "A wall-mounted docking cradle for the Customer Visibility Division's camera cars. TODO(SOLREIGN-ART): dedicated courier-dock sprite; placeholder reuses the cyborg charger silhouette."
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Structures/Power/solreign_terminus_courier_dock.rsi
+    noRot: true
+    layers:
+    - state: borgcharger-u1
+      color: "#9dfd39"
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        hard: false
+        mask:
+        - ItemMask
+        layer:
+        - ItemMask
+  - type: PointLight
+    radius: 1.5
+    energy: 1
+    color: "#9dfd39"
+
+# ── Monster nest — Sublevel H maintenance ring, deepest ring on the Terminus chassis (placed near
+#    the Disposals beacon, DefaultStationBeaconDisposals -55.5,-28.5 — the map's own trash-processing
+#    dead end, farthest interior room from Arrivals). Same recurring TimedSpawner idiom as
+#    Entities/Markers/hellzone_spawners.yml's Sublevel H nest (one-shot ConditionalSpawner markers
+#    for these mobs already exist too, Entities/Markers/Spawners/Mobs/hostile.yml, for a single
+#    map-init encounter — these are the *ongoing* variant, for a nest that keeps producing).
+#    Different mob set from the hellzone nest on purpose (industrial-infestation fiction, not
+#    Doom-zone fiction): MobGiantSpider (Entities/Mobs/NPCs/animals.yml), MobCarp
+#    (Entities/Mobs/NPCs/carp.yml), MobSpiderSpace (Entities/Mobs/NPCs/space.yml) — all existing,
+#    already-live upstream hostile mobs, zero new mob prototypes. Conservative budget, same
+#    discipline as the hellzone spawners' own comment (≤ a handful concurrent): three spawners,
+#    long intervals (100-160s), max 1-2 per pop, so steady-state stays low even with all three
+#    active at once.
+
+- type: entity
+  parent: MarkerBase
+  id: SolreignTerminusNestSpawnerAlpha
+  name: Sublevel H maintenance ring — containment breach (arachnid-class)
+  suffix: solreign, terminus, monster nest
+  description: Facilities insists this corner is "fully compliant."
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: tarantula
+      sprite: Mobs/Animals/spider.rsi
+  - type: TimedSpawner
+    prototypes:
+    - MobGiantSpider
+    chance: 0.6
+    intervalSeconds: 120
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 2
+
+- type: entity
+  parent: MarkerBase
+  id: SolreignTerminusNestSpawnerBeta
+  name: Sublevel H maintenance ring — containment breach (carp-class)
+  suffix: solreign, terminus, monster nest
+  description: Facilities insists this corner is "fully compliant."
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: alive
+      sprite: Mobs/Aliens/Carps/space.rsi
+      color: "#9dfd39"
+  - type: TimedSpawner
+    prototypes:
+    - MobCarp
+    chance: 0.6
+    intervalSeconds: 140
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1
+
+- type: entity
+  parent: MarkerBase
+  id: SolreignTerminusNestSpawnerGamma
+  name: Sublevel H maintenance ring — containment breach (elevated-risk)
+  suffix: solreign, terminus, monster nest
+  description: Facilities insists this corner is "fully compliant."
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: spacespider
+      sprite: Mobs/Animals/spacespider.rsi
+  - type: TimedSpawner
+    prototypes:
+    - MobSpiderSpace
+    chance: 0.4
+    intervalSeconds: 160
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1
+
+# ── Secrets (4 total incl. the showpiece — see Resources/Maps/_Solreign/solreign_terminus.yml's own
+#    header for the full placement table): 3 lore papers below + the WeaponPulseRifle showpiece
+#    placed directly in-map (grid file). Pattern copied from Entities/verdant_lore.yml
+#    (SolreignPaperLoreBase-derived, Paper.content locale key, no map placement baked into the
+#    prototype). Never-announce rule observed: none of these carry AnnounceOnUse or any
+#    system-visible pickup signal — found by foot traffic and rumor only, per
+#    docs/specs/2026-07-11-showpiece-placement.md §1.
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperTerminusLog1
+  name: "Grand Prix inaugural race log"
+  description: A grease-stained scorecard from what looks like the first-ever lap around this track.
+  components:
+  - type: Paper
+    content: solreign-terminus-log-1
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperTerminusLog2
+  name: "salvage crew transmission, partial"
+  description: A hand-copied radio transcript, the handwriting getting worse toward the bottom.
+  components:
+  - type: Paper
+    content: solreign-terminus-log-2
+
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignPaperTerminusLog3
+  name: "antimatter chamber decommission order"
+  description: An official order, stamped and countersigned. Someone added a note in the margin afterward, in different ink.
+  components:
+  - type: Paper
+    content: solreign-terminus-log-3

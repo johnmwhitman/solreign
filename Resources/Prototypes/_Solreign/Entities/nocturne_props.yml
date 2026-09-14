@@ -1,0 +1,93 @@
+# Solreign Nocturne (Station 2, noir night-shift) — identity props for the
+# map graft in Resources/Maps/_Solreign/solreign_nocturne.yml.
+#
+# Contents:
+#   * SolreignNocturneDimBaseline — the "DIM baseline" light. Reach's
+#     Poweredlight/PoweredlightLED/PoweredlightSodium instances were merged
+#     onto this one prototype (30 of 41 kept, 11 removed outright — see the
+#     map file's own header). Parented off Poweredlight so the tube-light
+#     sprite/behavior/power draw is unchanged; only the PointLight is retuned
+#     dimmer and desaturated toward a cool slate tone.
+#   * SolreignNocturneVioletNeon — the "pools of neon" deep-violet half of
+#     the accent lighting (acid-green pairs with the existing upstream
+#     AlwaysPoweredlightGreen — Resources/Prototypes/Entities/Structures/
+#     Lighting/base_lighting.yml — which is reused as-is, not duplicated
+#     here, since it already matches the Solreign acid-green brand color).
+#     Always-powered (no APC wiring dependency) since these are hand-placed
+#     accent props, not part of the station's real power grid.
+#   * SolreignSignNocturneBar / SolreignSignNocturneSpeakeasy /
+#     SolreignSignNocturneShowpiece / SolreignSignNocturneHRClosed — noir
+#     signage variants extending signage.yml's SolreignSignageBase idiom
+#     (same reused blank-plaque sprite, flavor authored on Name/Description).
+#   * SolreignNocturneHRLoreMemo — the "closed HR office" secret's lore
+#     paper, parented off lore_papers.yml's SolreignPaperLoreBase. Content
+#     loc key is in Locale/en-US/_solreign/nocturne.ftl (the one new Loc
+#     string this wave adds).
+#
+# NOT touched: Antags/Zones/Werewolf-adjacent paths (Wave 13 in flight there).
+# SolreignVampireCoffin (Antags/vampire.yml) is only *referenced* by prototype
+# id in the map file, never edited here.
+
+# ── Dim baseline light (general lighting, dimmed + desaturated) ────────────
+- type: entity
+  id: SolreignNocturneDimBaseline
+  name: light
+  description: "A light fixture. The tube's been swapped for something dimmer — night-shift protocol."
+  suffix: solreign, nocturne, dim
+  parent: Poweredlight
+  components:
+  - type: PointLight
+    enabled: true
+    radius: 6
+    energy: 0.35
+    softness: 2
+    color: "#3a3f52"
+
+# ── Deep-violet neon accent (always-on, no APC dependency) ─────────────────
+- type: entity
+  id: SolreignNocturneVioletNeon
+  name: violet neon strip
+  description: A thin strip of violet neon tubing. Purely decorative — it hums with its own dim, moody light regardless of the grid.
+  suffix: solreign, nocturne, neon
+  parent: AlwaysPoweredWallLight
+  components:
+  - type: PointLight
+    radius: 6
+    energy: 1.4
+    softness: 1.2
+    color: "#5b1f8f"
+
+# ── Signage (noir variants of signage.yml's SolreignSignageBase) ───────────
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignNocturneBar
+  name: nocturne bar sign
+  description: THE NOCTURNE ROOM. Solreign Nocturne Division — house rules apply. Complaints about the lighting are also, technically, compliments.
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignNocturneSpeakeasy
+  name: unmarked door sign
+  description: (no markings — someone scraped the placard off this one a long time ago)
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignNocturneShowpiece
+  name: maintenance notice
+  description: EQUIPMENT STORAGE — AUTHORIZED PERSONNEL ONLY. (The equipment in question does not, strictly speaking, look like equipment.)
+
+- type: entity
+  parent: SolreignSignageBase
+  id: SolreignSignNocturneHRClosed
+  name: HR office sign
+  description: HUMAN RESOURCES — Nocturne Division. Office hours suspended pending a staffing review. Please take a memo. There are several.
+
+# ── Lore paper — the "closed HR office" secret ─────────────────────────────
+- type: entity
+  parent: SolreignPaperLoreBase
+  id: SolreignNocturneHRLoreMemo
+  name: "HR memorandum"
+  description: A memo left on an empty desk, in an office that was never officially closed.
+  components:
+  - type: Paper
+    content: solreign-nocturne-hr-memo

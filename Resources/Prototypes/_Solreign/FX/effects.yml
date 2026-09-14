@@ -1,0 +1,209 @@
+# FX Language v1 — the 10-id wire allowlist's actual content (docs/specs/FX-LANGUAGE-V1-SPEC-2026-07-16.md
+# §2/§2.2, W3 `fx-primitives-v1`). Every entry here is checked at load time
+# (Content.Shared._Solreign.FX.SolreignFxCuePrototypeValidation) and cross-checked for exact
+# membership + audience-classification parity against the sealed
+# Content.Shared._Solreign.FX.SolreignFxWireAllowlist.V1/AudienceClassificationV1 manifest by
+# Content.Tests._Solreign.FX.SolreignFxEffectsYamlConsistencyTests and
+# Content.IntegrationTests.Tests._Solreign.FX.SolreignFxEffectsPrototypeConsistencyTest.
+#
+# Everything here is DORMANT: no system raises any of these ids yet (W4 is FxCue's first real
+# caller, the changeling arm-blade), and the whole language stays behind solreign.fx.cue_v1 = false.
+#
+# Bounds are provisional engineering defaults (spec §3's own caveat, applied here to the content
+# layer too) — durations are set to bracket Content.Shared._Solreign.FX.SolreignFxCategoryTable's
+# already-shipped (W2) per-category DurationCapSeconds, which is the value that actually governs
+# how long a pooled activation lives; a prototype's own MaxDuration only bounds what a future raiser
+# may REQUEST before that per-category cap clamps it further.
+
+- type: solreignFxCue
+  id: impact_light
+  audienceClassification: Broadcast
+  minIntensity: 0.0
+  maxIntensity: 1.0
+  minScale: 0.5
+  maxScale: 1.5
+  minDuration: 0.1
+  maxDuration: 0.4
+  defaultIntensity: 0.6
+  defaultScale: 1.0
+  defaultDuration: 0.4
+  paletteCount: 4
+  defaultPaletteIndex: 0
+  phaseCount: 1
+  defaultPhaseIndex: 0
+
+- type: solreignFxCue
+  id: impact_heavy
+  audienceClassification: Broadcast
+  minIntensity: 0.0
+  maxIntensity: 1.0
+  minScale: 0.5
+  maxScale: 2.0
+  minDuration: 0.2
+  maxDuration: 0.8
+  defaultIntensity: 0.8
+  defaultScale: 1.0
+  defaultDuration: 0.8
+  paletteCount: 4
+  defaultPaletteIndex: 0
+  phaseCount: 1
+  defaultPhaseIndex: 0
+
+- type: solreignFxCue
+  id: electrical
+  audienceClassification: Broadcast
+  genericVariant: body_shock_generic
+  minIntensity: 0.0
+  maxIntensity: 1.0
+  minScale: 0.5
+  maxScale: 1.5
+  minDuration: 0.2
+  maxDuration: 1.2
+  defaultIntensity: 0.7
+  defaultScale: 1.0
+  defaultDuration: 1.2
+  paletteCount: 3
+  defaultPaletteIndex: 0
+  phaseCount: 2
+  defaultPhaseIndex: 0
+
+- type: solreignFxCue
+  id: dust
+  audienceClassification: Broadcast
+  minIntensity: 0.0
+  maxIntensity: 1.0
+  minScale: 0.5
+  maxScale: 2.0
+  minDuration: 0.5
+  maxDuration: 3.0
+  defaultIntensity: 0.5
+  defaultScale: 1.0
+  defaultDuration: 3.0
+  paletteCount: 3
+  defaultPaletteIndex: 0
+  phaseCount: 1
+  defaultPhaseIndex: 0
+
+- type: solreignFxCue
+  id: smoke
+  audienceClassification: Broadcast
+  minIntensity: 0.0
+  maxIntensity: 1.0
+  minScale: 0.5
+  maxScale: 2.5
+  minDuration: 0.5
+  maxDuration: 4.0
+  defaultIntensity: 0.5
+  defaultScale: 1.0
+  defaultDuration: 4.0
+  paletteCount: 3
+  defaultPaletteIndex: 0
+  phaseCount: 1
+  defaultPhaseIndex: 0
+
+- type: solreignFxCue
+  id: cast_ring
+  audienceClassification: Broadcast
+  genericVariant: body_shock_generic
+  minIntensity: 0.0
+  maxIntensity: 1.0
+  minScale: 0.5
+  maxScale: 2.0
+  minDuration: 0.2
+  maxDuration: 2.5
+  defaultIntensity: 0.7
+  defaultScale: 1.0
+  defaultDuration: 1.5
+  paletteCount: 6
+  defaultPaletteIndex: 0
+  phaseCount: 2
+  defaultPhaseIndex: 0
+
+- type: solreignFxCue
+  id: transformation
+  audienceClassification: DetailOnly
+  requiresRedactedBroadcastVariant: true
+  genericVariant: transformation_generic
+  minIntensity: 0.0
+  maxIntensity: 1.0
+  minScale: 0.5
+  maxScale: 2.0
+  minDuration: 0.2
+  maxDuration: 3.0
+  defaultIntensity: 0.8
+  defaultScale: 1.0
+  defaultDuration: 1.2
+  paletteCount: 4
+  defaultPaletteIndex: 0
+  phaseCount: 2
+  defaultPhaseIndex: 0
+
+# Redacted broadcast cover for `transformation` (spec §2.2, §5.2). Every numeric field a real
+# RaiseSecretRoleCue call ships is scrubbed to THIS prototype's own defaults, never the detail
+# cue's values — so this prototype's palette/phase axes stay a single neutral entry each,
+# deliberately: any per-instance variation here would itself become a side channel (grk #2:
+# "parameter fingerprinting").
+- type: solreignFxCue
+  id: transformation_generic
+  audienceClassification: Broadcast
+  minIntensity: 0.0
+  maxIntensity: 1.0
+  minScale: 0.5
+  maxScale: 2.0
+  minDuration: 0.2
+  maxDuration: 3.0
+  defaultIntensity: 0.5
+  defaultScale: 1.0
+  defaultDuration: 1.2
+  paletteCount: 1
+  defaultPaletteIndex: 0
+  phaseCount: 1
+  defaultPhaseIndex: 0
+
+- type: solreignFxCue
+  id: stamina_break
+  audienceClassification: Broadcast
+  genericVariant: body_shock_generic
+  minIntensity: 0.0
+  maxIntensity: 1.0
+  minScale: 0.5
+  maxScale: 1.5
+  minDuration: 0.2
+  maxDuration: 0.6
+  defaultIntensity: 0.6
+  defaultScale: 1.0
+  defaultDuration: 0.6
+  paletteCount: 2
+  defaultPaletteIndex: 0
+  phaseCount: 1
+  defaultPhaseIndex: 0
+
+# The non-secret "body convulsion/shock" cover id (spec §2.2, grk #2B) — electrocution recovery,
+# stamina-collapse recoveries, and any other secret-role ability that reaches for `electrical`/
+# `cast_ring`/`stamina_break` all share THIS generic broadcast id as their redacted variant, so the
+# redacted vocabulary has multiple innocuous producers (not a size-1 oracle). Real non-secret
+# producers for these moments are a later wave's job (spec §2.2's own "until those producers land,
+# acknowledged as incomplete" caveat) — this worktree only makes the id exist and be well-formed.
+#
+# paletteCount/phaseCount are DELIBERATELY 1 (a single neutral entry), same reasoning as
+# transformation_generic above (grk W3 round-1 review finding #6): body_shock_generic covers THREE
+# secret-role-reachable primitives (electrical/cast_ring/stamina_break), a larger redaction surface
+# than transformation_generic's one — any per-instance palette/phase variation here would let a
+# bystander distinguish which secret ability actually fired by color, exactly the "parameter
+# fingerprinting" grk #2 already flagged for the transformation case.
+- type: solreignFxCue
+  id: body_shock_generic
+  audienceClassification: Broadcast
+  minIntensity: 0.0
+  maxIntensity: 1.0
+  minScale: 0.5
+  maxScale: 1.5
+  minDuration: 0.2
+  maxDuration: 0.6
+  defaultIntensity: 0.5
+  defaultScale: 1.0
+  defaultDuration: 0.6
+  paletteCount: 1
+  defaultPaletteIndex: 0
+  phaseCount: 1
+  defaultPhaseIndex: 0

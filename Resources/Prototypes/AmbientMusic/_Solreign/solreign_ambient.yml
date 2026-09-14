@@ -1,0 +1,62 @@
+# Solreign in-house ambient music. See Resources/Audio/_Solreign/attributions.yml
+# for asset provenance. Ported to the EntityCondition system after upstream
+# refactored ambient music rules (#44696).
+
+# BUGFIX (LJ beta feedback #2, "music starts/stops at random"):
+# Three entries share the same track but each claims a different time slot of a
+# repeating 45s x 3 cycle — exactly one is true at any moment, and which one
+# changes on its own as time passes. This defeats the same-prototype-twice guard.
+- type: ambientMusic
+  id: SolreignLobbyMainA
+  sound:
+    params:
+      volume: -12
+    path: /Audio/_Solreign/lobby_main.ogg
+  conditions:
+  - !type:SolreignTimeSlotCondition
+    slot: 0
+    slotCount: 3
+    slotDuration: 45
+  priority: 1
+
+- type: ambientMusic
+  id: SolreignLobbyMainB
+  sound:
+    params:
+      volume: -12
+    path: /Audio/_Solreign/lobby_main.ogg
+  conditions:
+  - !type:SolreignTimeSlotCondition
+    slot: 1
+    slotCount: 3
+    slotDuration: 45
+  priority: 1
+
+- type: ambientMusic
+  id: SolreignLobbyMainC
+  sound:
+    params:
+      volume: -12
+    path: /Audio/_Solreign/lobby_main.ogg
+  conditions:
+  - !type:SolreignTimeSlotCondition
+    slot: 2
+    slotCount: 3
+    slotDuration: 45
+  priority: 1
+
+# Solreign's flavor of the maintenance-tunnel ambience.
+- type: ambientMusic
+  id: SolreignMaintenanceDepths
+  sound:
+    params:
+      volume: -12
+    path: /Audio/_Solreign/maintenance_depths.ogg
+  conditions:
+  - !type:NearbyTilesPercentCondition
+    ignoreAnchored: true
+    percent: 0.25
+    tiles:
+    - Plating
+    range: 2
+  priority: 3

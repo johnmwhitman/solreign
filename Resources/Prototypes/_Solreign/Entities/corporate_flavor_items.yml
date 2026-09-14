@@ -1,0 +1,126 @@
+# Solreign corporate-flavor cosmetic items — break-room-tier flavor/delight props, same
+# additive idiom as solreign_easter_eggs.yml and contracts_executive_vendor.yml's "six status
+# goods": each item parents a verified existing base prototype and only overrides
+# name/description/suffix (no new sprites, no placeholder-mismatch risk — see the "No sprite
+# override" comments on SolreignExecutiveMug/SolreignComplianceMedal/SolreignExecutiveBell in
+# contracts_executive_vendor.yml, the exact pattern this file follows).
+#
+# Distribution (reachability): contracts_executive_vendor.yml's own comments record a past
+# lesson (BETA-FEEDBACK-01) that items with no vendor/loot-table entry are invisible to
+# players. To avoid repeating that mistake without touching any shared core file, this wave
+# defines a brand-new, ungated "Solreign Break Room Kiosk" vending machine + its own
+# vendingMachineInventory below, both new ids in this new file only.
+# SolreignExecutiveVendor / SolreignExecutiveVendorInventory (contracts_executive_vendor.yml)
+# and every upstream vending machine/inventory prototype are untouched.
+#
+# NO map placement here, same convention as signage.yml/lore_papers.yml — this wave defines
+# the kiosk and its stock; a later mapping wave decides where (and whether) it gets bolted to
+# a wall. Until then the kiosk (and its items) exist in the prototype graph but may not be
+# reachable in a live round — flagged here as a follow-up, not silently assumed solved.
+
+# ---------------------------------------------------------------- flavor items (cosmetic)
+
+- type: entity
+  parent: DrinkMugBlack
+  id: SolreignBreakRoomMug
+  suffix: solreign, flavor
+  name: Solreign break-room mug
+  description: Standard-issue employee drinkware. The acid-green logo is guaranteed to outlast the dishwasher, your shift, and possibly your department.
+  # No sprite override: DrinkMugBlack's existing mug art already reads as "generic office
+  # mug" — no placeholder mismatch to flag (same idiom as SolreignExecutiveMug).
+
+- type: entity
+  parent: PosterLegitObey
+  id: SolreignVoluntaryEnthusiasmPoster
+  suffix: solreign, flavor
+  name: "Voluntary Enthusiasm"
+  description: A poster reminding you that enthusiasm is entirely voluntary, in the same sense that breathing is entirely voluntary.
+  # No sprite override: reuses PosterLegitObey's existing poster9_legit art, which already
+  # reads as generic authoritarian propaganda — a perfect fit, no new texture needed.
+
+- type: entity
+  parent: PosterLegitDoNotQuestion
+  id: SolreignAskNoFollowUpsPoster
+  suffix: solreign, flavor
+  name: "Ask No Follow-Up Questions"
+  description: A poster reminding you that your first question was already one too many.
+  # No sprite override: reuses PosterLegitDoNotQuestion's existing poster16_legit art.
+
+- type: entity
+  parent: ToyRubberDuck
+  id: SolreignComplianceDuck
+  suffix: solreign, flavor
+  name: Solreign compliance duck
+  description: A small rubber duck stamped with the Solreign logo. Squeezing it does not file your grievance, but it feels like it might.
+  # No sprite override: ToyRubberDuck's existing ducky.rsi art needs no reskin, same idiom as
+  # SolreignExecutiveBell/SolreignComplianceMedal above.
+
+- type: entity
+  parent: ToyFigurineHeadOfPersonnel
+  id: SolreignHRFigurine
+  suffix: solreign, flavor
+  name: Solreign HR liaison figurine
+  description: A small figurine of a Solreign HR liaison, permanently mid-smile. It comes pre-loaded with reassurances.
+  # No sprite override: inherits ToyFigurineHeadOfPersonnel's existing "hop" figurine art and
+  # SpeakOnTrigger pack as-is — a bespoke Solreign voice-line pack is a later content wave.
+
+# ---------------------------------------------------------------- distribution: break room kiosk
+
+- type: entity
+  parent: VendingMachine
+  id: SolreignBreakRoomKiosk
+  name: Solreign Break Room Kiosk
+  suffix: solreign, flavor, ungated
+  description: A snack machine that also, inexplicably, sells office supplies. Solreign assures you this is a cost-saving measure, not a warning sign.
+  components:
+  - type: VendingMachine
+    pack: SolreignBreakRoomKioskInventory
+  - type: VendingMachineVisuals
+    ejectState: eject-unshaded
+    denyState: deny-unshaded
+  - type: Sprite
+    # Reuses upstream's snack.rsi cabinet skin (same skin as vanilla VendingMachineSnack /
+    # "Getmore Chocolate Corp") — a generic snack-machine chassis, not a new asset. Layer maps
+    # are required, not cosmetic (see contracts_executive_vendor.yml's note on this): a bare
+    # `sprite:` with no mapped layers logs "Layer with key 'Base' does not exist" every frame.
+    sprite: Structures/Machines/VendingMachines/snack.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: PointLight
+    radius: 1.5
+    energy: 3.0
+    color: "#9acd32" # Solreign acid-green brand color
+  # Deliberately NO AccessReader / SolreignExecutiveAccess: unlike SolreignExecutiveVendor,
+  # this kiosk is general-access flavor, not a rank-gated status good.
+
+- type: vendingMachineInventory
+  id: SolreignBreakRoomKioskInventory
+  startingInventory:
+    SolreignBreakRoomMug: 3
+    SolreignVoluntaryEnthusiasmPoster: 2
+    SolreignAskNoFollowUpsPoster: 2
+    SolreignComplianceDuck: 3
+    SolreignHRFigurine: 2
+    # ---- second flavor-item wave (corporate_flavor_items_2.yml) ----
+    # This is the one line-item edit made to this file for that wave: extending
+    # the existing inventory list so the new items are reachable via the
+    # already-mapped kiosk (Oasis map uid 90270, Science Break Room). None of
+    # this file's own items/kiosk definition above were otherwise touched.
+    SolreignSynergyChips: 4
+    SolreignHouseCola: 4
+    SolreignStressOrb: 3
+    SolreignCompliancePen: 3
+    SolreignEmployeeLanyard: 2
+    SolreignEmployeeSatisfactionMemo: 2
+    # ---- self-antag conduct charter wave (self_antag_conduct_charter.yml) ----
+    # Same one line-item edit idiom as the second flavor-item wave above: extending
+    # this inventory list so the charter is reachable via the already-mapped kiosk
+    # (Oasis map uid 90270, Science Break Room). Stocked generously (6) since it is
+    # meant to actually be read, not collected.
+    SolreignSelfAntagConductCharter: 6

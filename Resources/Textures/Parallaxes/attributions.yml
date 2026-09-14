@@ -1,0 +1,19 @@
+- files: ["planet.png", "gas_giant.png", "Asteroids.png", "debris_small.png", "space_map3.png", "XenoParallaxNeb.png"]
+  license: "CC0-1.0"
+  copyright: "Drawn procedurally from scratch for Solreign (docs/receipts/license-batch-bc/draw_parallax_batch_c.py, 2026); no prior art pixels used or referenced; replaces earlier third-party NC parallax art. Provenance: In-house generation, 2026-07-17. See docs/receipts/LICENSE-BATCH-BC-2026-07-17.md."
+  source: "NA"
+
+- files: ["KettleParallaxNeb.png", "KettleParallaxBG.png", "AspidParallaxBG.png", "AspidParallaxBG.png", "purple_nebula.png"]
+  license: "CC0-1.0"
+  copyright: "adapted from Screaming Brain Studios"
+  source: "https://opengameart.org/content/seamless-space-backgrounds"
+
+- files: [ "layer1.png", "layer2.png", "layer3.png" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from TGstation13"
+  source: "https://github.com/tgstation/tgstation/blob/bce9afc2cf39c229f2799c6ad2124f4d69a2dbbf/icons/effects/parallax.dmi"
+
+- files: ["SnowballParallaxBG.png", "SnowballParallaxStars.png", "SnowballParallaxSun.png"]
+  license: "CC-BY-3.0"
+  copyright: "By ketufaispikinut"
+  source: "https://github.com/ketufaispikinut"

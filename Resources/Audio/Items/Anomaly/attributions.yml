@@ -1,0 +1,26 @@
+﻿- files: ["flesh_crit.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Mashup by GonTar Quantumcross of malescream_1.ogg, malescream_2.ogg, femalescream_4.ogg, femalescream_5.ogg, alien_claw_flesh_2.ogg, alien_claw_flesh_3.ogg"
+  source: "https://github.com/tgstation/tgstation/commit/3d049e69fe71a0be2133005e65ea469135d648c8"
+  # additional source for alien claw sounds:
+  # source: "https://gitlab.com/cmdevs/colonial-warfare/-/tree/dev/sound/weapons"
+
+- files: ["shadow_crit.ogg", "tech_crit.ogg", "pyro_crit.ogg", "grav_crit.ogg", "electricity_crit.ogg", "bluespace_crit.ogg", "ice_crit.ogg", "fluid_crit.ogg", "rock_crit.ogg"]
+  license: "CC0-1.0"
+  copyright: "Solreign in-house procedural DSP synthesis (numpy; the 9 xenoarch anomaly-criticality alarms, family-specific arcs per element — erratic crackle, rising drone, descending rumble etc; no NC-conditioning — see pilot-w2/synth_blips.py and wave-4/synth_wave4.py). Replaces prior Custom-licensed (non-CC-BY-NC) mashup sources — outside the strict CC-BY-NC census but closed as license-debt cleanup. (Source provenance: In-house generation, 2026-07-17. See docs/receipts/AUDIO-FREESWAP-INTEGRATE-2026-07-17.md.)"
+  source: "NA"
+
+- files: ["present_crit.ogg"]
+  license: "CC0-1.0"
+  copyright: "richwise (Freesound), edited by Quantum-cross@github"
+  source: https://freesound.org/people/richwise/sounds/414374/
+
+- files: ["flora_crit.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Clusman, hereforthebass, eyesplice, Clearwavsound (all Freesound), layered and edited by Quantum-cross@github"
+  source: https://freesound.org/people/Clusman/sounds/543508/
+  # additional sources:
+  # source: https://freesound.org/people/hereforthebass/sounds/733255/
+  # source: https://freesound.org/people/eyesplice/sounds/717773/
+  # source: https://freesound.org/people/Clearwavsound/sounds/541032/
+  # source: https://freesound.org/people/Stickinthemud/sounds/44162/

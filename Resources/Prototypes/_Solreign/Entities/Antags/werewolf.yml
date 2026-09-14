@@ -1,0 +1,57 @@
+# Solreign — the "Unscheduled Fur Event" wolf-form entity (werewolf antag, task #12).
+# Spec: docs/specs/2026-07-11-werewolf-vampire-spec.md §2.2, §3.2-3.5.
+#
+# Closes the Phase-2 Track A1 headline defect (docs/plans/2026-07-11-ROADMAP-PHASE2.md): the
+# Werewolf mechanic referenced prototype ID "SolreignWerewolfPolymorph" — confirmed absent from
+# every file under Resources/Prototypes/ (repo-wide grep, zero hits) — so a drafted werewolf who
+# hit Transformed got nothing: no wolf, no message, no failure feedback
+# (SolreignWerewolfSystem.Transform.cs:47-49 caught the miss with a defensive TryIndex and only
+# logged a warning). This file + the polymorph prototype in
+# Resources/Prototypes/_Solreign/Polymorphs/werewolf_polymorph.yml is that missing prototype,
+# finally built, so the transform actually fires.
+#
+# Sprite: no wolf or dog-hostile sprite exists anywhere in this repo (verified: grep for
+# "wolf"/"canine"/"dog" across Resources/Textures turns up nothing but a cloak, a book, and a killsign
+# decal). Reuses the upstream fox (MobFox, Mobs/Animals/fox.rsi) — the single closest wolf/dog-
+# adjacent quadruped mob in the tree — darkened with a top-level Sprite color tint so it doesn't
+# read as "the captain's pet fox Renault" mid-Unscheduled-Fur-Event. MobFox's own parent chain
+# (SimpleMobBase -> SimpleSpaceMobBase -> BaseSimpleMob -> BaseMob, Content.Server/Resources/
+# Prototypes/Entities/Mobs/base.yml) already brings everything a player-controlled wolf body needs
+# for free: InputMover/MobMover (the player drives this body directly —
+# PolymorphSystem.PolymorphEntity transfers the mind, spec §2.2: "we will not write a bespoke
+# body-swap"), MobState/MobThresholds (so this prototype's polymorph revertOnCrit has something
+# real to trigger on), and CombatMode + a natural MeleeWeapon (MobFox's own WeaponArcBite bite
+# animation, inherited unchanged below) so the maul actually raises MeleeHitEvent for
+# SolreignWerewolfSystem.Transform.OnMeleeHit to catch.
+# TODO(SOLREIGN-ART): custom wolf sprite wanted — sprite-factory build-pass item, same kind of open
+# request as compliance_retrieval_unit.yml's chrome-endoskeleton ask for the Terminator.
+#
+# Anti-grief rule 1 (spec §3.5: "the maul path contains no DamageSpecifier ... wolf-form melee base
+# damage stays at or below upstream's harmless-critter tier"): the inherited MeleeWeapon damage is
+# trimmed to the same "restraint-grade" Blunt tier compliance_retrieval_unit.yml already uses for
+# its own nonlethal antag melee. SolreignWerewolfSystem.Transform.OnMeleeHit adds the maul's REAL
+# payload (knockdown + Moon-Touched mark) on top of this — never damage.
+
+- type: entity
+  parent: MobFox
+  id: SolreignMobWerewolfForm
+  name: unscheduled fur event
+  suffix: solreign, werewolf wolf-form
+  description: A Solreign employee mid Unscheduled Fur Event. Fast, loud, and extremely rude. Wellness insists this is a normal, HR-compliant biological process.
+  components:
+  - type: Sprite
+    color: "#4a4a52" # darkened tint so this doesn't read as Renault the captain's fox
+  - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
+    damage:
+      types:
+        Blunt: 3 # restraint-grade — same tier as compliance_retrieval_unit.yml's nonlethal melee.
+                 # The maul's real payload (knockdown + Moon-Touched) comes from
+                 # SolreignWerewolfSystem.Transform.OnMeleeHit, never from this weapon's own damage
+                 # (anti-grief rule 1).
+        Piercing: 0 # MobFox's own MeleeWeapon (the bite) sets Piercing: 8 — component-data
+                    # inheritance in this engine merges dictionary fields key-by-key rather than
+                    # replacing them wholesale, so an explicit zero here is required to actually
+                    # cancel the inherited fox bite rather than stack alongside the Blunt entry
+                    # above (verified precedent for this exact zeroing idiom: animals.yml:449).

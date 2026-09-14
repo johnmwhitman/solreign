@@ -1,0 +1,95 @@
+# Solreign Nocturne — Station 2, noir night-shift chassis (8-15 pop target).
+#
+# Chassis: upstream Reach (Resources/Maps/reach.yml — minPlayers 0/maxPlayers 7,
+# ~18-job roster, by far the smallest real station-class grid file in
+# Resources/Maps at 381K vs. 1.3M+ for every other station), picked over
+# solreign_oasis's own base (Saltern) and over Packed per the station brief
+# ("NOT Saltern/Packed-derived"). maxPlayers bumped 7 -> 15 below to match this
+# station's actual 8-15 pop target — Reach's job roster (17 roundstart, 21 w/
+# latejoins) comfortably supports that range; maxPlayers is a rotation-weight
+# hint, not a hard cap, so this doesn't change the map itself.
+#
+# Identity: dim baseline lighting + acid-green/deep-violet neon pools, a noir
+# bar centerpiece (jukebox) + stage, a vampire coffin corner (references the
+# existing SolreignVampireCoffin prototype from Antags/vampire.yml — that file
+# is NOT touched, Wave 13 owns it), a long slow day/night LightCycle, Solreign
+# noir signage, and 3 secrets (hidden speakeasy, closed HR office w/ lore
+# paper, showpiece piano) — all built directly into the grid file. See
+# Resources/Maps/_Solreign/solreign_nocturne.yml's own header for the full
+# rationale and Resources/Prototypes/_Solreign/Entities/nocturne_props.yml for
+# the new entities. No kart/golf/vehicle content — that's Oasis's recreation
+# wing, not this station's intimate/moody identity.
+#
+# Job roster carried over from Reach verbatim (re-tune once a mapping pass
+# adjusts room count/footprint).
+
+- type: gameMap
+  id: SolreignNocturne
+  mapName: 'Solreign Nocturne'
+  mapPath: /Maps/_Solreign/solreign_nocturne.yml
+  minPlayers: 0
+  maxPlayers: 15
+  stations:
+    SolreignNocturne:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Solreign Nocturne {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'SR'
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/Shuttles/emergency.yml
+        # Mood rollout pass (2026-07-16): Nocturne's own map file (Resources/Maps/_Solreign/
+        # solreign_nocturne.yml) already wires the DIFFERENT client-side LightCycle mechanic for
+        # its day/night ambient (3600s, minLightLevel 0.12/maxLightLevel 1.1 -- the exact PDA-dim
+        # bugfix bounds; see that map's own header). Deliberately NOT setting dayNightCycle/colorA/
+        # colorB here to avoid two systems fighting over MapLightComponent.AmbientLightColor --
+        # this component only stamps this station's weather-event preference + ambient mood
+        # popups, the two mechanics LightCycle doesn't cover. Weather preference is spore-drift, not
+        # solar flare (grk review pass flagged the original solar-flare pick as thematically
+        # sideways for a sealed, windowless night-bar -- a creeping damp/mildew-style drift event
+        # fits the noir/dim-neon identity better than a sun-exposure event this station never sees).
+        - type: SolreignStationMood
+          dayNightCycle: false
+          weatherEventPrototypes:
+          - SolreignSporeDrift
+          moodPopupLines:
+          - solreign-nocturne-mood-popup-1
+          - solreign-nocturne-mood-popup-2
+          - solreign-nocturne-mood-popup-3
+          - solreign-nocturne-mood-popup-4
+        - type: StationJobs
+          availableJobs: # carried over from Reach verbatim; 17 roundstart / 21 w/ latejoins
+            #command (2)
+            Captain: [ 1, 1 ]
+            HeadOfSecurity: [ 1, 1 ]
+            #service (4)
+            Bartender: [ 1, 1 ]
+            Botanist: [ 1, 1 ]
+            Chef: [ 1, 1 ]
+            Janitor: [ 1, 1 ]
+            #engineering (2 - 3)
+            AtmosphericTechnician: [ 1, 1 ]
+            StationEngineer: [ 1, 2 ]
+            #medical (2 - 3)
+            Chemist: [ 1, 1 ]
+            MedicalDoctor: [ 1, 2 ]
+            #science (1)
+            Scientist: [ 1, 1 ]
+            #security (1 - 3)
+            SecurityOfficer: [ 1, 3 ]
+            #supply (4)
+            CargoTechnician: [ 1, 1 ]
+            SalvageSpecialist: [ 1, 1 ]
+            SolreignSectorFreightMaster: [ 1, 1 ]
+            SolreignExpeditionSpecialist: [ 1, 1 ]
+            #civilian (3+)
+            Passenger: [ -1, -1 ] #infinite, not counted
+            # Pair-up onboarding roles; both present as Passenger in-game and share a
+            # private radio channel. Unlimited like Passenger so onboarding is never capped.
+            Wingmate: [ -1, -1 ]
+            WingmateMentor: [ -1, -1 ]
+            Clown: [ 1, 1 ]
+            Mime: [ 1, 1 ]
+            Musician: [ 1, 1 ]

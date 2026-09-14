@@ -1,0 +1,354 @@
+# Batches-2-9-ONLY verdict for feat/regen-integrate branch build.
+# Generated 2026-07-16 for the merge-gate-held integration lane.
+_schema: 'SR-W-084 batches-2-9-ONLY integration verdict. batch-1 EXCLUDED entirely -- already stale/superseded
+  by 3 earlier waves per dry-run ALREADY_INTEGRATED_DRIFT blocks. Any OTHER batch discovered under STAGED_ROOT
+  that is not in the explicit 2-9 whitelist (e.g. a newly-appeared production-batch-10-worn from a concurrent
+  lane) is likewise excluded/rejected -- out of scope for this run, not evaluated. Batches 2-9: every
+  asset set to approve (none graded FAIL); BORDERLINE assets are approved per owner''s standing instruction
+  but flagged in the integration receipt for a possible re-roll at the owner''s merge-time review.'
+apply_batch1_fill_retrofit: false
+batches:
+  production-batch-1:
+    assets:
+      bronx:
+        grade: BORDERLINE
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- icon+empty strong; fill glass shape drifts, small
+          remnant specks
+      crushdepth:
+        grade: BORDERLINE
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- good dark-drink identity; AI invented pink foam
+          tops not in original
+      dark&stormy:
+        grade: PASS
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- layered rum-over-ginger look matches well; fill
+          progression fair
+      electricshark:
+        grade: BORDERLINE
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- strong blue-mug identity; handle-hole key remnants
+          partly survive sweep
+      foam_dart:
+        grade: BORDERLINE
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- vertical dart, orange body + dark band correct;
+          tip teal vs original blue, chunkier
+      jackrose:
+        grade: PASS
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- completes the pilot partial; correct pink liquid;
+          fills not monotonic
+      junglebird:
+        grade: PASS
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- close to original; progression rough but identity
+          holds
+      monkeybusiness:
+        grade: BORDERLINE
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- green key saved the red drink; fill progression
+          non-monotonic
+      omnitool:
+        grade: FAIL
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- none of the 8 candidates share the original's common
+          body; 5 states read as 5 unrelated tools
+      radler:
+        grade: BORDERLINE
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- flute identity good; fill-level instruction ignored
+          -- all fills read near-full
+      snap_pops:
+        grade: BORDERLINE
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- color/material fixed; icon pose horizontal vs upright,
+          box still isometric
+      tortuga:
+        grade: BORDERLINE
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- mojito identity good; fills muddier, invented foam
+      xeno_toxic:
+        grade: PASS
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- clean green glowing blob + dark spiky crown, close
+          in spirit to original
+  production-batch-10-worn:
+    assets:
+      crowbar:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      egg07:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      egg10:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      egg16:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      egg18:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      egg20:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      feathered:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      flight:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      foam_crossbow_solreign:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      founders_seal:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      fowl:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      gs_armor:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      gs_jumpsuit:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      hoverpack:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      lenses:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      necktie:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      sabre:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      satchel:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+      trench:
+        grade: UNKNOWN
+        verdict: reject
+        note: EXCLUDED (out of scope for this run) -- no grade extracted -- check RUN-REPORT.md by hand
+  production-batch-2-artifacts:
+    assets:
+      item_artifacts:
+        grade: BORDERLINE
+        verdict: approve
+        note: '11 families: 5 PASS / 6 BORDERLINE (fine surface texture lost to MiniMax smoothing); 0
+          FAIL'
+  production-batch-3-xeno-guardians:
+    assets:
+      guardians:
+        grade: BORDERLINE
+        verdict: approve
+        note: '4 creatures POST-RE-ROLL: 3 PASS / 1 BORDERLINE (miner palette fidelity only partial);
+          0 FAIL'
+      xeno_artifacts:
+        grade: BORDERLINE
+        verdict: approve
+        note: '36 families: 20 PASS / 16 BORDERLINE (surface/pose detail smoothing); 0 FAIL'
+  production-batch-4-toilets:
+    assets:
+      golden_toilet:
+        grade: BORDERLINE
+        verdict: approve
+        note: 21 PASS / 1 BORDERLINE (N-direction seat-up hook legibility nit)
+      toilet:
+        grade: PASS
+        verdict: approve
+        note: all states PASS
+  production-batch-5-icononly:
+    assets:
+      greyscale:
+        grade: PASS
+        verdict: approve
+        note: 85/85 states, all gates PASS (alpha-footprint parity exact)
+  production-batch-6-r5:
+    assets:
+      AI:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      arachnid:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      atmosian:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      bee:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green; cdx-image reroll fixed 2x MiniMax identity fails
+      hampter:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green; 3rd-reroll quality upgrade (not a fail fix)
+      human:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      moth:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      narsie:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      nukie:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      penguin:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      ratvar:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      rouny:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      slime:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      toy_ian:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      toy_mouse:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+      toy_nuke:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green; cdx-image reroll fixed lost canister/readout identity
+      vulp:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green; v1 picked over v2's unremoved-bg defect
+      xeno:
+        grade: PASS
+        verdict: approve
+        note: 18/18 gate suite green, first-variant pick
+  production-batch-7-r6:
+    assets:
+      db_shotgun_inhands_64x:
+        grade: PASS
+        verdict: approve
+        note: dark grey/black double barrel + warm brown wood stock, holds all 4 dirs
+      enforcer_inhands_64x:
+        grade: PASS
+        verdict: approve
+        note: all-dark charcoal bullpup, no wood, clean minimalist read
+      glass_clear:
+        grade: PASS
+        verdict: approve
+        note: clean transparent-tumbler read; 9-level fill progression neutral/opaque
+      glue-tube:
+        grade: PASS
+        verdict: approve
+        note: grey tube + dark cap dome + orange band; 6-level fill progression clean
+      improvised_shotgun_inhands_64x:
+        grade: PASS
+        verdict: approve
+        note: grey pipe + tan cloth-wrap band + tan stock, reads as improvised
+      lube-tube:
+        grade: PASS
+        verdict: approve
+        note: grey tube + blue cap; orientation-flip corrected
+      pump_inhands_64x:
+        grade: PASS
+        verdict: approve
+        note: strong dark+red identity, matches original's saturated red accent
+      sawn_inhands_64x:
+        grade: PASS
+        verdict: approve
+        note: 'cdx-image reroll: visibly stubbier/shorter; twin barrels + grip stub clean'
+  production-batch-8-r7:
+    assets:
+      baseball_bat:
+        grade: PASS
+        verdict: approve
+        note: tan wood, darker knob-cap; storage pose shows 'poking out of a bag'
+      db_shotgun:
+        grade: PASS
+        verdict: approve
+        note: orange-rust stock/forend, dark grey double barrel; bolt-open shows a hinge break
+      energy_magnum:
+        grade: PASS
+        verdict: approve
+        note: grey/orange/maroon revolver-style sidearm, red LED-dash row matches identity
+      fireaxe:
+        grade: PASS
+        verdict: approve
+        note: red head + white edge stripe + silver-grey handle, matches identity after pick reversal
+      fireaxeflaming:
+        grade: PASS
+        verdict: approve
+        note: 0-generation recolor of fireaxe, re-tuned to fire-orange + ember highlights after re-grounding
+      pump:
+        grade: PASS
+        verdict: approve
+        note: strong maroon stock/forend; bolt-open shows a visible racked-back gap
+      sawn:
+        grade: PASS
+        verdict: approve
+        note: correctly compact/stubby after a reroll (v2 wrong-scale rejected)
+  production-batch-9-r8:
+    assets:
+      diona:
+        grade: PASS
+        verdict: approve
+        note: aggregate gate table 6/6 PASS; non-standard icon naming (2 variant icons) noted, not a defect
+      lizard:
+        grade: PASS
+        verdict: approve
+        note: aggregate gate table 6/6 PASS; 4 colour-variant families, hardcoded killsign-style ref confirmed
+          safe
+      performer:
+        grade: PASS
+        verdict: approve
+        note: aggregate gate table 6/6 PASS; equipped-alignment gate PASS all 4 dirs (>=0.85 threshold)
+      snake:
+        grade: PASS
+        verdict: approve
+        note: aggregate gate table 6/6 PASS; both MiniMax variants failed identity twice, cdx-image reroll
+          2 fixed it
+      tennisball:
+        grade: PASS
+        verdict: approve
+        note: aggregate gate table 6/6 PASS; 3 empty species states caught+fixed (whole-sheet-bbox bug)
+      vox:
+        grade: PASS
+        verdict: approve
+        note: aggregate gate table 6/6 PASS

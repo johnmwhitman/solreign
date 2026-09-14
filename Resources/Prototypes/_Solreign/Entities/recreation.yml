@@ -1,0 +1,363 @@
+# Solreign — Recreation pack: mini golf + go-kart (task #19, recreation & vehicles pack).
+# Spec: docs/specs/2026-07-11-recreation-spec.md (read first — full gap list + honest effort
+# estimates). Follows docs/specs/2026-07-11-rc-vehicles-spike.md gap #5 ("build on SetRelay +
+# Buckle ourselves... own spike").
+#
+# Mini golf is fully working with EXISTING upstream primitives, zero new physics/collision C#:
+#   - club "hit" = the exact combo Solreign already shipped for the pool noodle delighter
+#     (Resources/Prototypes/_Solreign/Entities/delighters/pool_noodle.yml -> MeleeWeapon +
+#     MeleeThrowOnHit, upstream idiom from Objects/Weapons/Melee/baseball_bat.yml ->
+#     WeaponMeleeKnockbackStick).
+#   - ball = the BaseSportsBall pattern (Entities/Objects/Fun/sports.yml).
+#   - hole = the generic Trigger primitives that build floor traps and landmines
+#     (Resources/Prototypes/floor_trap.yml -> TriggerOnCollide + DeleteOnTrigger), plus
+#     EmitSoundOnTrigger + PopupOnTrigger for the "sunk it" feedback.
+#   Stroke counting + a stroke-count-aware "sunk it in N strokes" popup are the one genuine C#
+#   addition on top of those primitives: SolreignGolfBallProgress + SolreignGolfHoleFeedback,
+#   handled by Content.Server/_Solreign/Recreation/SolreignGolfSystem.cs.
+#
+# The go-kart BODY is the same zero-C#-gap recipe as pilotable mechs
+# (Entities/Objects/Specific/Mech/mechs.yml -> BaseMech: Physics/KinematicController + Fixtures +
+# MobMover + InputMover + MovementSpeedModifier + GravityAffected + Pullable), with the mech's
+# pilot-slot container swapped for a Strap seat (Entities/Structures/Furniture/chairs.yml idiom).
+# IT NOW DRIVES: gap #1 from the spec doc is implemented — SolreignDriverSeat +
+# Content.Server/_Solreign/Recreation/SolreignDriverSeatSystem.cs wires buckling to
+# SharedMoverController.SetRelay() (bare Strap/BuckleComponent does not do this on its own).
+# Lap tracking (gap #2) is also implemented: SolreignLapTracker (on the kart) +
+# SolreignLapCheckpoint (on course checkpoint props) + SolreignLapTrackerSystem.cs, with the
+# checkpoint-ordinal validation extracted as a pure, NUnit-tested function
+# (SolreignLapTrackerMath — see Content.Tests/_Solreign/SolreignLapTrackerMathTests.cs).
+# Speed zones (gap #3) are zero new C#, now unblocked by gap #1 — SpeedModifierContactsComponent
+# on a boost pad / mud patch prop, same fixture recipe as Entities/Tiles/water.yml.
+
+## --- Mini golf: ball ---
+
+- type: entity
+  parent: BaseItem
+  id: SolreignGolfBall
+  name: golf ball
+  suffix: solreign, recreation
+  description: A regulation Solreign Recreation Division golf ball. Dimpled for aerodynamics and shareholder value.
+  components:
+  - type: Sprite
+    sprite: _Solreign/Objects/Recreation/solreign-golf-ball.rsi
+    state: icon
+  - type: Item
+    size: Tiny
+    sprite: _Solreign/Objects/Recreation/solreign-golf-ball.rsi
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.15
+        density: 10
+        mask:
+        - ItemMask
+        restitution: 0.35 # a little bouncy, mostly rolls
+        friction: 0.1
+  - type: TileFrictionModifier # rolls further across a green than a basketball would
+    modifier: 0.35
+  - type: Catchable
+    catchChance: 0.6
+    catchSuccessSound: &SoundGolfBallBounce
+      path: /Audio/Effects/Footsteps/bounce.ogg
+  - type: EmitSoundOnCollide
+    sound: *SoundGolfBallBounce
+  - type: EmitSoundOnLand
+    sound: *SoundGolfBallBounce
+  - type: SolreignGolfBallProgress # stroke counter; see SolreignGolfSystem.cs
+
+## --- Mini golf: clubs ---
+## Both clubs are 0-damage by construction (PG) — MeleeThrowOnHitSystem imparts velocity on any
+## registered hit regardless of damage dealt, so "whack it" works with Blunt: 0, same idiom as
+## the pool noodle delighter. Two tunings show the primitive covers "tap it" and "smack it" with
+## the same component; no new code, only new numbers.
+
+- type: entity
+  abstract: true
+  parent: [ BaseItem, BaseMinorContraband ]
+  id: BaseSolreignGolfClub
+  description: A Solreign Recreation Division golf club. Corporate-certified harmless.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/baseball_bat.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: Objects/Weapons/Melee/baseball_bat.rsi
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 0 # completely harmless; the swing is the point
+    soundHit:
+      collection: WeakHit
+  - type: UseDelay
+    delay: 0.5
+
+- type: entity
+  parent: BaseSolreignGolfClub
+  id: SolreignGolfClubPutter
+  name: golf putter
+  suffix: solreign, recreation
+  description: A short-game club for gentle taps on the green.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/solreign_golf_club_putter.rsi
+    state: icon
+    # tint removed: it multiplied the placeholder to fake this colour, and the
+    # dedicated art already carries it -- #9dfd39 is the club head's own colour,
+    # 31 of 126 opaque px, second only to the #26262c outline at 32. Keeping the
+    # tint squared the channel and shipped a darker, oversaturated club.
+  - type: Item
+    # Overrides BaseSolreignGolfClub's Item.sprite, which pins in-hands to
+    # baseball_bat.rsi. Without this the icon is a golf club and the held item
+    # is still a bat, and the delivered inhand-left/inhand-right are dead files.
+    sprite: Objects/Weapons/Melee/solreign_golf_club_putter.rsi
+  - type: MeleeThrowOnHit
+    speed: 3
+    distance: 3
+
+- type: entity
+  parent: BaseSolreignGolfClub
+  id: SolreignGolfClubDriver
+  name: golf driver
+  suffix: solreign, recreation
+  description: A full-swing club for driving the ball down the fairway.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/solreign_golf_club_driver.rsi
+    state: icon
+    # tint removed: it multiplied the placeholder to fake this colour, and the
+    # dedicated art's own DOMINANT pixel IS #39c7fd (40 of 129 opaque px).
+    # Keeping the tint squared the channel and shipped a darker club.
+  - type: Item
+    # Overrides BaseSolreignGolfClub's Item.sprite, which pins in-hands to
+    # baseball_bat.rsi. Without this the icon is a golf club and the held item
+    # is still a bat, and the delivered inhand-left/inhand-right are dead files.
+    sprite: Objects/Weapons/Melee/solreign_golf_club_driver.rsi
+  - type: MeleeThrowOnHit
+    speed: 9
+    distance: 15
+
+## --- Mini golf: the hole ---
+## Static prop: matches the ball's fixture on collide, sinks (deletes) the ball, plays a chime,
+## and pops "It's in the hole!" to the golfer. All four are generic Trigger primitives — the same
+## ones that build floor_trap.yml's landmines, just aimed at fun instead of harm.
+##
+## FIX (this pass): the cup's fixture as originally shipped copied floor_trap.yml's mask/layer
+## verbatim (mask: ItemMask, layer: SlipLayer) — but per
+## Content.Shared/Physics/CollisionGroup.cs, SlipLayer (MidImpassable|LowImpassable) only
+## intersects MobMask-carrying entities (players/mobs stepping on it), NOT ItemMask-carrying
+## entities like the golf ball itself (which never sets a nonzero fixture `layer`, following the
+## exact same convention as upstream Entities/Objects/Fun/sports.yml's Basketball/Football — mask
+## only, no layer). floor_trap.yml is a mob-triggered landmine; a cup needs to detect the BALL, not
+## a passing mob. `layer: ItemMask` on the cup intersects the ball's `mask: ItemMask` (both the
+## ball's resting fixture and its temporary mid-flight ThrownItem fixture, which also carries
+## Impassable|HighImpassable bits), so the hole now actually registers the ball rolling in — the
+## thing docs/specs/2026-07-11-recreation-spec.md's Verification section flagged as "not verified".
+
+- type: entity
+  id: SolreignGolfHole
+  name: golf hole
+  suffix: solreign, recreation
+  description: A regulation cup with a Solreign Recreation Division pin flag. Sink it if you can.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/solreign_golf_hole.rsi
+    state: icon
+    color: "#9dfd39"
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      cup:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        hard: false
+        mask:
+        - ItemMask
+        layer:
+        - ItemMask
+  - type: TriggerOnCollide
+    fixtureID: cup
+  - type: DeleteOnTrigger
+    targetUser: true # sinks the BALL (the thing collided with), not the cup itself
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Effects/chime.ogg
+    positional: true # the cup is about to make the ball disappear; anchor the sound to the cup
+  - type: PopupOnTrigger
+    text: solreign-golf-hole-sunk
+    userIsRecipient: true
+    popupType: Medium
+  - type: SolreignGolfHoleFeedback # adds the "sunk it in N strokes" popup; see SolreignGolfSystem.cs
+
+## --- Go-kart: rideable + drivable body (spec gap #1 + #2 implemented) ---
+
+- type: entity
+  id: SolreignGoKart
+  name: solreign go-kart
+  suffix: solreign, recreation
+  description: A single-seat Solreign Recreation Division go-kart. Buckle in and floor it.
+  components:
+  - type: Sprite
+    sprite: Objects/Vehicles/solreign_go_kart.rsi # orphaned upstream asset; RC car spike already claimed atv.rsi
+    state: vehicle
+    color: "#9dfd39"
+  - type: MobMover
+  - type: InputMover
+  - type: MovementSpeedModifier
+    # Kart-fast — tuned well above sprinting crew.
+    baseWalkSpeed: 6
+    baseSprintSpeed: 8
+  - type: Physics
+    bodyType: KinematicController
+  - type: GravityAffected
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        density: 400
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Pullable # crew can still push/tow it around when nobody's driving
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,0.05"
+  - type: SolreignDriverSeat # relays the buckled driver's movement input to the kart; see SolreignDriverSeatSystem.cs
+  - type: SolreignLapTracker # per-course lap/checkpoint progress; see SolreignLapTrackerSystem.cs
+    # Placeholder course config for spawnability — a mapper laying out a real track overrides
+    # courseId/checkpointCount per placed instance to match that track's actual checkpoints.
+    courseId: default
+    checkpointCount: 4
+    totalLaps: 3
+  - type: Damageable
+    damageModifierSet: Metallic
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Appearance
+
+## --- Go-kart: lap checkpoint (spec gap #2) ---
+## Same generic TriggerOnCollide primitive as the golf hole and floor traps — zero new
+## physics/collision code. The stateful "in order, how many laps" logic lives in
+## SolreignLapCheckpoint + SolreignLapTrackerSystem.cs, not here. Non-hard fixture (does not block
+## the kart). Fixture mask/layer reuses the exact same combo as the golf hole's cup and
+## Entities/Tiles/water.yml (mask: ItemMask, layer: SlipLayer) rather than mirroring the kart's own
+## MobMask/MobLayer pair — MobMask and MobLayer don't intersect each other (see
+## Content.Shared/Physics/CollisionGroup.cs: MobMask = the Impassable family, MobLayer =
+## Opaque|BulletImpassable), so two MobLayer/MobMask fixtures never generate a collide event
+## against one another. SlipLayer's bits (MidImpassable|LowImpassable) are a subset of MobMask, so
+## this combo reliably contacts the kart's own MobMask fixture, proven by water already slowing
+## ordinary MobMask/MobLayer mobs today.
+## courseId/ordinal below are a spawnable placeholder — a mapper placing real checkpoints for an
+## actual course overrides both per instance to lay out that course's ordinal sequence.
+
+- type: entity
+  id: SolreignGoKartCheckpoint
+  name: solreign kart checkpoint
+  suffix: solreign, recreation
+  description: A Solreign Recreation Division timing gate. Drive through it, in order.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/solreign_kart_checkpoint.rsi
+    state: icon
+    color: "#39c7fd" # corporate blue: distinct from the acid-green golf hole flag
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      gate:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.5
+        hard: false
+        mask:
+        - ItemMask
+        layer:
+        - SlipLayer
+  - type: TriggerOnCollide
+    fixtureID: gate
+    # No maxTriggers: a checkpoint must fire every lap, not just once.
+  - type: SolreignLapCheckpoint
+    courseId: default
+    ordinal: 0
+
+## --- Go-kart: speed zones (spec gap #3 — zero new C#, unblocked now gap #1 ships) ---
+## SpeedModifierContactsComponent already modifies MovementSpeedModifier on whatever entity's own
+## physics fixture touches it — the kart carries MovementSpeedModifier (see SolreignGoKart above)
+## and is now actually driven (gap #1), so this needs no new component, only new numbers. Fixture
+## recipe (mask/layer/hard) mirrors Entities/Tiles/water.yml's proven "slows MobLayer/MobMask
+## entities on contact" configuration exactly.
+
+- type: entity
+  id: SolreignGoKartBoostPad
+  name: solreign speed boost pad
+  suffix: solreign, recreation
+  description: A Solreign Recreation Division speed strip. Floor it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Tiles/Planet/solreign_kart_boostpad.rsi # TODO(SOLREIGN-ART): dedicated boost-stripe decal sprite
+    drawdepth: BelowFloor
+    layers:
+    - state: boostpad
+      color: "#9dfd39" # acid-green: speed up
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 1.6
+    sprintSpeedModifier: 1.6
+
+- type: entity
+  id: SolreignGoKartMudPatch
+  name: solreign mud patch
+  suffix: solreign, recreation
+  description: A Solreign Recreation Division "authentic terrain" hazard. Ease off the pedal.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Tiles/Planet/solreign_kart_mudpatch.rsi # TODO(SOLREIGN-ART): dedicated mud-puddle decal sprite
+    drawdepth: BelowFloor
+    layers:
+    - state: mudpatch
+      color: "#6b4a2f" # mud brown: slow down
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.5
+    sprintSpeedModifier: 0.5

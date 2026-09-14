@@ -1,0 +1,9 @@
+# "Station Directive" — layerable, cosmetic-only game rule (Solreign, churn-insight follow-up).
+# Started every round by StationDirectiveLayerSystem; never cancels a preset for too-few players.
+- type: entity
+  id: SolreignStationDirective
+  parent: BaseGameRule
+  components:
+  - type: StationDirectiveRule
+  - type: GameRule
+    cancelPresetOnTooFewPlayers: false

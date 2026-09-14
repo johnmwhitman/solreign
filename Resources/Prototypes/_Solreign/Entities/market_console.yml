@@ -1,0 +1,41 @@
+# "Requisitions Anonymous" — the black-market front door (v11 front door #3). A player-reachable
+# wall console: click it, browse the Director daemon's curated black-market inventory
+# (GET /api/public/market), spend Corporate Standing on a listing (POST /api/market/buy — the
+# daemon deducts Standing atomically; see Content.Server._Solreign.Market.SolreignMarketSystem).
+# The physical item does NOT appear here: it arrives later, out of band, as a spawn_entity Director
+# event delivered through the EXISTING poll (SolreignOracleSystem.Update's Director-event drain) —
+# the same "reply arrives elsewhere" idiom the Directive Terminal established for the Oracle.
+#
+# Sprite deliberately differs from BOTH existing Solreign wall fixtures — the Contracts Board's
+# noticeboard.rsi (contracts_infrastructure.yml) and the Directive Terminal's screen.rsi
+# (oracle_terminal.yml) — so all three read as distinct at a glance: this one reuses the upstream
+# wallmount Structures/Wallmounts/signalscreen.rsi (state "signalscreen" — verified on disk at
+# Resources/Textures/Structures/Wallmounts/signalscreen.rsi/meta.json), otherwise only used by the
+# upstream WallmountMachines/timer.yml chassis, unrelated to this terminal's function.
+
+- type: entity
+  parent: BaseWallmountMetallic # same wallmount base as the Contracts Board / Directive Terminal
+  id: SolreignMarketConsole
+  name: requisitions anonymous terminal
+  suffix: solreign
+  description: An unmarked terminal, powered by something that isn't on the manifest. It sells things that also aren't on the manifest. Standing spends easy here, and nobody asks where the stock comes from.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/signalscreen.rsi
+    state: signalscreen
+  - type: SolreignMarketConsole
+  - type: ActivatableUI
+    key: enum.SolreignMarketUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.SolreignMarketUiKey.Key:
+        type: SolreignMarketBoundUserInterface
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

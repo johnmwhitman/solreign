@@ -1,0 +1,42 @@
+# gitleaks config — SOLREIGN public snapshot
+# Copied from the ops overlay control (POSTURE-REPORT-2026-07-31) and
+# narrowed: this tree is the game content pack, not the ops overlay.
+
+title = "SOLREIGN snapshot gitleaks config"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "minimax-api-key"
+description = "MiniMax API key"
+regex = '''sk-cp-[A-Za-z0-9_\-]{40,}'''
+keywords = ["sk-cp-"]
+
+[[rules]]
+id = "solreign-director-token"
+description = "SOLREIGN Director HMAC shared secret"
+regex = '''(?i)token\s*=\s*["']([0-9a-f]{40,64})["']'''
+keywords = ["token"]
+[rules.allowlist]
+paths = ['''(^|/)tests?/''', '''\.example$''', '''\.md$''']
+
+[allowlist]
+description = "Test fixtures, engine submodule, documented placeholders"
+paths = [
+  '''(^|/)tests?/''',
+  '''(^|/)Content\.Tests/''',
+  '''(^|/)Content\.IntegrationTests/''',
+  '''(^|/)RobustToolbox/''',
+]
+regexes = [
+  '''discord\.com/api/oauth2/authorize\?client_id=\d+''',
+]
+stopwords = [
+  "example",
+  "placeholder",
+  "REPLACE_WITH",
+  "GENERATE_A",
+  "changeme",
+  "redacted",
+]

@@ -1,0 +1,288 @@
+# Solreign weird botany: PLANTS
+# Eight farmable Solreign crops migrated to upstream's entity/component botany model.
+# Sprite paths reuse upstream hydroponics RSIs; produce and packet entities retain
+# their Solreign color tints and gameplay contracts.
+
+# 1. GLOW CROP A — the lumen melon. Acid-green, glows, juices into rainbow juice.
+- type: entity
+  parent: BasePlant
+  id: SolreignLumenMelonPlants
+  name: lumen melon vines
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/watermelon.rsi
+  - type: PlantData
+    name: seeds-solreign-lumen-melon-name
+    packetPrototype: SolreignLumenMelonSeeds
+    productPrototypes: [ SolreignFoodLumenMelon ]
+  - type: Plant
+    lifespan: 55
+    maturation: 12
+    production: 3
+    yield: 2
+    potency: 10
+    growthStages: 6
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 10
+        potencyDivisor: 10
+      Water:
+        min: 1
+        max: 10
+        potencyDivisor: 10
+      SolreignLumenSap:
+        min: 2
+        max: 10
+        potencyDivisor: 10
+      SolreignRainbowJuice:
+        min: 1
+        max: 5
+        potencyDivisor: 20
+
+# 2. GLOW CROP B — the nightshift glowcap. A soft cyan mushroom for the late crew.
+- type: entity
+  parent: BasePlant
+  id: SolreignNightshiftGlowcapPlants
+  name: nightshift glowcaps
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/chanterelle.rsi
+  - type: PlantData
+    noun: seeds-noun-spores
+    name: seeds-solreign-nightshift-glowcap-name
+    packetPrototype: SolreignNightshiftGlowcapSeeds
+    productPrototypes: [ SolreignFoodNightshiftGlowcap ]
+  - type: Plant
+    lifespan: 35
+    maturation: 10
+    production: 7
+    yield: 4
+    potency: 5
+    growthStages: 3
+  - type: PlantGrowth
+    waterConsumption: 0.6
+    nutrientConsumption: 0.5
+  - type: PlantAtmospheric
+    lowHeatTolerance: 278
+    highHeatTolerance: 298
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 15
+        potencyDivisor: 15
+      SolreignLumenSap:
+        min: 2
+        max: 10
+        potencyDivisor: 10
+      SolreignOvertimeOil:
+        min: 1
+        max: 6
+        potencyDivisor: 15
+
+# 3. The ambition bean. Grind for liquid ambition; brief, well-documented speed.
+- type: entity
+  parent: BasePlant
+  id: SolreignAmbitionBeanPlants
+  name: ambition bean stalks
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/soybeans.rsi
+  - type: PlantData
+    name: seeds-solreign-ambition-bean-name
+    packetPrototype: SolreignAmbitionBeanSeeds
+    productPrototypes: [ SolreignFoodAmbitionBean ]
+  - type: Plant
+    lifespan: 25
+    maturation: 8
+    production: 4
+    yield: 3
+    potency: 5
+    growthStages: 4
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 10
+        potencyDivisor: 15
+      SolreignLiquidAmbition:
+        min: 2
+        max: 10
+        potencyDivisor: 10
+
+# 4. The compliance pea. Every pod is pre-approved.
+- type: entity
+  parent: BasePlant
+  id: SolreignCompliancePeaPlants
+  name: compliance pea vines
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/pea.rsi
+  - type: PlantData
+    name: seeds-solreign-compliance-pea-name
+    packetPrototype: SolreignCompliancePeaSeeds
+    productPrototypes: [ SolreignFoodCompliancePod ]
+  - type: Plant
+    lifespan: 25
+    maturation: 8
+    production: 6
+    yield: 3
+    potency: 5
+    growthStages: 3
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 10
+        potencyDivisor: 15
+      SolreignComplianceSerum:
+        min: 2
+        max: 8
+        potencyDivisor: 12
+
+# 5. POWER-UP FRUIT — the synergy fruit. Heals a small amount. Quarterly.
+- type: entity
+  parent: BasePlant
+  id: SolreignSynergyFruitPlants
+  name: synergy fruit tree
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/golden_apple.rsi
+  - type: PlantData
+    name: seeds-solreign-synergy-fruit-name
+    packetPrototype: SolreignSynergyFruitSeeds
+    productPrototypes: [ SolreignFoodSynergyFruit ]
+  - type: Plant
+    lifespan: 55
+    maturation: 14
+    production: 6
+    yield: 2
+    potency: 10
+    growthStages: 6
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 2
+        max: 10
+        potencyDivisor: 10
+      Vitamin:
+        min: 1
+        max: 5
+        potencyDivisor: 20
+      SolreignSynergy:
+        min: 2
+        max: 10
+        potencyDivisor: 10
+
+# 6. CORPORATE KUDZU — fast-spreading decorative groundcover.
+# An untended, weedy tray graduates into the harmless Solreign vine below.
+- type: entity
+  parent: BasePlant
+  id: SolreignCorporateKudzuPlants
+  name: corporate kudzu creepers
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
+  - type: PlantData
+    name: seeds-solreign-corporate-kudzu-name
+    packetPrototype: SolreignCorporateKudzuSeeds
+    productPrototypes: [ SolreignFoodKudzuClipping ]
+  - type: Plant
+    lifespan: 30
+    maturation: 6
+    production: 3
+    yield: 3
+    potency: 5
+    growthStages: 6
+  - type: PlantHarvest
+    harvestRepeat: Repeat
+  - type: PlantTraitKudzu
+    kudzuPrototype: SolreignKudzuCorporate
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 5
+        potencyDivisor: 20
+      Fiber:
+        min: 2
+        max: 10
+        potencyDivisor: 10
+
+# 7. WARDING GARLIC — vampire counterplay with the vanilla garlic growth contract.
+- type: entity
+  parent: BasePlant
+  id: SolreignWardGarlicPlants
+  name: warding garlic
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/garlic.rsi
+  - type: PlantData
+    name: seeds-solreign-ward-garlic-name
+    packetPrototype: SolreignWardGarlicSeeds
+    productPrototypes: [ SolreignVampireGarlicWard ]
+  - type: Plant
+    lifespan: 25
+    maturation: 8
+    production: 5
+    yield: 3
+    potency: 25
+    growthStages: 3
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 10
+        potencyDivisor: 10
+      Vitamin:
+        min: 1
+        max: 4
+        potencyDivisor: 25
+
+# 8. ANTIVIRAL HERB — the botanist path to the existing antiviral easter egg.
+- type: entity
+  parent: BasePlant
+  id: SolreignAntiviralHerbPlants
+  name: antiviral herb plant
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/ambrosia_vulgaris.rsi
+  - type: PlantData
+    name: seeds-solreign-antiviral-herb-name
+    packetPrototype: SolreignAntiviralHerbSeeds
+    productPrototypes: [ SolreignEgg18 ]
+  - type: Plant
+    lifespan: 25
+    maturation: 10
+    production: 3
+    yield: 3
+    potency: 10
+    growthStages: 6
+  - type: PlantGrowth
+    waterConsumption: 0.6
+  - type: PlantChemicals
+    chemicals:
+      Nutriment:
+        min: 1
+        max: 2
+        potencyDivisor: 10
+      Bicaridine:
+        min: 1
+        max: 5
+        potencyDivisor: 20
+      Kelotane:
+        min: 1
+        max: 5
+        potencyDivisor: 20
+      Vitamin:
+        min: 1
+        max: 2
+        potencyDivisor: 50

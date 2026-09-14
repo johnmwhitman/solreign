@@ -1,0 +1,1133 @@
+{
+ "sprites": [
+  {
+   "rsi": "unicorn",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "Horn-tip shimmer twinkle with a delayed mane glint (no silhouette change)",
+   "frames": 4,
+   "delays": [
+    0.35,
+    0.12,
+    0.18,
+    0.15
+   ],
+   "masks": {
+    "horn_tip": {
+     "pixels": [
+      [
+       27,
+       3
+      ],
+      [
+       28,
+       3
+      ],
+      [
+       27,
+       4
+      ]
+     ]
+    },
+    "horn_glow": {
+     "letters": [
+      "k",
+      "n",
+      "b",
+      "C"
+     ],
+     "region": [
+      23,
+      3,
+      30,
+      11
+     ]
+    },
+    "mane_glint": {
+     "letters": [
+      "x",
+      "h",
+      "a",
+      "w"
+     ],
+     "region": [
+      9,
+      16,
+      15,
+      21
+     ]
+    },
+    "mane_core": {
+     "pixels": [
+      [
+       11,
+       17
+      ],
+      [
+       12,
+       17
+      ],
+      [
+       11,
+       18
+      ],
+      [
+       12,
+       18
+      ],
+      [
+       10,
+       19
+      ],
+      [
+       11,
+       19
+      ]
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "horn_tip",
+       "op": "brightness",
+       "factor": 1.4
+      },
+      {
+       "mask": "horn_glow",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.18
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "horn_tip",
+       "op": "brightness",
+       "factor": 1.6
+      },
+      {
+       "mask": "horn_glow",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.28
+      },
+      {
+       "mask": "horn_glow",
+       "op": "brightness",
+       "factor": 1.12
+      },
+      {
+       "mask": "mane_core",
+       "op": "brightness",
+       "factor": 1.1
+      }
+     ]
+    },
+    {
+     "frame": 3,
+     "ops": [
+      {
+       "mask": "mane_core",
+       "op": "brightness",
+       "factor": 1.28
+      },
+      {
+       "mask": "mane_glint",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        240
+       ],
+       "t": 0.14
+      },
+      {
+       "mask": "horn_tip",
+       "op": "brightness",
+       "factor": 1.1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rsi": "exec_recharge_pod",
+   "state": "base",
+   "verdict": "skip",
+   "concept": "Byte-identical to closed in provided maps; LED designed on closed door face to avoid double-brightening if layered",
+   "frames": 1,
+   "delays": [
+    1.0
+   ],
+   "masks": {},
+   "frame_ops": []
+  },
+  {
+   "rsi": "exec_recharge_pod",
+   "state": "closed",
+   "verdict": "animate",
+   "concept": "Walnut door status pad breathing: mid-face green inset (zwwwwz) pulses like a wellness LED",
+   "frames": 3,
+   "delays": [
+    0.55,
+    0.55,
+    0.55
+   ],
+   "masks": {
+    "led_core": {
+     "pixels": [
+      [
+       12,
+       15
+      ],
+      [
+       13,
+       15
+      ],
+      [
+       14,
+       15
+      ],
+      [
+       15,
+       15
+      ]
+     ]
+    },
+    "led_frame": {
+     "pixels": [
+      [
+       11,
+       15
+      ],
+      [
+       16,
+       15
+      ]
+     ]
+    },
+    "led_spill": {
+     "letters": [
+      "w",
+      "s"
+     ],
+     "region": [
+      10,
+      14,
+      18,
+      19
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "led_core",
+       "op": "brightness",
+       "factor": 1.35
+      },
+      {
+       "mask": "led_core",
+       "op": "lerp",
+       "to": [
+        140,
+        220,
+        110
+       ],
+       "t": 0.22
+      },
+      {
+       "mask": "led_frame",
+       "op": "brightness",
+       "factor": 1.12
+      },
+      {
+       "mask": "led_spill",
+       "op": "brightness",
+       "factor": 1.06
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "led_core",
+       "op": "brightness",
+       "factor": 1.55
+      },
+      {
+       "mask": "led_core",
+       "op": "lerp",
+       "to": [
+        170,
+        255,
+        140
+       ],
+       "t": 0.35
+      },
+      {
+       "mask": "led_frame",
+       "op": "brightness",
+       "factor": 1.2
+      },
+      {
+       "mask": "led_frame",
+       "op": "lerp",
+       "to": [
+        100,
+        160,
+        90
+       ],
+       "t": 0.15
+      },
+      {
+       "mask": "led_spill",
+       "op": "brightness",
+       "factor": 1.1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rsi": "exec_recharge_pod",
+   "state": "open",
+   "verdict": "animate",
+   "concept": "Soft Solreign cushion micro-breathe on interior greens while lid is open",
+   "frames": 3,
+   "delays": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "masks": {
+    "cushion": {
+     "letters": [
+      "e",
+      "i",
+      "q"
+     ],
+     "region": [
+      4,
+      15,
+      26,
+      21
+     ]
+    },
+    "cushion_hi": {
+     "letters": [
+      "h",
+      "x",
+      "i"
+     ],
+     "region": [
+      6,
+      16,
+      24,
+      20
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "cushion",
+       "op": "brightness",
+       "factor": 1.1
+      },
+      {
+       "mask": "cushion_hi",
+       "op": "lerp",
+       "to": [
+        200,
+        235,
+        180
+       ],
+       "t": 0.08
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "cushion",
+       "op": "brightness",
+       "factor": 1.18
+      },
+      {
+       "mask": "cushion_hi",
+       "op": "brightness",
+       "factor": 1.12
+      },
+      {
+       "mask": "cushion_hi",
+       "op": "lerp",
+       "to": [
+        210,
+        240,
+        190
+       ],
+       "t": 0.12
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rsi": "pool_noodle",
+   "state": "icon",
+   "verdict": "animate",
+   "concept": "Foam specular ridge sheen slides along the bright highlight letters",
+   "frames": 3,
+   "delays": [
+    0.45,
+    0.45,
+    0.45
+   ],
+   "masks": {
+    "spec_hi": {
+     "letters": [
+      "h",
+      "f"
+     ],
+     "region": [
+      8,
+      8,
+      28,
+      18
+     ]
+    },
+    "spec_mid": {
+     "letters": [
+      "d",
+      "a",
+      "u",
+      "B"
+     ],
+     "region": [
+      6,
+      9,
+      26,
+      19
+     ]
+    },
+    "spec_core": {
+     "pixels": [
+      [
+       22,
+       9
+      ],
+      [
+       23,
+       9
+      ],
+      [
+       21,
+       10
+      ],
+      [
+       22,
+       10
+      ],
+      [
+       23,
+       10
+      ],
+      [
+       19,
+       11
+      ],
+      [
+       20,
+       11
+      ],
+      [
+       21,
+       11
+      ],
+      [
+       17,
+       12
+      ],
+      [
+       18,
+       12
+      ],
+      [
+       19,
+       12
+      ]
+     ]
+    }
+   },
+   "frame_ops": [
+    {
+     "frame": 1,
+     "ops": [
+      {
+       "mask": "spec_hi",
+       "op": "brightness",
+       "factor": 1.18
+      },
+      {
+       "mask": "spec_core",
+       "op": "lerp",
+       "to": [
+        255,
+        255,
+        255
+       ],
+       "t": 0.16
+      },
+      {
+       "mask": "spec_mid",
+       "op": "brightness",
+       "factor": 1.06
+      }
+     ]
+    },
+    {
+     "frame": 2,
+     "ops": [
+      {
+       "mask": "spec_mid",
+       "op": "brightness",
+       "factor": 1.16
+      },
+      {
+       "mask": "spec_hi",
+       "op": "brightness",
+       "factor": 1.08
+      },
+      {
+       "mask": "spec_mid",
+       "op": "lerp",
+       "to": [
+        230,
+        255,
+        210
+       ],
+       "t": 0.12
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "rsi": "scarlet",
+   "state": "scarlet",
+   "verdict": "animate",
+   "concept": "Per-direction ear flick pulse; tail tip glow where visible (N/E/W); same 3-frame cadence all dirs",
+   "frames": 3,
+   "delays": [
+    0.4,
+    0.4,
+    0.4
+   ],
+   "masks": {},
+   "frame_ops": [],
+   "per_direction": {
+    "S": {
+     "masks": {
+      "ear_L": {
+       "pixels": [
+        [
+         11,
+         5
+        ],
+        [
+         12,
+         5
+        ],
+        [
+         12,
+         6
+        ],
+        [
+         13,
+         5
+        ],
+        [
+         11,
+         6
+        ]
+       ]
+      },
+      "ear_R": {
+       "pixels": [
+        [
+         21,
+         5
+        ],
+        [
+         22,
+         5
+        ],
+        [
+         23,
+         5
+        ],
+        [
+         21,
+         6
+        ],
+        [
+         22,
+         6
+        ]
+       ]
+      },
+      "brow_hi": {
+       "letters": [
+        "n",
+        "D",
+        "j"
+       ],
+       "region": [
+        12,
+        2,
+        22,
+        9
+       ]
+      }
+     },
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "mask": "ear_L",
+         "op": "brightness",
+         "factor": 1.35
+        },
+        {
+         "mask": "ear_L",
+         "op": "lerp",
+         "to": [
+          120,
+          125,
+          120
+         ],
+         "t": 0.2
+        },
+        {
+         "mask": "ear_R",
+         "op": "brightness",
+         "factor": 1.12
+        },
+        {
+         "mask": "brow_hi",
+         "op": "brightness",
+         "factor": 1.05
+        }
+       ]
+      },
+      {
+       "frame": 2,
+       "ops": [
+        {
+         "mask": "ear_R",
+         "op": "brightness",
+         "factor": 1.35
+        },
+        {
+         "mask": "ear_R",
+         "op": "lerp",
+         "to": [
+          120,
+          125,
+          120
+         ],
+         "t": 0.2
+        },
+        {
+         "mask": "ear_L",
+         "op": "brightness",
+         "factor": 1.1
+        },
+        {
+         "mask": "brow_hi",
+         "op": "brightness",
+         "factor": 1.08
+        }
+       ]
+      }
+     ]
+    },
+    "N": {
+     "masks": {
+      "ears": {
+       "pixels": [
+        [
+         12,
+         3
+        ],
+        [
+         13,
+         3
+        ],
+        [
+         14,
+         3
+        ],
+        [
+         15,
+         3
+        ],
+        [
+         16,
+         3
+        ],
+        [
+         17,
+         3
+        ],
+        [
+         13,
+         2
+        ],
+        [
+         15,
+         2
+        ]
+       ]
+      },
+      "ear_rim": {
+       "letters": [
+        "n",
+        "F",
+        "c"
+       ],
+       "region": [
+        11,
+        2,
+        18,
+        6
+       ]
+      },
+      "tail": {
+       "pixels": [
+        [
+         16,
+         28
+        ],
+        [
+         17,
+         28
+        ],
+        [
+         18,
+         28
+        ],
+        [
+         16,
+         29
+        ],
+        [
+         17,
+         29
+        ],
+        [
+         18,
+         29
+        ]
+       ]
+      },
+      "tail_base": {
+       "pixels": [
+        [
+         15,
+         28
+        ],
+        [
+         19,
+         28
+        ],
+        [
+         17,
+         27
+        ],
+        [
+         18,
+         27
+        ]
+       ]
+      }
+     },
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "mask": "ears",
+         "op": "brightness",
+         "factor": 1.3
+        },
+        {
+         "mask": "ear_rim",
+         "op": "brightness",
+         "factor": 1.08
+        },
+        {
+         "mask": "tail",
+         "op": "brightness",
+         "factor": 1.12
+        }
+       ]
+      },
+      {
+       "frame": 2,
+       "ops": [
+        {
+         "mask": "tail",
+         "op": "brightness",
+         "factor": 1.4
+        },
+        {
+         "mask": "tail",
+         "op": "lerp",
+         "to": [
+          80,
+          80,
+          80
+         ],
+         "t": 0.25
+        },
+        {
+         "mask": "tail_base",
+         "op": "brightness",
+         "factor": 1.15
+        },
+        {
+         "mask": "ears",
+         "op": "brightness",
+         "factor": 1.1
+        }
+       ]
+      }
+     ]
+    },
+    "E": {
+     "masks": {
+      "ears": {
+       "pixels": [
+        [
+         21,
+         4
+        ],
+        [
+         22,
+         4
+        ],
+        [
+         23,
+         4
+        ],
+        [
+         24,
+         4
+        ],
+        [
+         22,
+         5
+        ],
+        [
+         23,
+         5
+        ],
+        [
+         21,
+         5
+        ]
+       ]
+      },
+      "ear_fur": {
+       "letters": [
+        "h",
+        "B",
+        "g",
+        "f"
+       ],
+       "region": [
+        19,
+        4,
+        26,
+        9
+       ]
+      },
+      "tail": {
+       "pixels": [
+        [
+         2,
+         24
+        ],
+        [
+         2,
+         25
+        ],
+        [
+         2,
+         26
+        ],
+        [
+         3,
+         24
+        ],
+        [
+         3,
+         25
+        ],
+        [
+         3,
+         26
+        ]
+       ]
+      },
+      "tail_base": {
+       "pixels": [
+        [
+         4,
+         24
+        ],
+        [
+         4,
+         25
+        ],
+        [
+         3,
+         23
+        ],
+        [
+         4,
+         23
+        ]
+       ]
+      }
+     },
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "mask": "ears",
+         "op": "brightness",
+         "factor": 1.32
+        },
+        {
+         "mask": "ear_fur",
+         "op": "brightness",
+         "factor": 1.08
+        },
+        {
+         "mask": "tail",
+         "op": "brightness",
+         "factor": 1.1
+        }
+       ]
+      },
+      {
+       "frame": 2,
+       "ops": [
+        {
+         "mask": "tail",
+         "op": "brightness",
+         "factor": 1.38
+        },
+        {
+         "mask": "tail",
+         "op": "lerp",
+         "to": [
+          90,
+          90,
+          90
+         ],
+         "t": 0.22
+        },
+        {
+         "mask": "tail_base",
+         "op": "brightness",
+         "factor": 1.14
+        },
+        {
+         "mask": "ears",
+         "op": "brightness",
+         "factor": 1.1
+        }
+       ]
+      }
+     ]
+    },
+    "W": {
+     "masks": {
+      "ears": {
+       "pixels": [
+        [
+         7,
+         4
+        ],
+        [
+         8,
+         4
+        ],
+        [
+         9,
+         4
+        ],
+        [
+         10,
+         4
+        ],
+        [
+         7,
+         5
+        ],
+        [
+         8,
+         5
+        ],
+        [
+         9,
+         5
+        ]
+       ]
+      },
+      "ear_fur": {
+       "letters": [
+        "h",
+        "B",
+        "g",
+        "f"
+       ],
+       "region": [
+        5,
+        4,
+        12,
+        9
+       ]
+      },
+      "tail": {
+       "pixels": [
+        [
+         28,
+         24
+        ],
+        [
+         27,
+         24
+        ],
+        [
+         28,
+         25
+        ],
+        [
+         27,
+         25
+        ],
+        [
+         28,
+         26
+        ],
+        [
+         29,
+         26
+        ]
+       ]
+      },
+      "tail_base": {
+       "pixels": [
+        [
+         26,
+         24
+        ],
+        [
+         27,
+         23
+        ],
+        [
+         26,
+         25
+        ],
+        [
+         28,
+         23
+        ]
+       ]
+      }
+     },
+     "frame_ops": [
+      {
+       "frame": 1,
+       "ops": [
+        {
+         "mask": "ears",
+         "op": "brightness",
+         "factor": 1.32
+        },
+        {
+         "mask": "ear_fur",
+         "op": "brightness",
+         "factor": 1.08
+        },
+        {
+         "mask": "tail",
+         "op": "brightness",
+         "factor": 1.1
+        }
+       ]
+      },
+      {
+       "frame": 2,
+       "ops": [
+        {
+         "mask": "tail",
+         "op": "brightness",
+         "factor": 1.38
+        },
+        {
+         "mask": "tail",
+         "op": "lerp",
+         "to": [
+          90,
+          90,
+          90
+         ],
+         "t": 0.22
+        },
+        {
+         "mask": "tail_base",
+         "op": "brightness",
+         "factor": 1.14
+        },
+        {
+         "mask": "ears",
+         "op": "brightness",
+         "factor": 1.1
+        }
+       ]
+      }
+     ]
+    }
+   }
+  }
+ ]
+}

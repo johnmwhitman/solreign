@@ -1,0 +1,57 @@
+# Solreign delighters: GLOW PLANTS
+# Soft-glowing flora. Based on upstream patterns:
+# - PottedPlantBioluminscent (Resources/Prototypes/Entities/Structures/Furniture/potted_plants.yml)
+#   = PottedPlantBase + PointLight
+# - LightTree (Resources/Prototypes/Entities/Objects/Decoration/flora.yml)
+#   = BaseTree + PointLight + RandomSprite
+# Sprites: reuse upstream potted-plant and light-tree RSIs (tinted where noted).
+# Wired approved plant-02/05 from solreign-glow-plants (latest reviews.jsonl verdicts approved; CC0-1.0).
+
+# 1. Potted, acid-green — the company plant.
+- type: entity
+  id: SolreignGlowPlantAcid
+  parent: PottedPlantBase
+  name: photosynthesis compliance unit
+  suffix: solreign, delighter
+  description: A potted plant genetically encouraged to glow corporate acid-green. It is watered on a schedule. It knows the schedule.
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-glow-plants.rsi
+    state: plant-02
+    color: "#c8ffb0" # gentle tint so the foliage reads luminous
+  - type: PointLight
+    radius: 2.2
+    energy: 1.2
+    color: "#7cf64b"
+
+# 2. Potted, soft cyan — the after-hours model.
+- type: entity
+  id: SolreignGlowPlantCyan
+  parent: PottedPlantBase
+  name: ambient serenity shrub
+  suffix: solreign, delighter
+  description: Emits a calming cyan glow calibrated by the Wellness Department. Prolonged exposure may cause feelings of gratitude toward your employer.
+  components:
+  - type: Sprite
+    sprite: _Solreign/solreign-glow-plants.rsi
+    state: plant-05
+    color: "#c9f7ef"
+  - type: PointLight
+    radius: 2.0
+    energy: 1.0
+    color: "#4bf6d8"
+
+# 3. Wild variant — a glowing tree for maints/planet maps.
+#    Parents upstream LightTree (keeps its glow layers, random sprites and
+#    log/luminous-mob destructible behaviors); only rebrands and recolors the light.
+- type: entity
+  parent: LightTree
+  id: SolreignGlowTreeAcid
+  name: unlicensed bioluminescent asset
+  suffix: solreign, delighter
+  description: A wild tree glowing a familiar shade of acid-green. Legal insists it signed the licensing agreement voluntarily.
+  components:
+  - type: PointLight
+    radius: 2.5
+    energy: 3.5
+    color: "#7cf64b"

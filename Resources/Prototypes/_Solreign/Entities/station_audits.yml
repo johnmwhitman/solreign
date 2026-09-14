@@ -1,0 +1,14 @@
+# Station Audits (v14 wave-1 #3, council C1 deltav-008 lineage — CLEAN-ROOM: built fresh from this
+# fork's own idioms, no upstream/Delta-V code read or copied; only their public "a paper station
+# report reaches the round-end screen" description informed the shape). PROVIDENCE's end-of-shift
+# keepsake paper — content is assembled and stamped at spawn time by StationAuditSystem via
+# PaperSystem.SetContent, the same idiom as SolreignFinalBalanceSheetRule's ledger book. No static
+# `content:` field here: unlike the Season 1 lore papers this is REAL per-round data, never
+# closed-YAML flavor text baked in ahead of time.
+
+- type: entity
+  parent: PaperOffice
+  id: SolreignPaperStationAudit
+  suffix: solreign, station-audit, keepsake
+  name: station audit
+  description: A dense, deadpan summary of the shift just ended, stamped with the Solreign seal.

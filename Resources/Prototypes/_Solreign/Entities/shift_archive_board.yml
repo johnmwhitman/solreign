@@ -1,0 +1,26 @@
+- type: entity
+  parent: BaseWallmountMetallic
+  id: SolreignShiftArchiveBoard
+  name: Shift Archive
+  suffix: solreign
+  description: A wall screen where PROVIDENCE keeps the record of recent shifts. The station remembers what you did here.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: Structures/Wallmounts/signalscreen.rsi
+    state: signalscreen
+  - type: ShiftArchiveBoard
+  - type: ActivatableUI
+    key: enum.ShiftArchiveUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.ShiftArchiveUiKey.Key:
+        type: ShiftArchiveBoundUserInterface
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

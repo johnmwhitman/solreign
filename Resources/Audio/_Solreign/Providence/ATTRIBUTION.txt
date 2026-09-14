@@ -1,0 +1,10 @@
+PROVIDENCE voice pack (50 lines): gemini-2.5-flash-tts, Kore voice, per-line delivery directions, loudnorm I=-16. Generated 2026-07-11, ~$0.10. Persona chosen by LJ.
+
+2026-07-22 addition (10 idle_musings lines, idle_musings_09..18): gemini-2.5-flash-tts,
+Kore voice, per-line delivery directions, loudnorm I=-16 TP=-1.5 LRA=11, vorbis 24kHz mono.
+Source text + delivery directions: lines_2026-07-22.tsv (next to this file).
+NOTE: the original pack's persona BASE_STYLE string was never recorded anywhere, so these
+used gen_voice_pack.sh's own example string:
+  "calm synthetic female station AI, passive-aggressive corporate contempt, crisp diction,
+   subtle electronic sheen"
+If the new lines read as a different character to the original 50, that is the reason.

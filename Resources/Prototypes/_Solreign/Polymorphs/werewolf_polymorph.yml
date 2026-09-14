@@ -1,0 +1,37 @@
+# Solreign — the werewolf's "Unscheduled Fur Event" body-swap (spec
+# docs/specs/2026-07-11-werewolf-vampire-spec.md §2.2, §3.2).
+#
+# Referenced by ID from Content.Server/_Solreign/Antags/Werewolf/SolreignWerewolfComponent.cs's
+# WolfPolymorphPrototype field ("SolreignWerewolfPolymorph"). Until this file existed, that
+# reference resolved to nothing anywhere in Resources/Prototypes/ and every Full Moon Window
+# transform silently no-opped at SolreignWerewolfSystem.Transform.cs's OnEnterTransformed (a
+# defensive TryIndex miss, logged and swallowed — no wolf, no message, no failure feedback). This
+# is Phase-2 Track A1's headline fix, per docs/plans/2026-07-11-ROADMAP-PHASE2.md.
+#
+# duration: intentionally NOT set. SolreignWerewolfSystem owns the Transformed/Waning timing itself
+# (the pure WerewolfStateMachine) and calls PolymorphSystem.Revert directly from
+# SolreignWerewolfSystem.Transform.cs's OnEnterWaning. If this prototype ALSO set a Duration,
+# PolymorphSystem.Update's own per-tick auto-revert check would race the state machine's explicit
+# revert — same reasoning the spec's own study of PolymorphSystem (§2.2) already worked through.
+
+- type: polymorph
+  id: SolreignWerewolfPolymorph
+  configuration:
+    entity: SolreignMobWerewolfForm
+    forced: true # the wolf never gets a player-facing "revert now" action; only the state machine
+                 # (via OnEnterWaning) ever calls Revert — same idiom as WizardForcedSkeleton et al.
+    inventory: None # gear stays safely on the paused human body for the whole episode (spec §2.2:
+                     # "inventory: None so gear survives")
+    transferName: true # "the wolf that mauled you" reads better with the drafted employee's name on it
+    transferDamage: true
+    revertOnCrit: true # spec §3.4: "crit auto-reverts (polymorph revertOnCrit)"
+    revertOnDeath: true
+    polymorphSound: !type:SoundPathSpecifier
+      path: /Audio/Voice/Vulpkanin/howl.ogg
+    exitPolymorphSound: !type:SoundPathSpecifier
+      path: /Audio/Voice/Vulpkanin/dog_whine.ogg
+    # Both null: SolreignWerewolfSystem.Transform.cs already fires its own bespoke popups on
+    # transform (OnEnterTransformed) and stays presentation-silent on revert (OnEnterWaning — the
+    # visible crawl says it all, spec §3.2) — the upstream generic popups would just double up.
+    polymorphPopup: null
+    exitPolymorphPopup: null

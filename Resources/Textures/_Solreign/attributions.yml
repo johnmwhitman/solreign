@@ -1,0 +1,73 @@
+# Solreign in-house sprites. All RSIs on this list are AI-generated for this
+# project (Imagen 4 via Vertex AI, no external clones, no third-party art),
+# then processed through a deterministic PIL pipeline (background key-out,
+# crop, downscale, palette quantization, alpha clean) into game-ready RSIs.
+# Full generation parameters (prompts, seeds, cost) and the pipeline recipe
+# are recorded in assets/sprites-batch1/PROVENANCE.md in the project
+# workspace (not shipped in this repo). Sprite wiring batch 1, 2026-07-11,
+# client-approved.
+
+- files: ["scarlet.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Black cocker spaniel station pet: 4-direction walk cycle + dead state, generated with Imagen 4 via Vertex AI, tail docked per client feedback (deterministic pixel-erasure pass, no regeneration). Provenance: In-house generation, 2026-07-11. See assets/sprites-batch1/PROVENANCE.md. Wired: Resources/Prototypes/_Solreign/Entities/delighters/scarlet.yml (MobScarlet)."
+  source: "NA"
+
+- files: ["hot_potato.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Steaming baked potato with a lit sparking fuse, cartoon bomb style, single icon state, generated with Imagen 4 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/sprites-batch1/PROVENANCE.md. Wired: Resources/Prototypes/_Solreign/Entities/hot_potato.yml (SolreignHotPotatoBomb)."
+  source: "NA"
+
+- files: ["companion_cube.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Grey weighted metal cube with riveted corner plates and an acid-green heart, single icon state, generated with Imagen 4 via Vertex AI. Provenance: In-house generation, 2026-07-11. See assets/sprites-batch1/PROVENANCE.md. Wired: Resources/Prototypes/_Solreign/Entities/portal_props.yml (SolreignCompanionCube, SolreignCompanionCubeStructure)."
+  source: "NA"
+
+- files: ["unicorn.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Small white unicorn pony with a gold horn, single icon state, generated with Imagen 4 via Vertex AI (3rd revision template after 2 rejected attempts, see PROVENANCE.md). Provenance: In-house generation, 2026-07-11. See assets/sprites-batch1/PROVENANCE.md. NOT WIRED to a visual yet — see the sprite-gap note in Resources/Prototypes/_Solreign/Entities/delighters/unicorn.yml (SolreignMobUnicorn): the mob's MobSheepBase parent needs 4-directional animated states this icon-only RSI can't supply without breaking directional turning or the RGB wooly-layer swap."
+  source: "NA"
+
+# --- Production batch 10 (worn-sprite wave), 2026-07-16 ---
+# Full run report: ~/AI/SUCCESSION/staged/ccbync-swap/production-batch-10-worn/RUN-REPORT.md
+# (staging area, not shipped in this repo). MiniMax image-01 for the 6 fresh generations
+# below (0 cdx-image rerolls used); foam_crossbow_solreign.rsi is a 0-generation procedural
+# recolor of this repo's own already-shipped foam_crossbow art.
+
+- files: ["foam_crossbow_solreign.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed) -- acid-green house-idiom recolor of the existing (non-NC, CC0-1.0) Solreign FoamCrossbow art; 0 generation calls. Provenance: Production batch 10, 2026-07-16. Wired: Resources/Prototypes/_Solreign/Entities/weapons_chaos_tier.yml (SolreignFoamCrossbow), superseding the prior runtime color-tint hack."
+  source: "NA"
+
+- files: ["navy_sabre.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Navy officer's sabre: custom weapon art, icon + inhand-left/right + equipped-BELT, generated with MiniMax image-01, 1/1 first-try. Provenance: Production batch 10, 2026-07-16. Wired: Resources/Prototypes/_Solreign/Entities/navy_officer_sabre.yml (SolreignNavyOfficerSabre), superseding the captain_sabre.rsi placeholder; a new Clothing (Belt slot) component was added to realize the equipped-BELT state."
+  source: "NA"
+
+- files: ["founders_seal.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Oasis Founder's Seal: fist-sized disc of cast metal embossed with a crest, icon only, generated with MiniMax image-01, 1/1 first-try. Original art, not a reused/tinted artifact-fragment state like the Leviathan/Meridian showpieces. Provenance: Production batch 10, 2026-07-16. Wired: Resources/Prototypes/_Solreign/Entities/oasis_identity.yml (SolreignOasisFoundersIdol), superseding the artifact_fragments.rsi tinted placeholder."
+  source: "NA"
+
+- files: ["greenshield_jumpsuit.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Greenshield Officer uniform jumpsuit: icon + equipped-INNERCLOTHING/-monkey + inhand-left/right, generated with MiniMax image-01, 1/1 first-try. Provenance: Production batch 10, 2026-07-16. Wired: Resources/Prototypes/_Solreign/Roles/greenshield.yml (SolreignGreenshieldOfficerUniform, new entity)."
+  source: "NA"
+
+- files: ["greenshield_armor.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Greenshield Officer armor vest: icon + equipped-OUTERCLOTHING/-vox + inhand-left/right, generated with MiniMax image-01, 1/1 first-try. Provenance: Production batch 10, 2026-07-16. Wired: Resources/Prototypes/_Solreign/Roles/greenshield.yml (SolreignGreenshieldOfficerArmor, new entity)."
+  source: "NA"
+
+- files: ["halcyon_hoverpack.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Halcyon hoverpack: soft rounded pack with two fold-out foam wings, acid-green piping, icon + equipped-BACKPACK + inhand-left/right, generated with MiniMax image-01, 1/1 first-try. Provenance: Production batch 10, 2026-07-16. Wired: Resources/Prototypes/_Solreign/Entities/gear.yml (SolreignClothingBackHalcyonHoverpack), superseding the backpack.rsi placeholder."
+  source: "NA"
+
+- files: ["verge_courier_satchel.rsi"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Verge courier satchel: courier-style satchel with acid-green mail chevron and a stamp-pocket flap, icon + equipped-BACKPACK + inhand-left/right, generated with MiniMax image-01, 1/1 first-try. Provenance: Production batch 10, 2026-07-16. Wired: Resources/Prototypes/_Solreign/Entities/gear.yml (SolreignClothingBackVergeCourierSatchel), superseding the satchel.rsi placeholder."
+  source: "NA"
+- files: ["verge_vanguard_visor.rsi"]
+  license: "CC0-1.0"
+  copyright: "Solreign (AI-generated, human-reviewed). Verge vanguard visor: acid-green goggle visor, icon + equipped-HELMET (4-dir, measured anchor refit), generated with PixelLab create-8-direction-object, Sprite Factory 2026-08-02. Wired: Resources/Prototypes/_Solreign/Entities/gear.yml (SolreignClothingHeadVergeVanguardVisor), superseding the corpsoft.rsi placeholder inheritance."
+  source: "NA"

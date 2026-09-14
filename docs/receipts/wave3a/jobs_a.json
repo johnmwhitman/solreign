@@ -1,0 +1,79 @@
+[
+ {
+  "asset": "powersink",
+  "state": "powersink",
+  "prompt": "a tall boxy sci-fi mechanical device console, dark navy-black screen panel on top, flanked by two thin red antenna-like spikes, grey metal chassis body with small red accent details and control panel texture at the base, standing upright",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "basketball",
+  "state": "icon",
+  "prompt": "an orange basketball sphere with black seam lines in the classic basketball pattern",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "syndicate",
+  "state": "icon",
+  "prompt": "a shield-shaped red balloon with a bold white numeral 5 logo centered on it, thin grey curly string hanging below",
+  "key": "green",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "lamp",
+  "state": "icon",
+  "prompt": "a small desk lamp with a green conical lampshade, tan beige spring-arm body, round gold base",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "foam_grenade",
+  "state": "icon",
+  "prompt": "a toy grenade shaped like an orange pineapple with a green pin and handle lever on top, foam toy prop",
+  "key": "magenta",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "singularityhammer",
+  "state": "icon",
+  "prompt": "a stylized fantasy warhammer held diagonally, dark obsidian-black hammer head rimmed in glowing orange-gold, dark maroon-purple handle",
+  "key": "cyan",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "asset": "cutlass",
+  "state": "icon",
+  "prompt": "a curved cutlass sword held diagonally, silver-white blade, ornate gold hilt and guard with a dark brown grip wrap",
+  "key": "cyan",
+  "variants": [
+   1,
+   2,
+   3
+  ]
+ }
+]

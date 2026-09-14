@@ -1,0 +1,35 @@
+# FX Language v1's ONE piece of genuinely new client cosmetic-entity infrastructure (spec §2.1) —
+# a single, generic, client-only, non-networked pooled sprite entity. Content.Client._Solreign.FX.
+# SolreignFxRenderPool spawns a fixed number of these per Content.Shared._Solreign.FX.SolreignFxCategory
+# (its concurrent cap) once, at pool-init, via Spawn(id, MapCoordinates.Nullspace) — never despawned,
+# only parked (moved back to nullspace, hidden, light disabled) between activations and re-skinned
+# (RSI/state/color/scale/light set at activation time by the renderer, per the specific primitive's
+# Content.Shared._Solreign.FX.SolreignFxPrimitiveAssets entry).
+#
+# Deliberately generic (one prototype for every sprite-having primitive) rather than one prototype
+# per primitive — the sprite/color/light are entirely code-driven per activation, so a single
+# reusable shape avoids 8 near-identical YAML entries for zero behavioral gain.
+#
+# categories: [ HideSpawnMenu ] mirrors spores.yml's precedent for a purely-cosmetic helper entity
+# nobody should ever admin-spawn by hand.
+- type: entity
+  id: SolreignFxCosmeticSprite
+  name: FX cosmetic sprite
+  description: A pooled, client-only cosmetic effect sprite used by FX Language v1. Not player-facing.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolreignFxPooledSprite
+  - type: Sprite
+    visible: false
+    noRot: true
+    drawdepth: Effects
+    layers:
+    - state: sparks
+      sprite: Effects/sparks.rsi
+      visible: false
+  - type: PointLight
+    enabled: false
+    castShadows: false
+    radius: 1.5
+    energy: 1.0
+    softness: 2

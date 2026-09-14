@@ -1,0 +1,189 @@
+# Solreign Leviathan — the megacorp HEADQUARTERS chassis. Lane 1 (largest) of the concurrent
+# big-chassis maps wave — see Resources/Prototypes/Maps/_Solreign/solreign_meridian.yml (lane 3)
+# for the sibling lane-coordination note; this file is lane 1's own version of that same survey:
+#
+#   Fland         minPlayers 70, grid 4.8M  -> lane 1 (largest, THIS ONE)
+#   Box           minPlayers 50, grid 3.7M  -> lane 2 (second)
+#   Marathon      minPlayers 35, grid 3.0M  -> lane 3 (Meridian, third)
+#
+# (Serpentcrest ties Box's grid size but was set aside by lane 3 as a multi-grid pirate-wreck POI,
+# not a clean StandardNanotrasenStation hull — same reasoning applies here, so it was never a
+# candidate for the single-biggest pick either.) Fland verified single-grid `StandardNanotrasenStation`
+# before picking it: `grids: [13329]`, 81-job StationJobs roster (largest job count of any chassis
+# surveyed), genuinely sprawling command wing (Captain + HoP + Bridge control room + a fully-dressed
+# Vault trophy room, all contiguous) — the natural "corporate headquarters" read without fighting the
+# base building's own fiction.
+#
+# Chassis: Resources/Maps/fland.yml (see Resources/map_attributions.txt, authors: Emisse), copied
+# byte-for-byte to Resources/Maps/_Solreign/solreign_leviathan.yml. Every new entity is an ADDITION
+# appended to the end of the copied grid file's `entities:` list, at fresh uids (900001-900025,
+# comfortably clear of upstream's max uid 37916) — no upstream tile chunk or entity was edited or
+# removed (W14 lesson: never copy tile-chunk data between map files — this build doesn't touch tile
+# data at all, only adds furniture/props on top of the existing, unmodified floor).
+#
+# W14 lesson applied: BecomesStation `id:` in the grid file was renamed Fland -> SolreignLeviathan
+# (the file's only `BecomesStation` block, on the main hull grid uid 13329) to match the `stations:`
+# key below.
+#
+# ── IDENTITY PASS (every coordinate below was grep-verified against an existing entity already
+#    placed at that exact tile in fland.yml, per this session's own "anchor on proven floor" method
+#    — no coordinate here was picked blind) ──
+#
+#   * BOARDROOM — the Captain's private dining nook (upstream Fland's own furnished lounge: existing
+#     TableWood cluster + Fireplace + ComfyChair around 76.5-77.5,49.5-51.5) reframed and extended
+#     into the corporate boardroom: one new TableWood at 78.5,50.5 lengthens the existing table into
+#     a proper long table; two ChairBrass ("the First/Second Chair") at 79.5,51.5 and 82.5,51.5 flank
+#     it as the executive thrones; `SolreignCakeShowcaseFilled` (Portal pack, Resources/Prototypes/
+#     _Solreign/Entities/portal_props.yml — first placement of this prototype anywhere in the fork)
+#     sits just off the table at 78.5,49.5 — the Employee Reward Cake, on display, permanently
+#     unclaimed. `SolreignPaperLeviathanLog2` ("Board Minutes") sits on the table itself at 77.5,49.5.
+#   * CEREMONY ATRIUM — the Captain's-quarters entry stairs/railing platform (upstream's own raised
+#     dais right next to `SpawnPointCaptain`, 79.5-80.5,44-47) dressed as the ceremony dais: a
+#     `RandomPainting` portrait at 80.5,44.5, a `PottedPlant22` at 78.5,44.5, and a second `SignPlaque`
+#     instance ("ceremony dais plaque") at 79.5,46.5. Title-ceremony announcements themselves
+#     (`SeasonLedgerSystem.Ceremony.cs`'s `AnnounceTitleCeremony`) are a station-wide broadcast with
+#     no map marker to place — this dais is the physical stage that broadcast lands on.
+#   * EXECUTIVE VENDOR'S FLAGSHIP HOME — the Vault's own windowed viewing gallery (upstream's twin
+#     window bays at 86.5,45-47 and 86.5,50-52, split by the load-bearing wall pillar that already
+#     carries the existing `SignPlaque`/`PaintingOlympia` at 86.5,48-49): `SolreignExecutiveVendor`
+#     (Contracts M4, Resources/Prototypes/_Solreign/Entities/contracts_executive_vendor.yml — first
+#     placement of this prototype anywhere in the fork) sits at 86.5,47.5, in the north bay.
+#   * SCALE GIMMICK: EXECUTIVE CONCOURSE — Fland's own single native `ConveyorBelt` instance is an
+#     isolated disposal-adjacent belt, not a spine (checked before building this), so per the brief's
+#     own fallback clause this is a hand-built moving-walkway: five new `ConveyorBelt` entities
+#     (86.5,45.5 / 46.5 in the north bay; 86.5,50.5 / 51.5 / 52.5 in the south bay, both flanking the
+#     Vendor's alcove) plus a `SignalSwitch` ("concourse walkway switch") at 86.5,45.5 wired
+#     (`DeviceLinkSource.linkedPorts`, On->Forward/Off->Off) to all five — admins/players can throw it
+#     to run the walkway the length of the Vault gallery. Off by default (belts spawn in their normal
+#     off state; this is a deliberate, discoverable little machine, not always-on scenery).
+#   * HELL-ZONE ENTRY GATE — placed in deep maintenance for the first time anywhere in the fork
+#     (Resources/Prototypes/_Solreign/Entities/Markers/hellzone_gates.yml's own header: "NOT placed
+#     anywhere by this wave... the follow-up mapping step"). `SolreignSublevelHGate` at 1.5,15.5, in
+#     the maintenance shaft right by the existing `AirlockMaintLocked` at 2.5,15.5. Its
+#     `SolreignCrimsonKeycard` sits on a new `Rack` at 0.5,15.5, one tile over — findable, not
+#     handed to the player standing at the gate.
+#   * HR WING — the Head of Personnel's office (existing `SpawnPointHeadOfPersonnel`/
+#     `LockerHeadOfPersonnelFilled`/`DresserHeadOfPersonnelFilled` cluster, 63.5-65.5,44-51) gets a
+#     new `filingCabinetTallRandom` (63.5,50.5), two reused `SolreignPaperAuditorMemo7`/`8` lore
+#     papers (Resources/Prototypes/_Solreign/Entities/lore_papers.yml — previously placed only on
+#     Oasis; reused verbatim here, same idiom Perihelion's shrine reuse established) at 63.5,46.5 and
+#     63.5,45.5, and the "termination processing" dark-joke office: an existing upstream `Recycler`
+#     machine (renamed "termination processing recycler") at 63.5,47.5, with `SolreignPaperLeviathanLog1`
+#     ("Internal Memo") on the existing TableWood at 65.5,44.5 clarifying — at length, unconvincingly —
+#     that the recycler is for scrap metal only.
+#   * 4 SECRETS: (1) the showpiece — `SolreignLeviathanFoundersSeal` (Resources/Prototypes/_Solreign/
+#     Entities/leviathan_identity.yml), sitting quietly on the Vault's own loot table at 87.5,51.5
+#     among the existing trophy-room dressing; no announce/alert hook per
+#     docs/specs/2026-07-11-showpiece-placement.md §1. (2) the reused "melted maintenance shrine"
+#     idiom — a second `StatueIronsandTall` instance ("forgotten founder's idol") at 0.5,16.5, in the
+#     same maintenance shaft as the Hell gate. (3) `SolreignPaperLeviathanLog1` (HR wing, above).
+#     (4) `SolreignPaperLeviathanLog2` (Boardroom, above) — counted as its own separate secret rather
+#     than paired with (3), since this station's brief asks for one more secret than Perihelion's 3.
+#   * MOOD — `SolreignStationMood` (Content.Server/_Solreign/StationIdentity, reused per this task's
+#     own instruction): a slow imperial day/night lerp (`cyclePeriodSeconds: 5400`, 90 minutes full
+#     cycle — noticeably slower than Perihelion's 2400s, matching "imperial gravitas" over
+#     Perihelion's more active solar-flare pacing), marble-grey night / pale acid-green institutional
+#     day (`colorA`/`colorB` below), preferring BOTH existing weather events (`SolreignSolarFlare`,
+#     `SolreignSporeDrift` — game_rules_weather.yml ships no dedicated "audit" weather event; that's
+#     out of this map-only lane's scope, so "audit-heavy" is carried instead by four audit-flavored
+#     `MoodPopupLines`, Resources/Locale/en-US/_solreign/leviathan.ftl).
+#
+# `minPlayers: 0` (this fork's standing convention for the Solreign map-pool stations, overriding
+# Fland's native 70 — see Perihelion's own header for the precedent) / `maxPlayers: 90` — bumped
+# above Meridian's 70 to reflect this being the single largest chassis in the pool (Fland's native
+# 81-job roster comfortably supports it); re-tune only alongside a real playtest pass, not blind
+# from this prototype.
+
+- type: gameMap
+  id: SolreignLeviathan
+  mapName: 'Solreign Leviathan'
+  mapPath: /Maps/_Solreign/solreign_leviathan.yml
+  minPlayers: 30
+  maxPlayers: 90
+  stations:
+    SolreignLeviathan:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Solreign Leviathan {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'LV'
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/Shuttles/emergency_delta.yml
+        - type: StationCargoShuttle
+          path: /Maps/Shuttles/cargo_fland.yml
+        # Mood rollout pass (2026-07-16): the pale-green #E8F5D0 bright endpoint sat too close to
+        # Meridian's own pale-mint, and the two largest-chassis stations reading as the same green
+        # at a glance undercut both. ColorA (near-black marble, at the safety floor already
+        # documented on SolreignStationMoodComponent -- do not go darker) is unchanged; ColorB
+        # retuned to a cooler champagne-ivory so Leviathan's day cycle reads as "opulent executive
+        # luxury," distinct from both Meridian's lab-clinical white and Perihelion's sun-cream.
+        - type: SolreignStationMood
+          dayNightCycle: true
+          cyclePeriodSeconds: 5400
+          colorA: '#1E1E24'
+          colorB: '#F0E8D4'
+          weatherEventPrototypes:
+          - SolreignSolarFlare
+          - SolreignSporeDrift
+          moodPopupLines:
+          - solreign-leviathan-mood-popup-1
+          - solreign-leviathan-mood-popup-2
+          - solreign-leviathan-mood-popup-3
+          - solreign-leviathan-mood-popup-4
+        - type: StationJobs
+          availableJobs: # carried over from Fland verbatim (81 jobs w/ latejoins & interns); re-tune only
+            # alongside a real mapping/playtest pass, not blind from this prototype
+            #command (7)
+            Captain: [ 1, 1 ]
+            HeadOfPersonnel: [ 1, 1 ]
+            HeadOfSecurity: [ 1, 1 ]
+            ChiefMedicalOfficer: [ 1, 1 ]
+            ChiefEngineer: [ 1, 1 ]
+            ResearchDirector: [ 1, 1 ]
+            Quartermaster: [ 1, 1 ]
+            #service (17)
+            Bartender: [ 2, 2 ]
+            Botanist: [ 3, 3 ]
+            Chef: [ 2, 2 ]
+            Janitor: [ 4, 4 ]
+            Chaplain: [ 1, 1 ]
+            Librarian: [ 1, 1 ]
+            ServiceWorker: [ 2, 2 ]
+            Reporter: [ 2, 2 ]
+            #engineering (9)
+            AtmosphericTechnician: [ 3, 3 ]
+            StationEngineer: [ 6, 6 ]
+            TechnicalAssistant: [ 4, 4 ] #intern, not counted
+            #medical (11)
+            Chemist: [ 3, 3 ]
+            MedicalDoctor: [ 6, 6 ]
+            Paramedic: [ 2, 2 ]
+            MedicalIntern: [ 4, 4 ] #intern, not counted
+            #science (5)
+            Scientist: [ 5, 5 ]
+            ResearchAssistant: [ 6, 6 ] #intern, not counted
+            #security (14)
+            Warden: [ 1, 1 ]
+            SecurityOfficer: [ 10, 10 ]
+            Detective: [ 1, 1 ]
+            SecurityCadet: [ 6, 6 ] #intern, not counted
+            Lawyer: [ 2, 2 ]
+            #supply (11)
+            SalvageSpecialist: [ 3, 3 ]
+            CargoTechnician: [ 6, 6 ]
+            SolreignSectorFreightMaster: [ 1, 1 ]
+            SolreignExpeditionSpecialist: [ 1, 1 ]
+            #civilian (3+)
+            Passenger: [ -1, -1 ] #infinite, not counted
+            # Pair-up onboarding roles; both present as Passenger in-game and share a
+            # private radio channel. Unlimited like Passenger so onboarding is never capped.
+            Wingmate: [ -1, -1 ]
+            WingmateMentor: [ -1, -1 ]
+            Clown: [ 1, 1 ]
+            Mime: [ 1, 1 ]
+            Musician: [ 1, 1 ]
+            #silicon (6)
+            StationAi: [ 1, 1 ]
+            Borg: [ 5, 5 ]

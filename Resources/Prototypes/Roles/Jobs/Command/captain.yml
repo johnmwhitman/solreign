@@ -1,0 +1,54 @@
+- type: job
+  id: Captain
+  name: job-name-captain
+  description: job-description-captain
+  playTimeTracker: JobCaptain
+  # Solreign J4 (ROADMAP-SEASON1-VISION.md #2): open server, gated command role.
+  # Upstream's default asks for 4h in EACH of 5 departments (20h total, spread across
+  # departments a small friend/show server will never naturally produce). Replaced with
+  # a single modest overall-playtime floor so brand-new accounts can't walk into Captain
+  # on day one, without permanently locking the role behind unreachable department diversity.
+  # 2026-07-22 (player report): 10h was unreachable at this population -- ~10 full shifts on a
+  # server where the player is often the only one online, so it read as a grind wall rather
+  # than a trust gate and directly fought acquisition. 2h keeps the original intent (a
+  # brand-new account still can't walk in on day one; ~1-2 shifts proves you're not a
+  # drive-by griefer) while being clearable in a single evening. Revisit upward if/when
+  # concurrent population makes Captain a contested role.
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 2h
+  startingGear: CaptainGear
+  icon: "JobIconCaptain"
+  joinNotifyCrew: true
+  supervisors: job-supervisors-centcom
+  accessGroups:
+  - AllAccess
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+      - type: CommandStaff
+
+- type: startingGear
+  id: CaptainGear
+  equipment:
+    shoes: ClothingShoesBootsLaceup
+    eyes: ClothingEyesGlassesCommand
+    gloves: ClothingHandsGlovesCaptain
+    id: CaptainPDA
+    ears: ClothingHeadsetAltCommand
+  storage:
+    back:
+    - Flash
+    # - StationCharter
+
+- type: chameleonOutfit
+  id: CaptainChameleonOutfit
+  job: Captain
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHatCapcap
+    eyes: ClothingEyesGlassesCommand
+    mask: ClothingMaskGasCaptain
+    neck: ClothingNeckCloakCap

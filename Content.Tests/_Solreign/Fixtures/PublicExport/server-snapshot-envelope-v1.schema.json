@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://solreign.net/schemas/server-snapshot-envelope-v1.schema.json",
+  "title": "SOLREIGN ServerSnapshotV1 signed envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "message_type",
+    "message_id",
+    "publisher_id",
+    "stream_id",
+    "sequence",
+    "occurred_at",
+    "published_at",
+    "key_id",
+    "idempotency_key",
+    "payload"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "message_type": {
+      "const": "ServerSnapshotV1"
+    },
+    "message_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "publisher_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^game-host-[a-z0-9][a-z0-9._-]{0,53}$"
+    },
+    "stream_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96,
+      "pattern": "^public-status-[a-z0-9][a-z0-9._-]{0,81}$"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "occurred_at": {
+      "$ref": "#/$defs/utcSecond"
+    },
+    "published_at": {
+      "$ref": "#/$defs/utcSecond"
+    },
+    "key_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^publisher-[a-z0-9][a-z0-9._-]{0,53}$"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 185,
+      "pattern": "^status:[a-z0-9][a-z0-9._-]*:[a-z0-9][a-z0-9._-]*:[1-9][0-9]{0,15}$"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "build_sha",
+        "map_id",
+        "population",
+        "capacity",
+        "round_phase",
+        "season_id",
+        "generated_at",
+        "fresh_until"
+      ],
+      "dependentRequired": {
+        "next_event_id": ["next_event_at"],
+        "next_event_at": ["next_event_id"]
+      },
+      "properties": {
+        "build_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "map_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 96,
+          "pattern": "^[A-Z][A-Za-z0-9]{0,95}$"
+        },
+        "population": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "capacity": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "round_phase": {
+          "type": "string",
+          "enum": ["lobby", "in_round", "post_round", "unknown"]
+        },
+        "season_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^season-[a-z0-9][a-z0-9._-]{0,56}$"
+        },
+        "generated_at": {
+          "$ref": "#/$defs/utcSecond"
+        },
+        "fresh_until": {
+          "$ref": "#/$defs/utcSecond"
+        },
+        "round_elapsed_bucket": {
+          "type": "string",
+          "enum": ["0-15m", "15-30m", "30-60m", "60-90m", "90m+"]
+        },
+        "next_event_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 96,
+          "pattern": "^event-[a-z0-9][a-z0-9._-]{0,89}$"
+        },
+        "next_event_at": {
+          "$ref": "#/$defs/utcSecond"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "utcSecond": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]Z$"
+    }
+  }
+}

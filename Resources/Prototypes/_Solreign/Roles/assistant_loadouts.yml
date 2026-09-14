@@ -1,0 +1,82 @@
+# Role loadouts for the SOLREIGN onboarding-track jobs.
+#
+# WHY THIS FILE EXISTS — a player reported on 2026-07-30 that "all the assistant/intern roles
+# seem to be naked". They were, and the cause is a SILENT skip rather than an error:
+#
+#   LoadoutSystem.GetJobPrototype(id) returns "Job" + id   (Content.Shared/Clothing/LoadoutSystem.cs:39)
+#   StationSpawningSystem then does:
+#       if (ProtoMan.TryIndex(jobLoadout, out RoleLoadoutPrototype? roleProto))  ... :98
+#           ... EquipRoleLoadout(entity, loadout, roleProto!)                    ... :149
+#
+# EquipRoleLoadout lives INSIDE that TryIndex guard. The five SOLREIGN jobs each shipped a
+# `playTimeTracker` named JobSolreign* but no `roleLoadout` of that name, so TryIndex returned
+# false, the whole block was skipped, and no loadout — including the jumpsuit — was ever applied.
+# No exception, no warning, no failing test: the character simply spawned in its underwear.
+#
+# Note the jumpsuit does NOT come from `startingGear`. Vanilla's MedicalInternGear omits it too;
+# body clothing is supplied by the loadout groups below. Adding a jumpsuit to startingGear would
+# have masked the real defect and left every other loadout group (backpack, survival, trinkets,
+# species breath tools) still missing.
+#
+# Each entry mirrors its closest vanilla counterpart and reuses only EXISTING loadout groups, so
+# the YAML linter proves every reference resolves.
+
+- type: roleLoadout
+  id: JobSolreignMedicalIntern
+  groups:
+  - GroupTankHarness
+  - MedicalInternJumpsuit
+  - MedicalBackpack
+  - Glasses
+  - AssistiveItems
+  - SurvivalMedical
+  - Trinkets
+  - GroupSpeciesBreathToolMedical
+
+- type: roleLoadout
+  id: JobSolreignResearchAssistant
+  groups:
+  - GroupTankHarness
+  - ResearchAssistantJumpsuit
+  - ScientistBackpack
+  - Glasses
+  - AssistiveItems
+  - Survival
+  - Trinkets
+
+- type: roleLoadout
+  id: JobSolreignEngineeringApprentice
+  groups:
+  - GroupTankHarness
+  - TechnicalAssistantJumpsuit
+  - StationEngineerBackpack
+  - AssistiveItems
+  - SurvivalExtended
+  - Trinkets
+
+- type: roleLoadout
+  id: JobSolreignCargoTrainee
+  groups:
+  - GroupTankHarness
+  - CargoTechnicianHead
+  - CargoTechnicianJumpsuit
+  - CargoTechnicianBackpack
+  - CargoTechnicianOuterClothing
+  - CargoTechnicianShoes
+  - Glasses
+  - AssistiveItems
+  - Survival
+  - Trinkets
+
+- type: roleLoadout
+  id: JobSolreignKitchenHand
+  groups:
+  - GroupTankHarness
+  - ChefHead
+  - ChefJumpsuit
+  - CommonBackpack
+  - ChefOuterClothing
+  - Glasses
+  - AssistiveItems
+  - Survival
+  - Trinkets

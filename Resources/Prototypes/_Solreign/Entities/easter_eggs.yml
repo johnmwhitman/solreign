@@ -1,0 +1,439 @@
+# Solreign easter-egg reskin pack — items 1-20 of section A,
+# docs/research/solreign-creative-bible-agx.md.
+# Additive cosmetic reskins: each parents a verified vanilla prototype and
+# overrides name + description (+ suffix for admin spawn menus) plus a custom
+# Solreign sprite from Textures/_Solreign/EasterEggs/ (factory: assets/
+# sprites-batch2, provenance in that folder's PROVENANCE.md). Homage, not
+# copy: no trademarked names, logos, or symbols.
+#
+# Sprite idiom notes:
+# - Visualizer-driven parents keep their layer maps pointed at our states
+#   (GunVisualLayers.Base, toy-sword "blade", SolutionContainerLayers.Fill,
+#   StorageVisualLayers Base/Door) so appearance systems find their layers.
+# - Fill/open companion states (icon1, icon2, icon_open) are copies of icon —
+#   the "filled"/"open" art is baked into the base sprite by design.
+
+# A1. Portal — handheld aperture device (Science / R&D)
+# SPRITE: sleek white-and-acid-green ray gun with three claw prongs around a glowing circular aperture.
+- type: entity
+  parent: RevolverCapGun
+  id: SolreignEgg01
+  suffix: Solreign, easter egg
+  name: experimental sub-spatial aperture device
+  description: Do not look directly into the operational aperture, even if it promises cake.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg01_aperture.rsi
+    layers:
+    - state: icon
+      map: ["enum.GunVisualLayers.Base"]
+
+# A2. The Legend of Zelda — golden trifecta paperweight (Cargo / Curator)
+# SPRITE: three small golden triangles stacked into one larger triangle, faint glow, desk-toy base.
+- type: entity
+  parent: ToyFigurinePassenger
+  id: SolreignEgg02
+  suffix: Solreign, easter egg
+  name: golden trifecta paperweight
+  description: Hums with power, courage, and a sudden urge to smash nearby pottery.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg02_trifecta.rsi
+    state: icon
+
+# A3. Doom — slayer's chestplate (Security)
+# SPRITE: scarred dark-green sci-fi chestplate, battle-worn, faint orange scorch marks.
+# FIX (2026-07-12, sprite factory batch beta01 — see assets/beta01-sprites/PROVENANCE.md): the
+# worn/ground mismatch was that only `Sprite` (ground/inventory icon) was ever overridden here;
+# `Clothing` (the component that actually drives the on-body worn render) was never set, so
+# equipping this silently fell back to the parent ClothingOuterArmorBasic/Base's upstream
+# security.rsi — i.e. you'd see the custom reliquary icon in your hand but a generic security
+# vest once worn. Added a real `equipped-OUTERCLOTHING` (4-dir) state to the same RSI (a
+# headless torso/shoulder render — the game draws the wearer's own head as a separate layer, so
+# baking a helmet into this state would double up) and pointed `Clothing` at it.
+- type: entity
+  parent: ClothingOuterArmorBasic
+  id: SolreignEgg03
+  suffix: Solreign, easter egg
+  name: slayer's reliquary chestplate
+  description: Scratched, dented, and smelling faintly of brimstone. Ideal for hostile takeovers.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg03_chestplate.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/egg03_chestplate.rsi
+
+# A4. Metal Gear Solid — tactical cardboard container (Cargo)
+# SPRITE: plain cardboard box with stenciled black text "NOTHING TO SEE HERE" and a cut viewport.
+# Open state intentionally looks identical to closed — nothing to see here.
+- type: entity
+  parent: StealthBox
+  id: SolreignEgg04
+  suffix: Solreign, easter egg
+  name: tactical relocation cardboard container
+  description: Emblazoned with "Nothing to see here, keep moving." Fits one corporate spy.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _Solreign/EasterEggs/egg04_cardboard_box.rsi
+    layers:
+    - state: icon
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: icon_open
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: EntityStorageVisuals
+    stateBaseClosed: icon
+    stateDoorOpen: icon_open
+
+# A5. Minecraft — blocky cerulean broadsword (Salvage)
+# SPRITE: chunky pixelated sword made of large cyan-blue square blocks, brown blocky handle.
+- type: entity
+  parent: ToySword
+  id: SolreignEgg05
+  suffix: Solreign, easter egg
+  name: blocky cerulean broadsword
+  description: Forge-crafted from hyper-dense crystalline carbon. Strikes fear into green, exploding fauna.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg05_blocky_sword.rsi
+    layers:
+    - state: icon
+    - state: icon
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+
+# A6. Terraria — apex convergence greatsword (Salvage)
+# SPRITE: oversized rainbow-gradient blade with swirling multicolored energy trail.
+- type: entity
+  parent: ToySword
+  id: SolreignEgg06
+  suffix: Solreign, easter egg
+  name: apex convergence greatsword
+  description: A dazzling composite blade that hums with the collective energy of a dozen lesser tools.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg06_rainbow_sword.rsi
+    layers:
+    - state: icon
+    - state: icon
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+
+# A7. Hollow Knight — pale needle (Cargo / Curator)
+# SPRITE: long thin pale-gray needle-blade with a simple wrapped grip, matte and dusty.
+- type: entity
+  parent: Spear
+  id: SolreignEgg07
+  suffix: Solreign, easter egg
+  name: pale king's needle
+  description: A blunt, gray iron weapon shaped like a large needle. It smells of ancient dust and melancholy.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg07_pale_needle.rsi
+    layers:
+    - state: icon
+    - state: icon1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  # production batch 10 (worn-sprite wave): Spear's own Clothing (slots:[back,suitStorage])
+  # sets no explicit sprite, so this fell back to base-Sprite-RSI resolution -- made
+  # explicit here for robustness. New RSI carries strapped-weapon equipped-BACKPACK/
+  # -SUITSTORAGE + wielded-inhand variants; icon1 (SolutionContainerVisuals fill layer)
+  # preserved untouched from the original RSI, not part of this wave's scope.
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/egg07_pale_needle.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: icon
+    inHandsFillBaseName: -fill-
+    inHandsMaxFillLevels: 1
+
+# A8. Elden Ring — flask of golden grace (Medical)
+# SPRITE: rounded hand-blown glass flask with glowing warm amber liquid and a cork stopper.
+- type: entity
+  parent: DrinkFlaskOld
+  id: SolreignEgg08
+  suffix: Solreign, easter egg
+  name: flask of golden grace
+  description: A beautifully blown glass vessel containing a glowing amber fluid. Read the terms of service before consuming.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg08_grace_flask.rsi
+    state: icon
+  # Delight-eggs batch (feat/delight-eggs): rewards repeated examine with escalating flavor text.
+  - type: SolreignCuriosityExamine
+    tierLocKeys:
+    - solreign-egg08-examine-tier0
+    - solreign-egg08-examine-tier1
+    - solreign-egg08-examine-tier2
+    tierThresholds:
+    - 1
+    - 3
+    - 6
+    rareAsideLocKey: solreign-egg08-examine-aside
+    rareAsideChance: 0.15
+
+# A9. Stardew Valley — astral berry (Hydroponics)
+# SPRITE: single plump purple star-shaped fruit with a green leaf stem and faint sparkle.
+- type: entity
+  parent: FoodBerries
+  id: SolreignEgg09
+  suffix: Solreign, easter egg
+  name: astral berry
+  description: Taking a bite fills your mind with thoughts of farming, fishing, and a very grumpy mayor.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg09_astral_berry.rsi
+    state: icon
+
+# A10. Undertale — heart-shaped red pendant (Service / Chaplain)
+# SPRITE: small bright-red pixel-heart pendant on a thin cord.
+- type: entity
+  parent: ClothingNeckBronzeheart
+  id: SolreignEgg10
+  suffix: Solreign, easter egg
+  name: heart-shaped red pendant
+  description: A simple red trinket. It fills you with a distinct lack of willingness to yield to corporate restructuring.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg10_red_pendant.rsi
+    state: icon
+  # production batch 10 (worn-sprite wave): ClothingNeckBronzeheart's own Clothing.sprite
+  # pointed at bronzeheart.rsi (vanilla). Overridden; equipped-NECK is S-only by design
+  # (N/E/W faithfully empty, matching bronzeheart.rsi's own convention).
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/egg10_red_pendant.rsi
+
+# A11. Celeste — high-altitude winged berry (Hydroponics)
+# SPRITE: red strawberry-like fruit with two small white feathered wings, hovering slightly.
+# ANIMATED (2026-07-12, sprite factory batch beta01 — see assets/beta01-sprites/PROVENANCE.md):
+# `icon` is now a 2-frame wing-flap loop (64x32 strip, delays [[0.18, 0.18]]) instead of a static
+# frame. No yml change needed here — same rsi/state reference, the animation lives in the RSI.
+- type: entity
+  parent: FoodApple
+  id: SolreignEgg11
+  suffix: Solreign, easter egg
+  name: high-altitude winged berry
+  description: A winged red fruit that floats just out of reach unless you dash with extreme precision.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg11_winged_berry.rsi
+    state: icon
+  # Delight-eggs batch (feat/delight-eggs): rewards repeated examine with escalating flavor text.
+  - type: SolreignCuriosityExamine
+    tierLocKeys:
+    - solreign-egg11-examine-tier0
+    - solreign-egg11-examine-tier1
+    - solreign-egg11-examine-tier2
+    tierThresholds:
+    - 1
+    - 3
+    - 6
+    rareAsideLocKey: solreign-egg11-examine-aside
+    rareAsideChance: 0.15
+
+# A12. Metroid — spherical transit capsule (Engineering)
+# SPRITE: orange-and-red segmented sphere with a glowing green core seam.
+#
+# BETA FEEDBACK item 3 (docs/BETA-FEEDBACK-01.md Lane A, "real functionality — roll/fast-move?"):
+# studied three upstream idioms before picking one —
+#   (1) rollerskates (Content.Shared/Clothing/EntitySystems/SkatesSystem.cs): equip-slot clothing,
+#       friction/acceleration tuning + collision damage. Requires an equipped-state sprite this RSI
+#       doesn't have (icon only) — worn in a visible slot would render blank.
+#   (2) a real drivable vehicle (Content.Server/_Solreign/Vehicles/ — the RC car's bind + relay-input
+#       idiom): full buckle/strap + movement-relay machinery, built for a car body you climb into,
+#       not a ball you carry. Far more C# than "add functionality to an easter egg" warrants.
+#   (3) HeldSpeedModifierComponent (Content.Shared/Item/HeldSpeedModifierSystem.cs) — stock, already
+#       reused in-house for the OPPOSITE effect (portal_props.yml's companion cube: "heavy, slows you
+#       down"). Applies purely from being held in a hand (GotEquippedHandEvent/GotUnequippedHandEvent
+#       relay into RefreshMovementSpeedModifiersEvent) — no equip slot, no new sprite states, zero new
+#       C#, zero render risk.
+# (3) is the cheapest fun one and what's wired below: grip the capsule and you roll faster. Positive
+# multipliers (mirrored the companion cube's negative ones) — this is the "fast-move" half of the
+# ask, not the hamster-ball container half; documented here per the task's "document choice" ask.
+# FIX (player-feedback batch 2026-07-16, item 3/25): BeachBall sets Item.sprite explicitly
+# (Objects/Fun/Balls/beach_ball.rsi), so without this override the in-hand render prefers
+# that explicit RsiPath over this entity's own Sprite override and keeps showing the plain
+# beach ball once picked up. Repointing Item.sprite here + adding inhand-left/right to
+# egg12_transit_orb.rsi (procedurally rigged, see docs/receipts/feedback-bugs/) fixes it.
+- type: entity
+  parent: BeachBall
+  id: SolreignEgg12
+  suffix: Solreign, easter egg
+  name: spherical personal transit capsule
+  description: Solreign claims the spinal compression required to fit inside is "entirely ergonomic." Somehow, gripping it firmly makes you roll along noticeably faster.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg12_transit_orb.rsi
+    state: icon
+  - type: Item
+    sprite: _Solreign/EasterEggs/egg12_transit_orb.rsi
+  - type: HeldSpeedModifier
+    walkModifier: 1.3
+    sprintModifier: 1.15
+
+# A13. Super Mario Bros. — red spotted fungal growth (Hydroponics)
+# SPRITE: red-capped mushroom with irregular pale cream spots and a short cream stalk, no face.
+- type: entity
+  parent: FoodFlyAmanita
+  id: SolreignEgg13
+  suffix: Solreign, easter egg
+  name: red spotted fungal growth
+  description: Eating this temporarily increases your height metric by 100%, but voids your life insurance.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg13_fungal_growth.rsi
+    state: icon
+
+# A14. Donkey Kong — simian cargo barrel (Cargo)
+# SPRITE: wooden slatted cargo barrel with metal bands and a bold red diamond stencil emblem.
+- type: entity
+  parent: ToyFigurinePassenger
+  id: SolreignEgg14
+  suffix: Solreign, easter egg
+  name: simian cargo barrel
+  description: Stamped with a bold red logo. Breaking it yields either a helpful coworker or a sudden burst of percussion.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg14_cargo_barrel.rsi
+    state: icon
+
+# A15. Fallout — wrist-mounted post-apocalyptic organizer (Engineering)
+# SPRITE: chunky retro wrist-mounted computer with a glowing acid-green phosphor screen, dials and knobs.
+#
+# BETA FEEDBACK item 4 (docs/BETA-FEEDBACK-01.md Lane A, "real functionality — health/status
+# readout"): studied HealthAnalyzerSystem (Content.Server/Medical/HealthAnalyzerSystem.cs) and
+# HandheldGpsSystem (Content.Shared/GPS/Systems/HandheldGpsSystem.cs) before writing
+# SolreignWristOrganizerSystem. Reuses HealthAnalyzer's data sources (DamageableComponent,
+# MobThresholdSystem) on USE (HandheldGPS's own trick is examine-only, and the parent's
+# HandheldGPSComponent is untouched here, so the item keeps its GPS examine for free) rather than
+# rebuilding the real analyzer's DoAfter+BoundUserInterface machinery — this is a one-shot SELF-scan
+# popup, not a scanning tool aimed at other people. Dropped the radiation-dose line the old flavor
+# text promised: RadiationReceiverComponent is [Access(typeof(RadiationSystem))] with no public
+# getter to read it through (ANALYZER LAW: owning-system API only) — see
+# Content.Server/_Solreign/EasterEggs/SolreignWristOrganizerRules.cs's doc comment. "Tells you
+# exactly how doomed you are" ships instead as a literal doom-index percentage.
+- type: entity
+  parent: HandheldGPSBasic
+  id: SolreignEgg15
+  suffix: Solreign, easter egg
+  name: wrist-mounted post-apocalyptic organizer
+  description: A chunky, green-phosphor screen that tracks your vitals and tells you exactly how doomed you are, as a percentage.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg15_wrist_organizer.rsi
+    state: icon
+    layers:
+    - state: icon
+  - type: SolreignWristOrganizer
+
+# A16. Half-Life — hazardous environment exosuit (Science / Engineering)
+# SPRITE: bulky orange hazardous-environment armored suit torso with dark grey padding.
+- type: entity
+  parent: ClothingOuterArmorBasic
+  id: SolreignEgg16
+  suffix: Solreign, easter egg
+  name: hazardous environment exosuit
+  description: Boasts an integrated voice assistant that politely counts down your organ failure.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg16_hazard_exosuit.rsi
+    state: icon
+  # production batch 10 (worn-sprite wave): ClothingOuterArmorBase's own Clothing.sprite
+  # pointed at security.rsi (vanilla). Overridden; new RSI carries the vox variant.
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/egg16_hazard_exosuit.rsi
+
+# A17. BioShock — plasmid delivery injector (Medical)
+# SPRITE: large antique medical syringe injector filled with glowing bright blue serum, brass fittings.
+- type: entity
+  parent: Syringe
+  id: SolreignEgg17
+  suffix: Solreign, easter egg
+  name: plasmid delivery injector
+  description: Filled with a glowing blue serum. Side effects include a sudden, violent hatred of golf clubs.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg17_plasmid_injector.rsi
+    layers:
+    - state: icon1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: icon
+      map: ["enum.SolutionContainerLayers.Base"]
+  - type: Icon
+    sprite: _Solreign/EasterEggs/egg17_plasmid_injector.rsi
+    state: icon
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: icon
+    inHandsMaxFillLevels: 3
+    inHandsFillBaseName: -fill-
+
+# A18. Resident Evil — antiviral botanist's greenery (Hydroponics)
+# SPRITE: small potted herb plant with jagged bright green leaves in a clay pot.
+- type: entity
+  parent: FoodAmbrosiaVulgaris
+  id: SolreignEgg18
+  suffix: Solreign, easter egg
+  name: antiviral botanist's greenery
+  description: Highly effective at curing standard biohazard infections when ground up and sprayed directly onto a bite.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg18_antiviral_herb.rsi
+    state: icon
+  # production batch 10 (worn-sprite wave): FoodAmbrosiaVulgaris carries its own
+  # Clothing (slots:[HEAD], sprite: ambrosia_vulgaris.rsi -- the vanilla "wear the sprig
+  # on your head" joke). Overridden here. OWNER-EYE FLAG: the equipped-HELMET anchor is a
+  # genuinely tiny (~9x2px) sprig slot; shipped intentionally 2x over-size (grow=2.0) for
+  # legibility, a disclosed trade-off on this low-priority item -- worth a look in-game.
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/egg18_antiviral_herb.rsi
+
+# A19. Silent Hill — static-emitting pocket receiver (Security)
+# SPRITE: rusted dented old handheld transistor radio with a short antenna and a faint acid-green static glow.
+- type: entity
+  parent: RadioHandheld
+  id: SolreignEgg19
+  suffix: Solreign, easter egg
+  name: static-emitting pocket receiver
+  description: A rusted transistor radio that crackles with static whenever bad vibes (or flesh-eating horrors) are nearby.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg19_pocket_radio.rsi
+    state: icon
+    layers:
+    - state: icon
+  # Delight-eggs batch (feat/delight-eggs): pays off the description above — a use-in-hand proximity
+  # scan for antagonist markers, gated by CCVars.SolreignDelightStaticReceiverEnabled.
+  - type: SolreignStaticReceiver
+
+# A20. Mass Effect — spectre-grade omni-utility gauntlet (Science)
+# SPRITE: dark forearm bracer gauntlet with a glowing orange holographic ring projected above it.
+# FIX (player-feedback batch 2026-07-16, item 1): only Sprite was overridden here; the
+# inherited ClothingHandsGlovesColorBlack Item.InhandVisuals (inhand-left/right, no
+# explicit RsiPath) fell back to this entity's own Sprite.BaseRSI per
+# Content.Client/Hands/Systems/HandsSystem.cs's "no RSI given -> use item's base RSI"
+# rule -- and egg20_omni_gauntlet.rsi had zero inhand states, so picking it up errored.
+# Added inhand-left/right (4-dir, procedurally rigged, see docs/receipts/feedback-bugs/)
+# to fix the crash.
+# CLOSED (production batch 10, sprite-factory wave, 2026-07-16): the equipped-HAND gap this
+# comment used to flag is now closed -- real art measured from the actual parent rig
+# (ClothingHandsGlovesColorBlack's own black.rsi) added below, and inhand-left/right were
+# re-derived from that same rig (superseding the icon-only quick fix above, which is now
+# gate-verified stale and replaced in the RSI itself).
+- type: entity
+  parent: ClothingHandsGlovesColorBlack
+  id: SolreignEgg20
+  suffix: Solreign, easter egg
+  name: spectre-grade omni-utility gauntlet
+  description: A glowing orange holographic projector worn on the forearm. Excellent for scanning anomalies.
+  components:
+  - type: Sprite
+    sprite: _Solreign/EasterEggs/egg20_omni_gauntlet.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Solreign/EasterEggs/egg20_omni_gauntlet.rsi

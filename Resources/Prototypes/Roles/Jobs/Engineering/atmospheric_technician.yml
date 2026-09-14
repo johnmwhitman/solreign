@@ -1,0 +1,44 @@
+- type: job
+  id: AtmosphericTechnician
+  name: job-name-atmostech
+  description: job-description-atmostech
+  playTimeTracker: JobAtmosphericTechnician
+  # Solreign J4 (ROADMAP-SEASON1-VISION.md #2): raised 2.5h -> 5h, same rationale as
+  # station_engineer.yml (atmos griefing/venting is a top low-pop round-ruiner).
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Engineering
+    time: 5h
+  startingGear: AtmosphericTechnicianGear
+  icon: "JobIconAtmosphericTechnician"
+  supervisors: job-supervisors-ce
+  access:
+  - Maintenance
+  - Engineering
+  - External
+  - Atmospherics
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FirefighterDay
+    prototype: FireAxe
+
+- type: startingGear
+  id: AtmosphericTechnicianGear
+  equipment:
+    eyes: ClothingEyesGlassesMeson
+    id: AtmosPDA
+    belt: ClothingBeltUtilityEngineering
+    ears: ClothingHeadsetEngineering
+  #storage:
+    #back:
+    #- Stuff
+
+- type: chameleonOutfit
+  id: AtmosphericTechnicianChameleonOutfit
+  job: AtmosphericTechnician
+  equipment:
+    head: ClothingHeadHelmetAtmosFire
+    mask: ClothingMaskGasAtmos
+    neck: ClothingNeckScarfStripedLightBlue
+    outerClothing: ClothingOuterSuitAtmosFire
+    gloves: ClothingHandsGlovesColorYellow
