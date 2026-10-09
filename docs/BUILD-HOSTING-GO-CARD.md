@@ -60,11 +60,9 @@ externally too — much more moving parts for no benefit here).
 
 ## wrangler / R2 finding
 
-`wrangler whoami` → logged in as `johndw@gmail.com`
-(account `33c970f9bc6406c8ce2368a571557f21`). Read-only check:
-`wrangler r2 bucket list` **succeeded** (returned the 6 existing buckets:
-ai-portfolio-backup, assets, fleetopus-evidence, routeplane-downloads,
-solreign-ledger-offsite, thumbprinted-backups) — this token has at least R2
+`wrangler whoami` → logged in to the owner's Cloudflare account
+(account id and bucket names redacted). Read-only check:
+`wrangler r2 bucket list` **succeeded** — this token has at least R2
 read/list. Bucket create + object put were **not** attempted (that would be
 a live write); `UPLOAD.sh` carries a GitHub-Release fallback in a trailing
 comment block in case `r2 bucket create` 403s when John runs it.
