@@ -33,4 +33,5 @@ def is_file_crlf(path: str) -> bool:
 
     return False
 
-exit(main())
+if __name__ == "__main__":
+    exit(main())
