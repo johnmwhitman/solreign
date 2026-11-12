@@ -234,5 +234,5 @@ def load_last_feed_items(client: paramiko.SFTPClient) -> List[Any]:
         return []
 
 
-
-main()
+if __name__ == "__main__":
+    main()
